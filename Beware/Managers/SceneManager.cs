@@ -34,19 +34,19 @@ namespace Beware.Managers {
             GameboardLogic gameboardLogic = new GameboardLogic(BewareGame.Instance, View.GamePlay);
             BackgroundStationary gameboardBackground = new BackgroundStationary(BewareGame.Instance, Scenes.Stars_2, View.GamePlay);
 
-            LeftPanelLogic leftPanelLogic = new LeftPanelLogic(BewareGame.Instance, View.InfoLeft);
+            PanelOneLogic panelOneLogic = new PanelOneLogic(BewareGame.Instance, View.InfoLeft);
             BackgroundStationary leftPanelBackground = new BackgroundStationary(BewareGame.Instance, Scenes.Stars_3, View.InfoLeft);
 
             switch (ViewportManager.CurrentLayout) {
                 case ViewportLayout.Layout1:
                     (BackgroundStationary background, BottomPanelLogic logic) layout1 = CreateGameLayout1();
-                    return new GameScene(tickerBackground, tickerLogic, leftPanelBackground, leftPanelLogic, layout1.background, layout1.logic, gameboardBackground);
+                    return new GameScene(tickerBackground, tickerLogic, leftPanelBackground, panelOneLogic, layout1.background, layout1.logic, gameboardBackground);
                 case ViewportLayout.Layout2:
-                    (BackgroundStationary background, RightPanelLogic logic) layout2 = CreateGameLayout2();
-                    return new GameScene(tickerBackground, tickerLogic, leftPanelBackground, leftPanelLogic, layout2.background, layout2.logic, gameboardBackground);
+                    (BackgroundStationary background, PanelTwoLogic logic) layout2 = CreateGameLayout2();
+                    return new GameScene(tickerBackground, tickerLogic, leftPanelBackground, panelOneLogic, layout2.background, layout2.logic, gameboardBackground);
                 default:
                     (BackgroundStationary background, BottomPanelLogic logic) defaultLayout = CreateGameLayout1();
-                    return new GameScene(tickerBackground, tickerLogic, leftPanelBackground, leftPanelLogic, defaultLayout.background, defaultLayout.logic, gameboardBackground);
+                    return new GameScene(tickerBackground, tickerLogic, leftPanelBackground, panelOneLogic, defaultLayout.background, defaultLayout.logic, gameboardBackground);
             }
         }
 
@@ -57,8 +57,8 @@ namespace Beware.Managers {
             return (bottomPanelBackground, bottomPanelLogic);
         }
 
-        private (BackgroundStationary background, RightPanelLogic logic) CreateGameLayout2() {
-            RightPanelLogic rightPanelLogic = new RightPanelLogic(BewareGame.Instance, View.InfoRight);
+        private (BackgroundStationary background, PanelTwoLogic logic) CreateGameLayout2() {
+            PanelTwoLogic rightPanelLogic = new PanelTwoLogic(BewareGame.Instance, View.InfoRight);
             BackgroundStationary rightPanelBackground = new BackgroundStationary(BewareGame.Instance, Scenes.Stars_4, View.InfoRight);
 
             return (rightPanelBackground, rightPanelLogic);

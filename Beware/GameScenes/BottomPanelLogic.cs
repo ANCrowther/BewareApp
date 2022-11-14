@@ -11,6 +11,8 @@ namespace Beware.GameScenes {
 
         public BottomPanelLogic(BewareGame game, View view) : base(game) {
             this.view = view;
+
+            //TODO: combine this panel and panel one logic
             centerCardinalPositionLeft = new Vector2(ViewportManager.InfoBottomView.Width  / 6, ViewportManager.InfoBottomView.Height / 2);
             centerCardinalPositionRight = new Vector2(ViewportManager.InfoBottomView.Width * 5 / 6, ViewportManager.InfoBottomView.Height / 2);
         }

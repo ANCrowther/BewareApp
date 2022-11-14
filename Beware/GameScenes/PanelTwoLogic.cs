@@ -3,13 +3,15 @@ using Beware.Utilities;
 using Microsoft.Xna.Framework;
 
 namespace Beware.GameScenes {
-    public class RightPanelLogic : DrawableGameComponent {
+    public class PanelTwoLogic : DrawableGameComponent {
         private View view;
         private Vector2 centerCardinalPosition;
 
-        public RightPanelLogic(BewareGame game, View view) : base (game) {
+        public PanelTwoLogic(BewareGame game, View view) : base (game) {
             this.view = view;
-            centerCardinalPosition = new Vector2(ViewportManager.InfoRightView.Width / 2, ViewportManager.InfoRightView.Height / 4);
+
+            //TODO: consider any logic for different layouts
+            centerCardinalPosition = new Vector2(ViewportManager.InfoTwoView.Width / 2, ViewportManager.InfoTwoView.Height / 4);
         }
 
         public override void Update(GameTime gameTime) {
@@ -24,7 +26,7 @@ namespace Beware.GameScenes {
 
             CardinalMapManager.Instance.Draw(Helpers.GetPicture(Mode.Shoot), centerCardinalPosition, Helpers.GetDirection(Mode.Shoot));
 
-            TimeKeeper.Instance.Draw(new Vector2((ViewportManager.InfoRightView.Width / 2) + 100, ViewportManager.InfoRightView.Height - 100));
+            TimeKeeper.Instance.Draw(new Vector2((ViewportManager.InfoTwoView.Width / 2) + 100, ViewportManager.InfoTwoView.Height - 100));
 
             BewareGame.Instance._spriteBatch.End();
             base.Draw(gameTime);

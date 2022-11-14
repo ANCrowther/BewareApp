@@ -3,15 +3,17 @@ using Beware.Utilities;
 using Microsoft.Xna.Framework;
 
 namespace Beware.GameScenes {
-    public class LeftPanelLogic : DrawableGameComponent {
+    public class PanelOneLogic : DrawableGameComponent {
         private BewareGame game;
         private View view;
         private Vector2 centerCardinalPosition;
 
-        public LeftPanelLogic(BewareGame inputGame, View inputView) : base(inputGame) {
+        public PanelOneLogic(BewareGame inputGame, View inputView) : base(inputGame) {
             game = inputGame;
             view = inputView;
-            centerCardinalPosition = new Vector2(ViewportManager.InfoLeftView.Width / 2, ViewportManager.InfoLeftView.Height / 4);
+
+            //TODO: combine this panel and bottom panel logic
+            centerCardinalPosition = new Vector2(ViewportManager.InfoOneView.Width / 2, ViewportManager.InfoOneView.Height / 4);
         }
 
         public override void Draw(GameTime gameTime) {

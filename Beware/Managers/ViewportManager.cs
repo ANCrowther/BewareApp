@@ -4,11 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 /*      |---|--- --- --- ---|           |---|--- --- ---|---|
  *      |   |               |           |   |           |   |
+ *      |   |       M       |           |   |     M     |   |
  *      |   |               |           |   |           |   |
- *      |   |               |           |   |           |   |
+ *      | 1 |--- --- --- ---|           | 1 |           | 2 |
  *      |   |--- --- --- ---|           |   |           |   |
- *      |   |--- --- --- ---|           |   |           |   |
- *      |   |               |           |   |--- --- ---|   |
+ *      |   |       2       |           |   |--- --- ---|   |
  *      |---|--- --- --- ---|           |---|--- --- ---|---|
  *          CreateLayout1()                 CreateLayout2()
  */
@@ -18,8 +18,8 @@ namespace Beware.Managers {
     public static class ViewportManager {
         public static Viewport GameboardView { get; private set; }
         public static Viewport TickerView { get; private set; }
-        public static Viewport InfoLeftView { get; private set; }
-        public static Viewport InfoRightView { get; private set; }
+        public static Viewport InfoOneView { get; private set; }
+        public static Viewport InfoTwoView { get; private set; }
         public static Viewport MenuView { get; private set; }
         public static Viewport InfoBottomView { get; private set; }
         public static ViewportLayout CurrentLayout { get; private set; } = ViewportLayout.Layout1;
@@ -45,8 +45,8 @@ namespace Beware.Managers {
                 case View.GamePlay: return GameboardView;
                 case View.Menu: return MenuView;
                 case View.Ticker: return TickerView;
-                case View.InfoLeft: return InfoLeftView;
-                case View.InfoRight: return InfoRightView;
+                case View.InfoLeft: return InfoOneView;
+                case View.InfoRight: return InfoTwoView;
                 case View.InfoBottom: return InfoBottomView;
                 default: return viewport;
             }
@@ -86,7 +86,7 @@ namespace Beware.Managers {
                 Height = viewport.Height - 100 - (viewport.Height / 6)
             };
 
-            InfoLeftView = new Viewport {
+            InfoOneView = new Viewport {
                 X = 0,
                 Y = 0,
                 Width = GameboardView.X,
@@ -126,14 +126,14 @@ namespace Beware.Managers {
                 Height = GameboardView.Height
             };
 
-            InfoLeftView = new Viewport {
+            InfoOneView = new Viewport {
                 X = 0,
                 Y = 0,
                 Width = GameboardView.X,
                 Height = viewport.Height
             };
 
-            InfoRightView = new Viewport {
+            InfoTwoView = new Viewport {
                 X = viewport.Width - GameboardView.X,
                 Y = 0,
                 Width = GameboardView.X,
