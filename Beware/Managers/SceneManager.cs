@@ -43,7 +43,7 @@ namespace Beware.Managers {
             BackgroundStationary leftPanelBackground = new BackgroundStationary(Scenes.Stars_3, View.InfoOne);
             PanelOneLogic panelOneLogic = new PanelOneLogic(View.InfoOne);
 
-            BackgroundStationary panelTwoBackground = new BackgroundStationary(Scenes.Stars_4, View.InfoTwo);
+            BackgroundStationary panelTwoBackground = new BackgroundStationary(Scenes.GreenSky, View.InfoTwo);
             PanelTwoLogic panelTwoLogic = new PanelTwoLogic(View.InfoTwo);
             return new GameScene(tickerBackground, tickerLogic, leftPanelBackground, panelOneLogic, panelTwoBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
         }
@@ -63,7 +63,7 @@ namespace Beware.Managers {
         }
 
         private void InitializeGameSettingsWindow() {
-            BackgroundStationary background = new BackgroundStationary(Scenes.Stars_1, View.Menu);
+            BackgroundStationary background = new BackgroundStationary(Scenes.GreenSky, View.Menu);
             GameSettingsLogic logic = new GameSettingsLogic(View.Menu);
             GameSettingsWindow = new GameScene(background, logic);
         }

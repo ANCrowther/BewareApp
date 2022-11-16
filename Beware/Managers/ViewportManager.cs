@@ -22,7 +22,7 @@ namespace Beware.Managers {
         public static Viewport InfoTwoView { get; private set; }
         public static Viewport MenuView { get; private set; }
         public static ViewportLayout CurrentLayout { get; private set; } = ViewportLayout.Layout1;
-        public static Vector2 VectorScale { get; private set; } = new Vector2(1600, 1200);
+        //public static Vector2 VectorScale { get; set; } = new Vector2(1600, 1200);
         private static Viewport viewport {
             get { return BewareGame.Instance.GraphicsDevice.Viewport; }
             set { BewareGame.Instance.GraphicsDevice.Viewport = value; }
@@ -32,8 +32,29 @@ namespace Beware.Managers {
             ApplyWindowSizeSettings();
         }
 
+        public static Vector2 GetWindowSize(View view) {
+            switch (view) {
+                case View.InfoOne:  return new Vector2(InfoOneView.Width, InfoOneView.Height);
+                case View.InfoTwo:  return new Vector2(InfoTwoView.Width, InfoTwoView.Height);
+                case View.GamePlay: return new Vector2(GameboardView.Width, GameboardView.Height);
+                case View.Ticker:   return new Vector2(TickerView.Width, TickerView.Height);
+                default:            return new Vector2(MenuView.Width, MenuView.Height);
+            }
+        }
+
         public static void GetView(View selection) {
             viewport = LoadViewport(selection);
+        }
+
+        public static void ChangeLayout(ViewportLayout layout) {
+            switch (layout) {
+                case ViewportLayout.Layout1:
+                    CreateLayout1();
+                    break;
+                case ViewportLayout.Layout2:
+                    CreateLayout2();
+                    break;
+            }
         }
 
         private static Viewport LoadViewport(View selection) {
@@ -53,21 +74,7 @@ namespace Beware.Managers {
             BewareGame.Instance._graphics.GraphicsProfile = GraphicsProfile.Reach;
             BewareGame.Instance._graphics.IsFullScreen = true;
             BewareGame.Instance._graphics.ApplyChanges();
-
             ChangeLayout(CurrentLayout);
-
-            VectorScale = MathUtil.ScaleVector(viewport.Width, viewport.Height, 1600, 1200);
-        }
-
-        public static void ChangeLayout(ViewportLayout layout) {
-            switch (layout) {
-                case ViewportLayout.Layout1: 
-                    CreateLayout1();
-                    break;
-                case ViewportLayout.Layout2:
-                    CreateLayout2();
-                    break;
-            }
         }
 
         private static void CreateLayout1() {
