@@ -11,7 +11,7 @@ namespace Beware.GameScenes {
         private List<TextModel> items;
         private Vector2 position;
 
-        public StartMenuComponents(BewareGame game, Vector2 initialPosition) : base (game) {
+        public StartMenuComponents(Vector2 initialPosition) : base (BewareGame.Instance) {
             items = new List<TextModel>();
             position = initialPosition;
             SelectedItem = null;

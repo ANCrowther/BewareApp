@@ -5,13 +5,19 @@ using Microsoft.Xna.Framework;
 namespace Beware.GameScenes {
     public class PanelTwoLogic : DrawableGameComponent {
         private View view;
-        private Vector2 centerCardinalPosition;
+        private Vector2 centerCardinalPositionLeft;
+        private Vector2 centerCardinalPositionRight;
 
-        public PanelTwoLogic(BewareGame game, View view) : base (game) {
+        public PanelTwoLogic(View view) : base (BewareGame.Instance) {
             this.view = view;
 
-            //TODO: consider any logic for different layouts
-            centerCardinalPosition = new Vector2(ViewportManager.InfoTwoView.Width / 2, ViewportManager.InfoTwoView.Height / 4);
+            if(ViewportManager.CurrentLayout == ViewportLayout.Layout1) {
+                centerCardinalPositionLeft = new Vector2(ViewportManager.InfoTwoView.Width / 6, ViewportManager.InfoTwoView.Height / 2);
+                centerCardinalPositionRight = new Vector2(ViewportManager.InfoTwoView.Width * 5 / 6, ViewportManager.InfoTwoView.Height / 2);
+            }
+            if (ViewportManager.CurrentLayout == ViewportLayout.Layout2) {
+                centerCardinalPositionRight = new Vector2(ViewportManager.InfoTwoView.Width / 2, ViewportManager.InfoTwoView.Height / 4);
+            }
         }
 
         public override void Update(GameTime gameTime) {
@@ -24,9 +30,19 @@ namespace Beware.GameScenes {
 
             ViewportManager.GetView(view);
 
-            CardinalMapManager.Instance.Draw(Helpers.GetPicture(Mode.Shoot), centerCardinalPosition, Helpers.GetDirection(Mode.Shoot));
+            if(ViewportManager.CurrentLayout == ViewportLayout.Layout1) {
+                CardinalMapManager.Instance.Draw(Helpers.GetPicture(Mode.Move), centerCardinalPositionLeft, Helpers.GetDirection(Mode.Move));
+                CardinalMapManager.Instance.Draw(Helpers.GetPicture(Mode.Shoot), centerCardinalPositionRight, Helpers.GetDirection(Mode.Shoot));
+                TimeKeeper.Instance.Draw(new Vector2(ViewportManager.InfoTwoView.Width - 50, ViewportManager.InfoTwoView.Height - 50));
+            }
 
-            TimeKeeper.Instance.Draw(new Vector2((ViewportManager.InfoTwoView.Width / 2) + 100, ViewportManager.InfoTwoView.Height - 100));
+            if (ViewportManager.CurrentLayout == ViewportLayout.Layout2) {
+                CardinalMapManager.Instance.Draw(Helpers.GetPicture(Mode.Shoot), centerCardinalPositionRight, Helpers.GetDirection(Mode.Shoot));
+                TimeKeeper.Instance.Draw(new Vector2((ViewportManager.InfoTwoView.Width / 2) + 100, ViewportManager.InfoTwoView.Height - 100));
+            }
+
+
+
 
             BewareGame.Instance._spriteBatch.End();
             base.Draw(gameTime);

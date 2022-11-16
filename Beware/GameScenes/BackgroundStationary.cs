@@ -8,7 +8,7 @@ namespace Beware.GameScenes {
         public Texture2D image;
         private View view;
 
-        public BackgroundStationary(BewareGame game, Texture2D backgroundImage, View backgroundView) : base(game) {
+        public BackgroundStationary(Texture2D backgroundImage, View backgroundView) : base(BewareGame.Instance) {
             image = backgroundImage;
             view = backgroundView;
         }

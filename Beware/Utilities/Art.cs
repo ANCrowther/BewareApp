@@ -11,6 +11,9 @@ namespace Beware.Utilities {
         public static Texture2D RedStarBurst { get; private set; }
         public static Texture2D BlueStarBurst { get; private set; }
 
+        public static Texture2D Layout1 { get; private set; }
+        public static Texture2D Layout2 { get; private set; }
+
         public static Texture2D One { get; private set; }
         public static Texture2D Two { get; private set; }
         public static Texture2D Three { get; private set; }
@@ -32,6 +35,9 @@ namespace Beware.Utilities {
             RedPointer = content.Load<Texture2D>(@"Sprites\red_pointer");
             RedStarBurst = content.Load<Texture2D>(@"Sprites\red_starBurst");
             BlueStarBurst = content.Load<Texture2D>(@"Sprites\blue_starBurst");
+
+            Layout1 = content.Load<Texture2D>(@"Sprites\layout1");
+            Layout2 = content.Load<Texture2D>(@"Sprites\layout2");
 
             One = content.Load<Texture2D>(@"Numbers\one");
             Two = content.Load<Texture2D>(@"Numbers\two");

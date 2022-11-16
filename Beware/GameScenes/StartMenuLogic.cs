@@ -1,4 +1,5 @@
 ﻿using Beware.Inputs;
+using Beware.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -6,7 +7,7 @@ namespace Beware.GameScenes {
     public class StartMenuLogic : DrawableGameComponent {
         private StartMenuComponents components;
 
-        public StartMenuLogic(BewareGame game, StartMenuComponents menuComponents) : base(game) {
+        public StartMenuLogic(StartMenuComponents menuComponents) : base(BewareGame.Instance) {
             components = menuComponents;
         }
 
@@ -15,6 +16,12 @@ namespace Beware.GameScenes {
                 switch (components.SelectedItem.Text) {
                     case "Play Game":
                         BewareGame.Instance.Scene.SwitchScene(BewareGame.Instance.Scene.NewGame);
+                        break;
+                    case "Player Settings":
+                        BewareGame.Instance.Scene.SwitchScene(SceneManager.PlayerSettingsWindow);
+                        break;
+                    case "Game Settings":
+                        BewareGame.Instance.Scene.SwitchScene(SceneManager.GameSettingsWindow);
                         break;
                     case "Quit":
                         BewareGame.Instance.Exit();

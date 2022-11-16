@@ -6,13 +6,10 @@
         Up
     }
 
-    public enum View {
-        GamePlay,
-        InfoBottom,
-        InfoLeft,
-        InfoRight,
-        Menu,
-        Ticker,
+    public enum GameSettings {
+        Layout,
+        Volume,
+        SFXVolume
     }
 
     public enum Mode {
@@ -23,6 +20,14 @@
     public enum Resolution {
         Game,
         Menu
+    }
+
+    public enum View {
+        GamePlay,
+        InfoOne,
+        InfoTwo,
+        Menu,
+        Ticker,
     }
 
     public enum ViewportLayout {

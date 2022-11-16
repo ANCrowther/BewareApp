@@ -21,16 +21,12 @@ namespace Beware.Managers {
         public static Viewport InfoOneView { get; private set; }
         public static Viewport InfoTwoView { get; private set; }
         public static Viewport MenuView { get; private set; }
-        public static Viewport InfoBottomView { get; private set; }
         public static ViewportLayout CurrentLayout { get; private set; } = ViewportLayout.Layout1;
-
+        public static Vector2 VectorScale { get; private set; } = new Vector2(1600, 1200);
         private static Viewport viewport {
             get { return BewareGame.Instance.GraphicsDevice.Viewport; }
             set { BewareGame.Instance.GraphicsDevice.Viewport = value; }
         }
-
-        public static Vector2 VectorScale { get; private set; } = new Vector2(1600, 1200);
-
 
         public static void Initialize(GraphicsDeviceManager graphics) {
             ApplyWindowSizeSettings();
@@ -43,12 +39,11 @@ namespace Beware.Managers {
         private static Viewport LoadViewport(View selection) {
             switch (selection) {
                 case View.GamePlay: return GameboardView;
-                case View.Menu: return MenuView;
-                case View.Ticker: return TickerView;
-                case View.InfoLeft: return InfoOneView;
-                case View.InfoRight: return InfoTwoView;
-                case View.InfoBottom: return InfoBottomView;
-                default: return viewport;
+                case View.Menu:     return MenuView;
+                case View.Ticker:   return TickerView;
+                case View.InfoOne:  return InfoOneView;
+                case View.InfoTwo:  return InfoTwoView;
+                default:            return viewport;
             }
         }
 
@@ -100,7 +95,7 @@ namespace Beware.Managers {
                 Height = viewport.Height - (viewport.Height - 100)
             };
 
-            InfoBottomView = new Viewport {
+            InfoTwoView = new Viewport {
                 X = viewport.Width / 6,
                 Y = GameboardView.Height + TickerView.Height,
                 Width = GameboardView.Width,
