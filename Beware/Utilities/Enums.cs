@@ -8,9 +8,7 @@
 
     public enum GameSettings {
         Layout,
-        MasterVolume,
-        MusicVolume,
-        SFXVolume
+        Volume
     }
 
     public enum Mode {
@@ -35,5 +33,11 @@
         Layout1,
         Layout2,
         Layout3
+    }
+
+    public enum VolumeType {
+        Master,
+        Music,
+        SFX
     }
 }

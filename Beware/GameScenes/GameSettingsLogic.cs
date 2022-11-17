@@ -12,14 +12,14 @@ namespace Beware.GameScenes {
         private List<(Texture2D image, ViewportLayout name)> layoutList;
         private (Texture2D image, ViewportLayout name) activeLayout;
         private Texture2D activeLayoutFrame;
+        private List<(string heading, VolumeType name)> volumeList;
+        private (string heading, VolumeType name) activeVolume;
         private bool isActive = false;
 
         public GameSettingsLogic() : base(BewareGame.Instance) {
             settingList = new List<(string heading, GameSettings name)> {
                 ("Layout", GameSettings.Layout),
-                ("Master Volume", GameSettings.MasterVolume),
-                ("Music Volume", GameSettings.MusicVolume),
-                ("SFX Volume", GameSettings.SFXVolume)
+                ("Volume Levels", GameSettings.Volume)
             };
             activeSetting = ("Layout", GameSettings.Layout);
 
@@ -30,6 +30,13 @@ namespace Beware.GameScenes {
             };
             activeLayout = (Art.Layout1, ViewportLayout.Layout1);
             ResetActiveLayoutFrameBorder();
+
+            volumeList = new List<(string heading, VolumeType name)> {
+                ("Master volume  ", VolumeType.Master),
+                ("Music volume   ", VolumeType.Music),
+                ("SFX volume     ", VolumeType.SFX)
+            };
+            activeVolume = ("Master volume  ", VolumeType.Master);
         }
 
         public override void Update(GameTime gameTime) {
@@ -58,14 +65,9 @@ namespace Beware.GameScenes {
                     activeLayout = Helpers.MoveThroughMenu(layoutList, activeLayout);
                     ViewportManager.ChangeLayout(activeLayout.name);
                     break;
-                case GameSettings.MasterVolume:
-
-                    break;
-                case GameSettings.MusicVolume:
-
-                    break;
-                case GameSettings.SFXVolume:
-
+                case GameSettings.Volume:
+                    activeVolume = Helpers.MoveThroughMenu(volumeList, activeVolume);
+                    AudioManager.Update(activeVolume.name);
                     break;
             }
         }
@@ -82,8 +84,67 @@ namespace Beware.GameScenes {
             DrawSettingList(new Vector2(200, ViewportManager.MenuView.Height / 4));
             DrawGameLayoutView(new Vector2(ViewportManager.MenuView.Width * 2 / 3, ViewportManager.MenuView.Height / 4));
 
+            Vector2 volumePosition = new Vector2(200, ViewportManager.MenuView.Height * 3 / 4);
+            DrawMasterVolumeLevel(volumePosition);
+            volumePosition.Y += 100;
+            DrawMusicVolumeLevel(volumePosition);
+            volumePosition.Y += 100;
+            DrawSFXVolumeLevel(volumePosition);
+
             BewareGame.Instance._spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private void DrawMasterVolumeLevel(Vector2 position) {
+            Color color = Color.Lime;
+            if (activeSetting.name == GameSettings.Volume && isActive == true) {
+                color = (activeVolume.name == VolumeType.Master) ? Color.Moccasin : Color.Lime;
+            }
+
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, "Master volume", position, color);
+            position.X += Fonts.NovaSquareMedium.MeasureString("Master volume  ").X;
+            position.Y += 50;
+
+
+            for (int i = 1; i <= 20; i++) {
+                Texture2D image = (AudioManager.MasterVolumeLevel >= i) ? Art.BlueSquare : Art.RedSquare;
+                BewareGame.Instance._spriteBatch.Draw(image, position, null, Color.White, 0, new Vector2(image.Width, image.Height) / 2.0f, 0.5f, 0, 0.0f);
+                position.X += 50;
+            }
+        }
+
+        private void DrawMusicVolumeLevel(Vector2 position) {
+            Color color = Color.Lime;
+            if (activeSetting.name == GameSettings.Volume && isActive == true) {
+                color = (activeVolume.name == VolumeType.Music) ? Color.Moccasin : Color.Lime;
+            }
+
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, "Music volume", position, color);
+            position.X += Fonts.NovaSquareMedium.MeasureString("Music volume   ").X;
+            position.Y += 50;
+
+            for (int i = 1; i <= 20; i++) {
+                Texture2D image = (AudioManager.MusicVolumeLevel >= i) ? Art.BlueSquare : Art.RedSquare;
+                BewareGame.Instance._spriteBatch.Draw(image, position, null, Color.White, 0, new Vector2(image.Width, image.Height) / 2.0f, 0.5f, 0, 0.0f);
+                position.X += 50;
+            }
+        }
+
+        private void DrawSFXVolumeLevel(Vector2 position) {
+            Color color = Color.Lime;
+            if (activeSetting.name == GameSettings.Volume && isActive == true) {
+                color = (activeVolume.name == VolumeType.SFX) ? Color.Moccasin : Color.Lime;
+            }
+
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, "SFX volume", position, color);
+            position.X += Fonts.NovaSquareMedium.MeasureString("SFX volume      ").X;
+            position.Y += 50;
+
+            for (int i = 1; i <= 20; i++) {
+                Texture2D image = (AudioManager.SFXVolumeLevel >= i) ? Art.BlueSquare : Art.RedSquare;
+                BewareGame.Instance._spriteBatch.Draw(image, position, null, Color.White, 0, new Vector2(image.Width, image.Height) / 2.0f, 0.5f, 0, 0.0f);
+                position.X += 50;
+            }
         }
 
         private void DrawSettingList(Vector2 position) {
