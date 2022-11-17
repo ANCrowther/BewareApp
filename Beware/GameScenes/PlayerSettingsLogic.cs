@@ -5,10 +5,8 @@ using Microsoft.Xna.Framework;
 
 namespace Beware.GameScenes {
     public class PlayerSettingsLogic : DrawableGameComponent {
-        public View view;
 
-        public PlayerSettingsLogic(View inputView) : base(BewareGame.Instance) {
-            view = inputView;
+        public PlayerSettingsLogic() : base(BewareGame.Instance) {
         }
 
         public override void Update(GameTime gameTime) {

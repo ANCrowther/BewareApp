@@ -13,6 +13,7 @@ namespace Beware.Utilities {
 
         public static Texture2D Layout1 { get; private set; }
         public static Texture2D Layout2 { get; private set; }
+        public static Texture2D Layout3 { get; private set; }
 
         public static Texture2D One { get; private set; }
         public static Texture2D Two { get; private set; }
@@ -38,6 +39,7 @@ namespace Beware.Utilities {
 
             Layout1 = content.Load<Texture2D>(@"Sprites\layout1");
             Layout2 = content.Load<Texture2D>(@"Sprites\layout2");
+            Layout3 = content.Load<Texture2D>(@"Sprites\layout3");
 
             One = content.Load<Texture2D>(@"Numbers\one");
             Two = content.Load<Texture2D>(@"Numbers\two");

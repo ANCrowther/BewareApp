@@ -13,7 +13,7 @@ namespace Beware.GameScenes {
 
         public override void Update(GameTime gameTime) {
             if (Input.WasKeyPressed(Keys.Enter) || Input.WasButtonPressed(Buttons.A)) {
-                switch (components.SelectedItem.Text) {
+                switch (components.SelectedItem.name) {
                     case "Play Game":
                         BewareGame.Instance.Scene.SwitchScene(BewareGame.Instance.Scene.NewGame);
                         break;

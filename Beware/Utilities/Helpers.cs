@@ -1,8 +1,8 @@
 ﻿using Beware.Inputs;
-using Beware.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Beware.Utilities {
     public static class Helpers {
@@ -20,8 +20,8 @@ namespace Beware.Utilities {
                 case 8:  return Art.Eight;
                 case 9:  return Art.Nine;
                 case 0:  return Art.Zero;
-                case 10: return Art.Colon;
-                default: return Art.Comma;
+                default: return Art.Colon; // Simple solution to insert a ':' into the integer time clock
+                //default: return Art.Comma; 
             }
         }
 
@@ -122,16 +122,31 @@ namespace Beware.Utilities {
             return direction;
         }
 
-        public static void DrawCardinalMap(Mode type, Vector2 centerPosition) {
-            //CardinalMapManager.Instance.Initialize(centerPosition);
-            //CardinalMapManager.Instance.Draw(GetPicture(type), GetDirection(type));
+        public static (T, U) MoveThroughMenu<T, U>(List<(T, U)> list, (T, U) active) {
+            if (Input.WasKeyPressed(Keys.Up) || Input.WasButtonPressed(Buttons.DPadUp)) {
+                return SelectUp(list, active);
+            }
+            if (Input.WasKeyPressed(Keys.Down) || Input.WasButtonPressed(Buttons.DPadDown)) {
+                return SelectDown(list, active);
+            }
+            return active;
         }
 
-        public static Texture2D GetPicture(Mode type) {
-            switch (type) {
-                case Mode.Move:  return Art.BlueStarBurst;
-                case Mode.Shoot: return Art.RedStarBurst;
-                default:         return Art.FourPointStar;
+        private static (T, U) SelectUp<T, U>(List<(T, U)> list, (T, U) active) {
+            int index = list.IndexOf(active);
+            if (index > 0) {
+                return active = list[index - 1];
+            } else {
+                return active = list[list.Count - 1];
+            }
+        }
+
+        private static (T, U) SelectDown<T, U>(List<(T, U)> list, (T, U) active) {
+            int index = list.IndexOf(active);
+            if (index < list.Count - 1) {
+                return active = list[index + 1];
+            } else {
+                return active = list[0];
             }
         }
     }

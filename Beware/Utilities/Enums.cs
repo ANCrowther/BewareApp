@@ -8,7 +8,8 @@
 
     public enum GameSettings {
         Layout,
-        Volume,
+        MasterVolume,
+        MusicVolume,
         SFXVolume
     }
 
@@ -32,6 +33,7 @@
 
     public enum ViewportLayout {
         Layout1,
-        Layout2
+        Layout2,
+        Layout3
     }
 }

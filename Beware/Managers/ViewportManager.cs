@@ -3,47 +3,52 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 /*      |---|--- --- --- ---|           |---|--- --- ---|---|
- *      |   |               |           |   |           |   |
- *      |   |       M       |           |   |     M     |   |
- *      |   |               |           |   |           |   |
- *      | 1 |--- --- --- ---|           | 1 |           | 2 |
- *      |   |--- --- --- ---|           |   |           |   |
- *      |   |       2       |           |   |--- --- ---|   |
+ *      |   |               |           |   |           |   |           |---|--- --- ---|---|
+ *      |   |       M       |           |   |     M     |   |           |   |           |   |
+ *      |   |               |           |   |           |   |           | 1 |     M     | 2 |
+ *      | 1 |--- --- --- ---|           | 1 |           | 2 |           |   |           |   |
+ *      |   |--- --- --- ---|           |   |           |   |           |---|--- --- ---|---|
+ *      |   |       2       |           |   |--- --- ---|   |               Layout 3
  *      |---|--- --- --- ---|           |---|--- --- ---|---|
- *          CreateLayout1()                 CreateLayout2()
+ *          Layout 1                        Layout 2
  */
 
 
 namespace Beware.Managers {
-    public static class ViewportManager {
+    static class ViewportManager {
         public static Viewport GameboardView { get; private set; }
         public static Viewport TickerView { get; private set; }
         public static Viewport InfoOneView { get; private set; }
         public static Viewport InfoTwoView { get; private set; }
         public static Viewport MenuView { get; private set; }
         public static ViewportLayout CurrentLayout { get; private set; } = ViewportLayout.Layout1;
-        //public static Vector2 VectorScale { get; set; } = new Vector2(1600, 1200);
+
         private static Viewport viewport {
             get { return BewareGame.Instance.GraphicsDevice.Viewport; }
             set { BewareGame.Instance.GraphicsDevice.Viewport = value; }
         }
 
         public static void Initialize(GraphicsDeviceManager graphics) {
-            ApplyWindowSizeSettings();
-        }
+            BewareGame.Instance._graphics.PreferredBackBufferWidth = BewareGame.Instance.GraphicsDevice.DisplayMode.Width;
+            BewareGame.Instance._graphics.PreferredBackBufferHeight = BewareGame.Instance.GraphicsDevice.DisplayMode.Height;
+            BewareGame.Instance._graphics.GraphicsProfile = GraphicsProfile.Reach;
+            BewareGame.Instance._graphics.IsFullScreen = true;
+            BewareGame.Instance._graphics.ApplyChanges();
+            ChangeLayout(CurrentLayout);
 
-        public static Vector2 GetWindowSize(View view) {
-            switch (view) {
-                case View.InfoOne:  return new Vector2(InfoOneView.Width, InfoOneView.Height);
-                case View.InfoTwo:  return new Vector2(InfoTwoView.Width, InfoTwoView.Height);
-                case View.GamePlay: return new Vector2(GameboardView.Width, GameboardView.Height);
-                case View.Ticker:   return new Vector2(TickerView.Width, TickerView.Height);
-                default:            return new Vector2(MenuView.Width, MenuView.Height);
-            }
+            //ApplyWindowSizeSettings();
         }
 
         public static void GetView(View selection) {
             viewport = LoadViewport(selection);
+        }
+
+        public static Vector2 GetScale(View view, Texture2D picture) {
+            Vector2 window = GetWindowSize(view);
+            float width = (picture.Width > window.X) ? window.X : picture.Width;
+            float height = (picture.Height > window.Y) ? window.Y : picture.Height;
+
+            return MathUtil.ScaleVector(window.X, window.Y, width, height);
         }
 
         public static void ChangeLayout(ViewportLayout layout) {
@@ -54,6 +59,24 @@ namespace Beware.Managers {
                 case ViewportLayout.Layout2:
                     CreateLayout2();
                     break;
+                case ViewportLayout.Layout3:
+                    CreateLayout3();
+                    break;
+            }
+        }
+
+        private static Vector2 GetWindowSize(View view) {
+            switch (view) {
+                case View.InfoOne:
+                    return new Vector2(InfoOneView.Width, InfoOneView.Height);
+                case View.InfoTwo:
+                    return new Vector2(InfoTwoView.Width, InfoTwoView.Height);
+                case View.GamePlay:
+                    return new Vector2(GameboardView.Width, GameboardView.Height);
+                case View.Ticker:
+                    return new Vector2(TickerView.Width, TickerView.Height);
+                default:
+                    return new Vector2(MenuView.Width, MenuView.Height);
             }
         }
 
@@ -140,6 +163,32 @@ namespace Beware.Managers {
                 Y = 0,
                 Width = GameboardView.X,
                 Height = viewport.Height
+            };
+        }
+
+        private static void CreateLayout3() {
+            MenuView = viewport;
+            CurrentLayout = ViewportLayout.Layout3;
+
+            GameboardView = new Viewport {
+                X = viewport.Width / 6,
+                Y = viewport.Height / 6,
+                Width = viewport.Width - (viewport.Width / 3),
+                Height = viewport.Height / 2
+            };
+
+            InfoOneView = new Viewport {
+                X = 0,
+                Y = GameboardView.Y,
+                Width = GameboardView.X,
+                Height = GameboardView.Height
+            };
+
+            InfoTwoView = new Viewport {
+                X = viewport.Width - GameboardView.X,
+                Y = GameboardView.Y,
+                Width = GameboardView.X,
+                Height = GameboardView.Height
             };
         }
     }

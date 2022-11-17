@@ -3,45 +3,35 @@ using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 
 namespace Beware.Utilities {
-    public class ScoreKeeper {
-        private static ScoreKeeper instance;
-        private float multiplyExpireTime = 0.0f;
-        private float multiplierTimeLeft;
-        private int maxMultiplier = 20;
-        private int scoreForExtraLife;
-        private int increaseScoreBy;
+    static class ScoreKeeper {
+        private static float multiplyExpireTime = 0.0f;
+        private static float multiplierTimeLeft;
+        private static int maxMultiplier = 20;
+        private static int scoreForExtraLife;
+        private static int increaseScoreBy;
         private const string highScoreFileName = "highscore.txt";
 
-        public int Score { get; private set; } = 12345;
-        public int HighScore { get; private set; } 
-        public int Multiplier { get; private set; }
-        public int Lives { get; private set; }
-        public bool IsGameOver { get { return Lives == 0; } }
+        public static int Score { get; private set; } = 12345;
+        public static int HighScore { get; private set; } 
+        public static int Multiplier { get; private set; }
+        public static int Lives { get; private set; }
+        public static bool IsGameOver { get { return Lives == 0; } }
 
-        public static ScoreKeeper Instance {
-            get {
-                if (instance == null) {
-                    instance = new ScoreKeeper();
-                }
-                return instance;
-            }
-        }
-
-        private ScoreKeeper() {
+        public static void Initialize() {
             HighScore = LoadHighScore();
             Reset();
         }
 
-        public void Update() {
+        public static void Update() {
             if (Multiplier > 1) {
-                if ((multiplierTimeLeft -= TimeKeeper.Instance.TotalSeconds) <= 0) {
+                if ((multiplierTimeLeft -= TimeKeeper.TotalSeconds) <= 0) {
                     multiplierTimeLeft = multiplyExpireTime;
                     Multiplier = 1;
                 }
             }
         }
 
-        public void Reset() {
+        public static void Reset() {
             if (Score > HighScore) {
                 SaveHighScore(HighScore = Score);
             }
@@ -54,16 +44,16 @@ namespace Beware.Utilities {
             multiplierTimeLeft = 0;
         }
 
-        public void RemoveLife() {
+        public static void RemoveLife() {
             Lives--;
         }
 
         // TODO: not sure if this method is really needed.
-        public void RemoveRemainingLives() {
+        public static void RemoveRemainingLives() {
             Lives = 0;
         }
 
-        public void IncreaseMultiplier() {
+        public static void IncreaseMultiplier() {
             // TODO: add play IsDead logic == true
             //if (false) {
             //    return;
@@ -76,7 +66,7 @@ namespace Beware.Utilities {
             }
         }
 
-        public void DrawScore(Vector2 position) {
+        public static void DrawScore(Vector2 position) {
             int score = Score;
             int print = score % 10;
 
@@ -94,16 +84,16 @@ namespace Beware.Utilities {
             }
         }
 
-        public void DrawHighScore(Vector2 position) {
+        public static void DrawHighScore(Vector2 position) {
 
         }
 
-        private void SaveHighScore(int score) {
+        private static void SaveHighScore(int score) {
             // TODO: digure out how to save top 10.
             File.WriteAllText(highScoreFileName, score.ToString());
         }
 
-        private void AddPoints(int basePoints) {
+        private static void AddPoints(int basePoints) {
             // TODO: add player instance IsDead == true.
             //if (false) {
             //    return;
@@ -117,7 +107,7 @@ namespace Beware.Utilities {
             }
         }
 
-        private int LoadHighScore() {
+        private static int LoadHighScore() {
             // TODO: digure out how to load top 10.
             return File.Exists(highScoreFileName) && int.TryParse(File.ReadAllText(highScoreFileName), out int score) ? score : 0;
         }

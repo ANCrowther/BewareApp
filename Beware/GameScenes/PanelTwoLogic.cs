@@ -4,12 +4,10 @@ using Microsoft.Xna.Framework;
 
 namespace Beware.GameScenes {
     public class PanelTwoLogic : DrawableGameComponent {
-        private View view;
         private Vector2 centerCardinalPositionLeft;
         private Vector2 centerCardinalPositionRight;
 
-        public PanelTwoLogic(View view) : base (BewareGame.Instance) {
-            this.view = view;
+        public PanelTwoLogic() : base (BewareGame.Instance) {
 
             if(ViewportManager.CurrentLayout == ViewportLayout.Layout1) {
                 centerCardinalPositionLeft = new Vector2(ViewportManager.InfoTwoView.Width / 6, ViewportManager.InfoTwoView.Height / 2);
@@ -18,30 +16,33 @@ namespace Beware.GameScenes {
             if (ViewportManager.CurrentLayout == ViewportLayout.Layout2) {
                 centerCardinalPositionRight = new Vector2(ViewportManager.InfoTwoView.Width / 2, ViewportManager.InfoTwoView.Height / 4);
             }
+            if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
+                centerCardinalPositionRight = new Vector2(ViewportManager.InfoTwoView.Width / 2, ViewportManager.InfoTwoView.Height / 4);
+            }
         }
 
         public override void Update(GameTime gameTime) {
-            TimeKeeper.Instance.Update();
+            TimeKeeper.Update();
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime) {
             BewareGame.Instance._spriteBatch.Begin();
 
-            ViewportManager.GetView(view);
-
             if(ViewportManager.CurrentLayout == ViewportLayout.Layout1) {
-                CardinalMapManager.Instance.Draw(Helpers.GetPicture(Mode.Move), centerCardinalPositionLeft, Helpers.GetDirection(Mode.Move));
-                CardinalMapManager.Instance.Draw(Helpers.GetPicture(Mode.Shoot), centerCardinalPositionRight, Helpers.GetDirection(Mode.Shoot));
-                TimeKeeper.Instance.Draw(new Vector2(ViewportManager.InfoTwoView.Width - 50, ViewportManager.InfoTwoView.Height - 50));
+                CardinalMapManager.Draw(Art.BlueStarBurst, centerCardinalPositionLeft, Helpers.GetDirection(Mode.Move));
+                CardinalMapManager.Draw(Art.RedStarBurst, centerCardinalPositionRight, Helpers.GetDirection(Mode.Shoot));
+                TimeKeeper.Draw(new Vector2(ViewportManager.InfoTwoView.Width - 50, ViewportManager.InfoTwoView.Height - 50));
             }
 
             if (ViewportManager.CurrentLayout == ViewportLayout.Layout2) {
-                CardinalMapManager.Instance.Draw(Helpers.GetPicture(Mode.Shoot), centerCardinalPositionRight, Helpers.GetDirection(Mode.Shoot));
-                TimeKeeper.Instance.Draw(new Vector2((ViewportManager.InfoTwoView.Width / 2) + 100, ViewportManager.InfoTwoView.Height - 100));
+                CardinalMapManager.Draw(Art.RedStarBurst, centerCardinalPositionRight, Helpers.GetDirection(Mode.Shoot));
+                TimeKeeper.Draw(new Vector2((ViewportManager.InfoTwoView.Width / 2) + 100, ViewportManager.InfoTwoView.Height - 100));
             }
 
-
+            if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
+                CardinalMapManager.Draw(Art.RedStarBurst, centerCardinalPositionRight, Helpers.GetDirection(Mode.Shoot));
+            }
 
 
             BewareGame.Instance._spriteBatch.End();

@@ -7,10 +7,8 @@ using System;
 namespace Beware.GameScenes {
     public class TickerLogic : DrawableGameComponent {
         private Texture2D frame;
-        private View view;
 
-        public TickerLogic(View inputView) : base (BewareGame.Instance) {
-            view = inputView;
+        public TickerLogic() : base (BewareGame.Instance) {
         }
 
         public override void Initialize() {
@@ -25,13 +23,13 @@ namespace Beware.GameScenes {
         }
 
         public override void Draw(GameTime gameTime) {
-            BewareGame.Instance._spriteBatch.Begin(SpriteSortMode.Texture, BlendState.Additive);
-            ViewportManager.GetView(view);
-            BewareGame.Instance._spriteBatch.Draw(frame, new Vector2(0, 0), Color.White);
-            BewareGame.Instance._spriteBatch.End();
+            //BewareGame.Instance._spriteBatch.Begin(SpriteSortMode.Texture, BlendState.Additive);
+
+            //BewareGame.Instance._spriteBatch.Draw(frame, new Vector2(0, 0), Color.White);
+            //BewareGame.Instance._spriteBatch.End();
 
             BewareGame.Instance._spriteBatch.Begin();
-            ScoreKeeper.Instance.DrawScore(new Vector2(500, 50));
+            ScoreKeeper.DrawScore(new Vector2(500, 50));
 
             BewareGame.Instance._spriteBatch.End();
             base.Draw(gameTime);

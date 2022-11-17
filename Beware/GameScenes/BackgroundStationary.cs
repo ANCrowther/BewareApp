@@ -7,18 +7,13 @@ namespace Beware.GameScenes {
     public class BackgroundStationary : DrawableGameComponent {
         public Texture2D image;
         private View view;
-        private Vector2 windowSize;
         private Vector2 scale;
 
         public BackgroundStationary(Texture2D backgroundImage, View backgroundView) : base(BewareGame.Instance) {
             image = backgroundImage;
             view = backgroundView;
-            windowSize = ViewportManager.GetWindowSize(backgroundView);
-
-            float width = (image.Width > windowSize.X) ? windowSize.X : image.Width;
-            float height = (image.Height > windowSize.Y) ? windowSize.Y : image.Height;
-
-            scale = MathUtil.ScaleVector(windowSize.X, windowSize.Y, width, height);
+            
+            scale = ViewportManager.GetScale(view, image);
         }
 
         public override void Draw(GameTime gameTime) {
