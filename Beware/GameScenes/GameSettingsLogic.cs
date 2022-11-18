@@ -55,7 +55,9 @@ namespace Beware.GameScenes {
             if (isActive == true) {
                 UpdateActiveSetting(activeSetting.name);
             }
-            
+
+            AudioManager.Update();
+
             base.Update(gameTime);
         }
 

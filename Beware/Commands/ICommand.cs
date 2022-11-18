@@ -2,6 +2,6 @@
 
 namespace Beware.Commands {
     interface ICommand {
-        Vector2 Execute();
+        void Execute();
     }
 }

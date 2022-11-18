@@ -5,23 +5,8 @@ using System.Collections.Generic;
 
 namespace Beware.Managers {
     static class CardinalMapManager {
-        //private static CardinalMapManager instance;
         private static List<ICardinalModel> compass;
         private static Vector2 origin = new Vector2(200, 200) / 2.0f;
-
-        //public static CardinalMapManager Instance {
-        //    get {
-        //        if (instance == null) {
-        //            instance = new CardinalMapManager();
-        //        }
-        //        return instance;
-        //    }
-        //}
-
-        //public CardinalMapManager() {
-        //    compass = new List<ICardinalModel>();
-        //    Initialize();
-        //}
 
         public static void Initialize() {
             compass = new List<ICardinalModel>();

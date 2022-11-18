@@ -1,6 +1,5 @@
 ﻿using Beware.Inputs;
 using Beware.Managers;
-using Beware.Utilities;
 using Microsoft.Xna.Framework;
 
 namespace Beware.GameScenes {
@@ -13,6 +12,7 @@ namespace Beware.GameScenes {
             if (Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad)) {
                 BewareGame.Instance.Scene.SwitchScene(SceneManager.MenuWindow);
             }
+            AudioManager.Update();
 
             base.Update(gameTime);
         }

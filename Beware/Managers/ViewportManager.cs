@@ -35,8 +35,6 @@ namespace Beware.Managers {
             BewareGame.Instance._graphics.IsFullScreen = true;
             BewareGame.Instance._graphics.ApplyChanges();
             ChangeLayout(CurrentLayout);
-
-            //ApplyWindowSizeSettings();
         }
 
         public static void GetView(View selection) {
@@ -89,15 +87,6 @@ namespace Beware.Managers {
                 case View.InfoTwo:  return InfoTwoView;
                 default:            return viewport;
             }
-        }
-
-        private static void ApplyWindowSizeSettings() {
-            BewareGame.Instance._graphics.PreferredBackBufferWidth = BewareGame.Instance.GraphicsDevice.DisplayMode.Width;
-            BewareGame.Instance._graphics.PreferredBackBufferHeight = BewareGame.Instance.GraphicsDevice.DisplayMode.Height;
-            BewareGame.Instance._graphics.GraphicsProfile = GraphicsProfile.Reach;
-            BewareGame.Instance._graphics.IsFullScreen = true;
-            BewareGame.Instance._graphics.ApplyChanges();
-            ChangeLayout(CurrentLayout);
         }
 
         private static void CreateLayout1() {

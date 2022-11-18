@@ -13,18 +13,6 @@ namespace Beware.Managers {
         public static int SFXVolumeLevel { get; private set; } = 3;
         public static int MasterVolumeLevel { get; private set; } = 10;
 
-        //public static void Update() {
-        //    if (Input.WasKeyPressed(ControlMap.VolumeUp)) {
-        //        MasterVolumeUp();
-        //    }
-        //    if (Input.WasKeyPressed(ControlMap.VolumeDown)) {
-        //        MasterVolumeDown();
-        //    }
-        //    if (Input.WasKeyPressed(ControlMap.Mute) || Input.WasButtonPressed(ControlMap.Mute_pad)) {
-        //        Mute();
-        //    }
-        //}
-
         public static void Update(VolumeType type = VolumeType.Master) {
             if (Input.WasKeyPressed(ControlMap.VolumeUp)) {
                 VolumeUp(type);
@@ -37,7 +25,7 @@ namespace Beware.Managers {
             }
         }
 
-        public static void VolumeUp(VolumeType type) {
+        private static void VolumeUp(VolumeType type) {
             switch (type) {
                 case VolumeType.Master:
                     MasterVolumeUp();
@@ -51,7 +39,7 @@ namespace Beware.Managers {
             }
         }
 
-        public static void VolumeDown(VolumeType type) {
+        private static void VolumeDown(VolumeType type) {
             switch (type) {
                 case VolumeType.Master:
                     MasterVolumeDown();

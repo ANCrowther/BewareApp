@@ -1,5 +1,6 @@
 ﻿using Beware.Inputs;
 using Beware.Managers;
+using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -29,10 +30,19 @@ namespace Beware.GameScenes {
                 }
             }
 
+            AudioManager.Update();
+
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime) {
+            BewareGame.Instance._spriteBatch.Begin();
+
+            if (AudioManager.IsMuted == true) {
+                BewareGame.Instance._spriteBatch.Draw(Art.Mute, new Vector2(ViewportManager.MenuView.Width - 150, ViewportManager.MenuView.Height - 150), null, Color.White, 0, new Vector2(Art.Mute.Width, Art.Mute.Height) / 2, 0.25f, 0, 0.0f);
+            }
+
+            BewareGame.Instance._spriteBatch.End();
             base.Draw(gameTime);
         }
     }

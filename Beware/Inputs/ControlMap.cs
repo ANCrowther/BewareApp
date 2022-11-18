@@ -16,9 +16,9 @@ namespace Beware.Inputs {
         public static Keys Special { get; set; } = Keys.Y;
         public static Keys Back { get; private set; } = Keys.OemTilde;
         public static Keys Enter { get; private set; } = Keys.Enter;
-        public static Keys VolumeUp { get; private set; } = Keys.VolumeUp;
-        public static Keys VolumeDown { get; private set; } = Keys.VolumeDown;
-        public static Keys Mute { get; private set; } = Keys.VolumeMute;
+        public static Keys VolumeUp { get; private set; } = Keys.OemPlus;
+        public static Keys VolumeDown { get; private set; } = Keys.OemMinus;
+        public static Keys Mute { get; private set; } = Keys.OemPipe;
 
         public static Buttons Move_pad { get; set; } = Buttons.LeftStick;
         public static Buttons Shoot_pad { get; set; } = Buttons.RightStick;
