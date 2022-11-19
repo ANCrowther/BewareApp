@@ -85,19 +85,19 @@ namespace Beware.Utilities {
 
         public static Texture2D GetMappingButton(string inputButton) {
             switch (inputButton) {
-                case "A": return Mapping.Button_A;
-                case "B": return Mapping.Button_B;
-                case "C": return Mapping.Button_X;
-                case "Y": return Mapping.Button_Y;
-                case "Back": return Mapping.Button_Back;
-                case "Start": return Mapping.Button_Start;
-                case "LStick": return Mapping.Button_LeftStick;
-                case "RStick": return Mapping.Button_RightStick;
-                case "RB": return Mapping.Button_RB;
-                case "LB": return Mapping.Button_LB;
-                case "RT": return Mapping.Button_RT;
-                case "LT": return Mapping.Button_LT;
-                default: return Mapping.Button_DPad;
+                case "A": return Controls.Button_A;
+                case "B": return Controls.Button_B;
+                case "C": return Controls.Button_X;
+                case "Y": return Controls.Button_Y;
+                case "Back": return Controls.Button_Back;
+                case "Start": return Controls.Button_Start;
+                case "LStick": return Controls.Button_LeftStick;
+                case "RStick": return Controls.Button_RightStick;
+                case "RB": return Controls.Button_RB;
+                case "LB": return Controls.Button_LB;
+                case "RT": return Controls.Button_RT;
+                case "LT": return Controls.Button_LT;
+                default: return Controls.Button_DPad;
             }
         }
 

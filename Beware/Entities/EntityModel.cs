@@ -18,7 +18,7 @@ namespace Beware.Entities {
 
         public virtual void Draw(SpriteBatch spriteBatch) {
             if (false) {
-                spriteBatch.Draw(image, Position, null, Color.White, Orientation, Size / 2f, ViewportManager.ScaleToOne, 0, 0);
+                spriteBatch.Draw(image, Position, null, Color.White, Orientation, Size / 2f, Vector2.One, 0, 0);
             }
         }
     }

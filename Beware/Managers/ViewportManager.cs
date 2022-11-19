@@ -29,10 +29,12 @@ namespace Beware.Managers {
         }
 
         public static void Initialize(GraphicsDeviceManager graphics) {
-            BewareGame.Instance._graphics.PreferredBackBufferWidth = BewareGame.Instance.GraphicsDevice.DisplayMode.Width;
-            BewareGame.Instance._graphics.PreferredBackBufferHeight = BewareGame.Instance.GraphicsDevice.DisplayMode.Height;
+            //BewareGame.Instance._graphics.PreferredBackBufferWidth = BewareGame.Instance.GraphicsDevice.DisplayMode.Width;
+            //BewareGame.Instance._graphics.PreferredBackBufferHeight = BewareGame.Instance.GraphicsDevice.DisplayMode.Height;
+            BewareGame.Instance._graphics.PreferredBackBufferWidth = 1920;
+            BewareGame.Instance._graphics.PreferredBackBufferHeight = 1200;
             BewareGame.Instance._graphics.GraphicsProfile = GraphicsProfile.Reach;
-            BewareGame.Instance._graphics.IsFullScreen = true;
+            BewareGame.Instance._graphics.IsFullScreen = false;
             BewareGame.Instance._graphics.ApplyChanges();
             ChangeLayout(CurrentLayout);
         }
@@ -63,7 +65,7 @@ namespace Beware.Managers {
             }
         }
 
-        private static Vector2 GetWindowSize(View view) {
+        public static Vector2 GetWindowSize(View view) {
             switch (view) {
                 case View.InfoOne:
                     return new Vector2(InfoOneView.Width, InfoOneView.Height);
@@ -160,10 +162,10 @@ namespace Beware.Managers {
             CurrentLayout = ViewportLayout.Layout3;
 
             GameboardView = new Viewport {
-                X = viewport.Width / 6,
+                X = (int)(viewport.Width * 0.16),
                 Y = viewport.Height / 6,
-                Width = viewport.Width - (viewport.Width / 3),
-                Height = viewport.Height / 2
+                Width = viewport.Width - (int)(viewport.Width * 0.32),
+                Height = 846
             };
 
             InfoOneView = new Viewport {

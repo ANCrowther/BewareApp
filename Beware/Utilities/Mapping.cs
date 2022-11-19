@@ -57,20 +57,6 @@ namespace Beware.Utilities {
         public static Texture2D Key_Right { get; private set; }
         public static Texture2D Key_Space { get; private set; }
 
-        public static Texture2D Button_A { get; private set; }
-        public static Texture2D Button_B { get; private set; }
-        public static Texture2D Button_X { get; private set; }
-        public static Texture2D Button_Y { get; private set; }
-        public static Texture2D Button_LT { get; private set; }
-        public static Texture2D Button_LB { get; private set; }
-        public static Texture2D Button_RT { get; private set; }
-        public static Texture2D Button_RB { get; private set; }
-        public static Texture2D Button_Back { get; private set; }
-        public static Texture2D Button_Start { get; private set; }
-        public static Texture2D Button_DPad { get; private set; }
-        public static Texture2D Button_LeftStick { get; private set; }
-        public static Texture2D Button_RightStick { get; private set; }
-
         public static void Initialize(ContentManager content) {
             Key_A = content.Load<Texture2D>(@"Digits\key_A");
             Key_B = content.Load<Texture2D>(@"Digits\key_B");
@@ -125,20 +111,6 @@ namespace Beware.Utilities {
             Key_Down = content.Load<Texture2D>(@"Digits\Key_Down");
             Key_Left = content.Load<Texture2D>(@"Digits\Key_Left");
             Key_Right = content.Load<Texture2D>(@"Digits\Key_Right");
-
-            Button_A = content.Load<Texture2D>(@"Digits\Button_A");
-            Button_B = content.Load<Texture2D>(@"Digits\Button_B");
-            Button_X = content.Load<Texture2D>(@"Digits\Button_X");
-            Button_Y = content.Load<Texture2D>(@"Digits\Button_Y");
-            Button_LeftStick = content.Load<Texture2D>(@"Digits\Button_LStick");
-            Button_RightStick = content.Load<Texture2D>(@"Digits\Button_RStick");
-            Button_LB = content.Load<Texture2D>(@"Digits\Button_LB");
-            Button_RB = content.Load<Texture2D>(@"Digits\Button_RB");
-            Button_LT = content.Load<Texture2D>(@"Digits\Button_LT");
-            Button_RT = content.Load<Texture2D>(@"Digits\Button_RT");
-            Button_DPad = content.Load<Texture2D>(@"Digits\Button_DPad");
-            Button_Back = content.Load<Texture2D>(@"Digits\Button_LT");
-            Button_Start = content.Load<Texture2D>(@"Digits\Button_RT");
         }
     }
 }

@@ -8,7 +8,10 @@ namespace Beware.Utilities {
         public static Texture2D Stars_3 { get; private set; }
         public static Texture2D Stars_4 { get; private set; }
         public static Texture2D Parchment { get; private set; }
-        public static Texture2D GreenSky { get; set; }
+        public static Texture2D GreenSky { get; private set; }
+        public static Texture2D BlinkingStar { get; private set; }
+        public static Texture2D LeftController { get; private set; }
+        public static Texture2D RightController { get; private set; }
 
         public static void Initialize(ContentManager content) {
             Stars_1 = content.Load<Texture2D>(@"Scenes\Background-1");
@@ -17,6 +20,9 @@ namespace Beware.Utilities {
             Stars_4 = content.Load<Texture2D>(@"Scenes\Background-4");
             Parchment = content.Load<Texture2D>(@"Scenes\background_parchment");
             GreenSky = content.Load<Texture2D>(@"Scenes\background_zpos");
+            BlinkingStar = content.Load<Texture2D>(@"Scenes\background_star");
+            LeftController = content.Load<Texture2D>(@"Scenes\background_leftController");
+            RightController = content.Load<Texture2D>(@"Scenes\background_rightController");
         }
     }
 }

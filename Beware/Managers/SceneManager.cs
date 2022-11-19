@@ -59,17 +59,21 @@ namespace Beware.Managers {
             BackgroundStationary gameboardBackground = new BackgroundStationary(Scenes.Stars_2, View.GamePlay);
             GameboardLogic gameboardLogic = new GameboardLogic();
 
-            BackgroundStationary leftPanelBackground = new BackgroundStationary(Scenes.GreenSky, View.InfoOne);
+            //BackgroundStationary panelOneBackground = new BackgroundStationary(Scenes.GreenSky, View.InfoOne);
+            BackgroundMoving panelOneBackground = new BackgroundMoving(Scenes.BlinkingStar, View.InfoOne);
             PanelOneLogic panelOneLogic = new PanelOneLogic();
 
-            BackgroundStationary panelTwoBackground = new BackgroundStationary(Scenes.Parchment, View.InfoTwo);
+            //BackgroundStationary panelTwoBackground = new BackgroundStationary(Scenes.Parchment, View.InfoTwo);
+            BackgroundMoving panelTwoBackground = new BackgroundMoving(Scenes.BlinkingStar, View.InfoTwo);
             PanelTwoLogic panelTwoLogic = new PanelTwoLogic();
 
             // Layout 3 does not use the Ticker logic. It is supposed to mimic a Nintendo Switch (for my son's amusement).
             if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
-                return new GameScene(leftPanelBackground, panelOneLogic, panelTwoBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
+                BackgroundStationary leftControllerBackground = new BackgroundStationary(Scenes.LeftController, View.InfoOne);
+                BackgroundStationary rightControllerBackground = new BackgroundStationary(Scenes.RightController, View.InfoTwo);
+                return new GameScene(leftControllerBackground, panelOneLogic, rightControllerBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
             }
-            return new GameScene(tickerBackground, tickerLogic, leftPanelBackground, panelOneLogic, panelTwoBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
+            return new GameScene(tickerBackground, tickerLogic, panelOneBackground, panelOneLogic, panelTwoBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
         }
 
         private void InitializeMenuWindow() {

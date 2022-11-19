@@ -13,7 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Digits/button_A.png
+#begin Controllers/button_A.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -23,9 +23,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_A.png
+/build:Controllers/button_A.png
 
-#begin Digits/button_B.png
+#begin Controllers/button_B.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,9 +35,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_B.png
+/build:Controllers/button_B.png
 
-#begin Digits/button_Back.png
+#begin Controllers/button_Back.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -47,9 +47,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_Back.png
+/build:Controllers/button_Back.png
 
-#begin Digits/button_DPad.png
+#begin Controllers/button_DPad.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -59,9 +59,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_DPad.png
+/build:Controllers/button_DPad.png
 
-#begin Digits/button_LB.png
+#begin Controllers/button_LB.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -71,9 +71,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_LB.png
+/build:Controllers/button_LB.png
 
-#begin Digits/button_LStick.png
+#begin Controllers/button_LStick.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -83,9 +83,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_LStick.png
+/build:Controllers/button_LStick.png
 
-#begin Digits/button_LT.png
+#begin Controllers/button_LT.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -95,9 +95,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_LT.png
+/build:Controllers/button_LT.png
 
-#begin Digits/button_RB.png
+#begin Controllers/button_RB.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -107,9 +107,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_RB.png
+/build:Controllers/button_RB.png
 
-#begin Digits/button_RStick.png
+#begin Controllers/button_RStick.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -119,9 +119,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_RStick.png
+/build:Controllers/button_RStick.png
 
-#begin Digits/button_RT.png
+#begin Controllers/button_RT.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -131,9 +131,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_RT.png
+/build:Controllers/button_RT.png
 
-#begin Digits/button_Start.png
+#begin Controllers/button_Start.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -143,9 +143,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_Start.png
+/build:Controllers/button_Start.png
 
-#begin Digits/button_X.png
+#begin Controllers/button_X.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -155,9 +155,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_X.png
+/build:Controllers/button_X.png
 
-#begin Digits/button_Y.png
+#begin Controllers/button_Y.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -167,7 +167,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Digits/button_Y.png
+/build:Controllers/button_Y.png
+
+#begin Controllers/controller_button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Controllers/controller_button.png
+
+#begin Controllers/controller_thumb.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Controllers/controller_thumb.png
 
 #begin Digits/key_0.png
 /importer:TextureImporter
@@ -805,26 +829,26 @@
 /processorParam:TextureFormat=Color
 /build:Digits/key_Z.png
 
-#begin fonts/NovaSquare_Large.spritefont
+#begin Fonts/NovaSquare_Large.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:fonts/NovaSquare_Large.spritefont
+/build:Fonts/NovaSquare_Large.spritefont
 
-#begin fonts/NovaSquare_Regular.spritefont
+#begin Fonts/NovaSquare_Regular.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:fonts/NovaSquare_Regular.spritefont
+/build:Fonts/NovaSquare_Regular.spritefont
 
-#begin fonts/NovaSquare_Small.spritefont
+#begin Fonts/NovaSquare_Small.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:fonts/NovaSquare_Small.spritefont
+/build:Fonts/NovaSquare_Small.spritefont
 
 #begin Numbers/colon.png
 /importer:TextureImporter
@@ -1114,6 +1138,30 @@
 /processorParam:TextureFormat=Color
 /build:Numbers/zero.png
 
+#begin Scenes/background_leftController.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Scenes/background_leftController.png
+
+#begin Scenes/background_microscheme.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Scenes/background_microscheme.png
+
 #begin Scenes/background_parchment.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1125,6 +1173,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Scenes/background_parchment.jpg
+
+#begin Scenes/background_rightController.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Scenes/background_rightController.png
+
+#begin Scenes/background_star.bmp
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Scenes/background_star.bmp
 
 #begin Scenes/background_zpos.png
 /importer:TextureImporter
@@ -1138,7 +1210,7 @@
 /processorParam:TextureFormat=Color
 /build:Scenes/background_zpos.png
 
-#begin scenes/Background-1.png
+#begin Scenes/Background-1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1148,9 +1220,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:scenes/Background-1.png
+/build:Scenes/Background-1.png
 
-#begin scenes/Background-2.png
+#begin Scenes/Background-2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1160,9 +1232,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:scenes/Background-2.png
+/build:Scenes/Background-2.png
 
-#begin scenes/Background-3.png
+#begin Scenes/Background-3.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1172,9 +1244,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:scenes/Background-3.png
+/build:Scenes/Background-3.png
 
-#begin scenes/Background-4.png
+#begin Scenes/Background-4.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1184,25 +1256,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:scenes/Background-4.png
-
-#begin Shaders/BloomCombine.fx
-/importer:EffectImporter
-/processor:EffectProcessor
-/processorParam:DebugMode=Auto
-/build:Shaders/BloomCombine.fx
-
-#begin Shaders/BloomExtract.fx
-/importer:EffectImporter
-/processor:EffectProcessor
-/processorParam:DebugMode=Auto
-/build:Shaders/BloomExtract.fx
-
-#begin Shaders/GaussianBlur.fx
-/importer:EffectImporter
-/processor:EffectProcessor
-/processorParam:DebugMode=Auto
-/build:Shaders/GaussianBlur.fx
+/build:Scenes/Background-4.png
 
 #begin Sprites/blue_pointer.png
 /importer:TextureImporter
@@ -1216,7 +1270,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/blue_pointer.png
 
-#begin sprites/blue_square.png
+#begin Sprites/blue_square.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1226,7 +1280,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:sprites/blue_square.png
+/build:Sprites/blue_square.png
 
 #begin Sprites/blue_starBurst.png
 /importer:TextureImporter
@@ -1240,7 +1294,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/blue_starBurst.png
 
-#begin sprites/four_point_star.png
+#begin Sprites/four_point_star.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1250,7 +1304,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:sprites/four_point_star.png
+/build:Sprites/four_point_star.png
 
 #begin Sprites/layout1.png
 /importer:TextureImporter
@@ -1312,7 +1366,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/red_pointer.png
 
-#begin sprites/red_square.png
+#begin Sprites/red_square.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1322,7 +1376,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:sprites/red_square.png
+/build:Sprites/red_square.png
 
 #begin Sprites/red_starBurst.png
 /importer:TextureImporter
