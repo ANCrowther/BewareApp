@@ -21,7 +21,7 @@ namespace Beware.Managers {
         public static Viewport InfoOneView { get; private set; }
         public static Viewport InfoTwoView { get; private set; }
         public static Viewport MenuView { get; private set; }
-        public static ViewportLayout CurrentLayout { get; private set; } = ViewportLayout.Layout1;
+        public static ViewportLayout CurrentLayout { get; private set; } = ViewportLayout.Layout3;
 
         private static Viewport viewport {
             get { return BewareGame.Instance.GraphicsDevice.Viewport; }
@@ -31,7 +31,7 @@ namespace Beware.Managers {
         public static void Initialize(GraphicsDeviceManager graphics) {
             //BewareGame.Instance._graphics.PreferredBackBufferWidth = BewareGame.Instance.GraphicsDevice.DisplayMode.Width;
             //BewareGame.Instance._graphics.PreferredBackBufferHeight = BewareGame.Instance.GraphicsDevice.DisplayMode.Height;
-            BewareGame.Instance._graphics.PreferredBackBufferWidth = 1920;
+            BewareGame.Instance._graphics.PreferredBackBufferWidth = 2200;
             BewareGame.Instance._graphics.PreferredBackBufferHeight = 1200;
             BewareGame.Instance._graphics.GraphicsProfile = GraphicsProfile.Reach;
             BewareGame.Instance._graphics.IsFullScreen = false;
@@ -162,23 +162,23 @@ namespace Beware.Managers {
             CurrentLayout = ViewportLayout.Layout3;
 
             GameboardView = new Viewport {
-                X = (int)(viewport.Width * 0.16),
-                Y = viewport.Height / 6,
-                Width = viewport.Width - (int)(viewport.Width * 0.32),
-                Height = 846
+                X = 366,
+                Y = 100,
+                Width = 1380,
+                Height = 885
             };
 
             InfoOneView = new Viewport {
-                X = 0,
+                X = 50,
                 Y = GameboardView.Y,
-                Width = GameboardView.X,
+                Width = 315,
                 Height = GameboardView.Height
             };
 
             InfoTwoView = new Viewport {
-                X = viewport.Width - GameboardView.X,
+                X = 1745,
                 Y = GameboardView.Y,
-                Width = GameboardView.X,
+                Width = 315,
                 Height = GameboardView.Height
             };
         }

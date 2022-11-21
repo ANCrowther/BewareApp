@@ -17,7 +17,7 @@ namespace Beware.GameScenes {
                 centerCardinalPositionRight = new Vector2(ViewportManager.InfoTwoView.Width / 2, ViewportManager.InfoTwoView.Height / 4);
             }
             if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
-                centerCardinalPositionRight = new Vector2(ViewportManager.InfoTwoView.Width / 2, ViewportManager.InfoTwoView.Height / 4);
+                centerCardinalPositionRight = new Vector2(ViewportManager.InfoTwoView.Width / 2, ViewportManager.InfoTwoView.Height / 2 + 50);
             }
         }
 
@@ -41,7 +41,7 @@ namespace Beware.GameScenes {
             }
 
             if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
-                CardinalMapManager.Draw(Art.RedStarBurst, centerCardinalPositionRight, Helpers.GetDirection(Mode.Shoot));
+                ControllerManager.Draw(centerCardinalPositionRight, Helpers.GetDirection(Mode.Shoot), Mode.Shoot);
             }
 
 

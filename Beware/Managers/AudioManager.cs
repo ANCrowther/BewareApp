@@ -56,7 +56,7 @@ namespace Beware.Managers {
         private static void Mute() {
             if (IsMuted) {
                 MusicVolumeLevel = tempVolume;
-                MediaPlayer.Volume = MusicVolumeLevel.ToFloat();
+                MediaPlayer.Volume = MusicVolumeLevel.SoundToFloat();
                 SFXVolumeLevel = tempSFXVolume;
                 MasterVolumeLevel = tempMasterVolume;
                 IsMuted = false;
@@ -104,14 +104,14 @@ namespace Beware.Managers {
             if (MusicVolumeLevel < 20 && MusicVolumeLevel < MasterVolumeLevel) {
                 MusicVolumeLevel += 1;
                 tempVolume = MusicVolumeLevel;
-                MediaPlayer.Volume = MusicVolumeLevel.ToFloat();
+                MediaPlayer.Volume = MusicVolumeLevel.SoundToFloat();
                 IsMuted = false;
             }
 
             if (MusicVolumeLevel <= 0) {
                 MusicVolumeLevel = 1;
                 tempVolume = 1;
-                MediaPlayer.Volume = MusicVolumeLevel.ToFloat();
+                MediaPlayer.Volume = MusicVolumeLevel.SoundToFloat();
                 IsMuted = false;
             }
         }
@@ -120,7 +120,7 @@ namespace Beware.Managers {
             if (MusicVolumeLevel > 0) {
                 MusicVolumeLevel -= 1;
                 tempVolume = MusicVolumeLevel;
-                MediaPlayer.Volume = MusicVolumeLevel.ToFloat();
+                MediaPlayer.Volume = MusicVolumeLevel.SoundToFloat();
             }
         }
 
@@ -128,13 +128,13 @@ namespace Beware.Managers {
             if (SFXVolumeLevel < 20 && SFXVolumeLevel < MasterVolumeLevel) {
                 SFXVolumeLevel += 1;
                 tempSFXVolume = SFXVolumeLevel;
-                MediaPlayer.Volume = SFXVolumeLevel.ToFloat();
+                MediaPlayer.Volume = SFXVolumeLevel.SoundToFloat();
                 IsMuted = false;
             }
             if (SFXVolumeLevel <= 0) {
                 SFXVolumeLevel = 1;
                 tempSFXVolume = 1;
-                MediaPlayer.Volume = SFXVolumeLevel.ToFloat();
+                MediaPlayer.Volume = SFXVolumeLevel.SoundToFloat();
             }
         }
 
@@ -142,7 +142,7 @@ namespace Beware.Managers {
             if (SFXVolumeLevel > 0) {
                 SFXVolumeLevel -= 1;
                 tempSFXVolume = SFXVolumeLevel;
-                MediaPlayer.Volume = SFXVolumeLevel.ToFloat();
+                MediaPlayer.Volume = SFXVolumeLevel.SoundToFloat();
             }
         }
     }

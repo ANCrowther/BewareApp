@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace Beware.CardinalModels {
     class EModel : ICardinalModel {
-        Vector2 origin;
+        private Vector2 origin;
 
         public EModel(Vector2 origin) {
             this.origin = origin;

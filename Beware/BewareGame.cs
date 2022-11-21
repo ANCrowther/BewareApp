@@ -27,9 +27,11 @@ namespace Beware {
             Art.Initialize(Content);
             Fonts.Initialize(Content);
             Scenes.Initialize(Content);
+            Controls.Initialize(Content);
             ScoreKeeper.Initialize();
             TimeKeeper.Initialize();
             CardinalMapManager.Initialize();
+            ControllerManager.Initialize();
             ViewportManager.Initialize(_graphics);
             Scene = new SceneManager();
 

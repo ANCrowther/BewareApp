@@ -1,10 +1,13 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 
 namespace Beware.Utilities {
     static class Extensions {
+        public static float ToAngle(this Vector2 vector) {
+            return (float)Math.Atan2(vector.Y, vector.X);
+        }
+
         public static Keys GetKey(this KeyboardState k) {
             if (k.IsKeyDown(Keys.A))
                 return Keys.A;
@@ -124,10 +127,18 @@ namespace Beware.Utilities {
                 return Buttons.Start;
             if (g.IsButtonDown(Buttons.Back))
                 return Buttons.Back;
+            if (g.IsButtonDown(Buttons.DPadUp))
+                return Buttons.DPadUp;
+            if (g.IsButtonDown(Buttons.DPadDown))
+                return Buttons.DPadDown;
+            if (g.IsButtonDown(Buttons.DPadRight))
+                return Buttons.DPadRight;
+            if (g.IsButtonDown(Buttons.DPadLeft))
+                return Buttons.DPadLeft;
             return Buttons.BigButton;
         }
 
-        public static float ToFloat(this int soundLevel) {
+        public static float SoundToFloat(this int soundLevel) {
             return soundLevel * 0.05f;
         }
     }

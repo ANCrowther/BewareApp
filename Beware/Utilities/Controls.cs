@@ -18,6 +18,13 @@ namespace Beware.Utilities {
         public static Texture2D Button_RightStick { get; private set; }
         public static Texture2D Button_Generic { get; private set; }
         public static Texture2D Button_GenericStick { get; private set; }
+        public static Texture2D Button_ThumbStationary { get; private set; }
+        public static Texture2D Button_ThumbMoving { get; private set; }
+        public static Texture2D Arrow { get; private set; }
+        public static Texture2D A { get; private set; }
+        public static Texture2D B { get; private set; }
+        public static Texture2D X { get; private set; }
+        public static Texture2D Y { get; private set; }
 
 
         public static void Initialize(ContentManager content) {
@@ -36,6 +43,13 @@ namespace Beware.Utilities {
             Button_Start = content.Load<Texture2D>(@"Controllers\Button_RT");
             Button_Generic = content.Load<Texture2D>(@"Controllers\controller_button");
             Button_GenericStick = content.Load<Texture2D>(@"Controllers\controller_thumb");
+            Button_ThumbStationary = content.Load<Texture2D>(@"Controllers\controller_thumbStationary");
+            Button_ThumbMoving = content.Load<Texture2D>(@"Controllers\controller_thumbMoving");
+            Arrow = content.Load<Texture2D>(@"Controllers\arrow");
+            A = content.Load<Texture2D>(@"Controllers\letter_A");
+            B = content.Load<Texture2D>(@"Controllers\letter_B");
+            X = content.Load<Texture2D>(@"Controllers\letter_X");
+            Y = content.Load<Texture2D>(@"Controllers\letter_Y");
         }
     }
 }

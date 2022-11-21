@@ -18,7 +18,7 @@ namespace Beware.GameScenes {
             }
 
             if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
-                CardinalMapManager.Draw(Art.BlueStarBurst, centerCardinalPosition, Helpers.GetDirection(Mode.Move));
+                ControllerManager.Draw(centerCardinalPosition, Helpers.GetDirection(Mode.Move), Mode.Move);
             }
 
             BewareGame.Instance._spriteBatch.End();
