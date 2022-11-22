@@ -40,6 +40,8 @@ namespace Beware.GameScenes {
         }
 
         public override void Update(GameTime gameTime) {
+            GetCurrentLayout();
+
             if (Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad)) {
                 BewareGame.Instance.Scene.SwitchScene(SceneManager.MenuWindow);
             }
@@ -49,7 +51,7 @@ namespace Beware.GameScenes {
             }
 
             if (isActive == false) {
-                activeSetting = Helpers.MoveThroughMenu(settingList, activeSetting);
+                activeSetting = activeSetting.MoveThroughMenu(settingList);
             }
 
             if (isActive == true) {
@@ -61,14 +63,28 @@ namespace Beware.GameScenes {
             base.Update(gameTime);
         }
 
+        private void GetCurrentLayout() {
+            switch (ViewportManager.CurrentLayout) {
+                case ViewportLayout.Layout1:
+                    activeLayout = (Art.Layout1, ViewportLayout.Layout1);
+                    break;
+                case ViewportLayout.Layout2:
+                    activeLayout = (Art.Layout2, ViewportLayout.Layout2);
+                    break;
+                case ViewportLayout.Layout3:
+                    activeLayout = (Art.Layout3, ViewportLayout.Layout3);
+                    break;
+            }
+        }
+
         private void UpdateActiveSetting(GameSettings setting) {
             switch (setting) {
                 case GameSettings.Layout:
-                    activeLayout = Helpers.MoveThroughMenu(layoutList, activeLayout);
+                    activeLayout = activeLayout.MoveThroughMenu(layoutList);
                     ViewportManager.ChangeLayout(activeLayout.name);
                     break;
                 case GameSettings.Volume:
-                    activeVolume = Helpers.MoveThroughMenu(volumeList, activeVolume);
+                    activeVolume = activeVolume.MoveThroughMenu(volumeList);
                     AudioManager.Update(activeVolume.name);
                     break;
             }

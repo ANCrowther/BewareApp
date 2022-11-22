@@ -44,11 +44,27 @@ namespace Beware.Managers {
         }
 
         public static Vector2 GetScale(View view, Texture2D picture) {
+            switch (CurrentLayout) {
+                //case ViewportLayout.Layout1:
+                //case ViewportLayout.Layout2:
+                //    return GetScale(view, picture);
+                case ViewportLayout.Layout3: return GetControllerScale(view, picture);
+                default: return GetRegularScale(view, picture);
+            }
+        }
+
+        private static Vector2 GetRegularScale(View view, Texture2D picture) {
             Vector2 window = GetWindowSize(view);
-            float width = (picture.Width > window.X) ? window.X : picture.Width;
-            float height = (picture.Height > window.Y) ? window.Y : picture.Height;
+            float width = (picture.Width >= window.X) ? window.X : picture.Width;
+            float height = (picture.Height >= window.Y) ? window.Y : picture.Height;
 
             return MathUtil.ScaleVector(window.X, window.Y, width, height);
+        }
+
+        private static Vector2 GetControllerScale(View view, Texture2D picture) {
+            Vector2 window = GetWindowSize(view);
+
+            return MathUtil.ScaleVector(window.X, window.Y, picture.Width, picture.Height);
         }
 
         public static void ChangeLayout(ViewportLayout layout) {

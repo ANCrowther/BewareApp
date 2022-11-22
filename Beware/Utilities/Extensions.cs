@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Beware.Inputs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -140,6 +142,34 @@ namespace Beware.Utilities {
 
         public static float SoundToFloat(this int soundLevel) {
             return soundLevel * 0.05f;
+        }
+
+        public static (T, U) MoveThroughMenu<T, U>(this (T, U) active, List<(T, U)> list) {
+            if (Input.WasKeyPressed(Keys.Up) || Input.WasButtonPressed(Buttons.DPadUp)) {
+                return SelectUp(list, active);
+            }
+            if (Input.WasKeyPressed(Keys.Down) || Input.WasButtonPressed(Buttons.DPadDown)) {
+                return SelectDown(list, active);
+            }
+            return active;
+        }
+
+        private static (T, U) SelectUp<T, U>(List<(T, U)> list, (T, U) active) {
+            int index = list.IndexOf(active);
+            if (index > 0) {
+                return active = list[index - 1];
+            } else {
+                return active = list[list.Count - 1];
+            }
+        }
+
+        private static (T, U) SelectDown<T, U>(List<(T, U)> list, (T, U) active) {
+            int index = list.IndexOf(active);
+            if (index < list.Count - 1) {
+                return active = list[index + 1];
+            } else {
+                return active = list[0];
+            }
         }
     }
 }

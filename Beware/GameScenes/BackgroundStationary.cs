@@ -12,7 +12,7 @@ namespace Beware.GameScenes {
         public BackgroundStationary(Texture2D backgroundImage, View backgroundView) : base(BewareGame.Instance) {
             image = backgroundImage;
             view = backgroundView;
-            
+
             scale = ViewportManager.GetScale(view, image);
         }
 
