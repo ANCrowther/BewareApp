@@ -11,7 +11,7 @@ namespace Beware.ControllerModels {
         }
 
         public void Draw(Vector2 position, Mode mode = Mode.Move, bool isMobile = true, float orientation = 0) {
-            Texture2D picture = (isMobile) ? Controls.Button_ThumbMoving : Controls.Button_ThumbStationary;
+            Texture2D picture = (isMobile) ? ControllerArt.Button_ThumbMoving : ControllerArt.Button_ThumbStationary;
             BewareGame.Instance._spriteBatch.Draw(picture, position, null, Color.White, orientation, this.origin, 0.5f, 0, 0.0f);
         }
     }

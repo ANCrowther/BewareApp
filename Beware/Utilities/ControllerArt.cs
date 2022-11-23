@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Beware.Utilities {
-    static class Controls {
+    static class ControllerArt {
         public static Texture2D Button_A { get; private set; }
         public static Texture2D Button_B { get; private set; }
         public static Texture2D Button_X { get; private set; }

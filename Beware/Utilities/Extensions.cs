@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Beware.Utilities {
     static class Extensions {
+        private static object gamepadState;
+
         public static float ToAngle(this Vector2 vector) {
             return (float)Math.Atan2(vector.Y, vector.X);
         }
@@ -142,6 +144,18 @@ namespace Beware.Utilities {
 
         public static float SoundToFloat(this int soundLevel) {
             return soundLevel * 0.05f;
+        }
+        
+        public static bool CheckIsButtonActive(this bool isActive, Buttons button) {
+            var gamepadState = GamePad.GetState(PlayerIndex.One);
+            isActive = (gamepadState.GetButton() == button);
+            return isActive;
+        }
+
+        public static bool boolCheckIsKeyActive(this bool isActive, Keys key) {
+            var keyboardState = Keyboard.GetState();
+            isActive = (keyboardState.GetKey() == key);
+            return isActive;
         }
 
         public static (T, U) MoveThroughMenu<T, U>(this (T, U) active, List<(T, U)> list) {

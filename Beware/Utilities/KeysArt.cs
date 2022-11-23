@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Beware.Utilities {
-    static class Mapping {
+    static class KeysArt {
         public static Texture2D Key_A { get; private set; }
         public static Texture2D Key_B { get; private set; }
         public static Texture2D Key_C { get; private set; }

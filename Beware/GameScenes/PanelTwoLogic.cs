@@ -4,20 +4,24 @@ using Microsoft.Xna.Framework;
 
 namespace Beware.GameScenes {
     public class PanelTwoLogic : DrawableGameComponent {
-        private Vector2 centerCardinalPositionLeft;
-        private Vector2 centerCardinalPositionRight;
+        private Vector2 centerThumbStickPositionLeft;
+        private Vector2 centerThumbStickPositionRight;
+        private Vector2 centerButtonPosition;
 
         public PanelTwoLogic() : base (BewareGame.Instance) {
 
             if(ViewportManager.CurrentLayout == ViewportLayout.Layout1) {
-                centerCardinalPositionLeft = new Vector2(ViewportManager.InfoTwoView.Width / 6, ViewportManager.InfoTwoView.Height / 2);
-                centerCardinalPositionRight = new Vector2(ViewportManager.InfoTwoView.Width * 5 / 6, ViewportManager.InfoTwoView.Height / 2);
+                centerThumbStickPositionLeft = new Vector2(ViewportManager.InfoTwoView.Width / 6, ViewportManager.InfoTwoView.Height / 2);
+                centerThumbStickPositionRight = new Vector2(ViewportManager.InfoTwoView.Width * 5 / 6, ViewportManager.InfoTwoView.Height / 2);
             }
             if (ViewportManager.CurrentLayout == ViewportLayout.Layout2) {
-                centerCardinalPositionRight = new Vector2(ViewportManager.InfoTwoView.Width / 2, ViewportManager.InfoTwoView.Height / 4);
+                centerThumbStickPositionRight = new Vector2(ViewportManager.InfoTwoView.Width / 2, ViewportManager.InfoTwoView.Height / 4);
+                centerButtonPosition = new Vector2(centerThumbStickPositionRight.X, centerThumbStickPositionRight.Y + 250);
+
             }
             if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
-                centerCardinalPositionRight = new Vector2(ViewportManager.InfoTwoView.Width / 2, ViewportManager.InfoTwoView.Height / 2 + 50);
+                centerThumbStickPositionRight = new Vector2(ViewportManager.InfoTwoView.Width / 2, ViewportManager.InfoTwoView.Height / 2 + 50);
+                centerButtonPosition = new Vector2(centerThumbStickPositionRight.X, centerThumbStickPositionRight.Y - 250);
             }
         }
 
@@ -30,20 +34,20 @@ namespace Beware.GameScenes {
             BewareGame.Instance._spriteBatch.Begin();
 
             if(ViewportManager.CurrentLayout == ViewportLayout.Layout1) {
-                CardinalMapManager.Draw(Art.BlueStarBurst, centerCardinalPositionLeft, Helpers.GetDirection(Mode.Move));
-                CardinalMapManager.Draw(Art.RedStarBurst, centerCardinalPositionRight, Helpers.GetDirection(Mode.Shoot));
+                CardinalMapManager.Draw(Art.BlueStarBurst, centerThumbStickPositionLeft, Helpers.GetDirection(Mode.Move));
+                CardinalMapManager.Draw(Art.RedStarBurst, centerThumbStickPositionRight, Helpers.GetDirection(Mode.Shoot));
                 TimeKeeper.Draw(new Vector2(ViewportManager.InfoTwoView.Width - 50, ViewportManager.InfoTwoView.Height - 50));
             }
 
             if (ViewportManager.CurrentLayout == ViewportLayout.Layout2) {
-                CardinalMapManager.Draw(Art.RedStarBurst, centerCardinalPositionRight, Helpers.GetDirection(Mode.Shoot));
+                //CardinalMapManager.Draw(Art.RedStarBurst, centerThumbStickPositionRight, Helpers.GetDirection(Mode.Shoot));
+                ControllerManager.Draw(centerThumbStickPositionRight, centerButtonPosition, Helpers.GetDirection(Mode.Shoot), Mode.Shoot);
                 TimeKeeper.Draw(new Vector2((ViewportManager.InfoTwoView.Width / 2) + 100, ViewportManager.InfoTwoView.Height - 100));
             }
 
             if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
-                ControllerManager.Draw(centerCardinalPositionRight, Helpers.GetDirection(Mode.Shoot), Mode.Shoot);
+                ControllerManager.Draw(centerThumbStickPositionRight, centerButtonPosition, Helpers.GetDirection(Mode.Shoot), Mode.Shoot);
             }
-
 
             BewareGame.Instance._spriteBatch.End();
             base.Draw(gameTime);

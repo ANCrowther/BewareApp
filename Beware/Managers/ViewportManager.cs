@@ -45,11 +45,8 @@ namespace Beware.Managers {
 
         public static Vector2 GetScale(View view, Texture2D picture) {
             switch (CurrentLayout) {
-                //case ViewportLayout.Layout1:
-                //case ViewportLayout.Layout2:
-                //    return GetScale(view, picture);
                 case ViewportLayout.Layout3: return GetControllerScale(view, picture);
-                default: return GetRegularScale(view, picture);
+                default:                     return GetRegularScale(view, picture);
             }
         }
 

@@ -16,6 +16,7 @@ namespace Beware.Utilities {
         public static Texture2D Layout2 { get; private set; }
         public static Texture2D Layout3 { get; private set; }
 
+        // Used by TimeKeeper and ScoreKeeper
         public static Texture2D One { get; private set; }
         public static Texture2D Two { get; private set; }
         public static Texture2D Three { get; private set; }

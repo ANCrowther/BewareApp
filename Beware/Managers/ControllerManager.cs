@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 namespace Beware.Managers {
     static class ControllerManager {
-        private static Vector2 thumbOrigin = new Vector2(Controls.Button_ThumbStationary.Width, Controls.Button_ThumbStationary.Height) / 2.0f;
-        private static Vector2 buttonOrigin = new Vector2(Controls.Button_Generic.Width, Controls.Button_Generic.Height) / 2.0f;
+        private static Vector2 thumbOrigin = new Vector2(ControllerArt.Button_ThumbStationary.Width, ControllerArt.Button_ThumbStationary.Height) / 2.0f;
+        private static Vector2 buttonOrigin = new Vector2(ControllerArt.Button_Generic.Width, ControllerArt.Button_Generic.Height) / 2.0f;
         private static List<IControllerModel> buttonList;
 
         public static void Initialize() {
@@ -18,20 +18,14 @@ namespace Beware.Managers {
             buttonList.Add(new ButtonRightModel(buttonOrigin));
         }
 
-        public static void Draw(Vector2 centerPosition, Vector2 controlDirection, Mode mode) {
+        public static void Draw(Vector2 centerThumbStickPosition, Vector2 centerButtonPosition, Vector2 controlDirection, Mode mode) {
             bool isMobile = (controlDirection.LengthSquared() > 0);
-            Vector2 position;
-            if (mode == Mode.Move) {
-                position = new Vector2(centerPosition.X, centerPosition.Y + 250);
-            } else {
-                position = new Vector2(centerPosition.X, centerPosition.Y - 250);
-            }
 
             foreach (IControllerModel button in buttonList) {
                 if (button is ThumbStickModel) {
-                    button.Draw(centerPosition, mode, isMobile, controlDirection.ToAngle());
+                    button.Draw(centerThumbStickPosition, mode, isMobile, controlDirection.ToAngle());
                 } else {
-                    button.Draw(position, mode);
+                    button.Draw(centerButtonPosition, mode);
                 }
             }
         }
