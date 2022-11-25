@@ -10,7 +10,7 @@ namespace Beware {
         public GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
         public static BewareGame Instance { get; private set; }
-        public SceneManager Scene { get; private set; }
+        //public SceneManager Scene { get; private set; }
         public static GameTime GameTime { get; private set; }
 
         public BewareGame() {
@@ -33,14 +33,14 @@ namespace Beware {
             CardinalMapManager.Initialize();
             ControllerManager.Initialize();
             ViewportManager.Initialize(_graphics);
-            Scene = new SceneManager();
+            //Scene = new SceneManager();
 
             base.Initialize();
         }
 
         protected override void LoadContent() {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Scene.SwitchScene(SceneManager.MenuWindow);
+            SceneManager.SwitchScene(SceneManager.MenuWindow);
         }
 
         protected override void Update(GameTime gameTime) {

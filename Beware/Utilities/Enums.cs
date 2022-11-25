@@ -6,9 +6,19 @@
         Up
     }
 
+    public enum Dimension {
+        Nintendo,
+        Standard
+    }
+
     public enum GameSettings {
         Layout,
         Volume
+    }
+
+    public enum PlayerSettings {
+        Keyboard,
+        Gamepad
     }
 
     public enum Mode {

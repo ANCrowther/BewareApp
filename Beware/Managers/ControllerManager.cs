@@ -22,8 +22,8 @@ namespace Beware.Managers {
             bool isMobile = (controlDirection.LengthSquared() > 0);
 
             foreach (IControllerModel button in buttonList) {
-                if (button is ThumbStickModel) {
-                    button.Draw(centerThumbStickPosition, mode, isMobile, controlDirection.ToAngle());
+                if (button is ThumbStickModel thumbStick) {
+                    thumbStick.Draw(centerThumbStickPosition, mode, isMobile, controlDirection.ToAngle());
                 } else {
                     button.Draw(centerButtonPosition, mode);
                 }

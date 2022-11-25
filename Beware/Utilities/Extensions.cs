@@ -158,7 +158,7 @@ namespace Beware.Utilities {
             return isActive;
         }
 
-        public static (T, U) MoveThroughMenu<T, U>(this (T, U) active, List<(T, U)> list) {
+        public static (T, U) MoveThroughMenu<T, U>(this List<(T, U)> list, (T, U) active) {
             if (Input.WasKeyPressed(Keys.Up) || Input.WasButtonPressed(Buttons.DPadUp)) {
                 return SelectUp(list, active);
             }
@@ -171,18 +171,18 @@ namespace Beware.Utilities {
         private static (T, U) SelectUp<T, U>(List<(T, U)> list, (T, U) active) {
             int index = list.IndexOf(active);
             if (index > 0) {
-                return active = list[index - 1];
+                return list[index - 1];
             } else {
-                return active = list[list.Count - 1];
+                return list[list.Count - 1];
             }
         }
 
         private static (T, U) SelectDown<T, U>(List<(T, U)> list, (T, U) active) {
             int index = list.IndexOf(active);
             if (index < list.Count - 1) {
-                return active = list[index + 1];
+                return list[index + 1];
             } else {
-                return active = list[0];
+                return list[0];
             }
         }
     }

@@ -16,13 +16,16 @@ namespace Beware.GameScenes {
             if (Input.WasKeyPressed(Keys.Enter) || Input.WasButtonPressed(Buttons.A)) {
                 switch (components.SelectedItem.name) {
                     case "Play Game":
-                        BewareGame.Instance.Scene.SwitchScene(BewareGame.Instance.Scene.NewGame);
+                        //BewareGame.Instance.Scene.SwitchScene(SceneManager.NewGame);
+                        SceneManager.SwitchScene(SceneManager.NewGame);
                         break;
                     case "Player Settings":
-                        BewareGame.Instance.Scene.SwitchScene(SceneManager.PlayerSettingsWindow);
+                        //BewareGame.Instance.Scene.SwitchScene(SceneManager.PlayerSettingsWindow);
+                        SceneManager.SwitchScene(SceneManager.PlayerSettingsWindow);
                         break;
                     case "Game Settings":
-                        BewareGame.Instance.Scene.SwitchScene(SceneManager.GameSettingsWindow);
+                        //BewareGame.Instance.Scene.SwitchScene(SceneManager.GameSettingsWindow);
+                        SceneManager.SwitchScene(SceneManager.GameSettingsWindow);
                         break;
                     case "Quit":
                         BewareGame.Instance.Exit();

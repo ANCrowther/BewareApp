@@ -22,20 +22,16 @@ namespace Beware.Managers {
         public static Viewport InfoTwoView { get; private set; }
         public static Viewport MenuView { get; private set; }
         public static ViewportLayout CurrentLayout { get; private set; } = ViewportLayout.Layout3;
-
         private static Viewport viewport {
             get { return BewareGame.Instance.GraphicsDevice.Viewport; }
             set { BewareGame.Instance.GraphicsDevice.Viewport = value; }
         }
 
+        private static (int width, int height) nintendoDimension = (2200, 1200);
+        private static (int width, int height) standardDimension = (2560, 1440);
+
         public static void Initialize(GraphicsDeviceManager graphics) {
-            //BewareGame.Instance._graphics.PreferredBackBufferWidth = BewareGame.Instance.GraphicsDevice.DisplayMode.Width;
-            //BewareGame.Instance._graphics.PreferredBackBufferHeight = BewareGame.Instance.GraphicsDevice.DisplayMode.Height;
-            BewareGame.Instance._graphics.PreferredBackBufferWidth = 2200;
-            BewareGame.Instance._graphics.PreferredBackBufferHeight = 1200;
-            BewareGame.Instance._graphics.GraphicsProfile = GraphicsProfile.Reach;
-            BewareGame.Instance._graphics.IsFullScreen = false;
-            BewareGame.Instance._graphics.ApplyChanges();
+            ChangeDimension(standardDimension);
             ChangeLayout(CurrentLayout);
         }
 
@@ -48,6 +44,27 @@ namespace Beware.Managers {
                 case ViewportLayout.Layout3: return GetControllerScale(view, picture);
                 default:                     return GetRegularScale(view, picture);
             }
+        }
+
+        public static void ChangeDimension(Dimension dimension) {
+            switch (dimension) {
+                case Dimension.Nintendo:
+                    ChangeDimension(nintendoDimension);
+                    break;
+                case Dimension.Standard:
+                    ChangeDimension(standardDimension);
+                    break;
+            }
+        }
+
+        private static void ChangeDimension((int width, int height) dimension) {
+            //BewareGame.Instance._graphics.PreferredBackBufferWidth = BewareGame.Instance.GraphicsDevice.DisplayMode.Width;
+            //BewareGame.Instance._graphics.PreferredBackBufferHeight = BewareGame.Instance.GraphicsDevice.DisplayMode.Height;
+            BewareGame.Instance._graphics.PreferredBackBufferWidth = dimension.width;
+            BewareGame.Instance._graphics.PreferredBackBufferHeight = dimension.height;
+            BewareGame.Instance._graphics.GraphicsProfile = GraphicsProfile.Reach;
+            BewareGame.Instance._graphics.IsFullScreen = false;
+            BewareGame.Instance._graphics.ApplyChanges();
         }
 
         private static Vector2 GetRegularScale(View view, Texture2D picture) {
@@ -68,12 +85,15 @@ namespace Beware.Managers {
             switch (layout) {
                 case ViewportLayout.Layout1:
                     CreateLayout1();
+                    //ChangeDimension(standardDimension);
                     break;
                 case ViewportLayout.Layout2:
                     CreateLayout2();
+                    //ChangeDimension(standardDimension);
                     break;
                 case ViewportLayout.Layout3:
                     CreateLayout3();
+                    //ChangeDimension(nintendoDimension);
                     break;
             }
         }
@@ -177,7 +197,7 @@ namespace Beware.Managers {
             GameboardView = new Viewport {
                 X = 366,
                 Y = 100,
-                Width = 1380,
+                Width = 1440,
                 Height = 885
             };
 
@@ -189,7 +209,7 @@ namespace Beware.Managers {
             };
 
             InfoTwoView = new Viewport {
-                X = 1745,
+                X = 1805,
                 Y = GameboardView.Y,
                 Width = 315,
                 Height = GameboardView.Height

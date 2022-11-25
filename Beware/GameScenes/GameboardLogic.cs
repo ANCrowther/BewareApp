@@ -11,7 +11,8 @@ namespace Beware.GameScenes {
 
         public override void Update(GameTime gameTime) {
             if (Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad)) {
-                BewareGame.Instance.Scene.SwitchScene(SceneManager.MenuWindow);
+                //BewareGame.Instance.Scene.SwitchScene(SceneManager.MenuWindow);
+                SceneManager.SwitchScene(SceneManager.MenuWindow);
             }
 
             base.Update(gameTime);

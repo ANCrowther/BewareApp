@@ -43,7 +43,8 @@ namespace Beware.GameScenes {
             GetCurrentLayout();
 
             if (Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad)) {
-                BewareGame.Instance.Scene.SwitchScene(SceneManager.MenuWindow);
+                //BewareGame.Instance.Scene.SwitchScene(SceneManager.MenuWindow);
+                SceneManager.SwitchScene(SceneManager.MenuWindow);
             }
 
             if (Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad)) {
@@ -51,14 +52,17 @@ namespace Beware.GameScenes {
             }
 
             if (isActive == false) {
-                activeSetting = activeSetting.MoveThroughMenu(settingList);
+                activeSetting = settingList.MoveThroughMenu(activeSetting);
             }
 
             if (isActive == true) {
                 UpdateActiveSetting(activeSetting.name);
             }
 
-            AudioManager.Update();
+            // As GameSettingsLogic handles all the music volume, this line was added so the user can mute anytime they want.
+            if ((Input.WasKeyPressed(ControlMap.Mute) || Input.WasButtonPressed(ControlMap.Mute_pad)) && isActive == false) {
+                AudioManager.Update();
+            }
 
             base.Update(gameTime);
         }
@@ -80,11 +84,11 @@ namespace Beware.GameScenes {
         private void UpdateActiveSetting(GameSettings setting) {
             switch (setting) {
                 case GameSettings.Layout:
-                    activeLayout = activeLayout.MoveThroughMenu(layoutList);
+                    activeLayout = layoutList.MoveThroughMenu(activeLayout);
                     ViewportManager.ChangeLayout(activeLayout.name);
                     break;
                 case GameSettings.Volume:
-                    activeVolume = activeVolume.MoveThroughMenu(volumeList);
+                    activeVolume = volumeList.MoveThroughMenu(activeVolume);
                     AudioManager.Update(activeVolume.name);
                     break;
             }
@@ -167,7 +171,7 @@ namespace Beware.GameScenes {
 
         private void DrawSettingList(Vector2 position) {
             foreach ((string heading, GameSettings name) setting in settingList) {
-                Color color = (activeSetting.name == setting.name) ? Color.Moccasin : Color.Lime;
+                Color color = (activeSetting.name == setting.name && isActive == false) ? Color.Moccasin : Color.Lime;
                 BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, setting.heading, position, color);
                 position.Y += 100;
             }
@@ -176,11 +180,11 @@ namespace Beware.GameScenes {
         private void DrawGameLayoutView(Vector2 position) {
             ResetActiveLayoutFrameBorder();
             foreach ((Texture2D picture, _) in layoutList) {
-                BewareGame.Instance._spriteBatch.Draw(picture, position, null, Color.White, 0, new Vector2(picture.Width, picture.Height) / 2.0f, 0.3f, 0, 0.3f);
+                BewareGame.Instance._spriteBatch.Draw(picture, position, null, Color.White, 0, new Vector2(picture.Width, picture.Height) / 2.0f, 0.2f, 0, 0.3f);
                 if (picture == activeLayout.image) {
-                    BewareGame.Instance._spriteBatch.Draw(activeLayoutFrame, position, null, Color.White, 0, new Vector2(picture.Width, picture.Height) / 2.0f, 0.3f, 0, 0.0f);
+                    BewareGame.Instance._spriteBatch.Draw(activeLayoutFrame, position, null, Color.White, 0, new Vector2(picture.Width, picture.Height) / 2.0f, 0.2f, 0, 0.0f);
                 }
-                position.Y += 400;
+                position.Y += 300;
             }
         }
     }

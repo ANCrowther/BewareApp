@@ -14,7 +14,7 @@ namespace Beware.GameScenes {
         }
 
         public override void Update(GameTime gameTime) {
-            SelectedItem = SelectedItem.MoveThroughMenu(items);
+            SelectedItem = items.MoveThroughMenu(SelectedItem);
 
             base.Update(gameTime);
         }

@@ -108,7 +108,7 @@ namespace Beware.Managers {
                 IsMuted = false;
             }
 
-            if (MusicVolumeLevel <= 0) {
+            if (MusicVolumeLevel <= 0 && MusicVolumeLevel < MasterVolumeLevel) {
                 MusicVolumeLevel = 1;
                 tempVolume = 1;
                 MediaPlayer.Volume = MusicVolumeLevel.SoundToFloat();
@@ -131,7 +131,7 @@ namespace Beware.Managers {
                 MediaPlayer.Volume = SFXVolumeLevel.SoundToFloat();
                 IsMuted = false;
             }
-            if (SFXVolumeLevel <= 0) {
+            if (SFXVolumeLevel <= 0 && SFXVolumeLevel < MasterVolumeLevel) {
                 SFXVolumeLevel = 1;
                 tempSFXVolume = 1;
                 MediaPlayer.Volume = SFXVolumeLevel.SoundToFloat();
