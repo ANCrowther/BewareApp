@@ -6,8 +6,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Beware.Utilities {
     static class Extensions {
-        private static object gamepadState;
-
         public static float ToAngle(this Vector2 vector) {
             return (float)Math.Atan2(vector.Y, vector.X);
         }

@@ -99,9 +99,9 @@ namespace Beware.Utilities {
             Key_Backslash = content.Load<Texture2D>(@"Digits\Key_backslash");
             Key_Slash = content.Load<Texture2D>(@"Digits\Key_slash");
             Key_Comma = content.Load<Texture2D>(@"Digits\Key_comma");
-            Key_SemiColon = content.Load<Texture2D>(@"Digits\Key_SemiComma");
+            Key_SemiColon = content.Load<Texture2D>(@"Digits\Key_SemiColon");
             Key_OpenBracket = content.Load<Texture2D>(@"Digits\Key_OpenBracket");
-            Key_ClosedBracket = content.Load<Texture2D>(@"Digits\Key_ClosedBracket");
+            Key_ClosedBracket = content.Load<Texture2D>(@"Digits\Key_CloseBracket");
             Key_Period = content.Load<Texture2D>(@"Digits\Key_Period");
             Key_Hyphen = content.Load<Texture2D>(@"Digits\Key_Hyphen");
             Key_Dash = content.Load<Texture2D>(@"Digits\Key_dash");

@@ -2,8 +2,8 @@
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
 
 namespace Beware.GameScenes {
@@ -17,7 +17,6 @@ namespace Beware.GameScenes {
         private (string heading, Buttons name) activeGamepad;
 
         public PlayerSettingsLogic() : base(BewareGame.Instance) {
-
             InitializeSettingList();
             InitializeKeyboardList();
             InitializeGamepadList();
@@ -37,10 +36,10 @@ namespace Beware.GameScenes {
                 ("Move Down", ControlMap.MoveDown),
                 ("Move Left", ControlMap.MoveLeft),
                 ("Move Right", ControlMap.MoveRight),
-                ("Aim Up", ControlMap.MoveUp),
-                ("Aim Down", ControlMap.MoveDown),
-                ("Aim Left", ControlMap.MoveLeft),
-                ("Aim Right", ControlMap.MoveRight),
+                ("Aim Up", ControlMap.AimUp),
+                ("Aim Down", ControlMap.AimDown),
+                ("Aim Left", ControlMap.AimLeft),
+                ("Aim Right", ControlMap.AimRight),
                 ("Shoot", ControlMap.Shoot),
                 ("Slow", ControlMap.Slow),
                 ("Special", ControlMap.Special),
@@ -92,6 +91,7 @@ namespace Beware.GameScenes {
 
                     break;
                 case PlayerSettings.Keyboard:
+                    activeKeyboard = keyboardList.MoveThroughMenu(activeKeyboard);
                     UpdateKeyboardSetting();
                     break;
             }
@@ -108,15 +108,34 @@ namespace Beware.GameScenes {
                 BewareGame.Instance._spriteBatch.Draw(Art.Mute, new Vector2(ViewportManager.MenuView.Width - 150, ViewportManager.MenuView.Height - 150), null, Color.White, 0, new Vector2(Art.Mute.Width, Art.Mute.Height) / 2, 0.25f, 0, 0.0f);
             }
 
+            DrawSettingList(new Vector2(200, ViewportManager.MenuView.Height / 6));
+
+            if (activeSetting.name == PlayerSettings.Keyboard) {
+                DrawKeyboardList(new Vector2(1000, ViewportManager.MenuView.Height / 6));
+            }
+
             BewareGame.Instance._spriteBatch.End();
             base.Draw(gameTime);
         }
 
-        private void DrawKeyboardList() {
-
+        private void DrawSettingList(Vector2 position) {
+            foreach ((string heading, PlayerSettings name) setting in settingList) {
+                Color color = (activeSetting.name == setting.name && isActive == false) ? Color.Moccasin : Color.Lime;
+                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, setting.heading, position, color);
+                position.Y += 100;
+            }
         }
 
-        private void DrawGamepadList() {
+        private void DrawKeyboardList(Vector2 position) {
+            foreach ((string heading, Keys name) item in keyboardList) {
+                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, item.heading, position, Color.White);
+                Texture2D picture = MapPlayerControls.GetKeyPicture(item.name);
+                BewareGame.Instance._spriteBatch.Draw(picture, new Vector2(position.X + 350, position.Y + 25), null, Color.White, 0, new Vector2(picture.Width, picture.Height) / 2.0f, 0.3f, 0, 0.3f);
+                position.Y += 75;
+            }
+        }
+
+        private void DrawGamepadList(Vector2 position) {
 
         }
     }

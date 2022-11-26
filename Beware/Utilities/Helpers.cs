@@ -106,13 +106,13 @@ namespace Beware.Utilities {
                 PlayerInputStates.gamePadState.ThumbSticks.Left : PlayerInputStates.gamePadState.ThumbSticks.Right;
             direction.Y *= -1;
 
-            if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveLeft : ControlMap.ShootLeft))
+            if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveLeft : ControlMap.AimLeft))
                 direction.X -= 1;
-            if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveRight : ControlMap.ShootRight))
+            if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveRight : ControlMap.AimRight))
                 direction.X += 1;
-            if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveUp : ControlMap.ShootUp))
+            if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveUp : ControlMap.AimUp))
                 direction.Y -= 1;
-            if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveDown : ControlMap.ShootDown))
+            if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveDown : ControlMap.AimDown))
                 direction.Y += 1;
 
             if (direction.LengthSquared() > 0) {
