@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Beware.Utilities {
     static class ControllerArt {
@@ -26,7 +27,6 @@ namespace Beware.Utilities {
         public static Texture2D X { get; private set; }
         public static Texture2D Y { get; private set; }
 
-
         public static void Initialize(ContentManager content) {
             Button_A = content.Load<Texture2D>(@"Controllers\Button_A");
             Button_B = content.Load<Texture2D>(@"Controllers\Button_B");
@@ -50,6 +50,26 @@ namespace Beware.Utilities {
             B = content.Load<Texture2D>(@"Controllers\letter_B");
             X = content.Load<Texture2D>(@"Controllers\letter_X");
             Y = content.Load<Texture2D>(@"Controllers\letter_Y");
+        }
+
+        public static Texture2D GetControllerArt(Buttons button) {
+            switch (button) {
+                case Buttons.A: return Button_A;
+                case Buttons.B: return Button_B;
+                case Buttons.X: return Button_X;
+                case Buttons.Y: return Button_Y;
+                case Buttons.LeftStick: return Button_LeftStick;
+                case Buttons.RightStick: return Button_RightStick;
+                case Buttons.LeftShoulder: return Button_LB;
+                case Buttons.RightShoulder: return Button_RB;
+                case Buttons.LeftTrigger: return Button_LT;
+                case Buttons.RightTrigger: return Button_RT;
+                case Buttons.DPadUp: return Button_DPad;
+                case Buttons.DPadDown: return Button_DPad;
+                case Buttons.DPadLeft: return Button_DPad;
+                case Buttons.DPadRight: return Button_DPad;
+                default: return Button_DPad;
+            }
         }
     }
 }

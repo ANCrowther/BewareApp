@@ -103,7 +103,7 @@ namespace Beware.GameScenes {
             BewareGame.Instance._spriteBatch.Begin();
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareLarge, "GAME SETTINGS", new Vector2(ViewportManager.MenuView.Width / 2 - Fonts.NovaSquareLarge.MeasureString("GAME SETTINGS").X / 2, 50), Color.BlueViolet);
 
-            DrawSettingList(new Vector2(200, ViewportManager.MenuView.Height / 4));
+            DrawSettingList(new Vector2(200, ViewportManager.MenuView.Height / 6));
             DrawGameLayoutView(new Vector2(ViewportManager.MenuView.Width * 2 / 3, ViewportManager.MenuView.Height / 4));
 
             Vector2 volumePosition = new Vector2(200, ViewportManager.MenuView.Height * 3 / 4);
