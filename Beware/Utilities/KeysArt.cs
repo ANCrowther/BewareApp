@@ -57,6 +57,7 @@ namespace Beware.Utilities {
         public static Texture2D Key_Left { get; private set; }
         public static Texture2D Key_Right { get; private set; }
         public static Texture2D Key_Space { get; private set; }
+        public static Texture2D Key_Enter { get; private set; }
 
         public static void Initialize(ContentManager content) {
             Key_A = content.Load<Texture2D>(@"Digits\key_A");
@@ -112,50 +113,55 @@ namespace Beware.Utilities {
             Key_Down = content.Load<Texture2D>(@"Digits\Key_Down");
             Key_Left = content.Load<Texture2D>(@"Digits\Key_Left");
             Key_Right = content.Load<Texture2D>(@"Digits\Key_Right");
+            Key_Enter = content.Load<Texture2D>(@"Digits\Key_Enter");
         }
 
         public static Texture2D GetKeyPicture(Keys key) {
             switch (key) {
-                case Keys.A: return KeysArt.Key_A;
-                case Keys.B: return KeysArt.Key_B;
-                case Keys.C: return KeysArt.Key_C;
-                case Keys.D: return KeysArt.Key_D;
-                case Keys.E: return KeysArt.Key_E;
-                case Keys.F: return KeysArt.Key_F;
-                case Keys.G: return KeysArt.Key_G;
-                case Keys.H: return KeysArt.Key_H;
-                case Keys.I: return KeysArt.Key_I;
-                case Keys.J: return KeysArt.Key_J;
-                case Keys.K: return KeysArt.Key_K;
-                case Keys.L: return KeysArt.Key_L;
-                case Keys.M: return KeysArt.Key_M;
-                case Keys.N: return KeysArt.Key_N;
-                case Keys.O: return KeysArt.Key_O;
-                case Keys.P: return KeysArt.Key_P;
-                case Keys.Q: return KeysArt.Key_Q;
-                case Keys.R: return KeysArt.Key_R;
-                case Keys.S: return KeysArt.Key_S;
-                case Keys.T: return KeysArt.Key_T;
-                case Keys.U: return KeysArt.Key_U;
-                case Keys.V: return KeysArt.Key_V;
-                case Keys.W: return KeysArt.Key_W;
-                case Keys.X: return KeysArt.Key_X;
-                case Keys.Y: return KeysArt.Key_Y;
-                case Keys.Z: return KeysArt.Key_Z;
-                case Keys.Escape: return KeysArt.Key_Esc;
-                case Keys.OemOpenBrackets: return KeysArt.Key_OpenBracket;
-                case Keys.OemCloseBrackets: return KeysArt.Key_ClosedBracket;
-                case Keys.OemComma: return KeysArt.Key_Comma;
-                case Keys.OemQuotes: return KeysArt.Key_Hyphen;
-                case Keys.OemSemicolon: return KeysArt.Key_SemiColon;
-                case Keys.OemPipe: return KeysArt.Key_Backslash;
-                case Keys.OemPeriod: return KeysArt.Key_Period;
-                case Keys.Space: return KeysArt.Key_Space;
-                case Keys.Up: return KeysArt.Key_Up;
-                case Keys.Down: return KeysArt.Key_Down;
-                case Keys.Left: return KeysArt.Key_Left;
-                case Keys.Right: return KeysArt.Key_Right;
-                default: return KeysArt.Key_Tilde;
+                case Keys.A: return Key_A;
+                case Keys.B: return Key_B;
+                case Keys.C: return Key_C;
+                case Keys.D: return Key_D;
+                case Keys.E: return Key_E;
+                case Keys.F: return Key_F;
+                case Keys.G: return Key_G;
+                case Keys.H: return Key_H;
+                case Keys.I: return Key_I;
+                case Keys.J: return Key_J;
+                case Keys.K: return Key_K;
+                case Keys.L: return Key_L;
+                case Keys.M: return Key_M;
+                case Keys.N: return Key_N;
+                case Keys.O: return Key_O;
+                case Keys.P: return Key_P;
+                case Keys.Q: return Key_Q;
+                case Keys.R: return Key_R;
+                case Keys.S: return Key_S;
+                case Keys.T: return Key_T;
+                case Keys.U: return Key_U;
+                case Keys.V: return Key_V;
+                case Keys.W: return Key_W;
+                case Keys.X: return Key_X;
+                case Keys.Y: return Key_Y;
+                case Keys.Z: return Key_Z;
+                case Keys.Escape: return Key_Esc;
+                case Keys.OemOpenBrackets: return Key_OpenBracket;
+                case Keys.OemCloseBrackets: return Key_ClosedBracket;
+                case Keys.OemComma: return Key_Comma;
+                case Keys.OemQuotes: return Key_Hyphen;
+                case Keys.OemSemicolon: return Key_SemiColon;
+                case Keys.OemBackslash:
+                case Keys.OemPipe: return Key_Backslash;
+                case Keys.OemPeriod: return Key_Period;
+                case Keys.Space: return Key_Space;
+                case Keys.Up: return Key_Up;
+                case Keys.Down: return Key_Down;
+                case Keys.Left: return Key_Left;
+                case Keys.Right: return Key_Right;
+                case Keys.OemPlus: return Key_Equal;
+                case Keys.OemMinus: return Key_Dash;
+                case Keys.Enter: return Key_Enter;
+                default: return Key_Tilde;
             }
         }
     }

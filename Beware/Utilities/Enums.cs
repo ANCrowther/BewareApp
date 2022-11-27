@@ -18,7 +18,8 @@
 
     public enum PlayerSettings {
         Keyboard,
-        Gamepad
+        Gamepad,
+        Generic
     }
 
     public enum Mode {

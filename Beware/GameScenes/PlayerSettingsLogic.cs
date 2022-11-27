@@ -4,36 +4,57 @@ using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
 
 namespace Beware.GameScenes {
     public class PlayerSettingsLogic : DrawableGameComponent {
-        private bool isActive = false;
-        private List<(string heading, PlayerSettings name)> settingList;
-        private (string heading, PlayerSettings name) activeSetting;
+        private List<(string heading, PlayerSettings name)> settingMenuList;
+        private (string heading, PlayerSettings name) activeMenuSetting;
+
         private List<(string heading, Keys name)> keyboardList;
         private (string heading, Keys name) activeKeyboard;
+
         private List<(string heading, Buttons name)> gamepadList;
         private (string heading, Buttons name) activeGamepad;
+
+        private List<(string heading, object name)> genericSettingList;
+        
+        private bool isActive = false;
         private float keyScale = 0.5f;
         private float controllerScale = 0.3f;
 
         public PlayerSettingsLogic() : base(BewareGame.Instance) {
-            InitializeSettingList();
-            InitializeKeyboardList();
-            InitializeGamepadList();
+            LoadSettingList();
+            LoadKeyboardList();
+            loadGamepadList();
+            LoadGenericSettingList();
         }
 
-        private void InitializeSettingList() {
-            settingList = new List<(string heading, PlayerSettings name)> {
-                ("Keyboard", PlayerSettings.Keyboard),
-                ("Gamepad", PlayerSettings.Gamepad)
+        private void LoadGenericSettingList() {
+            genericSettingList = new List<(string heading, object name)> {
+                ("Pause", ControlMap.Pause),
+                ("Back", ControlMap.Back),
+                ("Enter", ControlMap.Enter),
+                ("Mute", ControlMap.Mute),
+                ("Vol. Up", ControlMap.VolumeUp),
+                ("Vol. Down", ControlMap.VolumeDown),
+                ("Pause", ControlMap.Pause_pad),
+                ("Back", ControlMap.Back_pad),
+                ("Enter", ControlMap.Enter_pad),
+                ("Mute", ControlMap.Mute_pad)
             };
-            activeSetting = ("Keyboard", PlayerSettings.Keyboard);
         }
 
-        private void InitializeKeyboardList() {
+        private void LoadSettingList() {
+            settingMenuList = new List<(string heading, PlayerSettings name)> {
+                ("Keyboard", PlayerSettings.Keyboard),
+                ("Gamepad", PlayerSettings.Gamepad),
+                ("Generic", PlayerSettings.Generic)
+            };
+            activeMenuSetting = ("Keyboard", PlayerSettings.Keyboard);
+        }
+
+        private void LoadKeyboardList() {
             keyboardList = new List<(string heading, Keys name)> {
                 ("Move Up", ControlMap.MoveUp),
                 ("Move Down", ControlMap.MoveDown),
@@ -50,7 +71,7 @@ namespace Beware.GameScenes {
             activeKeyboard = ("Move Up", ControlMap.MoveUp);
         }
 
-        private void InitializeGamepadList() {
+        private void loadGamepadList() {
             gamepadList = new List<(string heading, Buttons name)> {
                 ("Move", ControlMap.Move_pad),
                 ("Aim", ControlMap.Aim_pad),
@@ -72,11 +93,11 @@ namespace Beware.GameScenes {
             }
 
             if (isActive == false) {
-                activeSetting = settingList.MoveThroughMenu(activeSetting);
+                activeMenuSetting = settingMenuList.MoveThroughMenu(activeMenuSetting);
             }
 
             if (isActive == true) {
-                UpdateActiveSetting(activeSetting.name);
+                UpdateActiveSetting(activeMenuSetting.name);
             }
 
             AudioManager.Update();
@@ -118,11 +139,14 @@ namespace Beware.GameScenes {
             }
 
             DrawSettingList(new Vector2(200, ViewportManager.MenuView.Height / 6));
-            if (activeSetting.name == PlayerSettings.Keyboard) {
-                DrawKeyboardList(new Vector2(900, ViewportManager.MenuView.Height / 6));
+            if (activeMenuSetting.name == PlayerSettings.Keyboard) {
+                DrawKeyboardList(new Vector2(800, ViewportManager.MenuView.Height / 6));
             }
-            if (activeSetting.name == PlayerSettings.Gamepad) {
-                DrawGamepadList(new Vector2(900, ViewportManager.MenuView.Height / 6));
+            if (activeMenuSetting.name == PlayerSettings.Gamepad) {
+                DrawGamepadList(new Vector2(800, ViewportManager.MenuView.Height / 6));
+            }
+            if (activeMenuSetting.name == PlayerSettings.Generic) {
+                DrawGenericList(new Vector2(800, ViewportManager.MenuView.Height / 6));
             }
 
             BewareGame.Instance._spriteBatch.End();
@@ -130,43 +154,60 @@ namespace Beware.GameScenes {
         }
 
         private void DrawSettingList(Vector2 position) {
-            foreach ((string heading, PlayerSettings name) setting in settingList) {
-                Color color = (activeSetting.name == setting.name && isActive == false) ? Color.Moccasin : Color.Lime;
+            foreach ((string heading, PlayerSettings name) setting in settingMenuList) {
+                Color color = (activeMenuSetting.name == setting.name && isActive == false) ? Color.Lime : Color.White;
                 BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, setting.heading, position, color);
                 position.Y += 100;
             }
         }
 
         private void DrawKeyboardList(Vector2 position) {
-            //foreach ((string heading, Keys name) item in keyboardList) {
-            //    //BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, item.heading, position, Color.White);
-            //    Texture2D picture = KeysArt.GetKeyPicture(item.name);
-            //    //BewareGame.Instance._spriteBatch.Draw(picture, new Vector2(position.X + 350, position.Y + 25), null, Color.White, 0, new Vector2(picture.Width, picture.Height) / 2.0f, 0.3f, 0, 0.3f);
-            //    DrawList(position, item.heading, picture);
-            //    position.Y += 100;
-            //}
-
-            for (int i = 0; i < keyboardList.Count; i++) {
-                Texture2D picture = KeysArt.GetKeyPicture(keyboardList[i].name);
-                DrawList(position, keyboardList[i].heading, picture, keyScale);
-                if (i == 5) {
-                    position = new Vector2(1700, ViewportManager.MenuView.Height / 6);
-                } else {
-                    position.Y += 125;
-                }
+            int count = 1;
+            foreach ((string heading, Keys name) item in keyboardList) {
+                Texture2D picture = KeysArt.GetKeyPicture(item.name);
+                Color color = (activeKeyboard.name == item.name && isActive == true) ? Color.Lime : Color.White;
+                DrawList(position, item.heading, picture, keyScale, color);
+                position = AdjustPosition(count++, position);
             }
         }
 
         private void DrawGamepadList(Vector2 position) {
+            int count = 1;
             foreach ((string heading, Buttons name) item in gamepadList) {
                 Texture2D picture = ControllerArt.GetControllerArt(item.name);
-                DrawList(position, item.heading, picture, controllerScale);
-                position.Y += 125;
+                Color color = (activeGamepad.name == item.name && isActive == true) ? Color.Lime : Color.White;
+                DrawList(position, item.heading, picture, controllerScale, color);
+                position = AdjustPosition(count, position);
             }
         }
 
-        private void DrawList(Vector2 position,string heading, Texture2D picture, float scale) {
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, heading, position, Color.White);
+        private void DrawGenericList(Vector2 position) {
+            int count = 1;
+            foreach ((string heading, object name) item in genericSettingList) {
+                Texture2D picture;
+                if (item.name is Keys) {
+                    picture = KeysArt.GetKeyPicture((Keys)item.name);
+                } else {
+                    picture = ControllerArt.GetControllerArt((Buttons)item.name);
+                }
+
+                float scale = (item.name is Keys) ? keyScale : controllerScale;
+                DrawList(position, item.heading, picture, scale, Color.White);
+                position = AdjustPosition(count++, position);
+            }
+        }
+
+        private Vector2 AdjustPosition(int count, Vector2 position) {
+            if (count == 6) {
+                position = new Vector2(position.X + 800, ViewportManager.MenuView.Height / 6);
+            } else {
+                position.Y += 125;
+            }
+            return position;
+        }
+
+        private void DrawList(Vector2 position,string heading, Texture2D picture, float scale, Color color) {
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, heading, position, color);
             BewareGame.Instance._spriteBatch.Draw(picture, new Vector2(position.X + 550, position.Y + 50), null, Color.White, 0, new Vector2(picture.Width, picture.Height) / 2.0f, scale, 0, 0.3f);
         }
     }

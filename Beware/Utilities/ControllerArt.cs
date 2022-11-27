@@ -39,8 +39,8 @@ namespace Beware.Utilities {
             Button_LT = content.Load<Texture2D>(@"Controllers\Button_LT");
             Button_RT = content.Load<Texture2D>(@"Controllers\Button_RT");
             Button_DPad = content.Load<Texture2D>(@"Controllers\Button_DPad");
-            Button_Back = content.Load<Texture2D>(@"Controllers\Button_LT");
-            Button_Start = content.Load<Texture2D>(@"Controllers\Button_RT");
+            Button_Back = content.Load<Texture2D>(@"Controllers\Button_Back");
+            Button_Start = content.Load<Texture2D>(@"Controllers\Button_Start");
             Button_Generic = content.Load<Texture2D>(@"Controllers\controller_button");
             Button_GenericStick = content.Load<Texture2D>(@"Controllers\controller_thumb");
             Button_ThumbStationary = content.Load<Texture2D>(@"Controllers\controller_thumbStationary");
@@ -68,6 +68,8 @@ namespace Beware.Utilities {
                 case Buttons.DPadDown: return Button_DPad;
                 case Buttons.DPadLeft: return Button_DPad;
                 case Buttons.DPadRight: return Button_DPad;
+                case Buttons.Back: return Button_Back;
+                case Buttons.Start: return Button_Start;
                 default: return Button_DPad;
             }
         }

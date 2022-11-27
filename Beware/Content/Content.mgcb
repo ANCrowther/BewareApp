@@ -541,6 +541,18 @@
 /processorParam:TextureFormat=Color
 /build:Digits/key_E.png
 
+#begin Digits/key_Enter.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Digits/key_Enter.png
+
 #begin Digits/key_equal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -744,6 +756,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Digits/key_Period.png
+
+#begin Digits/key_Plus.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Digits/key_Plus.png
 
 #begin Digits/key_Q.png
 /importer:TextureImporter
