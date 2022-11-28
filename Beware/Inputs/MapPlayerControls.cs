@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Beware.Inputs {
     static class MapPlayerControls {
-        public static bool MapNewControl<T>(this List<(string heading, T name)> list, (string heading, T name) activeSetting, T control) {
+        public static bool MapNewControl<T>(List<(string heading, T name)> list, (string heading, T name) activeSetting, T control) {
             foreach ((string heading, T name) item in list) {
                 if (item.heading != activeSetting.heading) {
                     if (activeSetting is Keys k && item.name is Keys i &&  i == k) {
@@ -12,6 +12,7 @@ namespace Beware.Inputs {
                     }
                     if (control is Buttons b && item.name is Buttons j && j == b) {
                         SetNewButton(item.heading, b);
+                        break;
                     }
                 }
             }
@@ -98,6 +99,7 @@ namespace Beware.Inputs {
 
             return isSet;
         }
+
         private static bool IsValidKey(Keys key) {
             switch (key) {
                 case Keys.A:

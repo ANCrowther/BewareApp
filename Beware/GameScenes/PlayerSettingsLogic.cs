@@ -20,6 +20,7 @@ namespace Beware.GameScenes {
         private List<(string heading, object name)> genericSettingList;
         
         private bool isActive = false;
+        private bool isSet = true;
         private float keyScale = 0.5f;
         private float controllerScale = 0.3f;
 
@@ -41,7 +42,9 @@ namespace Beware.GameScenes {
                 ("Pause", ControlMap.Pause_pad),
                 ("Back", ControlMap.Back_pad),
                 ("Enter", ControlMap.Enter_pad),
-                ("Mute", ControlMap.Mute_pad)
+                ("Mute", ControlMap.Mute_pad),
+                ("Vol. Up", ControlMap.VolumeUp_pad),
+                ("Vol. Down", ControlMap.VolumeDown_pad)
             };
         }
 
@@ -84,11 +87,10 @@ namespace Beware.GameScenes {
 
         public override void Update(GameTime gameTime) {
             if (Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad)) {
-                //BewareGame.Instance.Scene.SwitchScene(SceneManager.MenuWindow);
                 SceneManager.SwitchScene(SceneManager.MenuWindow);
             }
 
-            if (Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad)) {
+            if ((Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad)) && isSet == true) {
                 SwitchIsActiveStatus();
             }
 
@@ -97,8 +99,10 @@ namespace Beware.GameScenes {
             }
 
             if (isActive == true) {
+                UpdateSetting();
                 UpdateActiveSetting(activeMenuSetting.name);
             }
+
 
             AudioManager.Update();
 
@@ -109,21 +113,34 @@ namespace Beware.GameScenes {
             isActive = !isActive;
         }
 
+        private void SwitchIsSetStatus() {
+            isSet = !isSet;
+        }
+
         private void UpdateActiveSetting(PlayerSettings name) {
             switch (name) {
                 case PlayerSettings.Gamepad:
                     activeGamepad = gamepadList.MoveThroughMenu(activeGamepad);
-                    UpdateGamepadSetting();
+                    UpdateSetting();
                     break;
                 case PlayerSettings.Keyboard:
                     activeKeyboard = keyboardList.MoveThroughMenu(activeKeyboard);
-                    UpdateKeyboardSetting();
+                    UpdateSetting();
                     break;
             }
         }
 
-        private void UpdateGamepadSetting() {
-            
+        private void UpdateSetting() {
+            if (activeMenuSetting.name == PlayerSettings.Keyboard) {
+                var keyboardState = Keyboard.GetState();
+                isSet = MapPlayerControls.MapNewControl<Keys>(keyboardList, activeKeyboard, keyboardState.GetKey());
+            }
+            if (activeMenuSetting.name == PlayerSettings.Gamepad) {
+                var gamepadState = GamePad.GetState(PlayerIndex.One);
+                isSet = MapPlayerControls.MapNewControl<Buttons>(gamepadList, activeGamepad, gamepadState.GetButton());
+            }
+
+
         }
 
         private void UpdateKeyboardSetting() {

@@ -32,7 +32,8 @@ namespace Beware.Inputs {
         public static Buttons Enter_pad { get; private set; } = Buttons.Start;
         public static Buttons Mute_pad { get; private set; } = Buttons.DPadDown;
         public static Buttons Pause_pad { get; private set; } = Buttons.Start;
-
+        public static Buttons VolumeUp_pad { get; private set; } = Buttons.DPadRight;
+        public static Buttons VolumeDown_pad { get; private set; } = Buttons.DPadLeft;
 
         public static float MaxSpeed { get; set; } = 8.0f;
         public static float MinSpeed { get; set; } = 3.0f;

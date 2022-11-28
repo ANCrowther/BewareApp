@@ -15,6 +15,10 @@ namespace Beware.Utilities {
         public static Texture2D Button_Back { get; private set; }
         public static Texture2D Button_Start { get; private set; }
         public static Texture2D Button_DPad { get; private set; }
+        public static Texture2D Button_DPadUp { get; private set; }
+        public static Texture2D Button_DPadDown { get; private set; }
+        public static Texture2D Button_DPadLeft { get; private set; }
+        public static Texture2D Button_DPadRight { get; private set; }
         public static Texture2D Button_LeftStick { get; private set; }
         public static Texture2D Button_RightStick { get; private set; }
         public static Texture2D Button_Generic { get; private set; }
@@ -39,6 +43,10 @@ namespace Beware.Utilities {
             Button_LT = content.Load<Texture2D>(@"Controllers\Button_LT");
             Button_RT = content.Load<Texture2D>(@"Controllers\Button_RT");
             Button_DPad = content.Load<Texture2D>(@"Controllers\Button_DPad");
+            Button_DPadUp = content.Load<Texture2D>(@"Controllers\Button_DPadUp");
+            Button_DPadDown = content.Load<Texture2D>(@"Controllers\Button_DPadDown");
+            Button_DPadLeft = content.Load<Texture2D>(@"Controllers\Button_DPadLeft");
+            Button_DPadRight = content.Load<Texture2D>(@"Controllers\Button_DPadRight");
             Button_Back = content.Load<Texture2D>(@"Controllers\Button_Back");
             Button_Start = content.Load<Texture2D>(@"Controllers\Button_Start");
             Button_Generic = content.Load<Texture2D>(@"Controllers\controller_button");
@@ -64,10 +72,10 @@ namespace Beware.Utilities {
                 case Buttons.RightShoulder: return Button_RB;
                 case Buttons.LeftTrigger: return Button_LT;
                 case Buttons.RightTrigger: return Button_RT;
-                case Buttons.DPadUp: return Button_DPad;
-                case Buttons.DPadDown: return Button_DPad;
-                case Buttons.DPadLeft: return Button_DPad;
-                case Buttons.DPadRight: return Button_DPad;
+                case Buttons.DPadUp: return Button_DPadUp;
+                case Buttons.DPadDown: return Button_DPadDown;
+                case Buttons.DPadLeft: return Button_DPadLeft;
+                case Buttons.DPadRight: return Button_DPadRight;
                 case Buttons.Back: return Button_Back;
                 case Buttons.Start: return Button_Start;
                 default: return Button_DPad;
