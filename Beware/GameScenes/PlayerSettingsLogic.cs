@@ -23,12 +23,23 @@ namespace Beware.GameScenes {
         private bool isSet = true;
         private float keyScale = 0.5f;
         private float controllerScale = 0.3f;
+        private float masterVolume;
+        private float timeShowingVolumeChange = 2.0f;
+        private float timeLeft;
+        private bool isVolumeChanged = false;
 
         public PlayerSettingsLogic() : base(BewareGame.Instance) {
             LoadSettingList();
-            LoadKeyboardList();
-            loadGamepadList();
+            Refresh();
             LoadGenericSettingList();
+            LoadActiveSettings();
+            masterVolume = AudioManager.MasterVolumeLevel;
+            Reset();
+        }
+
+        private void Reset() {
+            isVolumeChanged = false;
+            timeLeft = 0;
         }
 
         private void LoadGenericSettingList() {
@@ -54,7 +65,6 @@ namespace Beware.GameScenes {
                 ("Gamepad", PlayerSettings.Gamepad),
                 ("Generic", PlayerSettings.Generic)
             };
-            activeMenuSetting = ("Keyboard", PlayerSettings.Keyboard);
         }
 
         private void LoadKeyboardList() {
@@ -71,10 +81,9 @@ namespace Beware.GameScenes {
                 ("Slow", ControlMap.Slow),
                 ("Special", ControlMap.Special),
             };
-            activeKeyboard = ("Move Up", ControlMap.MoveUp);
         }
 
-        private void loadGamepadList() {
+        private void LoadGamepadList() {
             gamepadList = new List<(string heading, Buttons name)> {
                 ("Move", ControlMap.Move_pad),
                 ("Aim", ControlMap.Aim_pad),
@@ -82,31 +91,49 @@ namespace Beware.GameScenes {
                 ("Slow", ControlMap.Slow_pad),
                 ("Special", ControlMap.Special_pad)
             };
+        }
+
+        private void LoadActiveSettings() {
             activeGamepad = ("Move", ControlMap.Move_pad);
+            activeKeyboard = ("Move Up", ControlMap.MoveUp);
+            activeMenuSetting = ("Keyboard", PlayerSettings.Keyboard);
         }
 
         public override void Update(GameTime gameTime) {
-            if (Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad)) {
+            if ((Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad)) && isSet == true) {
                 SceneManager.SwitchScene(SceneManager.MenuWindow);
             }
 
-            if ((Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad)) && isSet == true) {
+            if ((Input.WasKeyPressed(Keys.Left) || Input.WasKeyPressed(Keys.Right) ||
+                Input.WasButtonPressed(Buttons.DPadLeft) || Input.WasButtonPressed(Buttons.DPadRight)) && isSet == true) {
                 SwitchIsActiveStatus();
             }
 
-            if (isActive == false) {
-                activeMenuSetting = settingMenuList.MoveThroughMenu(activeMenuSetting);
+            if (isActive == true && isSet == true) {
+                MoveThroughMenu(activeMenuSetting.name);
+                if (Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad)) {
+                    SwitchIsSetStatus();
+                }
             }
 
-            if (isActive == true) {
+            if (isActive == true && isSet == false) {
                 UpdateSetting();
-                UpdateActiveSetting(activeMenuSetting.name);
+                Refresh();
             }
 
+            if (isActive == false) {
+                MoveThroughMenu(PlayerSettings.Standard);
+            }
 
             AudioManager.Update();
+            TimeKeeper.Update();
 
             base.Update(gameTime);
+        }
+
+        private void Refresh() {
+            LoadKeyboardList();
+            LoadGamepadList();
         }
 
         private void SwitchIsActiveStatus() {
@@ -117,15 +144,16 @@ namespace Beware.GameScenes {
             isSet = !isSet;
         }
 
-        private void UpdateActiveSetting(PlayerSettings name) {
+        private void MoveThroughMenu(PlayerSettings name) {
             switch (name) {
                 case PlayerSettings.Gamepad:
                     activeGamepad = gamepadList.MoveThroughMenu(activeGamepad);
-                    UpdateSetting();
                     break;
                 case PlayerSettings.Keyboard:
                     activeKeyboard = keyboardList.MoveThroughMenu(activeKeyboard);
-                    UpdateSetting();
+                    break;
+                case PlayerSettings.Standard:
+                    activeMenuSetting = settingMenuList.MoveThroughMenu(activeMenuSetting);
                     break;
             }
         }
@@ -139,12 +167,6 @@ namespace Beware.GameScenes {
                 var gamepadState = GamePad.GetState(PlayerIndex.One);
                 isSet = MapPlayerControls.MapNewControl<Buttons>(gamepadList, activeGamepad, gamepadState.GetButton());
             }
-
-
-        }
-
-        private void UpdateKeyboardSetting() {
-
         }
 
         public override void Draw(GameTime gameTime) {
@@ -153,6 +175,11 @@ namespace Beware.GameScenes {
 
             if (AudioManager.IsMuted == true) {
                 BewareGame.Instance._spriteBatch.Draw(Art.Mute, new Vector2(ViewportManager.MenuView.Width - 150, ViewportManager.MenuView.Height - 150), null, Color.White, 0, new Vector2(Art.Mute.Width, Art.Mute.Height) / 2, 0.25f, 0, 0.0f);
+            }
+
+            if (isVolumeChanged == true) {
+                int volume = AudioManager.MasterVolumeLevel;
+                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareLarge, $"{volume}", new Vector2(ViewportManager.MenuView.Width - 150 - Fonts.NovaSquareLarge.MeasureString($"{volume}").X / 2, ViewportManager.MenuView.Height - 150), Color.BlueViolet);
             }
 
             DrawSettingList(new Vector2(200, ViewportManager.MenuView.Height / 6));

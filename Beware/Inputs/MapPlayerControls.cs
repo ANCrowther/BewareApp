@@ -5,17 +5,20 @@ namespace Beware.Inputs {
     static class MapPlayerControls {
         public static bool MapNewControl<T>(List<(string heading, T name)> list, (string heading, T name) activeSetting, T control) {
             foreach ((string heading, T name) item in list) {
-                if (item.heading != activeSetting.heading) {
-                    if (activeSetting is Keys k && item.name is Keys i &&  i == k) {
-                        SetNewKey(item.heading, k);
+                if (item.name is Keys j && control is Keys k && activeSetting.name is Keys l){
+                    if (item.heading != activeSetting.heading && j == k) {
+                        SetNewKey(item.heading, l);
                         break;
                     }
-                    if (control is Buttons b && item.name is Buttons j && j == b) {
-                        SetNewButton(item.heading, b);
+                }
+                if (item.name is Buttons a && control is Buttons b && activeSetting.name is Buttons c) {
+                    if (item.heading != activeSetting.heading && a == b) {
+                        SetNewButton(item.heading, c);
                         break;
                     }
                 }
             }
+
             if (control is Keys key) {
                 return SetNewKey(activeSetting.heading, key);
             }
@@ -156,10 +159,10 @@ namespace Beware.Inputs {
                 case Buttons.RightTrigger:
                 case Buttons.LeftShoulder:
                 case Buttons.RightShoulder:
-                case Buttons.DPadUp:
-                case Buttons.DPadDown:
-                case Buttons.DPadLeft:
-                case Buttons.DPadRight:
+                //case Buttons.DPadUp:
+                //case Buttons.DPadDown:
+                //case Buttons.DPadLeft:
+                //case Buttons.DPadRight:
                 case Buttons.RightStick:
                 case Buttons.LeftStick:
                     return true;

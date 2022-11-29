@@ -1,5 +1,7 @@
 ﻿using Beware.Inputs;
 using Beware.Utilities;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 
 namespace Beware.Managers {
@@ -14,16 +16,80 @@ namespace Beware.Managers {
         public static int MasterVolumeLevel { get; private set; } = 10;
 
         public static void Update(VolumeType type = VolumeType.Master) {
-            if (Input.WasKeyPressed(ControlMap.VolumeUp)) {
+            if (Input.WasKeyPressed(ControlMap.VolumeUp) || Input.WasButtonPressed(ControlMap.VolumeUp_pad)) {
                 VolumeUp(type);
             }
-            if (Input.WasKeyPressed(ControlMap.VolumeDown)) {
+            if (Input.WasKeyPressed(ControlMap.VolumeDown) || Input.WasButtonPressed(ControlMap.VolumeDown_pad)) {
                 VolumeDown(type);
             }
             if (Input.WasKeyPressed(ControlMap.Mute) || Input.WasButtonPressed(ControlMap.Mute_pad)) {
                 Mute();
             }
         }
+
+        public static void Draw() {
+
+        }
+
+        public static void DrawGameSettingsView(Vector2 volumePosition, GameSettings gameSetting, VolumeType volumeType, bool isActive) {
+            DrawMasterVolumeLevel(gameSetting, volumeType, isActive, volumePosition);
+            volumePosition.Y += 100;
+            DrawMusicVolumeLevel(gameSetting, volumeType, isActive, volumePosition);
+            volumePosition.Y += 100;
+            DrawSFXVolumeLevel(gameSetting, volumeType, isActive, volumePosition);
+        }
+
+        private static void DrawMasterVolumeLevel(GameSettings gameSetting, VolumeType volumeType, bool isActive, Vector2 position) {
+            Color color = Color.Lime;
+            if (gameSetting == GameSettings.Volume && isActive == true) {
+                color = (volumeType == VolumeType.Master) ? Color.Moccasin : Color.Lime;
+            }
+
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, "Master volume", position, color);
+            position.X += Fonts.NovaSquareMedium.MeasureString("Master volume  ").X;
+            position.Y += 50;
+
+            for (int i = 1; i <= 20; i++) {
+                Texture2D image = (AudioManager.MasterVolumeLevel >= i) ? Art.BlueSquare : Art.RedSquare;
+                BewareGame.Instance._spriteBatch.Draw(image, position, null, Color.White, 0, new Vector2(image.Width, image.Height) / 2.0f, 0.5f, 0, 0.0f);
+                position.X += 50;
+            }
+        }
+
+        private static void DrawMusicVolumeLevel(GameSettings gameSetting, VolumeType volumeType, bool isActive, Vector2 position) {
+            Color color = Color.Lime;
+            if (gameSetting == GameSettings.Volume && isActive == true) {
+                color = (volumeType == VolumeType.Music) ? Color.Moccasin : Color.Lime;
+            }
+
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, "Music volume", position, color);
+            position.X += Fonts.NovaSquareMedium.MeasureString("Music volume   ").X;
+            position.Y += 50;
+
+            for (int i = 1; i <= 20; i++) {
+                Texture2D image = (AudioManager.MusicVolumeLevel >= i) ? Art.BlueSquare : Art.RedSquare;
+                BewareGame.Instance._spriteBatch.Draw(image, position, null, Color.White, 0, new Vector2(image.Width, image.Height) / 2.0f, 0.5f, 0, 0.0f);
+                position.X += 50;
+            }
+        }
+
+        private static void DrawSFXVolumeLevel(GameSettings gameSetting, VolumeType volumeType, bool isActive, Vector2 position) {
+            Color color = Color.Lime;
+            if (gameSetting == GameSettings.Volume && isActive == true) {
+                color = (volumeType == VolumeType.SFX) ? Color.Moccasin : Color.Lime;
+            }
+
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, "SFX volume", position, color);
+            position.X += Fonts.NovaSquareMedium.MeasureString("SFX volume      ").X;
+            position.Y += 50;
+
+            for (int i = 1; i <= 20; i++) {
+                Texture2D image = (AudioManager.SFXVolumeLevel >= i) ? Art.BlueSquare : Art.RedSquare;
+                BewareGame.Instance._spriteBatch.Draw(image, position, null, Color.White, 0, new Vector2(image.Width, image.Height) / 2.0f, 0.5f, 0, 0.0f);
+                position.X += 50;
+            }
+        }
+
 
         private static void VolumeUp(VolumeType type) {
             switch (type) {
