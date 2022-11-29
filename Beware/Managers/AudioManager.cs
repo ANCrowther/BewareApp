@@ -10,6 +10,10 @@ namespace Beware.Managers {
         private static int tempSFXVolume;
         private static int tempMasterVolume;
 
+        private static int cooldownFrames = 60;
+        private static int cooldownRemaining = 0;
+        private static bool isVolumeChanged = false;
+
         public static bool IsMuted { get; private set; } = false;
         public static int MusicVolumeLevel { get; private set; } = 5;
         public static int SFXVolumeLevel { get; private set; } = 3;
@@ -18,17 +22,40 @@ namespace Beware.Managers {
         public static void Update(VolumeType type = VolumeType.Master) {
             if (Input.WasKeyPressed(ControlMap.VolumeUp) || Input.WasButtonPressed(ControlMap.VolumeUp_pad)) {
                 VolumeUp(type);
+                ResetCooldown();
             }
             if (Input.WasKeyPressed(ControlMap.VolumeDown) || Input.WasButtonPressed(ControlMap.VolumeDown_pad)) {
                 VolumeDown(type);
+                ResetCooldown();
             }
             if (Input.WasKeyPressed(ControlMap.Mute) || Input.WasButtonPressed(ControlMap.Mute_pad)) {
                 Mute();
             }
+            if (isVolumeChanged == true) {
+                UpdateCountdown();
+            }
+            
         }
 
-        public static void Draw() {
+        private static void ResetCooldown() {
+            cooldownRemaining = cooldownFrames;
+            isVolumeChanged = true;
+        }
 
+        private static void UpdateCountdown() {
+            if (cooldownRemaining > 0) {
+                cooldownRemaining--;
+            }
+            if (cooldownRemaining <= 0) {
+                ResetCooldown();
+                isVolumeChanged = false;
+            }
+        }
+
+        public static void Draw(Vector2 position) {
+            if (isVolumeChanged == true) {
+                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{MasterVolumeLevel}", position, Color.Aquamarine);
+            }
         }
 
         public static void DrawGameSettingsView(Vector2 volumePosition, GameSettings gameSetting, VolumeType volumeType, bool isActive) {
@@ -89,7 +116,6 @@ namespace Beware.Managers {
                 position.X += 50;
             }
         }
-
 
         private static void VolumeUp(VolumeType type) {
             switch (type) {

@@ -23,23 +23,12 @@ namespace Beware.GameScenes {
         private bool isSet = true;
         private float keyScale = 0.5f;
         private float controllerScale = 0.3f;
-        private float masterVolume;
-        private float timeShowingVolumeChange = 2.0f;
-        private float timeLeft;
-        private bool isVolumeChanged = false;
 
         public PlayerSettingsLogic() : base(BewareGame.Instance) {
             LoadSettingList();
             Refresh();
             LoadGenericSettingList();
             LoadActiveSettings();
-            masterVolume = AudioManager.MasterVolumeLevel;
-            Reset();
-        }
-
-        private void Reset() {
-            isVolumeChanged = false;
-            timeLeft = 0;
         }
 
         private void LoadGenericSettingList() {
@@ -177,10 +166,7 @@ namespace Beware.GameScenes {
                 BewareGame.Instance._spriteBatch.Draw(Art.Mute, new Vector2(ViewportManager.MenuView.Width - 150, ViewportManager.MenuView.Height - 150), null, Color.White, 0, new Vector2(Art.Mute.Width, Art.Mute.Height) / 2, 0.25f, 0, 0.0f);
             }
 
-            if (isVolumeChanged == true) {
-                int volume = AudioManager.MasterVolumeLevel;
-                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareLarge, $"{volume}", new Vector2(ViewportManager.MenuView.Width - 150 - Fonts.NovaSquareLarge.MeasureString($"{volume}").X / 2, ViewportManager.MenuView.Height - 150), Color.BlueViolet);
-            }
+            AudioManager.Draw(new Vector2(ViewportManager.MenuView.Width - 150, ViewportManager.MenuView.Height - 150));
 
             DrawSettingList(new Vector2(200, ViewportManager.MenuView.Height / 6));
             if (activeMenuSetting.name == PlayerSettings.Keyboard) {
