@@ -1,4 +1,6 @@
-﻿using Beware.Inputs;
+﻿using Beware.Behaviours;
+using Beware.Entities;
+using Beware.Inputs;
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
@@ -10,7 +12,6 @@ namespace Beware {
         public GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
         public static BewareGame Instance { get; private set; }
-        //public SceneManager Scene { get; private set; }
         public static GameTime GameTime { get; private set; }
 
         public BewareGame() {
@@ -34,9 +35,17 @@ namespace Beware {
             CardinalMapManager.Initialize();
             ControllerManager.Initialize();
             ViewportManager.Initialize(_graphics);
-            //Scene = new SceneManager();
+            InitializePlayerBehaviours();
 
             base.Initialize();
+        }
+
+        protected void InitializePlayerBehaviours() {
+            //IBehaviour behaviour = PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerAttack1);
+            PlayerModel.Instance.SetBehaviour(() => PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerAttack1).Update());
+            //behaviour = PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerMove1);
+            PlayerModel.Instance.SetBehaviour(() => PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerMove1).Update());
+
         }
 
         protected override void LoadContent() {

@@ -9,7 +9,6 @@ namespace Beware.Entities {
         public Rectangle InitialFrame { get; set; }
         public Rectangle Destination { get { return new Rectangle((int)Location.X, (int)Location.Y, InitialFrame.Width, InitialFrame.Height); } }
 
-
         public StarModel(Vector2 location, Texture2D texture, Rectangle initialFrame) {
             image = texture;
             Location = location;

@@ -52,4 +52,20 @@
         Music,
         SFX
     }
+
+    public enum PlayerBehaviourType {
+        PlayerAttack1,
+        PlayerMove1,
+        PlayerSlow1,
+        PlayerSpecial,
+    }
+
+    public enum EnemyBehaviourType {
+        Move1
+    }
+
+    public enum EntityType {
+        Enemy_Wandering,
+        Enemy_Seeker
+    }
 }

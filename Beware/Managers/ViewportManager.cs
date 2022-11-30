@@ -85,31 +85,23 @@ namespace Beware.Managers {
             switch (layout) {
                 case ViewportLayout.Layout1:
                     CreateLayout1();
-                    //ChangeDimension(standardDimension);
                     break;
                 case ViewportLayout.Layout2:
                     CreateLayout2();
-                    //ChangeDimension(standardDimension);
                     break;
                 case ViewportLayout.Layout3:
                     CreateLayout3();
-                    //ChangeDimension(nintendoDimension);
                     break;
             }
         }
 
         public static Vector2 GetWindowSize(View view) {
             switch (view) {
-                case View.InfoOne:
-                    return new Vector2(InfoOneView.Width, InfoOneView.Height);
-                case View.InfoTwo:
-                    return new Vector2(InfoTwoView.Width, InfoTwoView.Height);
-                case View.GamePlay:
-                    return new Vector2(GameboardView.Width, GameboardView.Height);
-                case View.Ticker:
-                    return new Vector2(TickerView.Width, TickerView.Height);
-                default:
-                    return new Vector2(MenuView.Width, MenuView.Height);
+                case View.InfoOne:  return new Vector2(InfoOneView.Width, InfoOneView.Height);
+                case View.InfoTwo:  return new Vector2(InfoTwoView.Width, InfoTwoView.Height);
+                case View.GamePlay: return new Vector2(GameboardView.Width, GameboardView.Height);
+                case View.Ticker:   return new Vector2(TickerView.Width, TickerView.Height);
+                default:            return new Vector2(MenuView.Width, MenuView.Height);
             }
         }
 

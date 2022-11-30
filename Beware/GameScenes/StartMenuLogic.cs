@@ -47,7 +47,6 @@ namespace Beware.GameScenes {
 
             AudioManager.Draw(new Vector2(ViewportManager.MenuView.Width - 150, ViewportManager.MenuView.Height - 150));
 
-
             BewareGame.Instance._spriteBatch.End();
             base.Draw(gameTime);
         }

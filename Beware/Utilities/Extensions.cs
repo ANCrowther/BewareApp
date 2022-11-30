@@ -10,6 +10,10 @@ namespace Beware.Utilities {
             return (float)Math.Atan2(vector.Y, vector.X);
         }
 
+        public static Vector2 ScaleTo(this Vector2 vector, float length) {
+            return vector * (length / vector.Length());
+        }
+
         public static Keys GetKey(this KeyboardState k) {
             if (k.IsKeyDown(Keys.A))
                 return Keys.A;
