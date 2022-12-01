@@ -14,8 +14,7 @@ namespace Beware.Behaviours {
             this.entity = entity;
         }
 
-        public void Update() {
-            throw new NotImplementedException();
+        public void Update(EntityModel entity) {
         }
 
         IEnumerable<int> FollowPlayer(float acceleration = 1.0f) {

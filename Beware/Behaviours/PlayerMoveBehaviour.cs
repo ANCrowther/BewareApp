@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace Beware.Behaviours {
     public class PlayerMoveBehaviour : IBehaviour {
-        public void Update() {
+        public void Update(EntityModel entity) {
             PlayerModel.Instance.Velocity = Helpers.GetDirection(Mode.Move) * 2;
             PlayerModel.Instance.Position += PlayerModel.Instance.Velocity;
 

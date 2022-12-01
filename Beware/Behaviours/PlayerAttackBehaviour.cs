@@ -8,7 +8,7 @@ using System;
 namespace Beware.Behaviours {
     public class PlayerAttackBehaviour : IBehaviour {
         public static Random random = new Random();
-        public void Update() {
+        public void Update(EntityModel entity) {
             PlayerModel.Instance.IsShooting = false;
             PlayerModel.Instance.Aim = Helpers.GetDirection(Mode.Shoot);
 
@@ -18,24 +18,22 @@ namespace Beware.Behaviours {
                 PlayerModel.Instance.Orientation = PlayerModel.Instance.Aim.ToAngle();
             }
 
+            // Creates the bullets whenever the player shoots.
             if (Input.WasKeyPressed(ControlMap.Shoot) || Input.WasButtonPressed(ControlMap.Shoot_pad)) {
                 PlayerModel.Instance.ResetCooldown();
                 float aimAngle = PlayerModel.Instance.Orientation;
                 Quaternion aimQuat = Quaternion.CreateFromYawPitchRoll(0, 0, aimAngle);
 
-                float randomSpread = random.NextFloat(-0.4f, 0.4f) +
-                                     random.NextFloat(-0.4f, 0.4f);
+                float randomSpread = random.NextFloat(-0.4f, 0.4f) + random.NextFloat(-0.4f, 0.4f);
                 Vector2 vel = MathUtil.FromPolar(aimAngle + randomSpread, 11f);
-
                 Vector2 offset = Vector2.Transform(new Vector2(25, -8), aimQuat);
 
                 BulletModel bullet = new BulletModel(PlayerModel.Instance.Position + offset, vel);
-                IBehaviour behaviour = new PlayerBulletBehaviour(bullet);
-                bullet.SetBehaviour(() => behaviour.Update());
+                bullet.SetBehaviour(() => new BulletBehaviour().Update(bullet));
                 EntityManager.Add(bullet);
             }
 
-            PlayerModel.Instance.UpdateCooldown();
+            //PlayerModel.Instance.UpdateCooldown();
         }
     }
 }

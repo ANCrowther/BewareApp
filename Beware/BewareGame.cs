@@ -42,11 +42,8 @@ namespace Beware {
         }
 
         protected void InitializePlayerBehaviours() {
-            //IBehaviour behaviour = PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerAttack1);
-            PlayerModel.Instance.SetBehaviour(() => PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerAttack1).Update());
-            //behaviour = PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerMove1);
-            PlayerModel.Instance.SetBehaviour(() => PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerMove1).Update());
-
+            PlayerModel.Instance.SetBehaviour(() => PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerAttack1).Update(PlayerModel.Instance));
+            PlayerModel.Instance.SetBehaviour(() => PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerMove1).Update(PlayerModel.Instance));
         }
 
         protected override void LoadContent() {

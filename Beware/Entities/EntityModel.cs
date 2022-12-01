@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Beware.Entities;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
@@ -13,7 +14,7 @@ namespace Beware.Entities {
         public bool IsExpired;
         protected Texture2D image;
 
-        protected List<Behaviour> behaviours;
+        protected List<Behaviour> behaviours = new List<Behaviour>();
 
         public Vector2 Size { get { return image == null ? Vector2.Zero : new Vector2(image.Width, image.Height); } }
 

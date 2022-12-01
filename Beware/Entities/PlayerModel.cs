@@ -1,7 +1,6 @@
 ﻿using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
 
 namespace Beware.Entities {
@@ -24,7 +23,6 @@ namespace Beware.Entities {
         }
 
         private PlayerModel() {
-            behaviours = new List<Behaviour>();
             Position = ViewportManager.GetWindowSize(Utilities.View.GamePlay) / 2;
             CollisionRadius = 10;
             image = EntityArt.Player1;

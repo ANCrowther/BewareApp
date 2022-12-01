@@ -1,6 +1,8 @@
-﻿namespace Beware.Behaviours {
+﻿using Beware.Entities;
+
+namespace Beware.Behaviours {
     class PLayerSpecialBehaviour : IBehaviour {
-        public void Update() {
+        public void Update(EntityModel entity) {
             
         }
     }
