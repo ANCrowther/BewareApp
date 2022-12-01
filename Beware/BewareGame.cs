@@ -26,6 +26,7 @@ namespace Beware {
             // TODO: Add your initialization logic here
 
             Art.Initialize(Content);
+            EntityArt.Initialize(Content);
             Fonts.Initialize(Content);
             Scenes.Initialize(Content);
             ControllerArt.Initialize(Content);

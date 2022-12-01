@@ -1,5 +1,7 @@
 ﻿using Beware.Managers;
+using Beware.Utilities;
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 
 namespace Beware.Entities {
@@ -10,7 +12,7 @@ namespace Beware.Entities {
         public bool IsDead { get { return framesUntilRespawn > 0; } }
         private int framesUntilRespawn = 0;
         private int cooldownRemaining = 0;
-        const int cooldownFrames = 6;
+        private const int cooldownFrames = 6;
 
         public static PlayerModel Instance {
             get {
@@ -25,16 +27,23 @@ namespace Beware.Entities {
             behaviours = new List<Behaviour>();
             Position = ViewportManager.GetWindowSize(Utilities.View.GamePlay) / 2;
             CollisionRadius = 10;
+            image = EntityArt.Player1;
         }
 
-        public override void Update() {
-            foreach (Behaviour item in behaviours) {
-                item();
+        public void ResetCooldown() {
+            cooldownRemaining = cooldownFrames;
+        }
+
+        public void UpdateCooldown() {
+            if (cooldownRemaining > 0) {
+                cooldownRemaining--;
             }
         }
 
-        public override void SetBehaviour(Behaviour moveBehaviour) {
-            behaviours.Add(moveBehaviour);
+        public override void Draw() {
+            if (!IsDead) {
+                base.Draw();
+            }
         }
     }
 }

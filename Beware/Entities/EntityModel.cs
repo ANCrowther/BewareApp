@@ -17,11 +17,17 @@ namespace Beware.Entities {
 
         public Vector2 Size { get { return image == null ? Vector2.Zero : new Vector2(image.Width, image.Height); } }
 
-        public abstract void Update();
-        public abstract void SetBehaviour(Behaviour behaviour);
+        public virtual void Update() {
+            foreach (Behaviour item in behaviours) {
+                item();
+            }
+        }
+
+        public virtual void SetBehaviour(Behaviour behaviour) {
+            behaviours.Add(behaviour);
+        }
 
         public virtual void Draw() {
-            // TODO: Draw feature.
             BewareGame.Instance._spriteBatch.Draw(image, Position, null, Color.White, Orientation, Size / 2f, 1.0f, 0, 0);
         }
     }
