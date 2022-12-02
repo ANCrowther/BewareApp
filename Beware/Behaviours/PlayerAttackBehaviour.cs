@@ -29,7 +29,7 @@ namespace Beware.Behaviours {
                 Vector2 offset = Vector2.Transform(new Vector2(25, -8), aimQuat);
 
                 BulletModel bullet = new BulletModel(PlayerModel.Instance.Position + offset, vel);
-                bullet.SetBehaviour(() => new BulletBehaviour().Update(bullet));
+                bullet.SetBehaviour(new BulletBehaviour());
                 EntityManager.Add(bullet);
             }
 

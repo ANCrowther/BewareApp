@@ -15,16 +15,17 @@ namespace Beware.GameScenes {
                 SceneManager.SwitchScene(SceneManager.MenuWindow);
             }
 
-            //PlayerModel.Instance.Update();
             EntityManager.Update();
+            EnemySpawner.Update();
 
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime) {
             BewareGame.Instance._spriteBatch.Begin();
-            //PlayerModel.Instance.Draw();
+
             EntityManager.Draw();
+            
             BewareGame.Instance._spriteBatch.End();
             base.Draw(gameTime);
         }

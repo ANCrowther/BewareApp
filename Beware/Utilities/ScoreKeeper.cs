@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Beware.Entities;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 
@@ -54,10 +55,9 @@ namespace Beware.Utilities {
         }
 
         public static void IncreaseMultiplier() {
-            // TODO: add play IsDead logic == true
-            //if (false) {
-            //    return;
-            //}
+            if (PlayerModel.Instance.IsDead) {
+                return;
+            }
 
             multiplierTimeLeft = multiplyExpireTime;
 
@@ -93,11 +93,10 @@ namespace Beware.Utilities {
             File.WriteAllText(highScoreFileName, score.ToString());
         }
 
-        private static void AddPoints(int basePoints) {
-            // TODO: add player instance IsDead == true.
-            //if (false) {
-            //    return;
-            //}
+        public static void AddPoints(int basePoints) {
+            if (PlayerModel.Instance.IsDead) {
+                return;
+            }
 
             Score += Multiplier * basePoints;
 

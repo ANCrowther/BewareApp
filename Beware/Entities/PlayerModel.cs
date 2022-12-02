@@ -1,7 +1,6 @@
 ﻿using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
 
 namespace Beware.Entities {
     public class PlayerModel : EntityModel {
@@ -42,6 +41,11 @@ namespace Beware.Entities {
             if (!IsDead) {
                 base.Draw();
             }
+        }
+
+        public void Kill() {
+            ScoreKeeper.RemoveLife();
+            framesUntilRespawn = 60;
         }
     }
 }
