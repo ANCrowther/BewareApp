@@ -1,4 +1,5 @@
 ﻿using Beware.Entities;
+using Beware.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
@@ -40,7 +41,7 @@ namespace Beware.Utilities {
             Score = 0;
             Multiplier = 1;
             Lives = 4;
-            increaseScoreBy = 20;
+            increaseScoreBy = 2000;
             scoreForExtraLife = increaseScoreBy;
             multiplierTimeLeft = 0;
         }
@@ -84,8 +85,11 @@ namespace Beware.Utilities {
             }
         }
 
-        public static void DrawScoreForNintendo(Vector2 position) {
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Score}", position, Color.White);
+        public static void DrawScoreForNintendo() {
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Score}", new Vector2(25, ViewportManager.GameboardView.Height - 50), Color.Yellow);
+
+            BewareGame.Instance._spriteBatch.Draw(EntityArt.Player1, new Vector2(ViewportManager.GameboardView.Width - 50, ViewportManager.GameboardView.Height - 40), null, Color.Red, PlayerModel.Instance.Orientation, PlayerModel.Instance.Size / 2f, 1.0f, 0, 0.3f);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Lives}", new Vector2(ViewportManager.GameboardView.Width - 60, ViewportManager.GameboardView.Height - 60), Color.Yellow);
         }
 
         public static void DrawHighScore(Vector2 position) {
@@ -93,7 +97,7 @@ namespace Beware.Utilities {
         }
 
         private static void SaveHighScore(int score) {
-            // TODO: digure out how to save top 10.
+            // TODO: figure out how to save top 10.
             File.WriteAllText(highScoreFileName, score.ToString());
         }
 

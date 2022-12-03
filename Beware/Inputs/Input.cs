@@ -19,5 +19,13 @@ namespace Beware.Inputs {
             return PlayerInputStates.lastGamePadState.IsButtonUp(button) &&
                    PlayerInputStates.gamePadState.IsButtonDown(button);
         }
+
+        public static bool IsKeyHeldDown(Keys key) {
+            return PlayerInputStates.keyboardState.IsKeyDown(key);
+        }
+
+        public static bool IsButtonHeldDown(Buttons button) {
+            return PlayerInputStates.gamePadState.IsButtonDown(button);
+        }
     }
 }

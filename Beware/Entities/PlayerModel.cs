@@ -5,13 +5,12 @@ using Microsoft.Xna.Framework;
 namespace Beware.Entities {
     public class PlayerModel : EntityModel {
         private static PlayerModel instance;
+        private int framesUntilRespawn = 0;
+
         public Vector2 Aim { get; set; }
         public bool IsShooting { get; set; } = false;
         public bool IsSlow { get; set; } = false;
         public bool IsDead { get { return framesUntilRespawn > 0; } }
-        private int framesUntilRespawn = 0;
-        private int cooldownRemaining = 0;
-        private const int cooldownFrames = 6;
 
         public static PlayerModel Instance {
             get {
@@ -39,21 +38,8 @@ namespace Beware.Entities {
             } else {
                 base.Update();
             }
-
-            if (cooldownRemaining > 0) {
-                cooldownRemaining--;
-            }
         }
 
-        public void ResetCooldown() {
-            cooldownRemaining = cooldownFrames;
-        }
-
-        public void UpdateCooldown() {
-            if (cooldownRemaining > 0) {
-                cooldownRemaining--;
-            }
-        }
 
         public override void Draw() {
             if (!IsDead) {

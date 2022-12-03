@@ -24,7 +24,6 @@ namespace Beware {
 
         protected override void Initialize() {
             // TODO: Add your initialization logic here
-
             Art.Initialize(Content);
             EntityArt.Initialize(Content);
             Fonts.Initialize(Content);
@@ -45,7 +44,6 @@ namespace Beware {
             PlayerModel.Instance.SetBehaviour(BehaviourCategory.Move, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerAttack1));
             PlayerModel.Instance.SetBehaviour(BehaviourCategory.Shoot, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerMove1));
             PlayerModel.Instance.SetBehaviour(BehaviourCategory.Slow, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerSlow1));
-
         }
 
         protected override void LoadContent() {

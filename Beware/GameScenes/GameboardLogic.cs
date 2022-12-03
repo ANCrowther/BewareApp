@@ -27,8 +27,8 @@ namespace Beware.GameScenes {
 
             EntityManager.Draw();
             
-            if (ViewportManager.CurrentLayout == Utilities.ViewportLayout.Layout3) {
-                ScoreKeeper.DrawScoreForNintendo(new Vector2(25, ViewportManager.GameboardView.Height - 50));
+            if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
+                ScoreKeeper.DrawScoreForNintendo();
             }
 
             BewareGame.Instance._spriteBatch.End();
