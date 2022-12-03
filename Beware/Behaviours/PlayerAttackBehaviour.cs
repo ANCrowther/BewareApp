@@ -18,6 +18,8 @@ namespace Beware.Behaviours {
                 PlayerModel.Instance.Orientation = PlayerModel.Instance.Aim.ToAngle();
             }
 
+            PlayerModel.Instance.Position = Vector2.Clamp(PlayerModel.Instance.Position, PlayerModel.Instance.Size / 2, ViewportManager.GetWindowSize(View.GamePlay) - PlayerModel.Instance.Size / 2);
+
             // Creates the bullets whenever the player shoots.
             if (Input.WasKeyPressed(ControlMap.Shoot) || Input.WasButtonPressed(ControlMap.Shoot_pad)) {
                 PlayerModel.Instance.ResetCooldown();

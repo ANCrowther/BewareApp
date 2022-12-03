@@ -1,6 +1,7 @@
 ﻿using Beware.Entities;
 using Beware.Inputs;
 using Beware.Managers;
+using Beware.Utilities;
 using Microsoft.Xna.Framework;
 
 namespace Beware.GameScenes {
@@ -26,6 +27,10 @@ namespace Beware.GameScenes {
 
             EntityManager.Draw();
             
+            if (ViewportManager.CurrentLayout == Utilities.ViewportLayout.Layout3) {
+                ScoreKeeper.DrawScoreForNintendo(new Vector2(25, ViewportManager.GameboardView.Height - 50));
+            }
+
             BewareGame.Instance._spriteBatch.End();
             base.Draw(gameTime);
         }

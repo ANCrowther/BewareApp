@@ -12,7 +12,7 @@ namespace Beware.Utilities {
         private static int increaseScoreBy;
         private const string highScoreFileName = "highscore.txt";
 
-        public static int Score { get; private set; } = 12345;
+        public static int Score { get; private set; } = 0;
         public static int HighScore { get; private set; } 
         public static int Multiplier { get; private set; }
         public static int Lives { get; private set; }
@@ -82,6 +82,10 @@ namespace Beware.Utilities {
                 BewareGame.Instance._spriteBatch.Draw(digit, position, null, Color.White, 0, new Vector2(digit.Width, digit.Height) / 2.0f, 0.3f, 0, 0.0f);
                 position.X = position.X - 50;
             }
+        }
+
+        public static void DrawScoreForNintendo(Vector2 position) {
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Score}", position, Color.White);
         }
 
         public static void DrawHighScore(Vector2 position) {

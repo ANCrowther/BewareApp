@@ -28,6 +28,23 @@ namespace Beware.Entities {
             image = EntityArt.Player1;
         }
 
+        public override void Update() {
+            if (IsDead) {
+                if (--framesUntilRespawn == 0) {
+                    if (ScoreKeeper.Lives == 0) {
+                        ScoreKeeper.Reset();
+                        Position = ViewportManager.GetWindowSize(Utilities.View.GamePlay) / 2;
+                    }
+                }
+            } else {
+                base.Update();
+            }
+
+            if (cooldownRemaining > 0) {
+                cooldownRemaining--;
+            }
+        }
+
         public void ResetCooldown() {
             cooldownRemaining = cooldownFrames;
         }

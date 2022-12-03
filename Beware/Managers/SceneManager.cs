@@ -61,8 +61,6 @@ namespace Beware.Managers {
         }
 
         private static GameScene CreateStandardBackground() {
-            ViewportManager.ChangeDimension(Dimension.Standard);
-
             BackgroundStationary tickerBackground = new BackgroundStationary(Scenes.Stars_1, View.Ticker);
             TickerLogic tickerLogic = new TickerLogic();
 
@@ -75,12 +73,11 @@ namespace Beware.Managers {
             BackgroundMoving panelTwoBackground = new BackgroundMoving(Scenes.BlinkingStar, View.InfoTwo);
             PanelTwoLogic panelTwoLogic = new PanelTwoLogic();
 
+            ViewportManager.ChangeDimension(Dimension.Standard);
             return new GameScene(tickerBackground, tickerLogic, panelOneBackground, panelOneLogic, panelTwoBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
         }
 
         private static GameScene CreateNintendoLayout() {
-            ViewportManager.ChangeDimension(Dimension.Nintendo);
-
             BackgroundMoving gameboardBackground = new BackgroundMoving(Scenes.BlinkingStar, View.GamePlay);
             GameboardLogic gameboardLogic = new GameboardLogic();
 
@@ -90,6 +87,7 @@ namespace Beware.Managers {
             BackgroundStationary rightControllerBackground = new BackgroundStationary(Scenes.RightController, View.InfoTwo);
             PanelTwoLogic panelTwoLogic = new PanelTwoLogic();
 
+            ViewportManager.ChangeDimension(Dimension.Nintendo);
             return new GameScene(leftControllerBackground, panelOneLogic, rightControllerBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
         }
 
