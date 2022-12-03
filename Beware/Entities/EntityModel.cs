@@ -1,4 +1,5 @@
 ﻿using Beware.Behaviours;
+using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -16,18 +17,21 @@ namespace Beware.Entities {
         public Color color = Color.White;
 
         //protected List<Behaviour> behaviours = new List<Behaviour>();
-        protected List<IBehaviour> behaviours = new List<IBehaviour>();
-
+        //protected List<IBehaviour> behaviours = new List<IBehaviour>();
+        protected IBehaviour[] behaviours = new IBehaviour[5];
         public Vector2 Size { get { return image == null ? Vector2.Zero : new Vector2(image.Width, image.Height); } }
 
         public virtual void Update() {
             foreach (IBehaviour item in behaviours) {
-                item.Update(this);
+                if (item != null) {
+                    item.Update(this);
+                }
             }
         }
 
-        public virtual void SetBehaviour(IBehaviour behaviour) {
-            behaviours.Add(behaviour);
+        public virtual void SetBehaviour(BehaviourCategory category, IBehaviour behaviour) {
+            //behaviours.Add(behaviour);
+            behaviours[(int)category] = behaviour;
         }
 
         public virtual void Draw() {

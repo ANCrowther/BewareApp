@@ -53,15 +53,18 @@
         SFX
     }
 
+    public enum BehaviourCategory {
+        Move,
+        Shoot,
+        Slow,
+        Special
+    }
+
     public enum PlayerBehaviourType {
         PlayerAttack1,
         PlayerMove1,
         PlayerSlow1,
-        PlayerSpecial,
-    }
-
-    public enum EnemyBehaviourType {
-        Move1
+        PlayerSpecial
     }
 
     public enum EntityType {

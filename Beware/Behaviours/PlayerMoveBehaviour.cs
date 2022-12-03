@@ -1,4 +1,5 @@
 ﻿using Beware.Entities;
+using Beware.Inputs;
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
@@ -6,7 +7,8 @@ using Microsoft.Xna.Framework;
 namespace Beware.Behaviours {
     public class PlayerMoveBehaviour : IBehaviour {
         public void Update(EntityModel entity) {
-            PlayerModel.Instance.Velocity = Helpers.GetDirection(Mode.Move) * 2;
+            float speedModifier = (PlayerModel.Instance.IsSlow) ? ControlMap.MinSpeed : ControlMap.MaxSpeed;
+            PlayerModel.Instance.Velocity = Helpers.GetDirection(Mode.Move) * speedModifier;
             PlayerModel.Instance.Position += PlayerModel.Instance.Velocity;
 
             if (PlayerModel.Instance.IsShooting == false) {

@@ -7,6 +7,7 @@ namespace Beware.Entities {
         private static PlayerModel instance;
         public Vector2 Aim { get; set; }
         public bool IsShooting { get; set; } = false;
+        public bool IsSlow { get; set; } = false;
         public bool IsDead { get { return framesUntilRespawn > 0; } }
         private int framesUntilRespawn = 0;
         private int cooldownRemaining = 0;

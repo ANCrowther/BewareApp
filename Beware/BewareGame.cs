@@ -42,8 +42,10 @@ namespace Beware {
         }
 
         protected void InitializePlayerBehaviours() {
-            PlayerModel.Instance.SetBehaviour(PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerAttack1));
-            PlayerModel.Instance.SetBehaviour(PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerMove1));
+            PlayerModel.Instance.SetBehaviour(BehaviourCategory.Move, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerAttack1));
+            PlayerModel.Instance.SetBehaviour(BehaviourCategory.Shoot, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerMove1));
+            PlayerModel.Instance.SetBehaviour(BehaviourCategory.Slow, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerSlow1));
+
         }
 
         protected override void LoadContent() {

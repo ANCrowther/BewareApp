@@ -53,6 +53,16 @@ namespace Beware.Managers {
         }
 
         private static GameScene CreateNewGame() {
+            if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
+                return CreateNintendoLayout();
+            }
+
+            return CreateStandardBackground();
+        }
+
+        private static GameScene CreateStandardBackground() {
+            ViewportManager.ChangeDimension(Dimension.Standard);
+
             BackgroundStationary tickerBackground = new BackgroundStationary(Scenes.Stars_1, View.Ticker);
             TickerLogic tickerLogic = new TickerLogic();
 
@@ -65,15 +75,22 @@ namespace Beware.Managers {
             BackgroundMoving panelTwoBackground = new BackgroundMoving(Scenes.BlinkingStar, View.InfoTwo);
             PanelTwoLogic panelTwoLogic = new PanelTwoLogic();
 
-            // Layout 3 does not use the Ticker logic. It is supposed to mimic a Nintendo Switch (for my son's amusement).
-            if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
-                ViewportManager.ChangeDimension(Dimension.Nintendo);
-                BackgroundStationary leftControllerBackground = new BackgroundStationary(Scenes.LeftController, View.InfoOne);
-                BackgroundStationary rightControllerBackground = new BackgroundStationary(Scenes.RightController, View.InfoTwo);
-                return new GameScene(leftControllerBackground, panelOneLogic, rightControllerBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
-            }
-            ViewportManager.ChangeDimension(Dimension.Standard);
             return new GameScene(tickerBackground, tickerLogic, panelOneBackground, panelOneLogic, panelTwoBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
+        }
+
+        private static GameScene CreateNintendoLayout() {
+            ViewportManager.ChangeDimension(Dimension.Nintendo);
+
+            BackgroundMoving gameboardBackground = new BackgroundMoving(Scenes.BlinkingStar, View.GamePlay);
+            GameboardLogic gameboardLogic = new GameboardLogic();
+
+            BackgroundStationary leftControllerBackground = new BackgroundStationary(Scenes.LeftController, View.InfoOne);
+            PanelOneLogic panelOneLogic = new PanelOneLogic();
+
+            BackgroundStationary rightControllerBackground = new BackgroundStationary(Scenes.RightController, View.InfoTwo);
+            PanelTwoLogic panelTwoLogic = new PanelTwoLogic();
+
+            return new GameScene(leftControllerBackground, panelOneLogic, rightControllerBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
         }
 
         private static GameScene CreateMenuWindow() {

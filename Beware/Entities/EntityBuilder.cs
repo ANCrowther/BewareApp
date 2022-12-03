@@ -8,15 +8,15 @@ namespace Beware.Entities {
             switch (selection) {
                 case EntityType.Enemy_Wandering:
                     EnemyWandererModel wanderer = new EnemyWandererModel(EntityArt.EnemyWanderer, position);
-                    wanderer.SetBehaviour(new EnemyWandererMoveBehaviour());
+                    wanderer.SetBehaviour(BehaviourCategory.Move, new EnemyWandererMoveBehaviour());
                     return wanderer;
                 case EntityType.Enemy_Seeker:
                     EnemyFollowerModel follower = new EnemyFollowerModel(EntityArt.EnemySeeker, position);
-                    follower.SetBehaviour(new EnemyFollowerMoveBehaviour());
+                    follower.SetBehaviour(BehaviourCategory.Move, new EnemyFollowerMoveBehaviour());
                     return follower;
                 default:
                     EnemyWandererModel defaultEnemy = new EnemyWandererModel(EntityArt.EnemyWanderer, position);
-                    defaultEnemy.SetBehaviour(new EnemyWandererMoveBehaviour());
+                    defaultEnemy.SetBehaviour(BehaviourCategory.Move, new EnemyWandererMoveBehaviour());
                     return defaultEnemy;
             }
         }
