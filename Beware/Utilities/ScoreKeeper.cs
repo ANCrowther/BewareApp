@@ -21,6 +21,7 @@ namespace Beware.Utilities {
 
         public static void Initialize() {
             HighScore = LoadHighScore();
+            PlayerModel.Instance.OnCollide += (sender, o) => { RemoveLife(); };
             Reset();
         }
 

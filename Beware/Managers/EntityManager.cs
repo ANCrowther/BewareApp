@@ -78,7 +78,8 @@ namespace Beware.Managers {
             for (int i = 0; i < enemyList.Count; i++) {
                 for (int j = 0; j < bulletList.Count; j++) {
                     if (IsColliding(enemyList[i], bulletList[j])) {
-                        enemyList[i].WasShot();
+                        //enemyList[i].WasShot();
+                        enemyList[i].Hit(1);
                         bulletList[j].IsExpired = true;
                     }
                 }
@@ -87,8 +88,17 @@ namespace Beware.Managers {
             // Collisions between player and enemies
             for (int i = 0; i < enemyList.Count; i++) {
                 if (enemyList[i].IsActive && IsColliding(PlayerModel.Instance, enemyList[i])) {
-                    PlayerModel.Instance.Kill();
-                    enemyList.ForEach(x => x.WasShot());
+                    //PlayerModel.Instance.Kill();
+                    PlayerModel.Instance.Hit(3);
+                    enemyList.ForEach(x => x.Hit(3));
+                    break;
+                }
+            }
+
+            for (int i = 0; i < bulletList.Count; i++) {
+                if (bulletList[i].IsExpired == false && IsColliding(PlayerModel.Instance, bulletList[i])) {
+                    PlayerModel.Instance.Hit(1);
+                    bulletList.ForEach(x => x.IsExpired = true);
                     break;
                 }
             }
