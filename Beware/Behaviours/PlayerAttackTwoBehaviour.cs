@@ -31,7 +31,6 @@ namespace Beware.Behaviours {
 
                 float randomSpread = random.NextFloat(-0.4f, 0.4f) + random.NextFloat(-0.4f, 0.4f);
                 Vector2 vel = MathUtil.FromPolar(aimAngle + randomSpread, 11f);
-                //Vector2 vel = MathUtil.FromPolar(aimAngle, 11f);
                 Vector2 offset = Vector2.Transform(new Vector2(25, -8), aimQuat);
 
                 BulletModel bullet = new BulletModel(PlayerModel.Instance.Position + offset, vel);

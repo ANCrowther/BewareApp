@@ -13,17 +13,14 @@ namespace Beware.Entities {
         public bool IsExpired;
         public Texture2D image;
         public Color color = Color.White;
-        public bool IsHit;
         protected Health health;
 
         protected IBehaviour[] behaviours = new IBehaviour[5];
 
-        public event EventHandler OnCollide;
-
         public Vector2 Size { get { return image == null ? Vector2.Zero : new Vector2(image.Width, image.Height); } }
 
-        public EntityModel() {
-            IsHit = false;
+        public EntityModel(int startingHealth = 8) {
+            health = new Health(startingHealth);
         }
 
         public virtual HitCircle HitCircle {

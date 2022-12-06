@@ -1,5 +1,4 @@
-﻿using Beware.Entities;
-using System;
+﻿using System;
 
 namespace Beware.Utilities {
     public class Health {
@@ -15,6 +14,7 @@ namespace Beware.Utilities {
             CurrentHealth -= damage;
             if (CurrentHealth <= 0) {
                 OnDeath?.Invoke(this, new EventArgs());
+                CurrentHealth = totalHealth;
             }
         }
     }

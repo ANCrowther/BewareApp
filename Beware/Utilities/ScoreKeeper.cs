@@ -21,7 +21,6 @@ namespace Beware.Utilities {
 
         public static void Initialize() {
             HighScore = LoadHighScore();
-            PlayerModel.Instance.OnCollide += (sender, o) => { RemoveLife(); };
             Reset();
         }
 
@@ -56,7 +55,7 @@ namespace Beware.Utilities {
             Lives = 0;
         }
 
-        public static void IncreaseMultiplier() {
+        private static void IncreaseMultiplier() {
             if (PlayerModel.Instance.IsDead) {
                 return;
             }
@@ -88,7 +87,6 @@ namespace Beware.Utilities {
 
         public static void DrawScoreForNintendo() {
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Score}", new Vector2(25, ViewportManager.GameboardView.Height - 50), Color.Yellow);
-
             BewareGame.Instance._spriteBatch.Draw(EntityArt.Player1, new Vector2(ViewportManager.GameboardView.Width - 50, ViewportManager.GameboardView.Height - 40), null, Color.Red, PlayerModel.Instance.Orientation, PlayerModel.Instance.Size / 2f, 1.0f, 0, 0.3f);
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Lives}", new Vector2(ViewportManager.GameboardView.Width - 60, ViewportManager.GameboardView.Height - 60), Color.Yellow);
         }
@@ -106,9 +104,8 @@ namespace Beware.Utilities {
             if (PlayerModel.Instance.IsDead) {
                 return;
             }
-
+            IncreaseMultiplier();
             Score += Multiplier * basePoints;
-
             if (Score >= scoreForExtraLife) {
                 scoreForExtraLife += increaseScoreBy;
                 Lives++;
