@@ -1,4 +1,5 @@
 ﻿using Beware.Entities;
+using Beware.ExtensionSupport;
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
@@ -36,7 +37,7 @@ namespace Beware.Behaviours {
 
         IEnumerable<int> FollowPlayer(EnemyFollowerModel entity, float acceleration = 1.0f) {
             while (true) {
-                if (!PlayerModel.Instance.IsDead) {
+                if (!PlayerModel.Instance.IsExpired) {
                     entity.Velocity += (PlayerModel.Instance.Position - entity.Position).ScaleTo(acceleration);
                 }
 

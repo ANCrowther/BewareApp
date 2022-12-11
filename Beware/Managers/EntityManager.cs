@@ -78,8 +78,11 @@ namespace Beware.Managers {
             for (int i = 0; i < enemyList.Count; i++) {
                 for (int j = 0; j < bulletList.Count; j++) {
                     if (IsColliding(enemyList[i], bulletList[j])) {
-                        enemyList[i].Hit(1);
-                        bulletList[j].IsExpired = true;
+                        enemyList[i].Hit(bulletList[j].ImpactDamage);
+                        if (!(bulletList[j] is SabotRound)) {
+                            bulletList[j].IsExpired = true;
+                        } 
+                            
                     }
                 }
             }
@@ -87,16 +90,18 @@ namespace Beware.Managers {
             // Collisions between player and enemies
             for (int i = 0; i < enemyList.Count; i++) {
                 if (enemyList[i].IsActive && IsColliding(PlayerModel.Instance, enemyList[i])) {
-                    PlayerModel.Instance.Hit(3);
-                    enemyList.ForEach(x => x.Hit(3));
+                    PlayerModel.Instance.Hit(enemyList[i].ImpactDamage);
+                    //enemyList.ForEach(x => x.Hit(PlayerModel.Instance.ImpactDamage));
+                    enemyList[i].Hit(PlayerModel.Instance.ImpactDamage);
                     break;
                 }
             }
 
             for (int i = 0; i < bulletList.Count; i++) {
                 if (bulletList[i].IsExpired == false && IsColliding(PlayerModel.Instance, bulletList[i])) {
-                    PlayerModel.Instance.Hit(1);
-                    bulletList.ForEach(x => x.IsExpired = true);
+                    PlayerModel.Instance.Hit(bulletList[i].ImpactDamage);
+                    //bulletList.ForEach(x => x.IsExpired = true);
+                    bulletList[i].Hit(PlayerModel.Instance.ImpactDamage);
                     break;
                 }
             }

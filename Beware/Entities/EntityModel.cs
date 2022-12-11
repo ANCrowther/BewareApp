@@ -2,7 +2,6 @@
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace Beware.Entities {
     public abstract class EntityModel {
@@ -13,14 +12,16 @@ namespace Beware.Entities {
         public bool IsExpired;
         public Texture2D image;
         public Color color = Color.White;
+        public int ImpactDamage;
         protected Health health;
 
         protected IBehaviour[] behaviours = new IBehaviour[5];
 
         public Vector2 Size { get { return image == null ? Vector2.Zero : new Vector2(image.Width, image.Height); } }
 
-        public EntityModel(int startingHealth = 8) {
+        public EntityModel(int startingHealth = 8, int startingImpactDamage = 5) {
             health = new Health(startingHealth);
+            ImpactDamage = startingImpactDamage;
         }
 
         public virtual HitCircle HitCircle {
@@ -47,7 +48,7 @@ namespace Beware.Entities {
             behaviours[(int)category] = behaviour;
         }
 
-        public virtual void Die() {
+        protected virtual void Die() {
             IsExpired = true;
         }
 

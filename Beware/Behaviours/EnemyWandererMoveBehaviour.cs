@@ -1,4 +1,5 @@
 ﻿using Beware.Entities;
+using Beware.ExtensionSupport;
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;

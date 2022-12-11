@@ -1,23 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Beware.Inputs;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace Beware.Utilities {
-    static class Extensions {
-        public static float ToAngle(this Vector2 vector) {
-            return (float)Math.Atan2(vector.Y, vector.X);
-        }
-
-        public static float NextFloat(this Random rand, float minValue, float maxValue) {
-            return (float)rand.NextDouble() * (maxValue - minValue) + minValue;
-        }
-
-        public static Vector2 ScaleTo(this Vector2 vector, float length) {
-            return vector * (length / vector.Length());
-        }
-
+namespace Beware.ExtensionSupport {
+    static class InputExtensions {
         public static Keys GetKey(this KeyboardState k) {
             if (k.IsKeyDown(Keys.A))
                 return Keys.A;
@@ -148,10 +133,6 @@ namespace Beware.Utilities {
             return Buttons.BigButton;
         }
 
-        public static float SoundToFloat(this int soundLevel) {
-            return soundLevel * 0.05f;
-        }
-        
         public static bool CheckIsButtonActive(this bool isActive, Buttons button) {
             var gamepadState = GamePad.GetState(PlayerIndex.One);
             isActive = (gamepadState.GetButton() == button);
@@ -162,34 +143,6 @@ namespace Beware.Utilities {
             var keyboardState = Keyboard.GetState();
             isActive = (keyboardState.GetKey() == key);
             return isActive;
-        }
-
-        public static (T, U) MoveThroughMenu<T, U>(this List<(T, U)> list, (T, U) active) {
-            if (Input.WasKeyPressed(Keys.Up) || Input.WasButtonPressed(Buttons.DPadUp)) {
-                return SelectUp(list, active);
-            }
-            if (Input.WasKeyPressed(Keys.Down) || Input.WasButtonPressed(Buttons.DPadDown)) {
-                return SelectDown(list, active);
-            }
-            return active;
-        }
-
-        private static (T, U) SelectUp<T, U>(List<(T, U)> list, (T, U) active) {
-            int index = list.IndexOf(active);
-            if (index > 0) {
-                return list[index - 1];
-            } else {
-                return list[list.Count - 1];
-            }
-        }
-
-        private static (T, U) SelectDown<T, U>(List<(T, U)> list, (T, U) active) {
-            int index = list.IndexOf(active);
-            if (index < list.Count - 1) {
-                return list[index + 1];
-            } else {
-                return list[0];
-            }
         }
     }
 }

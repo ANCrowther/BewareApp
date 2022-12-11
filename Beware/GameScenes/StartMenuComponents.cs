@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Beware.Utilities;
+using Beware.ExtensionSupport;
 
 namespace Beware.GameScenes {
     public class StartMenuComponents : DrawableGameComponent {   

@@ -1,6 +1,6 @@
 ﻿using Beware.Entities;
+using Beware.ExtensionSupport;
 using Beware.Managers;
-using Beware.Utilities;
 
 namespace Beware.Behaviours {
     class BulletBehaviour : IBehaviour {

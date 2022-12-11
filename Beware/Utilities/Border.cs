@@ -37,5 +37,15 @@ namespace Beware.Utilities {
 
             texture.SetData(colors);
         }
+
+        public static void CreateHealthBar(this Texture2D texture, Color fillColor) {
+            Color[] colors = new Color[texture.Width * texture.Height];
+
+            for (int i = 0; i < colors.Length; i++) {
+                colors[i] = fillColor;
+            }
+
+            texture.SetData(colors);
+        }
     }
 }

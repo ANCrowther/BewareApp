@@ -1,4 +1,5 @@
-﻿using Beware.Inputs;
+﻿using Beware.ExtensionSupport;
+using Beware.Inputs;
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
@@ -29,6 +30,63 @@ namespace Beware.GameScenes {
             Refresh();
             LoadGenericSettingList();
             LoadActiveSettings();
+        }
+
+        public override void Update(GameTime gameTime) {
+            if ((Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad)) && isSet == true) {
+                SceneManager.SwitchScene(SceneManager.MenuWindow);
+            }
+
+            if ((Input.WasKeyPressed(Keys.Left) || Input.WasKeyPressed(Keys.Right) ||
+                Input.WasButtonPressed(Buttons.DPadLeft) || Input.WasButtonPressed(Buttons.DPadRight)) && isSet == true) {
+                SwitchIsActiveStatus();
+            }
+
+            if (isActive == true && isSet == true) {
+                MoveThroughMenu(activeMenuSetting.name);
+                if (Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad)) {
+                    SwitchIsSetStatus();
+                }
+            }
+
+            if (isActive == true && isSet == false) {
+                UpdateSetting();
+                Refresh();
+            }
+
+            if (isActive == false) {
+                MoveThroughMenu(PlayerSettings.Standard);
+            }
+
+            AudioManager.Update();
+            TimeKeeper.Update();
+
+            base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime) {
+            BewareGame.Instance._spriteBatch.Begin();
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareLarge, "PLAYER SETTINGS", new Vector2(ViewportManager.MenuView.Width / 2 - Fonts.NovaSquareLarge.MeasureString("PLAYER SETTINGS").X / 2, 50), Color.BlueViolet);
+
+            if (AudioManager.IsMuted == true) {
+                BewareGame.Instance._spriteBatch.Draw(Art.Mute, new Vector2(ViewportManager.MenuView.Width - 150, ViewportManager.MenuView.Height - 150), null, Color.White, 0, new Vector2(Art.Mute.Width, Art.Mute.Height) / 2, 0.25f, 0, 0.0f);
+            }
+
+            AudioManager.Draw(new Vector2(ViewportManager.MenuView.Width - 150, ViewportManager.MenuView.Height - 150));
+
+            DrawSettingList(new Vector2(200, ViewportManager.MenuView.Height / 6));
+            if (activeMenuSetting.name == PlayerSettings.Keyboard) {
+                DrawKeyboardList(new Vector2(800, ViewportManager.MenuView.Height / 6));
+            }
+            if (activeMenuSetting.name == PlayerSettings.Gamepad) {
+                DrawGamepadList(new Vector2(800, ViewportManager.MenuView.Height / 6));
+            }
+            if (activeMenuSetting.name == PlayerSettings.Generic) {
+                DrawGenericList(new Vector2(800, ViewportManager.MenuView.Height / 6));
+            }
+
+            BewareGame.Instance._spriteBatch.End();
+            base.Draw(gameTime);
         }
 
         private void LoadGenericSettingList() {
@@ -88,38 +146,6 @@ namespace Beware.GameScenes {
             activeMenuSetting = ("Keyboard", PlayerSettings.Keyboard);
         }
 
-        public override void Update(GameTime gameTime) {
-            if ((Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad)) && isSet == true) {
-                SceneManager.SwitchScene(SceneManager.MenuWindow);
-            }
-
-            if ((Input.WasKeyPressed(Keys.Left) || Input.WasKeyPressed(Keys.Right) ||
-                Input.WasButtonPressed(Buttons.DPadLeft) || Input.WasButtonPressed(Buttons.DPadRight)) && isSet == true) {
-                SwitchIsActiveStatus();
-            }
-
-            if (isActive == true && isSet == true) {
-                MoveThroughMenu(activeMenuSetting.name);
-                if (Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad)) {
-                    SwitchIsSetStatus();
-                }
-            }
-
-            if (isActive == true && isSet == false) {
-                UpdateSetting();
-                Refresh();
-            }
-
-            if (isActive == false) {
-                MoveThroughMenu(PlayerSettings.Standard);
-            }
-
-            AudioManager.Update();
-            TimeKeeper.Update();
-
-            base.Update(gameTime);
-        }
-
         private void Refresh() {
             LoadKeyboardList();
             LoadGamepadList();
@@ -156,31 +182,6 @@ namespace Beware.GameScenes {
                 var gamepadState = GamePad.GetState(PlayerIndex.One);
                 isSet = MapPlayerControls.MapNewControl<Buttons>(gamepadList, activeGamepad, gamepadState.GetButton());
             }
-        }
-
-        public override void Draw(GameTime gameTime) {
-            BewareGame.Instance._spriteBatch.Begin();
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareLarge, "PLAYER SETTINGS", new Vector2(ViewportManager.MenuView.Width / 2 - Fonts.NovaSquareLarge.MeasureString("PLAYER SETTINGS").X / 2, 50), Color.BlueViolet);
-
-            if (AudioManager.IsMuted == true) {
-                BewareGame.Instance._spriteBatch.Draw(Art.Mute, new Vector2(ViewportManager.MenuView.Width - 150, ViewportManager.MenuView.Height - 150), null, Color.White, 0, new Vector2(Art.Mute.Width, Art.Mute.Height) / 2, 0.25f, 0, 0.0f);
-            }
-
-            AudioManager.Draw(new Vector2(ViewportManager.MenuView.Width - 150, ViewportManager.MenuView.Height - 150));
-
-            DrawSettingList(new Vector2(200, ViewportManager.MenuView.Height / 6));
-            if (activeMenuSetting.name == PlayerSettings.Keyboard) {
-                DrawKeyboardList(new Vector2(800, ViewportManager.MenuView.Height / 6));
-            }
-            if (activeMenuSetting.name == PlayerSettings.Gamepad) {
-                DrawGamepadList(new Vector2(800, ViewportManager.MenuView.Height / 6));
-            }
-            if (activeMenuSetting.name == PlayerSettings.Generic) {
-                DrawGenericList(new Vector2(800, ViewportManager.MenuView.Height / 6));
-            }
-
-            BewareGame.Instance._spriteBatch.End();
-            base.Draw(gameTime);
         }
 
         private void DrawSettingList(Vector2 position) {

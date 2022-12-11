@@ -6,31 +6,23 @@ using System.IO;
 
 namespace Beware.Utilities {
     static class ScoreKeeper {
-        private static float multiplyExpireTime = 0.0f;
-        private static float multiplierTimeLeft;
-        private static int maxMultiplier = 20;
-        private static int scoreForExtraLife;
-        private static int increaseScoreBy;
+        //private static float multiplyExpireTime = 0.0f;
+        //private static float multiplierTimeLeft;
+        //private static int maxMultiplier = 5;
+        private static int increaseGameRoundBy;
+        private static int checkForNextGameRound;
         private const string highScoreFileName = "highscore.txt";
 
         public static int Score { get; private set; } = 0;
         public static int HighScore { get; private set; } 
         public static int Multiplier { get; private set; }
-        public static int Lives { get; private set; }
-        public static bool IsGameOver { get { return Lives == 0; } }
+        public static int EnemyCount { get; private set; } = 0;
+        public static int GameRound { get; private set; } = 1;
 
         public static void Initialize() {
             HighScore = LoadHighScore();
+            checkForNextGameRound = increaseGameRoundBy = 5;
             Reset();
-        }
-
-        public static void Update() {
-            if (Multiplier > 1) {
-                if ((multiplierTimeLeft -= TimeKeeper.TotalSeconds) <= 0) {
-                    multiplierTimeLeft = multiplyExpireTime;
-                    Multiplier = 1;
-                }
-            }
         }
 
         public static void Reset() {
@@ -40,31 +32,6 @@ namespace Beware.Utilities {
 
             Score = 0;
             Multiplier = 1;
-            Lives = 4;
-            increaseScoreBy = 2000;
-            scoreForExtraLife = increaseScoreBy;
-            multiplierTimeLeft = 0;
-        }
-
-        public static void RemoveLife() {
-            Lives--;
-        }
-
-        // TODO: not sure if this method is really needed.
-        public static void RemoveRemainingLives() {
-            Lives = 0;
-        }
-
-        private static void IncreaseMultiplier() {
-            if (PlayerModel.Instance.IsDead) {
-                return;
-            }
-
-            multiplierTimeLeft = multiplyExpireTime;
-
-            if (Multiplier < maxMultiplier) {
-                Multiplier++;
-            }
         }
 
         public static void DrawScore(Vector2 position) {
@@ -88,7 +55,8 @@ namespace Beware.Utilities {
         public static void DrawScoreForNintendo() {
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Score}", new Vector2(25, ViewportManager.GameboardView.Height - 50), Color.Yellow);
             BewareGame.Instance._spriteBatch.Draw(EntityArt.Player1, new Vector2(ViewportManager.GameboardView.Width - 50, ViewportManager.GameboardView.Height - 40), null, Color.Red, PlayerModel.Instance.Orientation, PlayerModel.Instance.Size / 2f, 1.0f, 0, 0.3f);
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Lives}", new Vector2(ViewportManager.GameboardView.Width - 60, ViewportManager.GameboardView.Height - 60), Color.Yellow);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{GameRound}", new Vector2(ViewportManager.GameboardView.Width - 50, ViewportManager.GameboardView.Height - 50), Color.Yellow);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{EnemyCount}", new Vector2(ViewportManager.GameboardView.Width / 2, ViewportManager.GameboardView.Height - 50), Color.Yellow);
         }
 
         public static void DrawHighScore(Vector2 position) {
@@ -101,14 +69,18 @@ namespace Beware.Utilities {
         }
 
         public static void AddPoints(int basePoints) {
-            if (PlayerModel.Instance.IsDead) {
+            if (PlayerModel.Instance.IsExpired) {
                 return;
             }
-            IncreaseMultiplier();
-            Score += Multiplier * basePoints;
-            if (Score >= scoreForExtraLife) {
-                scoreForExtraLife += increaseScoreBy;
-                Lives++;
+            Score += basePoints;
+            UpdateEnemyCountAndGameRound();
+        }
+
+        private static void UpdateEnemyCountAndGameRound() {
+            EnemyCount++;
+            if (EnemyCount == checkForNextGameRound) {
+                GameRound++;
+                checkForNextGameRound += increaseGameRoundBy;
             }
         }
 

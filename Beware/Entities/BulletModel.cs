@@ -1,9 +1,10 @@
-﻿using Beware.Utilities;
+﻿using Beware.ExtensionSupport;
+using Beware.Utilities;
 using Microsoft.Xna.Framework;
 
 namespace Beware.Entities {
     public class BulletModel : EntityModel {
-        public BulletModel(Vector2 position, Vector2 velocity) {
+        public BulletModel(Vector2 position, Vector2 velocity, int startingImpactDamage = 2) : base(startingImpactDamage) {
             image = EntityArt.Bullet;
             Velocity = velocity;
             Position = position;
