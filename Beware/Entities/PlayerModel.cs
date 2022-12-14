@@ -1,6 +1,7 @@
 ﻿using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
+using System;
 
 namespace Beware.Entities {
     public class PlayerModel : EntityModel {
@@ -51,7 +52,17 @@ namespace Beware.Entities {
         }
 
         protected override void Die() {
-            SceneManager.SwitchScene(SceneManager.MenuWindow);
+
+            SceneManager.SwitchScene(SceneManager.GameOverWindow);
+        }
+
+        public void ResetPlayer() {
+            health.ResetHealth();
+            framesUntilColorChange = 0;
+            IsExpired = false;
+            Position = ViewportManager.GetWindowSize(View.GamePlay) / 2;
+            Velocity = Vector2.Zero;
+            Aim = Vector2.Zero;
         }
     }
 }

@@ -6,8 +6,10 @@ using Microsoft.Xna.Framework;
 
 namespace Beware.GameScenes {
     public class GameboardLogic : DrawableGameComponent {
-        
         public GameboardLogic() : base (BewareGame.Instance) {
+            EntityManager.Clear();
+            ScoreKeeper.Reset();
+            PlayerModel.Instance.ResetPlayer();
             EntityManager.Add(PlayerModel.Instance);
         }
 

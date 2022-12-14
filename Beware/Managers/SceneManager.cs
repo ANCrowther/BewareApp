@@ -21,12 +21,8 @@ namespace Beware.Managers {
         public static GameScene MenuWindow => CreateMenuWindow();
         public static GameScene PlayerSettingsWindow => CreatePlayerSettingWindow();
         public static GameScene GameSettingsWindow => CreateGameSettingWindow();
-        public static GameScene GameOverWindow { get; private set; }
+        public static GameScene GameOverWindow => CreateGameOverWindow();
         public static GameScene GameWonWindow { get; private set; }
-
-        //public SceneManager() {
-        //    //Initialize();
-        //}
 
         public static void SwitchScene(GameScene inputScene) {
             GameComponent[] components = inputScene.ReturnComponents();
@@ -36,14 +32,6 @@ namespace Beware.Managers {
                 ChangeComponentState(component, isActive);
             }
         }
-
-        //private void Initialize() {
-        //    //InitializeMenuWindow();
-        //    //InitializePlayerSettingsWindow();
-        //    //InitializeGameSettingsWindow();
-        //    //InitializeGameOverWindow();
-        //    //InitializeGameWonWindow();
-        //}
 
         private static void ChangeComponentState(GameComponent component, bool isEnabled) {
             component.Enabled = isEnabled;
@@ -113,12 +101,28 @@ namespace Beware.Managers {
             return new GameScene(background, logic);
         }
 
-        //private void InitializeGameOverWindow() {
-        //    throw new NotImplementedException();
-        //}
+        private static GameScene CreateGameOverWindow() {
+            if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
+                return CreateNintendoGameOverWindow();
+            }
+            BackgroundStationary background = new BackgroundStationary(Scenes.GreenSky, View.Menu);
+            GameOverLogic logic = new GameOverLogic();
+            ViewportManager.ChangeDimension(Dimension.Standard);
+            return new GameScene(background, logic);
+        }
 
-        //private void InitializeGameWonWindow() {
-        //    throw new NotImplementedException();
-        //}
+        private static GameScene CreateNintendoGameOverWindow() {
+            BackgroundStationary background = new BackgroundStationary(Scenes.Stars_4, View.GamePlay);
+            GameOverLogic logic = new GameOverLogic();
+
+            BackgroundStationary leftControllerBackground = new BackgroundStationary(Scenes.LeftController, View.InfoOne);
+            PanelOneLogic panelOneLogic = new PanelOneLogic();
+
+            BackgroundStationary rightControllerBackground = new BackgroundStationary(Scenes.RightController, View.InfoTwo);
+            PanelTwoLogic panelTwoLogic = new PanelTwoLogic();
+
+            ViewportManager.ChangeDimension(Dimension.Nintendo);
+            return new GameScene(background, logic, leftControllerBackground, panelOneLogic, rightControllerBackground, panelTwoLogic);
+        }
     }
 }
