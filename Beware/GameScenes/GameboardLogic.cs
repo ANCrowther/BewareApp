@@ -18,8 +18,14 @@ namespace Beware.GameScenes {
                 SceneManager.SwitchScene(SceneManager.MenuWindow);
             }
 
-            EntityManager.Update();
-            EnemySpawner.Update();
+            if (Input.WasButtonPressed(ControlMap.Pause_pad)) {
+                PlayerInputStates.IsPaused = !PlayerInputStates.IsPaused;
+            }
+
+            if (PlayerInputStates.IsPaused == false) {
+                EntityManager.Update();
+                EnemySpawner.Update();
+            }
 
             base.Update(gameTime);
         }

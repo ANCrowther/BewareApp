@@ -44,7 +44,7 @@ namespace Beware.GameScenes {
 
             if (isActive == true && isSet == true) {
                 MoveThroughMenu(activeMenuSetting.name);
-                if (Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad)) {
+                if (Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad) || Input.WasButtonPressed(Buttons.A)) {
                     SwitchIsSetStatus();
                 }
             }

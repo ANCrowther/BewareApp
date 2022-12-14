@@ -23,7 +23,6 @@ namespace Beware {
         }
 
         protected override void Initialize() {
-            // TODO: Add your initialization logic here
             Art.Initialize(Content);
             EntityArt.Initialize(Content);
             Fonts.Initialize(Content);
@@ -53,11 +52,10 @@ namespace Beware {
         }
 
         protected override void Update(GameTime gameTime) {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
             // Game scenes handles all the updates
             GameTime = gameTime;
             Input.Update();
+            AudioManager.Update();
 
             base.Update(gameTime);
         }

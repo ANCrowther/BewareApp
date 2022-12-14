@@ -4,6 +4,7 @@ using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
 namespace Beware.GameScenes {
@@ -44,11 +45,10 @@ namespace Beware.GameScenes {
             GetCurrentLayout();
 
             if (Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad)) {
-                //BewareGame.Instance.Scene.SwitchScene(SceneManager.MenuWindow);
                 SceneManager.SwitchScene(SceneManager.MenuWindow);
             }
 
-            if (Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad)) {
+            if (Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad) || Input.WasButtonPressed(Buttons.A)) {
                 isActive = !isActive;
             }
 
@@ -58,11 +58,6 @@ namespace Beware.GameScenes {
 
             if (isActive == true) {
                 UpdateActiveSetting(activeSetting.name);
-            }
-
-            // As GameSettingsLogic handles all the music volume, this line was added so the user can mute anytime they want.
-            if ((Input.WasKeyPressed(ControlMap.Mute) || Input.WasButtonPressed(ControlMap.Mute_pad)) && isActive == false) {
-                AudioManager.Update();
             }
 
             base.Update(gameTime);

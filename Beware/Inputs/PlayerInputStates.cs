@@ -6,5 +6,6 @@ namespace Beware.Inputs {
         public static KeyboardState lastKeyboardState { get; set; }
         public static GamePadState gamePadState { get; set; }
         public static GamePadState lastGamePadState { get; set; }
+        public static bool IsPaused { get; set; } = false;
     }
 }
