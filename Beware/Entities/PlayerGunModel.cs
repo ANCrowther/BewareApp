@@ -28,11 +28,12 @@ namespace Beware.Entities {
 
         public override void SetBehaviour(BehaviourCategory category, IBehaviour behaviour) {
             if (behaviour is PlayerRapidFireBehaviour p) {
-                p.OnShooting += delegate { UpdateDrawColor(); };
+                p.OnUse += delegate { UpdateDrawColor(); };
                 base.SetBehaviour(category, p);
             }
             if (behaviour is PlayerSabotShootBehaviour q) {
-                q.OnShooting += delegate { UpdateDrawColor(); };
+                q.OnUse += delegate { UpdateDrawColor(); };
+                q.OnEmpty += delegate { RemoveBehaviour(category); };
                 base.SetBehaviour(category, q);
             }
         }
@@ -42,7 +43,6 @@ namespace Beware.Entities {
             if (framesUntilColorChange-- <= 0) {
                 color = Color.Lime;
             }
-
             base.Update();
         }
 

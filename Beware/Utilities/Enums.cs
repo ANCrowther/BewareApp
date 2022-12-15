@@ -61,8 +61,8 @@
     }
 
     public enum PlayerBehaviourType {
-        PlayerAttack1,
-        PlayerAttack2,
+        RapidFire,
+        SabotShoot,
         PlayerMove1,
         PlayerSlow1,
         PlayerSpecial

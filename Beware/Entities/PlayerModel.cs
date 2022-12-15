@@ -7,8 +7,6 @@ namespace Beware.Entities {
         private static PlayerModel instance;
         private int framesUntilColorChange = 0;
         
-        //public Vector2 Aim { get; set; }
-        //public bool IsShooting { get; set; } = false;
         public bool IsSlow { get; set; } = false;
 
         public static PlayerModel Instance {
@@ -33,12 +31,15 @@ namespace Beware.Entities {
             if (framesUntilColorChange-- <= 0) {
                 color = Color.Blue;
             }
+            if (framesUntilColorChange > 0 && framesUntilColorChange % 10 == 0) {
+                color = (color == Color.Blue) ? Color.Red : Color.Blue;
+            }
+
             base.Update();
         }
 
         private void UpdateDrawColor() {
-            color = Color.Red;
-            framesUntilColorChange = 50;
+            framesUntilColorChange = 70;
         }
 
         public override void Draw() {

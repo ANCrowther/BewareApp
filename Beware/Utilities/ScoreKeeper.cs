@@ -58,21 +58,21 @@ namespace Beware.Utilities {
         public static void DrawGameOverScore(Vector2 position) {
             Vector2 position2 = position;
             position2.X += 400;
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, "Score:", position, Color.BlueViolet);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, "Score:", position, Color.MintCream);
             position.Y += 60;
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, "High Score:", position, Color.BlueViolet);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, "High Score:", position, Color.MintCream);
             position.Y += 60;
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, "Rounds Survived:", position, Color.BlueViolet);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, "Rounds Survived:", position, Color.MintCream);
             position.Y += 60;
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, "Enemies Killed:", position, Color.BlueViolet);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, "Enemies Killed:", position, Color.MintCream);
 
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Score}", position2, Color.Firebrick);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Score}", position2, Color.BlanchedAlmond);
             position2.Y += 60;
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{HighScore}", position2, Color.Firebrick);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{HighScore}", position2, Color.BlanchedAlmond);
             position2.Y += 60;
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{GameRound}", position2, Color.Firebrick);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{GameRound}", position2, Color.BlanchedAlmond);
             position2.Y += 60;
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{EnemyCount}", position2, Color.Firebrick);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{EnemyCount}", position2, Color.BlanchedAlmond);
         }
 
         private static void SaveHighScore(int score) {

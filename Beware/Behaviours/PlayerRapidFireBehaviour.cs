@@ -8,7 +8,11 @@ using System;
 
 namespace Beware.Behaviours {
     public class PlayerRapidFireBehaviour : IBehaviour {
-        public event Action OnShooting;
+        private Random random = new Random(); 
+        private int cooldownRemaining = 0;
+        private const int cooldownFrames = 6;
+
+        public event Action OnUse;
 
         public void Update(EntityModel entity) {
             PlayerGunModel.Instance.IsShooting = false;
@@ -25,18 +29,32 @@ namespace Beware.Behaviours {
             PlayerGunModel.Instance.Position = Vector2.Clamp(PlayerGunModel.Instance.Position, PlayerGunModel.Instance.Size / 2, ViewportManager.GetWindowSize(View.GamePlay) - PlayerGunModel.Instance.Size / 2);
 
             // Creates the bullets whenever the player shoots.
-            if (Input.WasKeyPressed(ControlMap.Shoot) || Input.WasButtonPressed(ControlMap.Special_pad)) {
-                OnShooting?.Invoke();
+            if (Input.IsButtonHeldDown(ControlMap.Shoot_pad) && cooldownRemaining <= 0) {
+                OnUse?.Invoke();
+
+                ResetCooldown();
+
                 float aimAngle = PlayerGunModel.Instance.Orientation;
-
                 Quaternion aimQuat = Quaternion.CreateFromYawPitchRoll(0, 0, aimAngle);
-
-                Vector2 vel = MathUtil.FromPolar(aimAngle, 11f);
+                float randomSpread = random.NextFloat(-0.2f, 0.2f) + random.NextFloat(-0.2f, 0.2f);
+                Vector2 vel = MathUtil.FromPolar(aimAngle + randomSpread, 11f);
                 Vector2 offset = Vector2.Transform(new Vector2(25, -8), aimQuat);
 
-                BulletModel bullet = new SabotRound(PlayerModel.Instance.Position + offset, vel);
+                BulletModel bullet = new BulletModel(PlayerModel.Instance.Position + offset, vel);
                 bullet.SetBehaviour(BehaviourCategory.Move, new BulletBehaviour());
                 EntityManager.Add(bullet);
+            }
+
+            UpdateCooldown();
+        }
+
+        private void ResetCooldown() {
+            cooldownRemaining = cooldownFrames;
+        }
+
+        private void UpdateCooldown() {
+            if (cooldownRemaining > 0) {
+                cooldownRemaining--;
             }
         }
     }

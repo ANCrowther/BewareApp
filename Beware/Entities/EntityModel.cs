@@ -48,6 +48,10 @@ namespace Beware.Entities {
             behaviours[(int)category] = behaviour;
         }
 
+        public virtual void RemoveBehaviour(BehaviourCategory category) {
+            behaviours[(int)category] = null;
+        }
+
         protected virtual void Die() {
             IsExpired = true;
         }

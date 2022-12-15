@@ -5,9 +5,9 @@ namespace Beware.Entities {
     public static class PlayerBehaviourBuilder {
         public static IBehaviour Factory(PlayerBehaviourType behaviour) {
             switch (behaviour) {
-                case PlayerBehaviourType.PlayerAttack1:
+                case PlayerBehaviourType.RapidFire:
                     return new PlayerRapidFireBehaviour();
-                    case PlayerBehaviourType.PlayerAttack2:
+                case PlayerBehaviourType.SabotShoot:
                     return new PlayerSabotShootBehaviour();
                 case PlayerBehaviourType.PlayerMove1:
                     return new PlayerMoveBehaviour();
