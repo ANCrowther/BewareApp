@@ -7,27 +7,34 @@ using Microsoft.Xna.Framework;
 using System;
 
 namespace Beware.Behaviours {
-    class PlayerAttackTwoBehaviour : IBehaviour {
+    class PlayerSabotShootBehaviour : IBehaviour {
         private Random random = new Random();
         private int cooldownRemaining = 0;
         private const int cooldownFrames = 6;
 
-        public void Update(EntityModel entity) {
-            PlayerModel.Instance.IsShooting = false;
-            PlayerModel.Instance.Aim = Helpers.GetDirection(Mode.Shoot);
+        public event Action OnShooting;
 
-            if (PlayerModel.Instance.Aim.LengthSquared() > 0) {
-                PlayerModel.Instance.IsShooting = true;
-                PlayerModel.Instance.Aim.Normalize();
-                PlayerModel.Instance.Orientation = PlayerModel.Instance.Aim.ToAngle();
+        public void Update(EntityModel entity) {
+            PlayerGunModel.Instance.IsShooting = false;
+            PlayerGunModel.Instance.Aim = Helpers.GetDirection(Mode.Shoot);
+
+            PlayerGunModel.Instance.Orientation = PlayerModel.Instance.Orientation;
+            PlayerGunModel.Instance.IsShooting = Input.IsButtonHeldDown(ControlMap.Special_pad);
+
+            if (PlayerGunModel.Instance.Aim.LengthSquared() > 0) {
+                PlayerGunModel.Instance.Aim.Normalize();
+                PlayerGunModel.Instance.Orientation = PlayerGunModel.Instance.Aim.ToAngle();
             }
 
-            PlayerModel.Instance.Position = Vector2.Clamp(PlayerModel.Instance.Position, PlayerModel.Instance.Size / 2, ViewportManager.GetWindowSize(View.GamePlay) - PlayerModel.Instance.Size / 2);
+            PlayerGunModel.Instance.Position = Vector2.Clamp(PlayerGunModel.Instance.Position, PlayerGunModel.Instance.Size / 2, ViewportManager.GetWindowSize(View.GamePlay) - PlayerGunModel.Instance.Size / 2);
 
             // Creates the bullets whenever the player shoots.
             if ((Input.IsKeyHeldDown(ControlMap.Shoot) || Input.IsButtonHeldDown(ControlMap.Shoot_pad)) && cooldownRemaining <= 0) {
+                OnShooting?.Invoke();
+
                 ResetCooldown();
-                float aimAngle = PlayerModel.Instance.Orientation;
+                float aimAngle = PlayerGunModel.Instance.Orientation;
+
                 Quaternion aimQuat = Quaternion.CreateFromYawPitchRoll(0, 0, aimAngle);
 
                 float randomSpread = random.NextFloat(-0.4f, 0.4f) + random.NextFloat(-0.4f, 0.4f);

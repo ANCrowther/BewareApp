@@ -11,15 +11,11 @@ namespace Beware.Behaviours {
             float speedModifier = (PlayerModel.Instance.IsSlow) ? ControlMap.MinSpeed : ControlMap.MaxSpeed;
             PlayerModel.Instance.Velocity = Helpers.GetDirection(Mode.Move) * speedModifier;
             PlayerModel.Instance.Position += PlayerModel.Instance.Velocity;
+            PlayerModel.Instance.Position = Vector2.Clamp(PlayerModel.Instance.Position, PlayerModel.Instance.Size / 2, ViewportManager.GetWindowSize(View.GamePlay) - PlayerModel.Instance.Size / 2);
+            PlayerModel.Instance.Orientation = PlayerModel.Instance.Velocity.ToAngle();
 
-            if (PlayerModel.Instance.IsShooting == false) {
-                
-                PlayerModel.Instance.Orientation = PlayerModel.Instance.Velocity.ToAngle();
-                PlayerModel.Instance.Position = Vector2.Clamp(PlayerModel.Instance.Position, PlayerModel.Instance.Size / 2, ViewportManager.GetWindowSize(View.GamePlay) - PlayerModel.Instance.Size / 2);
-
-                if (PlayerModel.Instance.Velocity.LengthSquared() <= 0) {
-                    PlayerModel.Instance.Orientation = MathHelper.ToRadians(270.0f);
-                }
+            if (PlayerModel.Instance.Velocity.LengthSquared() <= 0) {
+                PlayerModel.Instance.Orientation = MathHelper.ToRadians(270.0f);
             }
         }
     }

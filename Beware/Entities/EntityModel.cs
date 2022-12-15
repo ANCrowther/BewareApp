@@ -1,5 +1,4 @@
 ﻿using Beware.Behaviours;
-using Beware.Inputs;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -54,9 +53,10 @@ namespace Beware.Entities {
         }
 
         public virtual void Draw() {
-            if (!PlayerInputStates.IsPaused) {
-                BewareGame.Instance._spriteBatch.Draw(image, Position, null, Color.White, Orientation, Size / 2f, 1.0f, 0, 0);
-            }
+            //if (!PlayerInputStates.IsPaused) {
+            //    BewareGame.Instance._spriteBatch.Draw(image, Position, null, Color.White, Orientation, Size / 2f, 1.0f, 0, 0);
+            //}
+            BewareGame.Instance._spriteBatch.Draw(image, Position, null, Color.White, Orientation, Size / 2f, 1.0f, 0, 0);
         }
     }
 }

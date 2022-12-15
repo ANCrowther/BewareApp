@@ -6,15 +6,15 @@ namespace Beware.Entities {
         public static IBehaviour Factory(PlayerBehaviourType behaviour) {
             switch (behaviour) {
                 case PlayerBehaviourType.PlayerAttack1:
-                    return new PlayerAttackOneBehaviour();
+                    return new PlayerRapidFireBehaviour();
                     case PlayerBehaviourType.PlayerAttack2:
-                    return new PlayerAttackTwoBehaviour();
+                    return new PlayerSabotShootBehaviour();
                 case PlayerBehaviourType.PlayerMove1:
                     return new PlayerMoveBehaviour();
                 case PlayerBehaviourType.PlayerSlow1:
                     return new PlayerSlowBehaviour();
                 default:
-                    return new PlayerAttackOneBehaviour();
+                    return new PlayerRapidFireBehaviour();
             }
         }
     }

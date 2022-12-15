@@ -11,6 +11,7 @@ namespace Beware.GameScenes {
             ScoreKeeper.Reset();
             PlayerModel.Instance.ResetPlayer();
             EntityManager.Add(PlayerModel.Instance);
+            EntityManager.Add(PlayerGunModel.Instance);
         }
 
         public override void Update(GameTime gameTime) {

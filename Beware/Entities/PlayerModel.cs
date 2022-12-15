@@ -1,16 +1,14 @@
-﻿using Beware.Inputs;
-using Beware.Managers;
+﻿using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
-using System;
 
 namespace Beware.Entities {
     public class PlayerModel : EntityModel {
         private static PlayerModel instance;
         private int framesUntilColorChange = 0;
-
-        public Vector2 Aim { get; set; }
-        public bool IsShooting { get; set; } = false;
+        
+        //public Vector2 Aim { get; set; }
+        //public bool IsShooting { get; set; } = false;
         public bool IsSlow { get; set; } = false;
 
         public static PlayerModel Instance {
@@ -35,7 +33,6 @@ namespace Beware.Entities {
             if (framesUntilColorChange-- <= 0) {
                 color = Color.Blue;
             }
-
             base.Update();
         }
 
@@ -53,7 +50,6 @@ namespace Beware.Entities {
         }
 
         protected override void Die() {
-
             SceneManager.SwitchScene(SceneManager.GameOverWindow);
         }
 
@@ -63,7 +59,6 @@ namespace Beware.Entities {
             IsExpired = false;
             Position = ViewportManager.GetWindowSize(View.GamePlay) / 2;
             Velocity = Vector2.Zero;
-            Aim = Vector2.Zero;
         }
     }
 }
