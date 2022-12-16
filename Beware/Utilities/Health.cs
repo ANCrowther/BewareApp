@@ -4,12 +4,12 @@ using System;
 
 namespace Beware.Utilities {
     public class Health : DrawableGameComponent {
-        private int totalHealth;
+        protected int totalHealth;
         private int displayHealthMultiplier = 15;
         public event Action OnDeath;
-        public event Action OnHit;
+        public virtual event Action OnHit;
 
-        public int CurrentHealth { get; private set; }
+        public int CurrentHealth { get; protected set; }
 
         private Texture2D healthBar;
 
@@ -18,7 +18,7 @@ namespace Beware.Utilities {
             SetHealthBar(CurrentHealth * displayHealthMultiplier, 15, Color.Blue);
         }
 
-        public void TakeDamage(int damage) {
+        public virtual void TakeDamage(int damage) {
             CurrentHealth -= damage;
             OnHit?.Invoke();
             if (CurrentHealth <= 0) {
@@ -26,14 +26,19 @@ namespace Beware.Utilities {
             }
         }
 
-        public void ResetHealth() {
+        public virtual void IncreaseHealth(int increaseHealthBy = 1) {
+            CurrentHealth += increaseHealthBy;
+        }
+
+        public virtual void ResetHealth() {
             CurrentHealth = totalHealth;
         }
 
-        public void DrawPlayerHealth(Vector2 position, Color color) {
+        public virtual void ResetTimer() { }
+
+        public virtual void DrawPlayerHealth(Vector2 position, Color color) {
             SetHealthBar(CurrentHealth * displayHealthMultiplier, 15, color);
             BewareGame.Instance._spriteBatch.Draw(healthBar, position, null, Color.White, 0, new Vector2(healthBar.Width, healthBar.Height) / 2.0f, 0.2f, 0, 0.0f);
-
         }
 
         private void SetHealthBar(int width, int height, Color color) {

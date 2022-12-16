@@ -8,7 +8,7 @@ using System.Linq;
  *      |   |               |           |   |           |   |           |---|--- --- ---|---|
  *      |   |       M       |           |   |     M     |   |           |   |           |   |
  *      |   |               |           |   |           |   |           | 1 |     M     | 2 |
- *      | 1 |--- --- --- ---|           | 1 |           | 2 |           |   |           |   |
+ *      | 1 |--- --- --- ---|           | 1 |           | 2 |           |   |--- --- ---|   |
  *      |   |--- --- --- ---|           |   |           |   |           |---|--- --- ---|---|
  *      |   |       2       |           |   |--- --- ---|   |               Layout 3
  *      |---|--- --- --- ---|           |---|--- --- ---|---|
@@ -124,8 +124,11 @@ namespace Beware.Managers {
             BackgroundStationary rightControllerBackground = new BackgroundStationary(Scenes.RightController, View.InfoTwo);
             PanelTwoLogic panelTwoLogic = new PanelTwoLogic();
 
+            BackgroundMoving tickerBackground = new BackgroundMoving(Scenes.BlinkingStar, View.Ticker);
+            TickerLogic tickerLogic = new TickerLogic();
+
             ViewportManager.ChangeDimension(Dimension.Nintendo);
-            return new GameScene(background, logic, leftControllerBackground, panelOneLogic, rightControllerBackground, panelTwoLogic);
+            return new GameScene(tickerBackground, tickerLogic, background, logic, leftControllerBackground, panelOneLogic, rightControllerBackground, panelTwoLogic);
         }
     }
 }

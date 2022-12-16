@@ -10,7 +10,7 @@ namespace Beware.Managers {
         private static List<EntityModel> entityList = new List<EntityModel>();
         private static List<EntityModel> addEntityList = new List<EntityModel>();
         private static List<EnemyModel> enemyList = new List<EnemyModel>();
-        private static List<BulletModel> bulletList = new List<BulletModel>();
+        //private static List<BulletModel> bulletList = new List<BulletModel>();
 
         public static int Count { get { return entityList.Count; } }
 
@@ -26,7 +26,7 @@ namespace Beware.Managers {
             entityList.Add(entity);
 
             if (entity is BulletModel) {
-                bulletList.Add(entity as BulletModel);
+                //bulletList.Add(entity as BulletModel);
             } else if (entity is EnemyModel) {
                 enemyList.Add(entity as EnemyModel);
             }
@@ -46,10 +46,12 @@ namespace Beware.Managers {
                 AddEntity(entity);
             }
 
+            BulletManager.Update();
+
             addEntityList.Clear();
 
             entityList = entityList.Where(x => x.IsExpired == false).ToList();
-            bulletList = bulletList.Where(x => x.IsExpired == false).ToList();
+            //bulletList = bulletList.Where(x => x.IsExpired == false).ToList();
             enemyList = enemyList.Where(x => x.IsExpired == false).ToList();
         }
 
@@ -57,6 +59,7 @@ namespace Beware.Managers {
             foreach (var entity in entityList) {
                 entity.Draw();
             }
+            BulletManager.Draw();
         }
 
         private static bool IsColliding(EntityModel a, EntityModel b) {
@@ -77,19 +80,28 @@ namespace Beware.Managers {
 
             // Collisions between bullets and enemies
             for (int i = 0; i < enemyList.Count; i++) {
-                for (int j = 0; j < bulletList.Count; j++) {
-                    if (IsColliding(enemyList[i], bulletList[j])) {
-                        enemyList[i].Hit(bulletList[j].ImpactDamage);
-                        if (!(bulletList[j] is SabotRound)) {
-                            bulletList[j].IsExpired = true;
+                for (int j = 0; j < BulletManager.playerBullets.Count; j++) {
+                    if (IsColliding(enemyList[i], BulletManager.playerBullets[j])) {
+                        enemyList[i].Hit(BulletManager.playerBullets[j].ImpactDamage);
+                        if (!(BulletManager.playerBullets[j] is SabotRound)) {
+                            BulletManager.playerBullets[j].IsExpired = true;
                         } 
                             
                     }
                 }
             }
 
+            //Collisions beteen shields and bullets or enemies
+
             // Collisions between player and enemies
             for (int i = 0; i < enemyList.Count; i++) {
+                if (PlayerModel.Instance.Shield != null) {
+                    if (enemyList[i].IsActive && IsColliding(PlayerModel.Instance.Shield, enemyList[i])) {
+                        PlayerModel.Instance.Shield.Hit(enemyList[i].ImpactDamage);
+                        enemyList[i].Hit(PlayerModel.Instance.Shield.ImpactDamage);
+                        break;
+                    }
+                }
                 if (enemyList[i].IsActive && IsColliding(PlayerModel.Instance, enemyList[i])) {
                     PlayerModel.Instance.Hit(enemyList[i].ImpactDamage);
                     enemyList[i].Hit(PlayerModel.Instance.ImpactDamage);
@@ -97,10 +109,17 @@ namespace Beware.Managers {
                 }
             }
 
-            for (int i = 0; i < bulletList.Count; i++) {
-                if (bulletList[i].IsExpired == false && IsColliding(PlayerModel.Instance, bulletList[i])) {
-                    PlayerModel.Instance.Hit(bulletList[i].ImpactDamage);
-                    bulletList[i].Hit(PlayerModel.Instance.ImpactDamage);
+            for (int i = 0; i < BulletManager.enemyBullets.Count; i++) {
+                //if (PlayerModel.Instance.Shield != null) {
+                //    if (bulletList[i].IsExpired == false && IsColliding(PlayerModel.Instance.Shield, enemyList[i])) {
+                //        PlayerModel.Instance.Shield.Hit(bulletList[i].ImpactDamage);
+                //        bulletList[i].Hit(PlayerModel.Instance.Shield.ImpactDamage);
+                //        break;
+                //    }
+                //}
+                if (BulletManager.enemyBullets[i].IsExpired == false && IsColliding(PlayerModel.Instance, BulletManager.enemyBullets[i])) {
+                    PlayerModel.Instance.Hit(BulletManager.enemyBullets[i].ImpactDamage);
+                    BulletManager.enemyBullets[i].Hit(PlayerModel.Instance.ImpactDamage);
                     break;
                 }
             }
@@ -110,13 +129,15 @@ namespace Beware.Managers {
             entityList.Clear();
             addEntityList.Clear();
             enemyList.Clear();
-            bulletList.Clear();
+            //bulletList.Clear();
+            BulletManager.Clear();
         }
 
         public static void RoundChange() {
             addEntityList.Clear();
             enemyList.Clear();
-            bulletList.Clear();
+            //bulletList.Clear();
+            BulletManager.Clear();
         }
     }
 }

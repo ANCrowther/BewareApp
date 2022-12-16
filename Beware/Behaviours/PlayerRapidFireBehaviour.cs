@@ -42,7 +42,8 @@ namespace Beware.Behaviours {
 
                 BulletModel bullet = new BulletModel(PlayerModel.Instance.Position + offset, vel);
                 bullet.SetBehaviour(BehaviourCategory.Move, new BulletBehaviour());
-                EntityManager.Add(bullet);
+                //EntityManager.Add(bullet);
+                BulletManager.AddPlayerBullet(bullet);
             }
 
             UpdateCooldown();

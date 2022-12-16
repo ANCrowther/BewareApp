@@ -57,7 +57,8 @@
         Move,
         Shoot,
         Slow,
-        Special
+        SpecialDefensive,
+        SpecialOffensive
     }
 
     public enum PlayerBehaviourType {
@@ -65,7 +66,8 @@
         SabotShoot,
         PlayerMove1,
         PlayerSlow1,
-        PlayerSpecial
+        PlayerShield,
+        PlayerShieldMove
     }
 
     public enum EntityType {

@@ -1,4 +1,5 @@
-﻿using Beware.Managers;
+﻿using Beware.Behaviours;
+using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
 
@@ -8,6 +9,7 @@ namespace Beware.Entities {
         private int framesUntilColorChange = 0;
         
         public bool IsSlow { get; set; } = false;
+        public ShieldModel Shield { get; set; } = null;
 
         public static PlayerModel Instance {
             get {
@@ -35,7 +37,20 @@ namespace Beware.Entities {
                 color = (color == Color.Blue) ? Color.Red : Color.Blue;
             }
 
+            if (Shield != null && Shield.IsExpired == true) {
+                Shield = null;
+            }
+
+            if (Shield != null) {
+                Shield.Update();
+            }
+
             base.Update();
+        }
+
+        public override void Hit(int damage = 1) {
+
+            base.Hit(damage);
         }
 
         private void UpdateDrawColor() {
@@ -46,6 +61,9 @@ namespace Beware.Entities {
             if (!IsExpired) {
                 Vector2 position = new Vector2(Position.X, Position.Y + Size.Y / 2 + 5);
                 health.DrawPlayerHealth(position, color);
+                if (Shield != null) {
+                    Shield.Draw();
+                }
                 base.Draw();
             }
         }

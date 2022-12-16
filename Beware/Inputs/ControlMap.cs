@@ -13,7 +13,7 @@ namespace Beware.Inputs {
         public static Keys Shoot { get; set; } = Keys.Space;
         public static Keys Slow { get; set; } = Keys.Q;
         public static Keys Special { get; set; } = Keys.Y;
-        
+
         public static Keys Back { get; private set; } = Keys.OemTilde;
         public static Keys Enter { get; private set; } = Keys.Enter;
         public static Keys Mute { get; private set; } = Keys.OemPipe;
@@ -27,7 +27,8 @@ namespace Beware.Inputs {
         public static Buttons Shoot_pad { get; set; } = Buttons.RightTrigger;
         public static Buttons Slow_pad { get; set; } = Buttons.RightShoulder;
         public static Buttons Special_pad { get; set; } = Buttons.LeftTrigger;
-       
+        public static Buttons SwitchSpecial_Pad { get; set; } = Buttons.Y;
+
         public static Buttons Back_pad { get; private set; } = Buttons.Back;
         public static Buttons Enter_pad { get; private set; } = Buttons.Start;
         public static Buttons Mute_pad { get; private set; } = Buttons.DPadDown;
