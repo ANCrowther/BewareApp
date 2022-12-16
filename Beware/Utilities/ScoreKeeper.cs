@@ -2,6 +2,7 @@
 using Beware.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.IO;
 
 namespace Beware.Utilities {
@@ -9,6 +10,8 @@ namespace Beware.Utilities {
         private static int increaseGameRoundBy;
         private static int checkForNextGameRound;
         private const string highScoreFileName = "highscore.txt";
+
+        public static event Action NextRound;
 
         public static int Score { get; private set; } = 0;
         public static int HighScore { get; private set; }
@@ -46,6 +49,10 @@ namespace Beware.Utilities {
                 BewareGame.Instance._spriteBatch.Draw(digit, position, null, Color.White, 0, new Vector2(digit.Width, digit.Height) / 2.0f, 0.3f, 0, 0.0f);
                 position.X = position.X - 50;
             }
+        }
+
+        public static void DrawNintendo(Vector2 position) {
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"Round {GameRound}", position, Color.MintCream);
         }
 
         public static void DrawScoreForNintendo() {
@@ -92,6 +99,7 @@ namespace Beware.Utilities {
             EnemyCount++;
             if (EnemyCount == checkForNextGameRound) {
                 GameRound++;
+                NextRound?.Invoke();
                 checkForNextGameRound += increaseGameRoundBy;
             }
         }

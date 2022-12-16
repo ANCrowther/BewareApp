@@ -75,8 +75,11 @@ namespace Beware.Managers {
             BackgroundStationary rightControllerBackground = new BackgroundStationary(Scenes.RightController, View.InfoTwo);
             PanelTwoLogic panelTwoLogic = new PanelTwoLogic();
 
+            BackgroundMoving tickerBackground = new BackgroundMoving(Scenes.BlinkingStar, View.Ticker);
+            TickerLogic tickerLogic = new TickerLogic();
+
             ViewportManager.ChangeDimension(Dimension.Nintendo);
-            return new GameScene(leftControllerBackground, panelOneLogic, rightControllerBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
+            return new GameScene(tickerBackground, tickerLogic, leftControllerBackground, panelOneLogic, rightControllerBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
         }
 
         private static GameScene CreateMenuWindow() {

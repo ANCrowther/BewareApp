@@ -190,21 +190,28 @@ namespace Beware.Managers {
                 X = 366,
                 Y = 100,
                 Width = 1440,
-                Height = 885
+                Height = 785
             };
 
             InfoOneView = new Viewport {
                 X = 50,
                 Y = GameboardView.Y,
                 Width = 315,
-                Height = GameboardView.Height
+                Height = 885
             };
 
             InfoTwoView = new Viewport {
                 X = 1805,
                 Y = GameboardView.Y,
                 Width = 315,
-                Height = GameboardView.Height
+                Height = 885
+            };
+
+            TickerView = new Viewport {
+                X = GameboardView.X,
+                Y = 885,
+                Width = GameboardView.Width,
+                Height = 100
             };
         }
     }

@@ -112,5 +112,11 @@ namespace Beware.Managers {
             enemyList.Clear();
             bulletList.Clear();
         }
+
+        public static void RoundChange() {
+            addEntityList.Clear();
+            enemyList.Clear();
+            bulletList.Clear();
+        }
     }
 }
