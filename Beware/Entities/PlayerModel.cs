@@ -7,8 +7,9 @@ namespace Beware.Entities {
     public class PlayerModel : EntityModel {
         private static PlayerModel instance;
         private int framesUntilColorChange = 0;
-        
-        public bool IsSlow { get; set; } = false;
+        private IBehaviour switchSpecial;
+        private IBehaviour switchSpeed;
+
         public ShieldModel Shield { get; set; } = null;
 
         public static PlayerModel Instance {
@@ -26,6 +27,8 @@ namespace Beware.Entities {
             image = EntityArt.Player1;
             health.OnDeath += delegate { this.Die(); };
             health.OnHit += delegate { this.UpdateDrawColor(); };
+            switchSpecial = new SwitchSpecialBehaviour();
+            switchSpeed = new SwitchSpeedBehaviour();
         }
 
 
@@ -44,6 +47,9 @@ namespace Beware.Entities {
             if (Shield != null) {
                 Shield.Update();
             }
+
+            switchSpecial.Update(null);
+            switchSpeed.Update(null);
 
             base.Update();
         }

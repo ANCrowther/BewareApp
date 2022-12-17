@@ -2,7 +2,7 @@
 using Beware.Inputs;
 
 namespace Beware.Behaviours {
-    class PlayerSpecialSwitchBehaviour : IBehaviour {
+    class SwitchSpecialBehaviour : IBehaviour {
         public void Update(EntityModel entity) {
             if (Input.WasButtonPressed(ControlMap.SwitchSpecial_Pad)) {
                 PlayerInputStates.IsSpecialDefensive = !PlayerInputStates.IsSpecialDefensive;

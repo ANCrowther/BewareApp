@@ -27,6 +27,7 @@ namespace Beware.Inputs {
         public static Buttons Shoot_pad { get; set; } = Buttons.RightTrigger;
         public static Buttons Slow_pad { get; set; } = Buttons.RightShoulder;
         public static Buttons Special_pad { get; set; } = Buttons.LeftTrigger;
+        public static Buttons Boost_pad { get; set; } = Buttons.LeftShoulder;
         public static Buttons SwitchSpecial_Pad { get; set; } = Buttons.Y;
 
         public static Buttons Back_pad { get; private set; } = Buttons.Back;

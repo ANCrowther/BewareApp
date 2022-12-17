@@ -54,22 +54,20 @@
     }
 
     public enum BehaviourCategory {
+        Boost,
         Move,
         Shoot,
-        Slow,
         SpecialDefensive,
-        SpecialOffensive,
-        SpecialSwitch
+        SpecialOffensive
     }
 
     public enum PlayerBehaviourType {
         RapidFire,
         SabotShoot,
-        PlayerMove1,
+        PlayerBasicMove,
         PlayerSlow1,
         PlayerShield,
-        PlayerShieldMove,
-        SpecialSwitch
+        PlayerShieldMove
     }
 
     public enum EntityType {

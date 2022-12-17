@@ -13,6 +13,11 @@ namespace Beware.Behaviours {
         public event Action OnEmpty;
 
         public void Update(EntityModel entity) {
+            if (PlayerStatus.SpecialAmmoCount != RoundCount) {
+                PlayerStatus.SpecialAmmoCount = RoundCount;
+            }
+            
+
             if (PlayerInputStates.IsSpecialDefensive == false) {
                 PlayerGunModel.Instance.IsShooting = false;
                 PlayerGunModel.Instance.Aim = Helpers.GetDirection(Mode.Shoot);
@@ -33,7 +38,7 @@ namespace Beware.Behaviours {
                     if (RoundCount-- <= 0) {
                         OnEmpty?.Invoke();
                     }
-
+                    
                     float aimAngle = PlayerGunModel.Instance.Orientation;
 
                     Quaternion aimQuat = Quaternion.CreateFromYawPitchRoll(0, 0, aimAngle);
@@ -43,7 +48,6 @@ namespace Beware.Behaviours {
 
                     BulletModel bullet = new SabotRound(PlayerModel.Instance.Position + offset, vel);
                     bullet.SetBehaviour(BehaviourCategory.Move, new BulletBehaviour());
-                    //EntityManager.Add(bullet);
                     BulletManager.AddPlayerBullet(bullet);
                 }
             }
