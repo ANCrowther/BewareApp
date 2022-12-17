@@ -1,5 +1,4 @@
 ﻿using Beware.Entities;
-using Beware.Inputs;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,6 @@ namespace Beware.Managers {
         private static List<EntityModel> entityList = new List<EntityModel>();
         private static List<EntityModel> addEntityList = new List<EntityModel>();
         private static List<EnemyModel> enemyList = new List<EnemyModel>();
-        //private static List<BulletModel> bulletList = new List<BulletModel>();
 
         public static int Count { get { return entityList.Count; } }
 
@@ -25,9 +23,7 @@ namespace Beware.Managers {
         private static void AddEntity(EntityModel entity) {
             entityList.Add(entity);
 
-            if (entity is BulletModel) {
-                //bulletList.Add(entity as BulletModel);
-            } else if (entity is EnemyModel) {
+            if (entity is EnemyModel) {
                 enemyList.Add(entity as EnemyModel);
             }
         }
@@ -51,7 +47,6 @@ namespace Beware.Managers {
             addEntityList.Clear();
 
             entityList = entityList.Where(x => x.IsExpired == false).ToList();
-            //bulletList = bulletList.Where(x => x.IsExpired == false).ToList();
             enemyList = enemyList.Where(x => x.IsExpired == false).ToList();
         }
 
@@ -91,8 +86,6 @@ namespace Beware.Managers {
                 }
             }
 
-            //Collisions beteen shields and bullets or enemies
-
             // Collisions between player and enemies
             for (int i = 0; i < enemyList.Count; i++) {
                 if (PlayerModel.Instance.Shield != null) {
@@ -110,13 +103,6 @@ namespace Beware.Managers {
             }
 
             for (int i = 0; i < BulletManager.enemyBullets.Count; i++) {
-                //if (PlayerModel.Instance.Shield != null) {
-                //    if (bulletList[i].IsExpired == false && IsColliding(PlayerModel.Instance.Shield, enemyList[i])) {
-                //        PlayerModel.Instance.Shield.Hit(bulletList[i].ImpactDamage);
-                //        bulletList[i].Hit(PlayerModel.Instance.Shield.ImpactDamage);
-                //        break;
-                //    }
-                //}
                 if (BulletManager.enemyBullets[i].IsExpired == false && IsColliding(PlayerModel.Instance, BulletManager.enemyBullets[i])) {
                     PlayerModel.Instance.Hit(BulletManager.enemyBullets[i].ImpactDamage);
                     BulletManager.enemyBullets[i].Hit(PlayerModel.Instance.ImpactDamage);
@@ -129,14 +115,12 @@ namespace Beware.Managers {
             entityList.Clear();
             addEntityList.Clear();
             enemyList.Clear();
-            //bulletList.Clear();
             BulletManager.Clear();
         }
 
         public static void RoundChange() {
             addEntityList.Clear();
             enemyList.Clear();
-            //bulletList.Clear();
             BulletManager.Clear();
         }
     }

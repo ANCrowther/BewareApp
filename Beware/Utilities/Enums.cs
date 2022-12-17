@@ -58,7 +58,8 @@
         Shoot,
         Slow,
         SpecialDefensive,
-        SpecialOffensive
+        SpecialOffensive,
+        SpecialSwitch
     }
 
     public enum PlayerBehaviourType {
@@ -67,7 +68,8 @@
         PlayerMove1,
         PlayerSlow1,
         PlayerShield,
-        PlayerShieldMove
+        PlayerShieldMove,
+        SpecialSwitch
     }
 
     public enum EntityType {

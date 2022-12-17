@@ -4,7 +4,6 @@ using Beware.Utilities;
 
 namespace Beware.Behaviours {
     class PlayerShieldBehaviour : IBehaviour {
-        public int framesRemaining;
         private bool IsNull = true;
 
         public void Update(EntityModel entity) {

@@ -15,7 +15,7 @@ namespace Beware.Entities {
         public int ImpactDamage;
         protected Health health;
 
-        protected IBehaviour[] behaviours = new IBehaviour[5];
+        protected IBehaviour[] behaviours = new IBehaviour[6];
 
         public Vector2 Size { get { return image == null ? Vector2.Zero : new Vector2(image.Width, image.Height); } }
 

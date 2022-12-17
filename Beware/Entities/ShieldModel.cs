@@ -4,34 +4,34 @@ using System;
 
 namespace Beware.Entities {
     public class ShieldModel : EntityModel {
+        private Color[] colors = { Color.White, Color.AliceBlue, Color.Yellow, Color.Orange, Color.DarkOrange, Color.Red };
+        private int maxShieldHealth;
+
         public ShieldModel(int startingHealth = 100, int startingImpactDamage = 15) : base(startingHealth, startingImpactDamage) {
             CollisionRadius = 40;
+            maxShieldHealth = startingHealth;
             image = EntityArt.Shield;
             Position = PlayerModel.Instance.Position;
             health = new ShieldHealth();
             health.OnDeath += delegate { this.Die(); };
-            health.OnHit += delegate { health.ResetTimer(); };
         }
 
         public override void Update() {
             Position = PlayerModel.Instance.Position;
+            
+            if (health is ShieldHealth s) {
+                s.Update();
+            }
+
             UpdateDrawColor();
-            TimeKeeper.Update();
             base.Update();
         }
 
         private void UpdateDrawColor() {
-            if (health.CurrentHealth > 80) {
-                color = Color.CadetBlue;
-            } else if (health.CurrentHealth > 60) {
-                color = Color.DarkBlue;
-            } else if (health.CurrentHealth > 40) {
-                color = Color.MediumPurple;
-            } else if (health.CurrentHealth > 20) {
-                color = Color.Purple;
-            } else {
-                color = Color.Red;
-            }
+            int index = (maxShieldHealth - health.CurrentHealth) / 16;
+            index = (index < 0) ? 0 : index;
+            index = (index > 5) ? 5 : index;
+            color = colors[index];
         }
 
         public override void Draw() {

@@ -17,6 +17,8 @@ namespace Beware.Entities {
                     return new PlayerShieldBehaviour();
                 case PlayerBehaviourType.PlayerShieldMove:
                     return new PlayerShieldMoveBehaviour();
+                case PlayerBehaviourType.SpecialSwitch:
+                    return new PlayerSpecialSwitchBehaviour();
                 default:
                     return new PlayerRapidFireBehaviour();
             }

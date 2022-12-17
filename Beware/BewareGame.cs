@@ -43,8 +43,9 @@ namespace Beware {
             PlayerModel.Instance.SetBehaviour(BehaviourCategory.Move, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerMove1));
             PlayerModel.Instance.SetBehaviour(BehaviourCategory.Slow, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerSlow1));
             PlayerGunModel.Instance.SetBehaviour(BehaviourCategory.Shoot, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.RapidFire));
-            //PlayerGunModel.Instance.SetBehaviour(BehaviourCategory.SpecialOffensive, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.SabotShoot));
+            PlayerGunModel.Instance.SetBehaviour(BehaviourCategory.SpecialOffensive, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.SabotShoot));
             PlayerModel.Instance.SetBehaviour(BehaviourCategory.SpecialDefensive, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerShield));
+            PlayerModel.Instance.SetBehaviour(BehaviourCategory.SpecialSwitch, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.SpecialSwitch));
         }
 
         protected override void LoadContent() {

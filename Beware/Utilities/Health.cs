@@ -6,8 +6,8 @@ namespace Beware.Utilities {
     public class Health : DrawableGameComponent {
         protected int totalHealth;
         private int displayHealthMultiplier = 15;
-        public event Action OnDeath;
-        public virtual event Action OnHit;
+        public virtual event Action OnDeath;
+        public event Action OnHit;
 
         public int CurrentHealth { get; protected set; }
 
@@ -33,8 +33,6 @@ namespace Beware.Utilities {
         public virtual void ResetHealth() {
             CurrentHealth = totalHealth;
         }
-
-        public virtual void ResetTimer() { }
 
         public virtual void DrawPlayerHealth(Vector2 position, Color color) {
             SetHealthBar(CurrentHealth * displayHealthMultiplier, 15, color);

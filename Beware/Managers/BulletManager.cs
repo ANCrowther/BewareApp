@@ -1,6 +1,7 @@
 ﻿using Beware.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Beware.Managers {
@@ -23,6 +24,9 @@ namespace Beware.Managers {
             foreach (var bullet in enemyBullets) {
                 bullet.Update();
             }
+
+            playerBullets = playerBullets.Where(x => x.IsExpired == false).ToList();
+            enemyBullets = enemyBullets.Where(x => x.IsExpired == false).ToList();
         }
 
         public static void Clear() {
