@@ -49,16 +49,16 @@ namespace Beware.Managers {
         }
 
         private static GameScene CreateStandardBackground() {
-            BackgroundStationary tickerBackground = new BackgroundStationary(Scenes.Stars_1, View.Ticker);
+            BackgroundStationary tickerBackground = new BackgroundStationary(ScenesArt.GenericSpace, View.Ticker);
             TickerLogic tickerLogic = new TickerLogic();
 
-            BackgroundStationary gameboardBackground = new BackgroundStationary(Scenes.Stars_2, View.GamePlay);
+            BackgroundMoving gameboardBackground = new BackgroundMoving(ScenesArt.BlinkingStar, View.GamePlay);
             GameboardLogic gameboardLogic = new GameboardLogic();
 
-            BackgroundMoving panelOneBackground = new BackgroundMoving(Scenes.BlinkingStar, View.InfoOne);
+            BackgroundStationary panelOneBackground = new BackgroundStationary(ScenesArt.ArtificialPlanet, View.InfoOne);
             PanelOneLogic panelOneLogic = new PanelOneLogic();
 
-            BackgroundMoving panelTwoBackground = new BackgroundMoving(Scenes.BlinkingStar, View.InfoTwo);
+            BackgroundStationary panelTwoBackground = new BackgroundStationary(ScenesArt.ArtificialPlanet, View.InfoTwo);
             PanelTwoLogic panelTwoLogic = new PanelTwoLogic();
 
             ViewportManager.ChangeDimension(Dimension.Standard);
@@ -66,16 +66,16 @@ namespace Beware.Managers {
         }
 
         private static GameScene CreateNintendoLayout() {
-            BackgroundMoving gameboardBackground = new BackgroundMoving(Scenes.BlinkingStar, View.GamePlay);
+            BackgroundMoving gameboardBackground = new BackgroundMoving(ScenesArt.BlinkingStar, View.GamePlay);
             GameboardLogic gameboardLogic = new GameboardLogic();
 
-            BackgroundStationary leftControllerBackground = new BackgroundStationary(Scenes.LeftController, View.InfoOne);
+            BackgroundStationary leftControllerBackground = new BackgroundStationary(ScenesArt.LeftController, View.InfoOne);
             PanelOneLogic panelOneLogic = new PanelOneLogic();
 
-            BackgroundStationary rightControllerBackground = new BackgroundStationary(Scenes.RightController, View.InfoTwo);
+            BackgroundStationary rightControllerBackground = new BackgroundStationary(ScenesArt.RightController, View.InfoTwo);
             PanelTwoLogic panelTwoLogic = new PanelTwoLogic();
 
-            BackgroundMoving tickerBackground = new BackgroundMoving(Scenes.BlinkingStar, View.Ticker);
+            BackgroundStationary tickerBackground = new BackgroundStationary(ScenesArt.GenericSpace, View.Ticker);
             TickerLogic tickerLogic = new TickerLogic();
 
             ViewportManager.ChangeDimension(Dimension.Nintendo);
@@ -85,20 +85,20 @@ namespace Beware.Managers {
         private static GameScene CreateMenuWindow() {
             StartMenuComponents menuOptions = new StartMenuComponents(new Vector2(ViewportManager.MenuView.Width / 3, ViewportManager.MenuView.Height / 3));
             StartMenuLogic menuLogic = new StartMenuLogic(menuOptions);
-            BackgroundStationary background = new BackgroundStationary(Scenes.Stars_3, View.Menu);
+            BackgroundStationary background = new BackgroundStationary(ScenesArt.NebulaPlanetRing, View.Menu);
             ViewportManager.ChangeDimension(Dimension.Standard);
             return new GameScene(background, menuOptions, menuLogic);
         }
 
         private static GameScene CreatePlayerSettingWindow() {
-            BackgroundStationary background = new BackgroundStationary(Scenes.Parchment, View.Menu);
+            BackgroundStationary background = new BackgroundStationary(ScenesArt.StellarSpaceship, View.Menu);
             PlayerSettingsLogic logic = new PlayerSettingsLogic();
             ViewportManager.ChangeDimension(Dimension.Standard);
             return new GameScene(background, logic);
         }
 
         private static GameScene CreateGameSettingWindow() {
-            BackgroundStationary background = new BackgroundStationary(Scenes.GreenSky, View.Menu);
+            BackgroundStationary background = new BackgroundStationary(ScenesArt.SpacePlanetsStars, View.Menu);
             GameSettingsLogic logic = new GameSettingsLogic();
             ViewportManager.ChangeDimension(Dimension.Standard);
             return new GameScene(background, logic);
@@ -108,23 +108,23 @@ namespace Beware.Managers {
             if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
                 return CreateNintendoGameOverWindow();
             }
-            BackgroundStationary background = new BackgroundStationary(Scenes.GreenSky, View.Menu);
+            BackgroundStationary background = new BackgroundStationary(ScenesArt.SpaceBattleWide, View.Menu);
             GameOverLogic logic = new GameOverLogic();
             ViewportManager.ChangeDimension(Dimension.Standard);
             return new GameScene(background, logic);
         }
 
         private static GameScene CreateNintendoGameOverWindow() {
-            BackgroundStationary background = new BackgroundStationary(Scenes.Stars_4, View.GamePlay);
+            BackgroundStationary background = new BackgroundStationary(ScenesArt.RedSky, View.GamePlay);
             GameOverLogic logic = new GameOverLogic();
 
-            BackgroundStationary leftControllerBackground = new BackgroundStationary(Scenes.LeftController, View.InfoOne);
+            BackgroundStationary leftControllerBackground = new BackgroundStationary(ScenesArt.LeftController, View.InfoOne);
             PanelOneLogic panelOneLogic = new PanelOneLogic();
 
-            BackgroundStationary rightControllerBackground = new BackgroundStationary(Scenes.RightController, View.InfoTwo);
+            BackgroundStationary rightControllerBackground = new BackgroundStationary(ScenesArt.RightController, View.InfoTwo);
             PanelTwoLogic panelTwoLogic = new PanelTwoLogic();
 
-            BackgroundMoving tickerBackground = new BackgroundMoving(Scenes.BlinkingStar, View.Ticker);
+            BackgroundStationary tickerBackground = new BackgroundStationary(ScenesArt.GenericSpace, View.Ticker);
             TickerLogic tickerLogic = new TickerLogic();
 
             ViewportManager.ChangeDimension(Dimension.Nintendo);

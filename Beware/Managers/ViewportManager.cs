@@ -6,13 +6,22 @@ using Microsoft.Xna.Framework.Graphics;
  *      |   |               |           |   |           |   |           |---|--- --- ---|---|
  *      |   |       M       |           |   |     M     |   |           |   |           |   |
  *      |   |               |           |   |           |   |           | 1 |     M     | 2 |
- *      | 1 |--- --- --- ---|           | 1 |           | 2 |           |   |           |   |
+ *      | 1 |--- --- --- ---|           | 1 |           | 2 |           |   |--- --- ---|   |
  *      |   |--- --- --- ---|           |   |           |   |           |---|--- --- ---|---|
  *      |   |       2       |           |   |--- --- ---|   |               Layout 3
  *      |---|--- --- --- ---|           |---|--- --- ---|---|
  *          Layout 1                        Layout 2
  */
 
+//   16:10
+//2560x1600
+//1920x1200
+//1680x1050
+//1440x900
+
+//    16:9
+//1920x1080
+//1366x768
 
 namespace Beware.Managers {
     static class ViewportManager {
@@ -27,8 +36,8 @@ namespace Beware.Managers {
             set { BewareGame.Instance.GraphicsDevice.Viewport = value; }
         }
 
-        private static (int width, int height) nintendoDimension = (2200, 1200);
-        private static (int width, int height) standardDimension = (2560, 1440);
+        private static (int width, int height) nintendoDimension = (2200, 1200); // 1920x1200
+        private static (int width, int height) standardDimension = (2560, 1600);
 
         public static void Initialize(GraphicsDeviceManager graphics) {
             ChangeDimension(standardDimension);

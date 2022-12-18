@@ -26,7 +26,7 @@ namespace Beware {
             Art.Initialize(Content);
             EntityArt.Initialize(Content);
             Fonts.Initialize(Content);
-            Scenes.Initialize(Content);
+            ScenesArt.Initialize(Content);
             ControllerArt.Initialize(Content);
             KeysArt.Initialize(Content);
             ScoreKeeper.Initialize();

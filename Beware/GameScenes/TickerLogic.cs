@@ -25,13 +25,15 @@ namespace Beware.GameScenes {
 
         public override void Draw(GameTime gameTime) {
             BewareGame.Instance._spriteBatch.Begin(SpriteSortMode.Texture, BlendState.Additive);
-
             BewareGame.Instance._spriteBatch.Draw(frame, new Vector2(0, 0), Color.White);
             BewareGame.Instance._spriteBatch.End();
 
             BewareGame.Instance._spriteBatch.Begin();
-            ScoreKeeper.DrawScore(new Vector2(500, 50));
+            ScoreKeeper.DrawScore(new Vector2(450, 50));
             DrawNintendoTicker(new Vector2(ViewportManager.TickerView.Width - 10, 25));
+
+            //BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{PlayerStatus.SpecialAmmoCount}", new Vector2(1000, 50), Color.Yellow);
+
             BewareGame.Instance._spriteBatch.End();
             base.Draw(gameTime);
         }
