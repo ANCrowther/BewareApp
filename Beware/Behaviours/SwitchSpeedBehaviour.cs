@@ -5,7 +5,7 @@ using Beware.Utilities;
 namespace Beware.Behaviours {
     class SwitchSpeedBehaviour : IBehaviour {
         public void Update(EntityModel entity) {
-            if (Input.WasKeyPressed(ControlMap.Slow) || Input.WasButtonPressed(ControlMap.Slow_pad)) {
+            if (Input.WasButtonPressed(ControlMap.Slow)) {
                 PlayerStatus.IsSlow = !PlayerStatus.IsSlow;
             }
         }

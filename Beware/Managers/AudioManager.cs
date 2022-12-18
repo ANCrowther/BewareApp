@@ -21,15 +21,15 @@ namespace Beware.Managers {
         public static int MasterVolumeLevel { get; private set; } = 10;
 
         public static void Update(VolumeType type = VolumeType.Master) {
-            if (Input.WasKeyPressed(ControlMap.VolumeUp) || Input.WasButtonPressed(ControlMap.VolumeUp_pad)) {
+            if (Input.WasKeyPressed(ControlMap.VolumeUp_key) || Input.WasButtonPressed(ControlMap.VolumeUp)) {
                 VolumeUp(type);
                 ResetCooldown();
             }
-            if (Input.WasKeyPressed(ControlMap.VolumeDown) || Input.WasButtonPressed(ControlMap.VolumeDown_pad)) {
+            if (Input.WasKeyPressed(ControlMap.VolumeDown_key) || Input.WasButtonPressed(ControlMap.VolumeDown)) {
                 VolumeDown(type);
                 ResetCooldown();
             }
-            if (Input.WasKeyPressed(ControlMap.Mute) || Input.WasButtonPressed(ControlMap.Mute_pad)) {
+            if (Input.WasKeyPressed(ControlMap.Mute_key) || Input.WasButtonPressed(ControlMap.Mute)) {
                 Mute();
             }
             if (isVolumeChanged == true) {

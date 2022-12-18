@@ -17,7 +17,7 @@
     }
 
     public enum PlayerSettings {
-        Keyboard,
+        //Keyboard,
         Gamepad,
         Generic,
         Standard

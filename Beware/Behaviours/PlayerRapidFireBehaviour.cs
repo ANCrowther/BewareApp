@@ -19,7 +19,7 @@ namespace Beware.Behaviours {
             PlayerGunModel.Instance.Aim = Helpers.GetDirection(Mode.Shoot);
 
             PlayerGunModel.Instance.Orientation = PlayerModel.Instance.Orientation;
-            PlayerGunModel.Instance.IsShooting = Input.IsButtonHeldDown(ControlMap.Shoot_pad);
+            PlayerGunModel.Instance.IsShooting = Input.IsButtonHeldDown(ControlMap.Shoot);
 
             if (PlayerGunModel.Instance.Aim.LengthSquared() > 0) {
                 PlayerGunModel.Instance.Aim.Normalize();
@@ -29,7 +29,7 @@ namespace Beware.Behaviours {
             PlayerGunModel.Instance.Position = Vector2.Clamp(PlayerGunModel.Instance.Position, PlayerGunModel.Instance.Size / 2, ViewportManager.GetWindowSize(View.GamePlay) - PlayerGunModel.Instance.Size / 2);
 
             // Creates the bullets whenever the player shoots.
-            if (Input.IsButtonHeldDown(ControlMap.Shoot_pad) && cooldownRemaining <= 0) {
+            if (Input.IsButtonHeldDown(ControlMap.Shoot) && cooldownRemaining <= 0) {
                 OnUse?.Invoke();
 
                 ResetCooldown();

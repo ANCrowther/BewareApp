@@ -9,7 +9,7 @@ namespace Beware.Behaviours {
         public void Update(EntityModel entity) {
             IsNull = (PlayerModel.Instance.Shield == null) ? true : false;
             if (PlayerInputStates.IsSpecialDefensive == true) {
-                if (IsNull == true && Input.WasButtonPressed(ControlMap.Special_pad)) {
+                if (IsNull == true && Input.WasButtonPressed(ControlMap.Special)) {
                     ShieldModel shield = new ShieldModel();
                     shield.SetBehaviour(BehaviourCategory.Move, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerShieldMove));
                     PlayerModel.Instance.Shield = shield;

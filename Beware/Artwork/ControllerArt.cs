@@ -30,6 +30,7 @@ namespace Beware.Utilities {
         public static Texture2D B { get; private set; }
         public static Texture2D X { get; private set; }
         public static Texture2D Y { get; private set; }
+        public static Texture2D Gamepad { get; private set; }
 
         public static void Initialize(ContentManager content) {
             Button_A = content.Load<Texture2D>(@"Controllers\Button_A");
@@ -58,6 +59,7 @@ namespace Beware.Utilities {
             B = content.Load<Texture2D>(@"Controllers\letter_B");
             X = content.Load<Texture2D>(@"Controllers\letter_X");
             Y = content.Load<Texture2D>(@"Controllers\letter_Y");
+            Gamepad = content.Load<Texture2D>(@"Controllers\Gamepad");
         }
 
         public static Texture2D GetControllerArt(Buttons button) {

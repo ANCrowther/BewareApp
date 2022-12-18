@@ -25,18 +25,18 @@ namespace Beware.Utilities {
         }
 
         public static Vector2 GetDirection(Mode type) {
-            Vector2 direction = (((type == Mode.Move) ? ControlMap.Move_pad : ControlMap.Shoot_pad) == Buttons.LeftStick) ?
+            Vector2 direction = (((type == Mode.Move) ? ControlMap.Move : ControlMap.Shoot) == Buttons.LeftStick) ?
                 PlayerInputStates.gamePadState.ThumbSticks.Left : PlayerInputStates.gamePadState.ThumbSticks.Right;
             direction.Y *= -1;
 
-            if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveLeft : ControlMap.AimLeft))
-                direction.X -= 1;
-            if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveRight : ControlMap.AimRight))
-                direction.X += 1;
-            if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveUp : ControlMap.AimUp))
-                direction.Y -= 1;
-            if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveDown : ControlMap.AimDown))
-                direction.Y += 1;
+            //if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveLeft : ControlMap.AimLeft))
+            //    direction.X -= 1;
+            //if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveRight : ControlMap.AimRight))
+            //    direction.X += 1;
+            //if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveUp : ControlMap.AimUp))
+            //    direction.Y -= 1;
+            //if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveDown : ControlMap.AimDown))
+            //    direction.Y += 1;
 
             if (direction.LengthSquared() > 0) {
                 direction.Normalize();

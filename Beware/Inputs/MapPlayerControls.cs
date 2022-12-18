@@ -5,12 +5,12 @@ namespace Beware.Inputs {
     static class MapPlayerControls {
         public static bool MapNewControl<T>(List<(string heading, T name)> list, (string heading, T name) activeSetting, T control) {
             foreach ((string heading, T name) item in list) {
-                if (item.name is Keys j && control is Keys k && activeSetting.name is Keys l){
-                    if (item.heading != activeSetting.heading && j == k) {
-                        SetNewKey(item.heading, l);
-                        break;
-                    }
-                }
+                //if (item.name is Keys j && control is Keys k && activeSetting.name is Keys l){
+                //    if (item.heading != activeSetting.heading && j == k) {
+                //        SetNewKey(item.heading, l);
+                //        break;
+                //    }
+                //}
                 if (item.name is Buttons a && control is Buttons b && activeSetting.name is Buttons c) {
                     if (item.heading != activeSetting.heading && a == b) {
                         SetNewButton(item.heading, c);
@@ -19,9 +19,6 @@ namespace Beware.Inputs {
                 }
             }
 
-            if (control is Keys key) {
-                return SetNewKey(activeSetting.heading, key);
-            }
             if (control is Buttons button) {
                 return SetNewButton(activeSetting.heading, button);
             }
@@ -29,33 +26,15 @@ namespace Beware.Inputs {
             return false;
         }
 
-        private static bool SetNewKey(string heading, Keys control) {
-            bool isSet = IsValidKey(control);
+        private static bool SetNewButton(string heading, Buttons control) {
+            bool isSet = IsValidButton(control);
             if (isSet) {
                 switch (heading) {
-                    case "Move Up":
-                        ControlMap.MoveUp = control;
+                    case "Move":
+                        ControlMap.Move = control;
                         break;
-                    case "Move Down":
-                        ControlMap.MoveDown = control;
-                        break;
-                    case "Move Left":
-                        ControlMap.MoveLeft = control;
-                        break;
-                    case "Move Right":
-                        ControlMap.MoveRight = control;
-                        break;
-                    case "Aim Up":
-                        ControlMap.AimUp = control;
-                        break;
-                    case "Aim Down":
-                        ControlMap.AimDown = control;
-                        break;
-                    case "Aim Left":
-                        ControlMap.AimLeft = control;
-                        break;
-                    case "Aim Right":
-                        ControlMap.AimRight = control;
+                    case "Aim":
+                        ControlMap.Aim = control;
                         break;
                     case "Shoot":
                         ControlMap.Shoot = control;
@@ -63,36 +42,17 @@ namespace Beware.Inputs {
                     case "Slow":
                         ControlMap.Slow = control;
                         break;
+                    case "Boost":
+                        ControlMap.Boost = control;
+                        break;
+                    case "Switch Special":
+                        ControlMap.SwitchSpecial = control;
+                        break;
                     case "Special":
                         ControlMap.Special = control;
                         break;
-                    default:
-                        isSet = false;
-                        break;
-                }
-            }
-
-            return isSet;
-        }
-
-        private static bool SetNewButton(string heading, Buttons control) {
-            bool isSet = IsValidButton(control);
-            if (isSet) {
-                switch (heading) {
-                    case "Move":
-                        ControlMap.Move_pad = control;
-                        break;
-                    case "Aim":
-                        ControlMap.Aim_pad = control;
-                        break;
-                    case "Shoot":
-                        ControlMap.Shoot_pad = control;
-                        break;
-                    case "Slow":
-                        ControlMap.Slow_pad = control;
-                        break;
-                    case "Special":
-                        ControlMap.Special_pad = control;
+                    case "Accept":
+                        ControlMap.Accept = control;
                         break;
                     default:
                         isSet = false;
@@ -101,52 +61,6 @@ namespace Beware.Inputs {
             }
 
             return isSet;
-        }
-
-        private static bool IsValidKey(Keys key) {
-            switch (key) {
-                case Keys.A:
-                case Keys.B:
-                case Keys.C:
-                case Keys.D:
-                case Keys.E:
-                case Keys.F:
-                case Keys.G:
-                case Keys.H:
-                case Keys.I:
-                case Keys.J:
-                case Keys.K:
-                case Keys.L:
-                case Keys.M:
-                case Keys.N:
-                case Keys.O:
-                //case Keys.P:
-                case Keys.Q:
-                case Keys.R:
-                case Keys.S:
-                case Keys.T:
-                case Keys.U:
-                case Keys.V:
-                case Keys.W:
-                case Keys.X:
-                case Keys.Y:
-                case Keys.Z:
-                case Keys.Up:
-                case Keys.Down:
-                case Keys.Left:
-                case Keys.Right:
-                case Keys.Space:
-                case Keys.OemOpenBrackets:
-                case Keys.OemCloseBrackets:
-                case Keys.OemSemicolon:
-                case Keys.OemComma:
-                case Keys.OemPeriod:
-                case Keys.OemQuestion:
-                case Keys.OemQuotes:
-                    return true;
-                default:
-                    return false;
-            }
         }
 
         private static bool IsValidButton(Buttons button) {

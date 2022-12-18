@@ -44,11 +44,11 @@ namespace Beware.GameScenes {
         public override void Update(GameTime gameTime) {
             GetCurrentLayout();
 
-            if (Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad)) {
+            if (Input.WasButtonPressed(ControlMap.Back)) {
                 SceneManager.SwitchScene(SceneManager.MenuWindow);
             }
 
-            if (Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad) || Input.WasButtonPressed(Buttons.A)) {
+            if (Input.WasButtonPressed(ControlMap.Enter) || Input.WasButtonPressed(Buttons.A)) {
                 isActive = !isActive;
             }
 

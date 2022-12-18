@@ -10,8 +10,7 @@ namespace Beware.GameScenes {
         }
 
         public override void Update(GameTime gameTime) {
-            if (Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad) || 
-                Input.WasKeyPressed(ControlMap.Enter) || Input.WasButtonPressed(ControlMap.Enter_pad)) {
+            if (Input.WasButtonPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Enter)) {
                 ScoreKeeper.Reset();
                 SceneManager.SwitchScene(SceneManager.MenuWindow);
             }

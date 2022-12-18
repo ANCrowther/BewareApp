@@ -5,10 +5,10 @@ using System.Collections.Generic;
 namespace Beware.ExtensionSupport {
     static class MenuRemoteExtensions {
         public static (T, U) MoveThroughMenu<T, U>(this List<(T, U)> list, (T, U) active) {
-            if (Input.WasKeyPressed(Keys.Up) || Input.WasButtonPressed(Buttons.LeftThumbstickUp)) {
+            if (Input.WasButtonPressed(Buttons.DPadUp) || Input.WasButtonPressed(Buttons.LeftThumbstickUp)) {
                 return SelectUp(list, active);
             }
-            if (Input.WasKeyPressed(Keys.Down) || Input.WasButtonPressed(Buttons.LeftThumbstickDown)) {
+            if (Input.WasButtonPressed(Buttons.DPadDown) || Input.WasButtonPressed(Buttons.LeftThumbstickDown)) {
                 return SelectDown(list, active);
             }
             return active;

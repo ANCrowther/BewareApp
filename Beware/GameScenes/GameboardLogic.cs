@@ -15,11 +15,11 @@ namespace Beware.GameScenes {
         }
 
         public override void Update(GameTime gameTime) {
-            if (Input.WasKeyPressed(ControlMap.Back) || Input.WasButtonPressed(ControlMap.Back_pad)) {
+            if (Input.WasButtonPressed(ControlMap.Back)) {
                 SceneManager.SwitchScene(SceneManager.MenuWindow);
             }
 
-            if (Input.WasButtonPressed(ControlMap.Pause_pad)) {
+            if (Input.WasButtonPressed(ControlMap.Pause)) {
                 PlayerInputStates.IsPaused = !PlayerInputStates.IsPaused;
             }
 
