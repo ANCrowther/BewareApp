@@ -1,4 +1,6 @@
 ﻿using System;
+using Beware.Entities;
+using Beware.Utilities;
 using Microsoft.Xna.Framework;
 
 namespace Beware.ExtensionSupport {
@@ -17,6 +19,10 @@ namespace Beware.ExtensionSupport {
 
         public static float SoundToFloat(this int soundLevel) {
             return soundLevel * 0.05f;
+        }
+
+        public static bool Contains(this HitCircle entity, HitCircle otherEntity) {
+            return (Vector2.Distance(entity.Position, otherEntity.Position) < (entity.Radius + otherEntity.Radius));
         }
     }
 }

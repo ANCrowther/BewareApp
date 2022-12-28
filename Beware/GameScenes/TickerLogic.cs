@@ -1,4 +1,5 @@
-﻿using Beware.Managers;
+﻿using Beware.Entities;
+using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,6 +33,9 @@ namespace Beware.GameScenes {
             ScoreKeeper.DrawScore(new Vector2(450, 50));
             DrawNintendoTicker(new Vector2(ViewportManager.TickerView.Width - 10, 25));
 
+            if (PlayerModel.Instance.ShieldCountdown > 0) {
+                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{PlayerModel.Instance.ShieldCountdown}", new Vector2(700, 25), Color.Orange);
+            }
             //BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{PlayerStatus.SpecialAmmoCount}", new Vector2(1000, 50), Color.Yellow);
 
             BewareGame.Instance._spriteBatch.End();

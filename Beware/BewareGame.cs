@@ -56,7 +56,7 @@ namespace Beware {
             GameTime = gameTime;
             Input.Update();
             AudioManager.Update();
-
+            TimeKeeper.Update();
             base.Update(gameTime);
         }
 

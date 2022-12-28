@@ -7,7 +7,7 @@ namespace Beware.Utilities {
         protected int totalHealth;
         private int displayHealthMultiplier = 15;
         public virtual event Action OnDeath;
-        public event Action OnHit;
+        public virtual event Action OnHit;
 
         public int CurrentHealth { get; protected set; }
 

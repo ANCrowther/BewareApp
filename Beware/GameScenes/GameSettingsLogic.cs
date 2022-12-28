@@ -26,11 +26,11 @@ namespace Beware.GameScenes {
             activeSetting = ("Layout", GameSettings.Layout);
 
             layoutList = new List<(Texture2D image, ViewportLayout name)> {
-                (Art.Layout1, ViewportLayout.Layout1),
-                (Art.Layout2, ViewportLayout.Layout2),
-                (Art.Layout3, ViewportLayout.Layout3)
+                (Art.Layout1, ViewportLayout.Unbalanced),
+                (Art.Layout2, ViewportLayout.Parallel),
+                (Art.Layout3, ViewportLayout.Nintendo)
             };
-            activeLayout = (Art.Layout1, ViewportLayout.Layout1);
+            activeLayout = (Art.Layout1, ViewportLayout.Unbalanced);
             ResetActiveLayoutFrameBorder();
 
             volumeList = new List<(string heading, VolumeType name)> {
@@ -65,14 +65,14 @@ namespace Beware.GameScenes {
 
         private void GetCurrentLayout() {
             switch (ViewportManager.CurrentLayout) {
-                case ViewportLayout.Layout1:
-                    activeLayout = (Art.Layout1, ViewportLayout.Layout1);
+                case ViewportLayout.Unbalanced:
+                    activeLayout = (Art.Layout1, ViewportLayout.Unbalanced);
                     break;
-                case ViewportLayout.Layout2:
-                    activeLayout = (Art.Layout2, ViewportLayout.Layout2);
+                case ViewportLayout.Parallel:
+                    activeLayout = (Art.Layout2, ViewportLayout.Parallel);
                     break;
-                case ViewportLayout.Layout3:
-                    activeLayout = (Art.Layout3, ViewportLayout.Layout3);
+                case ViewportLayout.Nintendo:
+                    activeLayout = (Art.Layout3, ViewportLayout.Nintendo);
                     break;
             }
         }

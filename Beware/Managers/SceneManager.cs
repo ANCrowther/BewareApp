@@ -41,7 +41,7 @@ namespace Beware.Managers {
         }
 
         private static GameScene CreateNewGame() {
-            if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
+            if (ViewportManager.CurrentLayout == ViewportLayout.Nintendo) {
                 return CreateNintendoLayout();
             }
 
@@ -105,7 +105,7 @@ namespace Beware.Managers {
         }
 
         private static GameScene CreateGameOverWindow() {
-            if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
+            if (ViewportManager.CurrentLayout == ViewportLayout.Nintendo) {
                 return CreateNintendoGameOverWindow();
             }
             BackgroundStationary background = new BackgroundStationary(ScenesArt.SpaceBattleWide, View.Menu);

@@ -6,11 +6,7 @@ namespace Beware.Utilities {
 
         public ShieldHealth(int startingHealth = 100) : base(startingHealth) { }
 
-        public void Update() {
-            DecreaseHealth();
-        }
-
-        private void DecreaseHealth() {
+        public void DecreaseHealth() {
             if (TimeKeeper.Seconds % 3 == 0) {
                 CurrentHealth--;
             }

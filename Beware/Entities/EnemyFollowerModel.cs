@@ -8,5 +8,13 @@ namespace Beware.Entities {
             : base(image, position, startingHealth) {
             health.OnDeath += delegate { this.Die(); ScoreKeeper.AddPoints(pointValue); };
         }
+
+        public override void Update() {
+            //if (this.Shield != null) {
+            //    this.Shield.Position = this.Position;
+            //    this.Shield.Orientation = this.Orientation;
+            //}
+            base.Update();
+        }
     }
 }

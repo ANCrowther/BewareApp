@@ -23,7 +23,7 @@ namespace Beware.ControllerModels {
             }
 
             (Texture2D picture, Color color) inputs;
-            if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
+            if (ViewportManager.CurrentLayout == ViewportLayout.Nintendo) {
                 inputs = DrawLayout3(mode, isActive);
             } else {
                 inputs = DrawLayout1_2(mode, isActive);

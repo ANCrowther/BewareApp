@@ -9,14 +9,16 @@ namespace Beware.Utilities {
         public static Texture2D EnemySeeker { get; private set; }
         public static Texture2D Bullet { get; private set; }
         public static Texture2D Shield { get; private set; }
+        public static Texture2D Sabot { get; private set; }
 
         public static void Initialize(ContentManager content) {
-            Player1 = content.Load<Texture2D>(@"Sprites\Player");
+            Player1 = content.Load<Texture2D>(@"Sprites\Player1");
             MainGun = content.Load<Texture2D>(@"Sprites\maingun");
             EnemyWanderer = content.Load<Texture2D>(@"Sprites\Wanderer");
-            EnemySeeker = content.Load<Texture2D>(@"Sprites\Seeker");
+            EnemySeeker = content.Load<Texture2D>(@"Sprites\Seeker1");
             Bullet = content.Load<Texture2D>(@"Sprites\Bullet");
-            Shield = content.Load<Texture2D>(@"Sprites\shield");
+            Shield = content.Load<Texture2D>(@"Sprites\spr_shield");
+            Sabot = content.Load<Texture2D>(@"Sprites\SabotRound");
         }
     }
 }

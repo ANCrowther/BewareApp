@@ -10,7 +10,8 @@ namespace Beware.Entities {
         private IBehaviour switchSpecial;
         private IBehaviour switchSpeed;
 
-        public ShieldModel Shield { get; set; } = null;
+        public int ShieldCountdown { get; private set; }
+        private int previousSecond = 0;
 
         public static PlayerModel Instance {
             get {
@@ -29,8 +30,8 @@ namespace Beware.Entities {
             health.OnHit += delegate { this.UpdateDrawColor(); };
             switchSpecial = new SwitchSpecialBehaviour();
             switchSpeed = new SwitchSpeedBehaviour();
+            ShieldCountdown = PlayerStatus.MaxShieldCountdown;
         }
-
 
         public override void Update() {
             if (framesUntilColorChange-- <= 0) {
@@ -42,6 +43,12 @@ namespace Beware.Entities {
 
             if (Shield != null && Shield.IsExpired == true) {
                 Shield = null;
+                ShieldCountdown = PlayerStatus.MaxShieldCountdown;
+            }
+
+            if (TimeKeeper.Seconds != previousSecond) {
+                previousSecond = TimeKeeper.Seconds;
+                ShieldCountdown--;
             }
 
             if (Shield != null) {

@@ -3,12 +3,10 @@ using Beware.ExtensionSupport;
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
 
 namespace Beware.Behaviours {
-    internal class EnemyFollowerMoveBehaviour : IBehaviour {
-        private Random rand = new Random();
+    internal class EnemySeekerMoveBehaviour : IBehaviour {
         private List<IEnumerator<int>> behaviours = new List<IEnumerator<int>>();
 
         public void Update(EntityModel entity) {

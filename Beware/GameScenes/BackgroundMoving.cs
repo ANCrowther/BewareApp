@@ -43,8 +43,8 @@ namespace Beware.GameScenes {
         public override void Update(GameTime gameTime) {
             position = Helpers.GetDirection(Mode.Move);
 
-            if ((ViewportManager.CurrentLayout == ViewportLayout.Layout2
-                || ViewportManager.CurrentLayout == ViewportLayout.Layout3) && view == View.InfoTwo) {
+            if ((ViewportManager.CurrentLayout == ViewportLayout.Parallel
+                || ViewportManager.CurrentLayout == ViewportLayout.Nintendo) && view == View.InfoTwo) {
                 position = Helpers.GetDirection(Mode.Shoot);
             }
 

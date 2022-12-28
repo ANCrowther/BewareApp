@@ -14,13 +14,13 @@ namespace Beware.GameScenes {
 
         public override void Draw(GameTime gameTime) {
             BewareGame.Instance._spriteBatch.Begin();
-            
-            if (ViewportManager.CurrentLayout == ViewportLayout.Layout2) {
+
+            if (ViewportManager.CurrentLayout == ViewportLayout.Parallel) {
                 //CardinalMapManager.Draw(Art.BlueStarBurst, centerThumbStickPosition, Helpers.GetDirection(Mode.Move));
                 ControllerManager.Draw(centerThumbStickPosition, centerButtonPosition, Helpers.GetDirection(Mode.Move), Mode.Move);
             }
 
-            if (ViewportManager.CurrentLayout == ViewportLayout.Layout3) {
+            if (ViewportManager.CurrentLayout == ViewportLayout.Nintendo) {
                 ControllerManager.Draw(centerThumbStickPosition, centerButtonPosition, Helpers.GetDirection(Mode.Move), Mode.Move);
             }
 

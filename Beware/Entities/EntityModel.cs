@@ -15,6 +15,15 @@ namespace Beware.Entities {
         public int ImpactDamage;
         protected Health health;
 
+        public ShieldModel Shield { get; set; } = null;
+
+        public virtual HitCircle CollisionCircle {
+            get {
+                float radius = (float)(image.Width > image.Height ? image.Height : image.Width);
+                return new HitCircle(Position, radius / 2);
+            }
+        }
+
         protected IBehaviour[] behaviours = new IBehaviour[6];
 
         public Vector2 Size { get { return image == null ? Vector2.Zero : new Vector2(image.Width, image.Height); } }
@@ -24,19 +33,16 @@ namespace Beware.Entities {
             ImpactDamage = startingImpactDamage;
         }
 
-        public virtual HitCircle HitCircle {
-            get {
-                float r = (float)(this.image.Width > this.image.Height ? image.Height : image.Width);
-                var p = Position;
-                return new HitCircle(p, r / 4);
-            }
-        }
-
         public virtual void Update() {
             foreach (IBehaviour item in behaviours) {
                 if (item != null) {
                     item.Update(this);
                 }
+            }
+
+            if (this.Shield != null) {
+                this.Shield.Position = this.Position;
+                this.Shield.Orientation = this.Orientation;
             }
         }
 

@@ -20,7 +20,6 @@ namespace Beware.Utilities {
                 case 9:  return Art.Nine;
                 case 0:  return Art.Zero;
                 default: return Art.Colon; // Simple solution to insert a ':' into the integer time clock
-                //default: return Art.Comma; 
             }
         }
 
@@ -28,15 +27,6 @@ namespace Beware.Utilities {
             Vector2 direction = (((type == Mode.Move) ? ControlMap.Move : ControlMap.Shoot) == Buttons.LeftStick) ?
                 PlayerInputStates.gamePadState.ThumbSticks.Left : PlayerInputStates.gamePadState.ThumbSticks.Right;
             direction.Y *= -1;
-
-            //if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveLeft : ControlMap.AimLeft))
-            //    direction.X -= 1;
-            //if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveRight : ControlMap.AimRight))
-            //    direction.X += 1;
-            //if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveUp : ControlMap.AimUp))
-            //    direction.Y -= 1;
-            //if (PlayerInputStates.keyboardState.IsKeyDown((type == Mode.Move) ? ControlMap.MoveDown : ControlMap.AimDown))
-            //    direction.Y += 1;
 
             if (direction.LengthSquared() > 0) {
                 direction.Normalize();

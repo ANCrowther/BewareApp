@@ -1,4 +1,5 @@
 ﻿using Beware.Entities;
+using Beware.ExtensionSupport;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,7 @@ namespace Beware.Managers {
             // Collisions between enemies
             for (int i = 0; i < enemyList.Count; i++) {
                 for (int j = 0; j < enemyList.Count; j++) {
-                    if (IsColliding(enemyList[i], enemyList[j])) {
+                    if (enemyList[i].CollisionCircle.Contains(enemyList[j].CollisionCircle)) {
                         enemyList[i].HandleCollision(enemyList[j]);
                         enemyList[j].HandleCollision(enemyList[i]);
                     }
@@ -76,12 +77,11 @@ namespace Beware.Managers {
             // Collisions between bullets and enemies
             for (int i = 0; i < enemyList.Count; i++) {
                 for (int j = 0; j < BulletManager.playerBullets.Count; j++) {
-                    if (IsColliding(enemyList[i], BulletManager.playerBullets[j])) {
+                    if (enemyList[i].CollisionCircle.Contains(BulletManager.playerBullets[j].CollisionCircle)) {
                         enemyList[i].Hit(BulletManager.playerBullets[j].ImpactDamage);
                         if (!(BulletManager.playerBullets[j] is SabotRound)) {
                             BulletManager.playerBullets[j].IsExpired = true;
-                        } 
-                            
+                        }
                     }
                 }
             }
@@ -89,13 +89,30 @@ namespace Beware.Managers {
             // Collisions between player and enemies
             for (int i = 0; i < enemyList.Count; i++) {
                 if (PlayerModel.Instance.Shield != null) {
-                    if (enemyList[i].IsActive && IsColliding(PlayerModel.Instance.Shield, enemyList[i])) {
-                        PlayerModel.Instance.Shield.Hit(enemyList[i].ImpactDamage);
-                        enemyList[i].Hit(PlayerModel.Instance.Shield.ImpactDamage);
-                        break;
+                    if (enemyList[i].Shield != null) {
+                        if (enemyList[i].IsActive && PlayerModel.Instance.Shield.CollisionCircle.Contains(enemyList[i].Shield.CollisionCircle)) {
+                            PlayerModel.Instance.Shield.Hit(enemyList[i].ImpactDamage);
+                            enemyList[i].Shield.Hit(PlayerModel.Instance.Shield.ImpactDamage);
+                            if (enemyList[i].Shield.IsExpired != true) {
+                                enemyList[i].Shield.HandleCollision(PlayerModel.Instance.Shield);
+                            }
+                            break;
+                        }
                     }
+                    if (enemyList[i].Shield == null) {
+                        if (enemyList[i].IsActive && PlayerModel.Instance.Shield.CollisionCircle.Contains(enemyList[i].CollisionCircle)) {
+                            PlayerModel.Instance.Shield.Hit(enemyList[i].ImpactDamage);
+                            enemyList[i].Hit(PlayerModel.Instance.Shield.ImpactDamage);
+                            if (enemyList[i].IsExpired != true) {
+                                enemyList[i].HandleCollision(PlayerModel.Instance.Shield);
+                            }
+                            break;
+                        }
+                    }
+
+
                 }
-                if (enemyList[i].IsActive && IsColliding(PlayerModel.Instance, enemyList[i])) {
+                if (enemyList[i].IsActive && PlayerModel.Instance.CollisionCircle.Contains(enemyList[i].CollisionCircle)) {
                     PlayerModel.Instance.Hit(enemyList[i].ImpactDamage);
                     enemyList[i].Hit(PlayerModel.Instance.ImpactDamage);
                     break;

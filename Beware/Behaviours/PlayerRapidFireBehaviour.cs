@@ -15,18 +15,21 @@ namespace Beware.Behaviours {
         public event Action OnUse;
 
         public void Update(EntityModel entity) {
-            PlayerGunModel.Instance.IsShooting = false;
-            PlayerGunModel.Instance.Aim = Helpers.GetDirection(Mode.Shoot);
+            if (entity is PlayerGunModel gun) {
+                gun.IsShooting = false;
+                gun.Aim = Helpers.GetDirection(Mode.Shoot);
 
-            PlayerGunModel.Instance.Orientation = PlayerModel.Instance.Orientation;
-            PlayerGunModel.Instance.IsShooting = Input.IsButtonHeldDown(ControlMap.Shoot);
+                gun.Orientation = PlayerModel.Instance.Orientation;
+                gun.IsShooting = Input.IsButtonHeldDown(ControlMap.Shoot);
 
-            if (PlayerGunModel.Instance.Aim.LengthSquared() > 0) {
-                PlayerGunModel.Instance.Aim.Normalize();
-                PlayerGunModel.Instance.Orientation = PlayerGunModel.Instance.Aim.ToAngle();
+                if (gun.Aim.LengthSquared() > 0) {
+                    gun.Aim.Normalize();
+                    gun.Orientation = gun.Aim.ToAngle();
+                }
+
+                gun.Position = Vector2.Clamp(gun.Position, gun.Size / 2, ViewportManager.GetWindowSize(View.GamePlay) - gun.Size / 2);
+
             }
-
-            PlayerGunModel.Instance.Position = Vector2.Clamp(PlayerGunModel.Instance.Position, PlayerGunModel.Instance.Size / 2, ViewportManager.GetWindowSize(View.GamePlay) - PlayerGunModel.Instance.Size / 2);
 
             // Creates the bullets whenever the player shoots.
             if (Input.IsButtonHeldDown(ControlMap.Shoot) && cooldownRemaining <= 0) {
@@ -40,9 +43,8 @@ namespace Beware.Behaviours {
                 Vector2 vel = MathUtil.FromPolar(aimAngle + randomSpread, 11f);
                 Vector2 offset = Vector2.Transform(new Vector2(25, -8), aimQuat);
 
-                BulletModel bullet = new BulletModel(PlayerModel.Instance.Position + offset, vel);
+                BulletModel bullet = new BulletModel(entity.Position + offset, vel);
                 bullet.SetBehaviour(BehaviourCategory.Move, new BulletBehaviour());
-                //EntityManager.Add(bullet);
                 BulletManager.AddPlayerBullet(bullet);
             }
 

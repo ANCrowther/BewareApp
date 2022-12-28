@@ -8,15 +8,16 @@ namespace Beware.Entities {
             switch (selection) {
                 case EntityType.Enemy_Wandering:
                     EnemyWandererModel wanderer = new EnemyWandererModel(EntityArt.EnemyWanderer, position, (int)(ScoreKeeper.GameRound * 1.15), (int)(ScoreKeeper.GameRound * 1.15) + 1);
-                    wanderer.SetBehaviour(BehaviourCategory.Move, new EnemyWandererMoveBehaviour());
+                    wanderer.SetBehaviour(BehaviourCategory.Move, EntityBehaviourBuilder.Factory(EntityBehaviourType.WandererMove));
                     return wanderer;
                 case EntityType.Enemy_Seeker:
-                    EnemyFollowerModel follower = new EnemyFollowerModel(EntityArt.EnemySeeker, position, (int)(ScoreKeeper.GameRound * 1.25), (int)(ScoreKeeper.GameRound * 1.25) + 1);
-                    follower.SetBehaviour(BehaviourCategory.Move, new EnemyFollowerMoveBehaviour());
-                    return follower;
+                    EnemyFollowerModel seeker = new EnemyFollowerModel(EntityArt.EnemySeeker, position, (int)(ScoreKeeper.GameRound * 1.25), (int)(ScoreKeeper.GameRound * 1.25) + 1);
+                    seeker.SetBehaviour(BehaviourCategory.Move, EntityBehaviourBuilder.Factory(EntityBehaviourType.SeekerMove));
+                    //seeker.SetBehaviour(BehaviourCategory.SpecialDefensive, EntityBehaviourBuilder.Factory(EntityBehaviourType.SeekerShield));
+                    return seeker;
                 default:
                     EnemyWandererModel defaultEnemy = new EnemyWandererModel(EntityArt.EnemyWanderer, position);
-                    defaultEnemy.SetBehaviour(BehaviourCategory.Move, new EnemyWandererMoveBehaviour());
+                    defaultEnemy.SetBehaviour(BehaviourCategory.Move, EntityBehaviourBuilder.Factory(EntityBehaviourType.WandererMove));
                     return defaultEnemy;
             }
         }

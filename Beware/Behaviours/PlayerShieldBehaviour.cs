@@ -4,18 +4,26 @@ using Beware.Utilities;
 
 namespace Beware.Behaviours {
     class PlayerShieldBehaviour : IBehaviour {
-        private bool IsNull = true;
+        private bool isNull = true;
+        private int startTimer = 0;
 
         public void Update(EntityModel entity) {
-            IsNull = (PlayerModel.Instance.Shield == null) ? true : false;
+            isNull = (entity.Shield == null) ? true : false;
+            if (isNull == false) {
+                startTimer = TimeKeeper.Seconds;
+            }
+            
             if (PlayerInputStates.IsSpecialDefensive == true) {
-                if (IsNull == true && Input.WasButtonPressed(ControlMap.Special)) {
-                    ShieldModel shield = new ShieldModel();
-                    shield.SetBehaviour(BehaviourCategory.Move, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerShieldMove));
-                    PlayerModel.Instance.Shield = shield;
-                    IsNull = false;
+                if (isNull == true && Input.WasButtonPressed(ControlMap.Special)) {
+                    if (TimesUp()) {
+                        entity.Shield = new PlayerShieldModel();
+                    }
                 }
             }
+        }
+
+        private bool TimesUp() {
+            return (TimeKeeper.Seconds - startTimer) >= PlayerStatus.MaxShieldCountdown;
         }
     }
 }

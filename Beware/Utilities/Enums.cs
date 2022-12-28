@@ -17,7 +17,6 @@
     }
 
     public enum PlayerSettings {
-        //Keyboard,
         Gamepad,
         Generic,
         Standard
@@ -42,9 +41,11 @@
     }
 
     public enum ViewportLayout {
-        Layout1,
-        Layout2,
-        Layout3
+        Nintendo,
+        Parallel,
+        SinglePanelLeft,
+        SinglePanelRIght,
+        Unbalanced
     }
 
     public enum VolumeType {
@@ -68,6 +69,15 @@
         PlayerSlow1,
         PlayerShield,
         PlayerShieldMove
+    }
+
+    public enum EntityBehaviourType {
+        SeekerMove,
+        SeekerShield,
+        SeekerShoot,
+        WandererMove,
+        WandererShield,
+        WandererShoot
     }
 
     public enum EntityType {

@@ -1,7 +1,5 @@
-﻿using Beware.Utilities;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace Beware.Entities {
     public abstract class EnemyModel : EntityModel {
@@ -17,16 +15,20 @@ namespace Beware.Entities {
             health.OnHit += delegate { this.UpdateDrawColor(); };
         }
 
-        public void HandleCollision(EnemyModel other) {
+        public void HandleCollision(EntityModel other) {
             var d = Position - other.Position;
             Velocity += 10 * d / (d.LengthSquared() + 1);
         }
-
 
         public override void Update() {
             if (framesUntilColorChange-- <= 0) {
                 color = Color.Blue;
             }
+
+            //if (this.Shield != null) {
+            //    this.Shield.Position = this.Position;
+            //    this.Shield.Orientation = this.Orientation;
+            //}
 
             base.Update();
         }
@@ -40,6 +42,9 @@ namespace Beware.Entities {
             if (!IsExpired) {
                 Vector2 position = new Vector2(Position.X, Position.Y + Size.Y / 2 + 5);
                 health.DrawPlayerHealth(position, color);
+                if (Shield != null) {
+                    Shield.Draw();
+                }
                 base.Draw();
             }
         }

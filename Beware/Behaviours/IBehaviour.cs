@@ -2,6 +2,6 @@
 
 namespace Beware.Behaviours {
     public interface IBehaviour {
-        void Update(EntityModel entity);
+        void Update(EntityModel entity2);
     }
 }
