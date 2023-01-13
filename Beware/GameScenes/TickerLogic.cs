@@ -36,7 +36,6 @@ namespace Beware.GameScenes {
             if (PlayerModel.Instance.ShieldCountdown > 0) {
                 BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{PlayerModel.Instance.ShieldCountdown}", new Vector2(700, 25), Color.Orange);
             }
-            //BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{PlayerStatus.SpecialAmmoCount}", new Vector2(1000, 50), Color.Yellow);
 
             BewareGame.Instance._spriteBatch.End();
             base.Draw(gameTime);

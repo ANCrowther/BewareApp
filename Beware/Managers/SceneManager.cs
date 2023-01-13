@@ -35,8 +35,8 @@ namespace Beware.Managers {
 
         private static void ChangeComponentState(GameComponent component, bool isEnabled) {
             component.Enabled = isEnabled;
-            if (component is DrawableGameComponent) {
-                ((DrawableGameComponent)component).Visible = isEnabled;
+            if (component is DrawableGameComponent c) {
+                c.Visible = isEnabled;
             }
         }
 
@@ -45,7 +45,19 @@ namespace Beware.Managers {
                 return CreateNintendoLayout();
             }
 
+            if (ViewportManager.CurrentLayout == ViewportLayout.NoPanel) {
+                return CreateNoPanelLayout();
+            }
+
             return CreateStandardBackground();
+        }
+
+        private static GameScene CreateNoPanelLayout() {
+            BackgroundMoving gameboardBackground = new BackgroundMoving(ScenesArt.BlinkingStar, View.HUD);
+            GameboardLogic gameboardLogic = new GameboardLogic();
+            PanelOneLogic headsUpDisplayLogic = new PanelOneLogic();
+
+            return new GameScene(gameboardBackground, gameboardLogic, headsUpDisplayLogic);
         }
 
         private static GameScene CreateStandardBackground() {

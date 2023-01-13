@@ -11,7 +11,7 @@ namespace Beware.Managers {
         private static int tempSFXVolume;
         private static int tempMasterVolume;
 
-        private static int cooldownFrames = 60;
+        private const int cooldownFrames = 60;
         private static int cooldownRemaining = 0;
         private static bool isVolumeChanged = false;
 

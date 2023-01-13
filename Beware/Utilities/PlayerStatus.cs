@@ -1,9 +1,9 @@
 ﻿namespace Beware.Utilities {
     static class PlayerStatus {
         public static int SpecialAmmoCount { get; set; } = 0;
-        public static bool IsSlow { get; set; } = false;
-        public static float MaxSpeed { get; set; } = 8.0f;
-        public static float MinSpeed { get; set; } = 3.0f;
         public static int MaxShieldCountdown { get; private set; } = 5;
+        public static int MaxBoostCountdown { get; private set; } = 2;
+        public static bool IsPaused { get; set; } = false;
+        public static bool IsSpecialDefensive { get; set; } = true;
     }
 }

@@ -12,7 +12,7 @@ namespace Beware.Managers {
         }
 
         public static void AddEnemyBullets(BulletModel bullet) {
-            playerBullets.Add(bullet);
+            enemyBullets.Add(bullet);
         }
 
         public static void Update() {

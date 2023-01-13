@@ -15,8 +15,6 @@ namespace Beware.GameScenes {
             ScoreKeeper.Reset();
             PlayerModel.Instance.ResetPlayer();
             EntityManager.Add(PlayerModel.Instance);
-            EntityManager.Add(PlayerGunModel.Instance);
-
 
             centerThumbStickPosition = new Vector2(ViewportManager.InfoOneView.Width / 2, ViewportManager.InfoOneView.Height / 4);
             centerButtonPosition = new Vector2(centerThumbStickPosition.X, centerThumbStickPosition.Y + 250);
@@ -28,10 +26,10 @@ namespace Beware.GameScenes {
             }
 
             if (Input.WasButtonPressed(ControlMap.Pause)) {
-                PlayerInputStates.IsPaused = !PlayerInputStates.IsPaused;
+                PlayerStatus.IsPaused = !PlayerStatus.IsPaused;
             }
 
-            if (PlayerInputStates.IsPaused == false) {
+            if (PlayerStatus.IsPaused == false) {
                 EntityManager.Update();
                 EnemySpawner.Update();
             }
@@ -41,6 +39,7 @@ namespace Beware.GameScenes {
 
         public override void Draw(GameTime gameTime) {
             BewareGame.Instance._spriteBatch.Begin();
+            ViewportManager.GetView(View.GamePlay);
 
             EntityManager.Draw();
             
@@ -52,7 +51,6 @@ namespace Beware.GameScenes {
 
             BewareGame.Instance._spriteBatch.Begin(SpriteSortMode.Texture, BlendState.Additive);
             if (ViewportManager.CurrentLayout == ViewportLayout.Parallel) {
-                //CardinalMapManager.Draw(Art.BlueStarBurst, centerThumbStickPosition, Helpers.GetDirection(Mode.Move));
                 ControllerManager.Draw(centerThumbStickPosition, centerButtonPosition, Helpers.GetDirection(Mode.Move), Mode.Move);
             }
 

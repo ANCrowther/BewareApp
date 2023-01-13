@@ -1570,6 +1570,30 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/blue_starBurst.png
 
+#begin Sprites/booster_blue.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/booster_blue.png
+
+#begin Sprites/booster_red.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/booster_red.png
+
 #begin Sprites/Bullet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1605,6 +1629,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Glow.png
+
+#begin Sprites/gun.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/gun.png
 
 #begin Sprites/Laser.png
 /importer:TextureImporter
@@ -1702,7 +1738,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Player1.png
 
-#begin Sprites/Player1.png
+#begin Sprites/Player2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1712,7 +1748,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Player1.png
+/build:Sprites/Player2.png
 
 #begin Sprites/Pointer.png
 /importer:TextureImporter
@@ -1798,18 +1834,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Seeker1.png
 
-#begin Sprites/Seeker1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Seeker1.png
-
 #begin Sprites/shield.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1845,4 +1869,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/Wanderer.png
+
+#begin Sprites/yellowbullet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/yellowbullet.png
 

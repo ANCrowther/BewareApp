@@ -9,12 +9,12 @@ using System.Collections.Generic;
 
 namespace Beware.GameScenes {
     class GameSettingsLogic: DrawableGameComponent {
-        private List<(string heading, GameSettings name)> settingList;
+        private readonly List<(string heading, GameSettings name)> settingList;
         private (string heading, GameSettings name) activeSetting;
-        private List<(Texture2D image, ViewportLayout name)> layoutList;
+        private readonly List<(Texture2D image, ViewportLayout name)> layoutList;
         private (Texture2D image, ViewportLayout name) activeLayout;
         private Texture2D activeLayoutFrame;
-        private List<(string heading, VolumeType name)> volumeList;
+        private readonly List<(string heading, VolumeType name)> volumeList;
         private (string heading, VolumeType name) activeVolume;
         private bool isActive = false;
 
@@ -110,9 +110,9 @@ namespace Beware.GameScenes {
         }
 
         private void DrawSettingList(Vector2 position) {
-            foreach ((string heading, GameSettings name) setting in settingList) {
-                Color color = (activeSetting.name == setting.name && isActive == false) ? Color.Moccasin : Color.Lime;
-                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, setting.heading, position, color);
+            foreach ((string heading, GameSettings name) in settingList) {
+                Color color = (activeSetting.name == name && isActive == false) ? Color.Moccasin : Color.Lime;
+                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, heading, position, color);
                 position.Y += 100;
             }
         }

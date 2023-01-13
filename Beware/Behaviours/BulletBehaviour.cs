@@ -5,14 +5,14 @@ using Beware.Managers;
 namespace Beware.Behaviours {
     class BulletBehaviour : IBehaviour {
         public void Update(EntityModel entity) {
-            if (entity.Velocity.LengthSquared() > 0) {
-                entity.Orientation = entity.Velocity.ToAngle();
+            if (entity.Engine.Velocity.LengthSquared() > 0) {
+                entity.Engine.Orientation = entity.Engine.Velocity.ToAngle();
             }
 
-            entity.Position += entity.Velocity;
+            entity.Engine.Position += entity.Engine.Velocity;
 
-            if (entity.Position.X <= 0 || entity.Position.X >= ViewportManager.GameboardView.Width ||
-                entity.Position.Y <= 0 || entity.Position.Y >= ViewportManager.GameboardView.Height) {
+            if (entity.Engine.Position.X <= 0 || entity.Engine.Position.X >= ViewportManager.GameboardView.Width ||
+                entity.Engine.Position.Y <= 0 || entity.Engine.Position.Y >= ViewportManager.GameboardView.Height) {
                 entity.IsExpired = true;
             }
         }

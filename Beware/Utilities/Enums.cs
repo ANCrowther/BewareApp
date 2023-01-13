@@ -34,6 +34,7 @@
 
     public enum View {
         GamePlay,
+        HUD,
         InfoOne,
         InfoTwo,
         Menu,
@@ -42,6 +43,7 @@
 
     public enum ViewportLayout {
         Nintendo,
+        NoPanel,
         Parallel,
         SinglePanelLeft,
         SinglePanelRIght,
@@ -66,6 +68,7 @@
         RapidFire,
         SabotShoot,
         PlayerBasicMove,
+        PlayerBoost,
         PlayerSlow1,
         PlayerShield,
         PlayerShieldMove

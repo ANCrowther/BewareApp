@@ -1,15 +1,11 @@
-﻿using Beware.ExtensionSupport;
-using Beware.Utilities;
+﻿using Beware.EntityFeatures;
 using Microsoft.Xna.Framework;
 
 namespace Beware.Entities {
     public class BulletModel : EntityModel {
-        public BulletModel(Vector2 position, Vector2 velocity, int startingImpactDamage = 2) : base(startingImpactDamage) {
-            image = EntityArt.Bullet;
-            Velocity = velocity;
-            Position = position;
-            Orientation = Velocity.ToAngle();
-            CollisionRadius = 8;
+        public BulletModel(Vector2 position, Vector2 velocity, Sprite sprite = null, int startingImpactDamage = 2) : base(startingImpactDamage) {
+            this.Sprite = sprite;
+            this.Engine = new Engine(position, velocity);
         }
     }
 }

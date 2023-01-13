@@ -1,20 +1,19 @@
-﻿using Beware.ExtensionSupport;
+﻿using Beware.EntityFeatures;
+using Beware.ExtensionSupport;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
 
 namespace Beware.Entities {
     class SabotRound : BulletModel {
-        public SabotRound(Vector2 position, Vector2 velocity, int startingImpactDamage = 10) : base(position, velocity, startingImpactDamage) {
-            image = EntityArt.Sabot;
-            Velocity = velocity * 2f;
-            Position = position;
-            Orientation = Velocity.ToAngle();
-            CollisionRadius = 12;
-            color = Color.White;
+        public SabotRound(Vector2 position, Vector2 velocity, int startingImpactDamage = 10) : base(position, velocity, null, startingImpactDamage) {
+            Sprite = new Sprite(EntityArt.Sabot, 2.0f);
+            Engine.Velocity = velocity * 2.5f;
+            Engine.Position = position;
+            Engine.Orientation = Engine.Velocity.ToAngle();
         }
 
         public override void Draw() {
-            BewareGame.Instance._spriteBatch.Draw(image, Position, null, color, Orientation, Size / 2f, 2f, 0, 0);
+            BewareGame.Instance._spriteBatch.Draw(Sprite.Image, Engine.Position, null, Sprite.color, Engine.Orientation, Sprite.Size / 2f, Sprite.Scale, 0, 0);
         }
     }
 }

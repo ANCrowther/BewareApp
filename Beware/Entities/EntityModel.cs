@@ -1,36 +1,27 @@
 ﻿using Beware.Behaviours;
+using Beware.EntityFeatures;
 using Beware.Utilities;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Beware.Entities {
     public abstract class EntityModel {
-        public Vector2 Position;
-        public Vector2 Velocity;
-        public float Orientation;
-        public float CollisionRadius = 20.0f;
         public bool IsExpired;
-        public Texture2D image;
-        public Color color = Color.White;
         public int ImpactDamage;
-        protected Health health;
 
-        public ShieldModel Shield { get; set; } = null;
+        public Sprite Sprite;
+        public Engine Engine;
+        public Gun MainGun;
+        protected Health Health;
 
-        public virtual HitCircle CollisionCircle {
-            get {
-                float radius = (float)(image.Width > image.Height ? image.Height : image.Width);
-                return new HitCircle(Position, radius / 2);
-            }
-        }
+        public Shield Shield { get; set; } = null;
 
-        protected IBehaviour[] behaviours = new IBehaviour[6];
+        public virtual HitCircle CollisionCircle { get { return new HitCircle(Engine.Position, Sprite.Radius / 2); } }
 
-        public Vector2 Size { get { return image == null ? Vector2.Zero : new Vector2(image.Width, image.Height); } }
+        protected IBehaviour[] behaviours = new IBehaviour[5];
 
-        public EntityModel(int startingHealth = 8, int startingImpactDamage = 5) {
-            health = new Health(startingHealth);
-            ImpactDamage = startingImpactDamage;
+        public EntityModel(int startingHealth = 8, int startingImpactDamage = 5, Sprite sprite = null) {
+            this.Health = new Health(startingHealth);
+            this.ImpactDamage = startingImpactDamage;
+            this.Sprite = sprite;
         }
 
         public virtual void Update() {
@@ -39,31 +30,27 @@ namespace Beware.Entities {
                     item.Update(this);
                 }
             }
-
-            if (this.Shield != null) {
-                this.Shield.Position = this.Position;
-                this.Shield.Orientation = this.Orientation;
-            }
         }
 
         public virtual void Hit(int damage = 1) {
-            health.TakeDamage(damage);
+            this.Health.TakeDamage(damage);
         }
 
         public virtual void SetBehaviour(BehaviourCategory category, IBehaviour behaviour) {
-            behaviours[(int)category] = behaviour;
+            this.behaviours[(int)category] = behaviour;
         }
 
         public virtual void RemoveBehaviour(BehaviourCategory category) {
-            behaviours[(int)category] = null;
+            this.behaviours[(int)category] = null;
         }
 
         protected virtual void Die() {
-            IsExpired = true;
+            this.IsExpired = true;
         }
 
         public virtual void Draw() {
-            BewareGame.Instance._spriteBatch.Draw(image, Position, null, Color.White, Orientation, Size / 2f, 1.0f, 0, 0);
+            this.Sprite.Draw(this.Engine);
+            this.Shield?.Draw();
         }
     }
 }

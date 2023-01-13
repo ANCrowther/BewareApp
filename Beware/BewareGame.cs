@@ -33,17 +33,18 @@ namespace Beware {
             TimeKeeper.Initialize();
             CardinalMapManager.Initialize();
             ControllerManager.Initialize();
-            ViewportManager.Initialize(_graphics);
-            InitializePlayerBehaviours();
+            ViewportManager.Initialize();
+            SetPlayerBehaviours();
 
             base.Initialize();
         }
 
-        protected void InitializePlayerBehaviours() {
+        protected void SetPlayerBehaviours() {
+            PlayerModel.Instance.SetBehaviour(BehaviourCategory.Shoot, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.RapidFire));
             PlayerModel.Instance.SetBehaviour(BehaviourCategory.Move, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerBasicMove));
             PlayerModel.Instance.SetBehaviour(BehaviourCategory.SpecialDefensive, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerShield));
-            PlayerGunModel.Instance.SetBehaviour(BehaviourCategory.Shoot, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.RapidFire));
-            PlayerGunModel.Instance.SetBehaviour(BehaviourCategory.SpecialOffensive, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.SabotShoot));
+            PlayerModel.Instance.SetBehaviour(BehaviourCategory.SpecialOffensive, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.SabotShoot));
+            PlayerModel.Instance.SetBehaviour(BehaviourCategory.Boost, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerBoost));
         }
 
         protected override void LoadContent() {

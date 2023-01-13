@@ -26,7 +26,7 @@ namespace Beware.Managers {
 
             do {
                 position = new Vector2(rand.Next((int)ViewportManager.GameboardView.Width), rand.Next((int)ViewportManager.GameboardView.Height));
-            } while (Vector2.DistanceSquared(position, PlayerModel.Instance.Position) < 250 * 250);
+            } while (Vector2.DistanceSquared(position, PlayerModel.Instance.Engine.Position) < 250 * 250);
 
             return position;
         }

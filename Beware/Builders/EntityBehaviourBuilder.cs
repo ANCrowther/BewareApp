@@ -7,17 +7,17 @@ namespace Beware.Behaviours {
                 case EntityBehaviourType.SeekerMove:
                     return new EnemySeekerMoveBehaviour();
                 case EntityBehaviourType.SeekerShield:
-                    return new EnemyShieldBehaviour();
-                case EntityBehaviourType.SeekerShoot:
                     return null;
+                case EntityBehaviourType.SeekerShoot:
+                    return new EnemyShootBehaviour();
                 case EntityBehaviourType.WandererMove:
                     return new EnemyWandererMoveBehaviour();
                 case EntityBehaviourType.WandererShield:
                     return null;
                 case EntityBehaviourType.WandererShoot:
-                    return null;
+                    return new EnemyRandomShootBehaviour();
                 default:
-                    return new PlayerRapidFireBehaviour();
+                    return null;
             }
         }
     }

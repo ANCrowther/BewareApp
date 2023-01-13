@@ -7,7 +7,7 @@ namespace Beware.Utilities {
         public ShieldHealth(int startingHealth = 100) : base(startingHealth) { }
 
         public void DecreaseHealth() {
-            if (TimeKeeper.Seconds % 3 == 0) {
+            if (TimeKeeper.Seconds % 5 == 0) {
                 CurrentHealth--;
             }
             if (CurrentHealth <= 0) {

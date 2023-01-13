@@ -57,7 +57,7 @@ namespace Beware.Utilities {
 
         public static void DrawScoreForNintendo() {
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Score}", new Vector2(25, ViewportManager.GameboardView.Height - 50), Color.Yellow);
-            BewareGame.Instance._spriteBatch.Draw(EntityArt.Player1, new Vector2(ViewportManager.GameboardView.Width - 50, ViewportManager.GameboardView.Height - 40), null, Color.Red, PlayerModel.Instance.Orientation, PlayerModel.Instance.Size / 2f, 1.0f, 0, 0.3f);
+            BewareGame.Instance._spriteBatch.Draw(EntityArt.Player1, new Vector2(ViewportManager.GameboardView.Width - 50, ViewportManager.GameboardView.Height - 40), null, Color.Red, PlayerModel.Instance.Engine.Orientation, PlayerModel.Instance.Sprite.Size / 2f, 1.0f, 0, 0.3f);
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{GameRound}", new Vector2(ViewportManager.GameboardView.Width - 50, ViewportManager.GameboardView.Height - 50), Color.Yellow);
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{EnemyCount}", new Vector2(ViewportManager.GameboardView.Width / 2, ViewportManager.GameboardView.Height - 50), Color.Yellow);
         }

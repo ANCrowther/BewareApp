@@ -51,22 +51,22 @@ namespace Beware.GameScenes {
         }
 
         private void DrawLabels(Vector2 position) {
-            foreach ((string heading, Buttons name) setting in gamepadList) {
-                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, setting.heading, CommandPosition(setting.name, position), Color.Black);
+            foreach ((string heading, Buttons name) in gamepadList) {
+                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, heading, CommandPosition(name, position), Color.Black);
             }
-            foreach ((string heading, Buttons name) setting in genericGamepadList) {
-                if (setting.heading == "Pause") {
-                    BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"/{setting.heading}", CommandPosition(setting.name, new Vector2(position.X + 100, position.Y)), Color.Black);
+            foreach ((string heading, Buttons name) in genericGamepadList) {
+                if (heading == "Pause") {
+                    BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"/{heading}", CommandPosition(name, new Vector2(position.X + 100, position.Y)), Color.Black);
                     continue;
                 }
-                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, setting.heading, CommandPosition(setting.name, position), Color.Black);
+                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, heading, CommandPosition(name, position), Color.Black);
             }
         }
 
         private void DrawCommmands(Vector2 position) {
-            foreach ((string heading, Buttons name) setting in gamepadList) {
-                Color color = (activeGamepad.name == setting.name) ? Color.Lime : Color.White;
-                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, setting.heading, position, color);
+            foreach ((string heading, Buttons name) in gamepadList) {
+                Color color = (activeGamepad.name == name) ? Color.Lime : Color.White;
+                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareMedium, heading, position, color);
                 position.Y += 75;
             }
         }

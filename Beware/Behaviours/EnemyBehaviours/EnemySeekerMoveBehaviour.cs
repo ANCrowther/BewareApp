@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Beware.Behaviours {
     internal class EnemySeekerMoveBehaviour : IBehaviour {
-        private List<IEnumerator<int>> behaviours = new List<IEnumerator<int>>();
+        private readonly List<IEnumerator<int>> behaviours = new List<IEnumerator<int>>();
 
         public void Update(EntityModel entity) {
             if (behaviours.Count == 0) {
@@ -15,10 +15,9 @@ namespace Beware.Behaviours {
             }
             ApplyBehaviours();
 
-            entity.Position += entity.Velocity;
-            entity.Position = Vector2.Clamp(entity.Position, entity.Size / 2, ViewportManager.GetWindowSize(View.GamePlay) - entity.Size / 2);
-
-            entity.Velocity *= 0.8f;
+            entity.Engine.Position += entity.Engine.Velocity;
+            entity.Engine.Position = Vector2.Clamp(entity.Engine.Position, entity.Sprite.Size / 2, ViewportManager.GetWindowSize(View.GamePlay) - entity.Sprite.Size / 2);
+            entity.Engine.Velocity *= 0.8f;
         }
 
         private void AddBehaviour(IEnumerable<int> behaviour) {
@@ -36,11 +35,10 @@ namespace Beware.Behaviours {
         IEnumerable<int> FollowPlayer(EnemyFollowerModel entity, float acceleration = 1.0f) {
             while (true) {
                 if (!PlayerModel.Instance.IsExpired) {
-                    entity.Velocity += (PlayerModel.Instance.Position - entity.Position).ScaleTo(acceleration);
+                    entity.Engine.Velocity += (PlayerModel.Instance.Engine.Position - entity.Engine.Position).ScaleTo(acceleration);
                 }
-
-                if (entity.Velocity != Vector2.Zero) {
-                    entity.Orientation = entity.Velocity.ToAngle();
+                if (entity.Engine.Velocity != Vector2.Zero) {
+                    entity.Engine.Orientation = entity.Engine.Velocity.ToAngle();
                 }
 
                 yield return 0;

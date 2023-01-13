@@ -8,14 +8,14 @@ using System.Collections.Generic;
 
 namespace Beware.GameScenes {
     class BackgroundMoving : DrawableGameComponent {
-        private Texture2D image;
+        private readonly Texture2D image;
         private Vector2 position;
         private Vector2 windowSize;
-        private View view;
+        private readonly View view;
 
-        private List<StarModel> stars = new List<StarModel>();
-        private Color[] colors = { Color.White, Color.Yellow, Color.Red, Color.CornflowerBlue };
-        private Random random = new Random();
+        private readonly List<StarPoint> stars = new List<StarPoint>();
+        private readonly Color[] colors = { Color.White, Color.Yellow, Color.Red, Color.CornflowerBlue };
+        private readonly Random random = new Random();
 
         public BackgroundMoving(Texture2D backgroundImage, View backgroundView) : base(BewareGame.Instance) {
             this.image = backgroundImage;
@@ -30,11 +30,11 @@ namespace Beware.GameScenes {
 
             for (int i = 0; i < maxCount; i++) {
                 int size = random.Next(2, 5);
-                stars.Add(new StarModel(new Vector2(
+                stars.Add(new StarPoint(new Vector2(
                     random.Next(0, (int)windowSize.X),
                     random.Next(0, (int)windowSize.Y)), this.image,  new Rectangle(0, 0, size, size)));
             }
-            foreach (StarModel star in stars) {
+            foreach (StarPoint star in stars) {
                 star.TintColor = colors[random.Next(0, colors.Length)];
                 star.TintColor *= (float)(random.Next(30, 80) / 100f);
             }
@@ -50,7 +50,7 @@ namespace Beware.GameScenes {
 
             position *= 2;
 
-            foreach (StarModel star in stars) {
+            foreach (StarPoint star in stars) {
                 star.Update(position);
                 if (star.Location.Y < 0)
                     star.Location = new Vector2(star.Location.X, windowSize.Y);
@@ -67,7 +67,7 @@ namespace Beware.GameScenes {
             BewareGame.Instance._spriteBatch.Begin();
             ViewportManager.GetView(view);
 
-            foreach (StarModel star in stars) {
+            foreach (StarPoint star in stars) {
                 star.Draw();
             }
             

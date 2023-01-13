@@ -4,16 +4,16 @@ using System.Collections.Generic;
 namespace Beware.Inputs {
     static class MapPlayerControls {
         public static bool MapNewControl<T>(List<(string heading, T name)> list, (string heading, T name) activeSetting, T control) {
-            foreach ((string heading, T name) item in list) {
+            foreach ((string heading, T name) in list) {
                 //if (item.name is Keys j && control is Keys k && activeSetting.name is Keys l){
                 //    if (item.heading != activeSetting.heading && j == k) {
                 //        SetNewKey(item.heading, l);
                 //        break;
                 //    }
                 //}
-                if (item.name is Buttons a && control is Buttons b && activeSetting.name is Buttons c) {
-                    if (item.heading != activeSetting.heading && a == b) {
-                        SetNewButton(item.heading, c);
+                if (name is Buttons a && control is Buttons b && activeSetting.name is Buttons c) {
+                    if (heading != activeSetting.heading && a == b) {
+                        SetNewButton(heading, c);
                         break;
                     }
                 }

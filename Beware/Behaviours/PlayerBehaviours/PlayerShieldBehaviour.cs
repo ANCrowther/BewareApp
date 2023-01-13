@@ -1,4 +1,5 @@
 ﻿using Beware.Entities;
+using Beware.EntityFeatures;
 using Beware.Inputs;
 using Beware.Utilities;
 
@@ -8,17 +9,16 @@ namespace Beware.Behaviours {
         private int startTimer = 0;
 
         public void Update(EntityModel entity) {
-            isNull = (entity.Shield == null) ? true : false;
+            isNull = (entity.Shield == null);
             if (isNull == false) {
                 startTimer = TimeKeeper.Seconds;
             }
             
-            if (PlayerInputStates.IsSpecialDefensive == true) {
-                if (isNull == true && Input.WasButtonPressed(ControlMap.Special)) {
-                    if (TimesUp()) {
-                        entity.Shield = new PlayerShieldModel();
-                    }
-                }
+            if (Input.WasButtonPressed(ControlMap.Special)
+                && PlayerStatus.IsSpecialDefensive == true
+                && isNull == true
+                && TimesUp()) {
+                entity.Shield = new PlayerShield(entity);
             }
         }
 

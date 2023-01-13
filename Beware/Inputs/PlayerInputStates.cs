@@ -2,11 +2,9 @@
 
 namespace Beware.Inputs {
     internal static class PlayerInputStates {
-        public static KeyboardState keyboardState { get; set; }
-        public static KeyboardState lastKeyboardState { get; set; }
-        public static GamePadState gamePadState { get; set; }
-        public static GamePadState lastGamePadState { get; set; }
-        public static bool IsPaused { get; set; } = false;
-        public static bool IsSpecialDefensive { get; set; } = true;
+        public static KeyboardState KeyboardState { get; set; }
+        public static KeyboardState LastKeyboardState { get; set; }
+        public static GamePadState GamePadState { get; set; }
+        public static GamePadState LastGamePadState { get; set; }
     }
 }
