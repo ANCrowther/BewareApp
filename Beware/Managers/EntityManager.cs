@@ -1,5 +1,6 @@
 ﻿using Beware.Entities;
 using Beware.ExtensionSupport;
+using Beware.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,6 +10,7 @@ namespace Beware.Managers {
         private static List<EntityModel> entityList = new List<EntityModel>();
         private static readonly List<EntityModel> addEntityList = new List<EntityModel>();
         private static List<EnemyModel> enemyList = new List<EnemyModel>();
+        private static List<DroppedItemModel> droppedItemList = new List<DroppedItemModel>();
 
         public static int Count { get { return entityList.Count; } }
 
@@ -23,8 +25,11 @@ namespace Beware.Managers {
         private static void AddEntity(EntityModel entity) {
             entityList.Add(entity);
 
-            if (entity is EnemyModel) {
-                enemyList.Add(entity as EnemyModel);
+            if (entity is EnemyModel e) {
+                enemyList.Add(e);
+            }
+            if(entity is DroppedItemModel d) {
+                droppedItemList.Add(d);
             }
         }
 
@@ -48,6 +53,7 @@ namespace Beware.Managers {
 
             entityList = entityList.Where(x => x.IsExpired == false).ToList();
             enemyList = enemyList.Where(x => x.IsExpired == false).ToList();
+            droppedItemList = droppedItemList.Where(x => x.IsExpired == false).ToList();
         }
 
         public static void Draw() {
@@ -117,6 +123,14 @@ namespace Beware.Managers {
 
             }
 
+            // Collisions between player and droppedItems
+            for (int i = 0; i < droppedItemList.Count; i++) {
+                if (droppedItemList[i].IsExpired == false && PlayerModel.Instance.CollisionCircle.Intersects(droppedItemList[i].CollisionCircle)) {
+                    droppedItemList[i].Hit();
+                    break;
+                }
+            }
+
             for (int i = 0; i < BulletManager.enemyBullets.Count; i++) {
                 if (PlayerModel.Instance.Shield != null) {
                     if (PlayerModel.Instance.Shield.CollisionCircle.Intersects(BulletManager.enemyBullets[i].CollisionCircle)) {
@@ -136,6 +150,7 @@ namespace Beware.Managers {
             entityList.Clear();
             addEntityList.Clear();
             enemyList.Clear();
+            droppedItemList.Clear();
             BulletManager.Clear();
         }
 

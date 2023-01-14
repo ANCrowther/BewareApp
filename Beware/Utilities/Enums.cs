@@ -83,6 +83,16 @@
         WandererShoot
     }
 
+    public enum DroppedItemBehaviourType {
+        AmmoDrop,
+        ShieldDrop
+    }
+
+    public enum DroppedItemType {
+        SabotAmmoDrop,
+        RegularShieldDrop
+    }
+
     public enum EntityType {
         Enemy_Wandering,
         Enemy_Seeker

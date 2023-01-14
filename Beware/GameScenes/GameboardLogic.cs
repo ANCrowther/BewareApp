@@ -32,6 +32,7 @@ namespace Beware.GameScenes {
             if (PlayerStatus.IsPaused == false) {
                 EntityManager.Update();
                 EnemySpawner.Update();
+                ItemDropSpawner.Update();
             }
 
             base.Update(gameTime);

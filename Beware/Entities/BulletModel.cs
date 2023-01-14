@@ -4,8 +4,8 @@ using Microsoft.Xna.Framework;
 namespace Beware.Entities {
     public class BulletModel : EntityModel {
         public BulletModel(Vector2 position, Vector2 velocity, Sprite sprite = null, int startingImpactDamage = 2) : base(startingImpactDamage) {
-            this.Sprite = sprite;
-            this.Engine = new Engine(position, velocity);
+            Sprite = sprite;
+            Engine = new Engine(position, velocity);
         }
     }
 }
