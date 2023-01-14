@@ -31,9 +31,10 @@ namespace Beware.Entities {
             switchSpecial = new SwitchSpecialBehaviour();
             switchSpeed = new SwitchSpeedBehaviour();
             ShieldCountdown = PlayerStatus.MaxShieldCountdown;
+            BoostCountdown = PlayerStatus.MaxBoostWaitCountdown;
 
             MainGun = new PlayerGun(this);
-            Engine = new Engine() { Position = ViewportManager.GetWindowSize(Utilities.View.GamePlay) / 2 };
+            Engine = new Engine() { Position = ViewportManager.GetWindowSize(View.GamePlay) / 2 };
         }
 
         public override void Update() {
@@ -78,6 +79,11 @@ namespace Beware.Entities {
                 q.OnEmpty += delegate { RemoveBehaviour(category); };
                 base.SetBehaviour(category, q);
                 return;
+            } else if (behaviour is PlayerBoostBehaviour r) {
+                r.OnUse += delegate { BoostCountdown = PlayerStatus.MaxBoostCountdown; };
+                r.OnTimesUp += delegate { BoostCountdown = PlayerStatus.MaxBoostWaitCountdown; };
+                base.SetBehaviour(category, r);
+                return;
             } else {
                 base.SetBehaviour(category, behaviour);
             }
@@ -97,14 +103,25 @@ namespace Beware.Entities {
         }
 
         public void ResetPlayer() {
+            SetBehaviours();
             Health.ResetHealth();
             IsExpired = false;
             Engine.Position = ViewportManager.GetWindowSize(View.GamePlay) / 2;
             Engine.Velocity = Vector2.Zero;
             Shield = null;
+            ShieldCountdown = PlayerStatus.MaxShieldCountdown;
+            BoostCountdown = PlayerStatus.MaxBoostWaitCountdown;
 
             // TODO: remove the following line when able to pickup ammo reloads.
             PlayerStatus.SpecialAmmoCount = 10;
+        }
+
+        private void SetBehaviours() {
+            PlayerModel.Instance.SetBehaviour(BehaviourCategory.Shoot, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.RapidFire));
+            PlayerModel.Instance.SetBehaviour(BehaviourCategory.Move, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerBasicMove));
+            PlayerModel.Instance.SetBehaviour(BehaviourCategory.SpecialDefensive, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerShield));
+            PlayerModel.Instance.SetBehaviour(BehaviourCategory.SpecialOffensive, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.SabotShoot));
+            PlayerModel.Instance.SetBehaviour(BehaviourCategory.Boost, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerBoost));
         }
     }
 }

@@ -1,11 +1,8 @@
-﻿using Beware.Behaviours;
-using Beware.Entities;
-using Beware.Inputs;
+﻿using Beware.Inputs;
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Beware {
     public class BewareGame : Game {
@@ -34,17 +31,8 @@ namespace Beware {
             CardinalMapManager.Initialize();
             ControllerManager.Initialize();
             ViewportManager.Initialize();
-            SetPlayerBehaviours();
 
             base.Initialize();
-        }
-
-        protected void SetPlayerBehaviours() {
-            PlayerModel.Instance.SetBehaviour(BehaviourCategory.Shoot, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.RapidFire));
-            PlayerModel.Instance.SetBehaviour(BehaviourCategory.Move, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerBasicMove));
-            PlayerModel.Instance.SetBehaviour(BehaviourCategory.SpecialDefensive, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerShield));
-            PlayerModel.Instance.SetBehaviour(BehaviourCategory.SpecialOffensive, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.SabotShoot));
-            PlayerModel.Instance.SetBehaviour(BehaviourCategory.Boost, PlayerBehaviourBuilder.Factory(PlayerBehaviourType.PlayerBoost));
         }
 
         protected override void LoadContent() {

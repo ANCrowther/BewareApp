@@ -9,11 +9,13 @@ namespace Beware.Managers {
         static float inverseSpawnChance = 90;
 
         public static void Update() {
-            if (rand.Next((int)inverseSpawnChance) == 0) {
-                EntityManager.Add(EntityBuilder.Factory(EntityType.Enemy_Wandering, GetSpawnPosition()));
-            }
-            if (rand.Next((int)inverseSpawnChance) == 0) {
-                EntityManager.Add(EntityBuilder.Factory(EntityType.Enemy_Seeker, GetSpawnPosition()));
+            if (PlayerStatus.IsPaused == false && !PlayerModel.Instance.IsExpired && EntityManager.Count < 200) {
+                if (rand.Next((int)inverseSpawnChance) == 0) {
+                    EntityManager.Add(EntityBuilder.Factory(EntityType.Enemy_Wandering, GetSpawnPosition()));
+                }
+                if (rand.Next((int)inverseSpawnChance) == 0) {
+                    EntityManager.Add(EntityBuilder.Factory(EntityType.Enemy_Seeker, GetSpawnPosition()));
+                }
             }
 
             if (inverseSpawnChance > 30) {

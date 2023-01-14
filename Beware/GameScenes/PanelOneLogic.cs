@@ -1,6 +1,5 @@
 ﻿using Beware.Entities;
 using Beware.EntityFeatures;
-using Beware.Inputs;
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
@@ -20,11 +19,14 @@ namespace Beware.GameScenes {
         public PanelOneLogic() : base(BewareGame.Instance) {
             centerThumbStickPosition = new Vector2(ViewportManager.InfoOneView.Width / 2, ViewportManager.InfoOneView.Height / 4);
             centerButtonPosition = new Vector2(centerThumbStickPosition.X, centerThumbStickPosition.Y + 250);
-            shieldSprite = new Sprite(EntityArt.Shield);
-            gunSprite = new Sprite(EntityArt.MainGun);
-            redBooster = new Sprite(EntityArt.RedBooster);
-            blueBooster = new Sprite(EntityArt.BlueBooster);
-            ResetFrameBorder();
+
+            if (ViewportManager.CurrentLayout == ViewportLayout.NoPanel) {
+                shieldSprite = new Sprite(EntityArt.Shield);
+                gunSprite = new Sprite(EntityArt.MainGun);
+                redBooster = new Sprite(EntityArt.RedBooster);
+                blueBooster = new Sprite(EntityArt.BlueBooster);
+                ResetFrameBorder();
+            }
         }
 
         private void ResetFrameBorder() {
@@ -57,25 +59,12 @@ namespace Beware.GameScenes {
             BewareGame.Instance._spriteBatch.Begin();
 
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{ScoreKeeper.Score:000000}", new Vector2(25, 25), Color.DarkViolet);
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"EC: {ScoreKeeper.EnemyCount}", new Vector2(ViewportManager.GetWindowSize(View.InfoOne).X / 2, 25), Color.DeepPink);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"Enemy Count: {ScoreKeeper.EnemyCount}", new Vector2(ViewportManager.GetWindowSize(View.InfoOne).X / 2, 25), Color.DeepPink);
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"Round: {ScoreKeeper.EnemyCount}", new Vector2(ViewportManager.GetWindowSize(View.InfoOne).X - 200, 25), Color.Maroon);
 
-            //if (PlayerStatus.IsSpecialDefensive == true) {
-            //    DrawGun(new Vector2(150, ViewportManager.GetWindowSize(View.InfoOne).Y - 150), 1.5f, MathHelper.ToRadians(-135.0f));
-            //    DrawShield(new Vector2(100, ViewportManager.GetWindowSize(View.InfoOne).Y - 80), 0.25f);
-            //}
-            //if (PlayerStatus.IsSpecialDefensive == false) {
-            //    DrawShield(new Vector2(150, ViewportManager.GetWindowSize(View.InfoOne).Y - 150), 0.15f);
-            //    DrawGun(new Vector2(100, ViewportManager.GetWindowSize(View.InfoOne).Y - 80), 2.0f, MathHelper.ToRadians(-45.0f));
-            //}
-            if (PlayerStatus.IsSpecialDefensive == true) {
-                DrawGun(new Vector2(200, ViewportManager.GetWindowSize(View.InfoOne).Y - 80), 2.5f, MathHelper.ToRadians(-135.0f));
-                DrawShield(new Vector2(100, ViewportManager.GetWindowSize(View.InfoOne).Y - 80), 0.25f);
-            }
-            if (PlayerStatus.IsSpecialDefensive == false) {
-                DrawGun(new Vector2(200, ViewportManager.GetWindowSize(View.InfoOne).Y - 80), 3.5f, MathHelper.ToRadians(-135.0f));
-                DrawShield(new Vector2(100, ViewportManager.GetWindowSize(View.InfoOne).Y - 80), 0.15f);
-            }
+            (float gun, float shield) scale = (PlayerStatus.IsSpecialDefensive == true) ? (2.5f, 0.25f) : (3.5f, 0.15f);
+            gunSprite?.Draw(new Vector2(200, ViewportManager.GetWindowSize(View.InfoOne).Y - 80), scale.gun, -135.0f);
+            shieldSprite?.Draw(new Vector2(100, ViewportManager.GetWindowSize(View.InfoOne).Y - 80),scale.shield, -135.0f);
 
             DrawBooster(new Vector2(300, ViewportManager.GetWindowSize(View.InfoOne).Y - 80), 2.0f);
             DrawShieldCooldown();
@@ -96,26 +85,19 @@ namespace Beware.GameScenes {
                 redBooster?.Draw(position, scale, 0.0f);
             } else {
                 blueBooster?.Draw(position, scale, 0.0f);
-                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{PlayerStatus.MaxBoostCountdown:00}", new Vector2(position.X - 25, position.Y - 25), Color.Crimson);
+            }
+            if (PlayerModel.Instance.BoostCountdown > 0) {
+                BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{PlayerModel.Instance.BoostCountdown:00}", new Vector2(position.X - 25, position.Y - 25), Color.Lime);
             }
         }
 
         private void DrawShieldCooldown() {
             shieldSprite.color = Color.LightCyan;
             if (PlayerModel.Instance.ShieldCountdown > 0) {
-                //Vector2 position = (PlayerStatus.IsSpecialDefensive) ? new Vector2(75, ViewportManager.GetWindowSize(View.InfoOne).Y - 100) : new Vector2(125, ViewportManager.GetWindowSize(View.InfoOne).Y - 175);
                 Vector2 position = new Vector2(75, ViewportManager.GetWindowSize(View.InfoOne).Y - 100);
                 BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{PlayerModel.Instance.ShieldCountdown:00}", position, Color.Orange);
                 shieldSprite.color = Color.OrangeRed;
             }
-        }
-
-        private void DrawShield(Vector2 position, float scale) {
-            shieldSprite?.Draw(position, scale, MathHelper.ToRadians(-90.0f));
-        }
-
-        private void DrawGun(Vector2 position, float scale, float orientation) {
-            gunSprite?.Draw(position, scale, orientation);
         }
     }
 }

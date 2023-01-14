@@ -48,7 +48,7 @@ namespace Beware.GameScenes {
                 position = Helpers.GetDirection(Mode.Shoot);
             }
 
-            position *= 2;
+            position *= 4;
 
             foreach (StarPoint star in stars) {
                 star.Update(position);
