@@ -13,18 +13,18 @@ namespace Beware.EntityFeatures {
         public float CurrentSpeed { get; private set; }
         public bool IsBoosting { get; set; } = false;
 
-        public Engine(EntityModel entity = null, float maxSpeed = 12.0f, float minSpeed = 6.0f) : base() {
-            this.Entity = entity;
-            MaxSpeed = maxSpeed;
-            MinSpeed = minSpeed;
-            CurrentSpeed = MaxSpeed;
+        public Engine(float maxSpeed = 12.0f, float minSpeed = 6.0f) : base() {
+            SetSpeed(maxSpeed, minSpeed);
         }
 
-        public Engine(Vector2 position, Vector2 velocity, EntityModel entity = null, float maxSpeed = 8.0f, float minSpeed = 3.0f) : base() {
+        public Engine(Vector2 position, Vector2 velocity, float maxSpeed = 8.0f, float minSpeed = 3.0f) : base() {
             Velocity = velocity;
             Position = position;
             Orientation = Velocity.ToAngle();
-            this.Entity = entity;
+            SetSpeed(maxSpeed, minSpeed);
+        }
+
+        private void SetSpeed(float maxSpeed, float minSpeed) {
             MaxSpeed = maxSpeed;
             MinSpeed = minSpeed;
             CurrentSpeed = MaxSpeed;

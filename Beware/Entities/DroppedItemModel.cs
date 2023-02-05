@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework;
 
 namespace Beware.Entities {
     class DroppedItemModel : EntityModel {
-        public DroppedItemModel(Vector2 position, Vector2 velocity, Sprite sprite = null, int startingHealth = 1, int startingImpactDamage = 0) : base(startingHealth, startingImpactDamage, sprite) {
-            Sprite = sprite;
-            Engine = new Engine(position, velocity);
+        public DroppedItemModel(Vector2 position, Vector2 velocity, Sprite sprite, int startingHealth = 1, int startingImpactDamage = 0) 
+            : base(new Engine(position, velocity), sprite, startingHealth, startingImpactDamage) {
+
         }
 
         public override void Update() {

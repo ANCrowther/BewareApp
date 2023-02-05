@@ -24,18 +24,18 @@ namespace Beware.Entities {
             }
         }
 
-        private PlayerModel(int startingHealth = 20) : base(startingHealth) {
-            Sprite = new Sprite(EntityArt.Player1, 0.3f);
+        private PlayerModel(int startingHealth = 20, int startingImpactDamage = 5) 
+            : base(new Engine(ViewportManager.GetWindowSize(View.GamePlay) / 2, Vector2.Zero), new Sprite(EntityArt.Player1, 0.3f), startingHealth, startingImpactDamage) {
             Health.OnDeath += delegate { this.Die(); };
             Health.OnHit += delegate { this.Health.ResetHealthBarFramesUntilColorChange(); };
             switchSpecial = new SwitchSpecialBehaviour();
             switchSpeed = new SwitchSpeedBehaviour();
             ShieldCountdown = PlayerStatus.MaxShieldCountdown;
             BoostCountdown = PlayerStatus.MaxBoostWaitCountdown;
-
             MainGun = new PlayerGun(this);
-            Engine = new Engine() { Position = ViewportManager.GetWindowSize(View.GamePlay) / 2 };
         }
+
+
 
         public override void Update() {
             UpdateShieldStatus();

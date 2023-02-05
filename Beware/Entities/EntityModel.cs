@@ -18,10 +18,11 @@ namespace Beware.Entities {
 
         protected IBehaviour[] behaviours = new IBehaviour[5];
 
-        public EntityModel(int startingHealth = 8, int startingImpactDamage = 5, Sprite sprite = null) {
+        public EntityModel(Engine engine, Sprite sprite, int startingHealth, int startingImpactDamage) {
+            this.Engine = engine;
+            this.Sprite = sprite;
             this.Health = new Health(startingHealth);
             this.ImpactDamage = startingImpactDamage;
-            this.Sprite = sprite;
         }
 
         public virtual void Update() {

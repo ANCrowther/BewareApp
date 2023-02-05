@@ -8,9 +8,7 @@ namespace Beware.Entities {
         public bool IsActive { get { return timeUntilStart <= 60; } }
 
         public EnemyModel(Texture2D image, Vector2 position, int startingHealth, int startingImpactDamage = 5, Sprite sprite = null) 
-            : base(startingHealth, startingImpactDamage, sprite) {
-            Sprite = new Sprite(image, 1.3f);
-            Engine = new Engine(position, Vector2.Zero);
+            : base(new Engine(position, Vector2.Zero), new Sprite(image, 1.3f), startingHealth, startingImpactDamage) {
             Health.OnHit += delegate { this.Health.ResetHealthBarFramesUntilColorChange(); };
         }
 
