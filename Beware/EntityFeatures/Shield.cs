@@ -12,9 +12,9 @@ namespace Beware.EntityFeatures {
 
         public virtual HitCircle CollisionCircle { get { return new HitCircle(Entity.Engine.Position, Sprite.Radius / 6); } }
 
-        public Shield(EntityModel entity, int startingHealth = 20, int startingImpactDamage = 15) : base(entity) {
+        public Shield(EntityModel entity, int startingHealth = 20, int startingImpactDamage = 15) 
+            : base(entity, new Sprite(EntityArt.Shield)) {
             health = new ShieldHealth(startingHealth);
-            Sprite = new Sprite(EntityArt.Shield);
             maxShieldHealth = startingHealth;
             ImpactDamage = startingImpactDamage;
             health.OnDeath += delegate { this.Die(); };
@@ -49,11 +49,8 @@ namespace Beware.EntityFeatures {
         }
 
         public override void Draw() {
-            //float scale = 0.3f + 0.05f * (float)Math.Sin(2 * BewareGame.GameTime.TotalGameTime.TotalSeconds);
             Sprite.Scale = 0.3f + 0.05f * (float)Math.Sin(2 * BewareGame.GameTime.TotalGameTime.TotalSeconds);
             Sprite.Draw(Entity.Engine);
-            //Sprite.Draw(Entity.Engine.Position, Entity.Engine.Orientation, scale);
-            //BewareGame.Instance._spriteBatch.Draw(Sprite.Image, Entity.Engine.Position, null, Sprite.color, Entity.Engine.Orientation, Sprite.Size / 2f, scale, 0, 0);
         }
     }
 }

@@ -8,7 +8,7 @@ using System;
 namespace Beware.Managers {
     static class ItemDropSpawner {
         static Random rand = new Random();
-        static float inverseItemDropChance = 50;
+        static float inverseItemDropChance = 500;
 
         public static void Update() {
             if (PlayerStatus.IsPaused == false && !PlayerModel.Instance.IsExpired && EntityManager.Count < 200) {

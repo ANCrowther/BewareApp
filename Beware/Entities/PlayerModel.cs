@@ -35,8 +35,6 @@ namespace Beware.Entities {
             MainGun = new PlayerGun(this);
         }
 
-
-
         public override void Update() {
             UpdateShieldStatus();
 
