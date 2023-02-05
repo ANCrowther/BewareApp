@@ -11,15 +11,15 @@ namespace Beware.Managers {
         static float inverseItemDropChance = 500;
 
         public static void Update() {
-            if (PlayerStatus.IsPaused == false && !PlayerModel.Instance.IsExpired && EntityManager.Count < 200) {
-                if (rand.Next((int)inverseItemDropChance) == 0) {
-                    EntityManager.Add(ItemDropBuilder.Factory(DroppedItemType.SabotAmmoDrop, GetSpawnPosition(), GetSpawnVelocity()));
-                }
-            }
+            //if (PlayerStatus.IsPaused == false && !PlayerModel.Instance.IsExpired && EntityManager.Count < 200) {
+            //    if (rand.Next((int)inverseItemDropChance) == 0) {
+            //        EntityManager.Add(ItemDropBuilder.Factory(DroppedItemType.SabotAmmoDrop, GetSpawnPosition(), GetSpawnVelocity()));
+            //    }
+            //}
 
-            if (inverseItemDropChance > 15) {
-                inverseItemDropChance -= 0.005f;
-            }
+            //if (inverseItemDropChance > 15) {
+            //    inverseItemDropChance -= 0.005f;
+            //}
         }
 
         private static Vector2 GetSpawnPosition() {
@@ -37,6 +37,10 @@ namespace Beware.Managers {
             Vector2 velocity = MathUtil.FromPolar(direction, rand.Next(5,30)*0.1f);
 
             return velocity;
+        }
+
+        public static void SpawnItem(Vector2 position) {
+            EntityManager.Add(ItemDropBuilder.Factory(DroppedItemType.SabotAmmoDrop, position, GetSpawnVelocity()));
         }
 
         public static void Reset() {
