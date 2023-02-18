@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Beware.Managers {
-    static class BulletManager {
-        public static List<BulletModel> playerBullets = new List<BulletModel>();
-        public static List<BulletModel> enemyBullets = new List<BulletModel>();
+    static class AmmoManager {
+        public static List<AmmoModel> playerBullets = new List<AmmoModel>();
+        public static List<AmmoModel> enemyBullets = new List<AmmoModel>();
 
-        public static void AddPlayerBullet(BulletModel bullet) {
+        public static void AddPlayerBullet(AmmoModel bullet) {
             playerBullets.Add(bullet);
         }
 
-        public static void AddEnemyBullets(BulletModel bullet) {
+        public static void AddEnemyBullets(AmmoModel bullet) {
             enemyBullets.Add(bullet);
         }
 

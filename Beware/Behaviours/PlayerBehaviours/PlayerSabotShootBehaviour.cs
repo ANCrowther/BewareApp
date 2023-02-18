@@ -1,4 +1,5 @@
 ﻿using Beware.Entities;
+using Beware.EntityFeatures;
 using Beware.Inputs;
 using Beware.Managers;
 using Beware.Utilities;
@@ -30,9 +31,10 @@ namespace Beware.Behaviours {
                     Vector2 vel = MathUtil.FromPolar(aimAngle, 11f);
                     Vector2 offset = Vector2.Transform(new Vector2(25, -8), aimQuat);
 
-                    BulletModel bullet = new SabotRound(player.Engine.Position + offset, vel);
+                    //BulletModel bullet = new SabotRound(player.Engine.Position + offset, vel);
+                    AmmoModel bullet = new SabotRound(new Engine(player.Engine.Position + offset, vel * 2.5f), new Sprite(EntityArt.Sabot, 2.0f));
                     bullet.SetBehaviour(BehaviourCategory.Move, new BulletBehaviour());
-                    BulletManager.AddPlayerBullet(bullet);
+                    AmmoManager.AddPlayerBullet(bullet);
                     PlayerStatus.SpecialAmmoCount--;
                 }
             }

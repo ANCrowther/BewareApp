@@ -34,9 +34,10 @@ namespace Beware.Behaviours {
                 Vector2 vel = MathUtil.FromPolar(aimAngle + randomSpread, 16f);
                 Vector2 offset = Vector2.Transform(new Vector2(50, -8), aimQuat);
 
-                BulletModel bullet = new BulletModel(player.Engine.Position + offset, vel, new Sprite(EntityArt.YellowBullet));
+                //BulletModel bullet = new BulletModel(player.Engine.Position + offset, vel, new Sprite(EntityArt.YellowBullet));
+                BulletModel bullet = new BulletModel(new Engine(player.Engine.Position + offset, vel), new Sprite(EntityArt.YellowBullet));
                 bullet.SetBehaviour(BehaviourCategory.Move, new BulletBehaviour());
-                BulletManager.AddPlayerBullet(bullet);
+                AmmoManager.AddPlayerBullet(bullet);
             }
         }
 

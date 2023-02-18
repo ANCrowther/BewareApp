@@ -1,14 +1,18 @@
 ﻿using Beware.Entities;
+using Beware.ExtensionSupport;
 using Beware.Utilities;
+using Microsoft.Xna.Framework;
 using System;
 
 namespace Beware.EntityFeatures {
     public abstract class Shield : EntityFeature {
         public bool IsExpired;
-        public int ImpactDamage;
+        private readonly int baseImpactDamage;
         protected int maxShieldHealth;
         protected Health health;
         private readonly int colorCount = 0;
+        public Vector2 ImpactDamage { get { return this.Entity.Engine.Velocity; } }
+
 
         public virtual HitCircle CollisionCircle { get { return new HitCircle(Entity.Engine.Position, Sprite.Radius / 6); } }
 
@@ -16,7 +20,7 @@ namespace Beware.EntityFeatures {
             : base(entity, new Sprite(EntityArt.Shield)) {
             health = new ShieldHealth(startingHealth);
             maxShieldHealth = startingHealth;
-            ImpactDamage = startingImpactDamage;
+            baseImpactDamage = startingImpactDamage;
             health.OnDeath += delegate { this.Die(); };
 
             foreach (var item in Helpers.colors2) {
@@ -44,8 +48,8 @@ namespace Beware.EntityFeatures {
             IsExpired = true;
         }
 
-        public virtual void Hit(int damage = 1) {
-            health.TakeDamage(damage);
+        public virtual void Hit(Vector2 damage) {
+            this.health.TakeDamage(this.Entity.Engine.Velocity.GetDamage(damage, baseImpactDamage));
         }
 
         public override void Draw() {

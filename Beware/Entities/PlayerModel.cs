@@ -46,9 +46,9 @@ namespace Beware.Entities {
             base.Update();
         }
 
-        public override void Hit(int damage = 1) {
-            base.Hit(damage);
-        }
+        //public override void Hit(int damage = 1) {
+        //    base.Hit(damage);
+        //}
 
         private void UpdateShieldStatus() {
             if (Shield != null && Shield.IsExpired == true) {

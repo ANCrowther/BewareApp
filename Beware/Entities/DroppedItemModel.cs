@@ -13,7 +13,7 @@ namespace Beware.Entities {
             base.Update();
         }
 
-        public override void Hit(int damage = 0) {
+        public override void Hit(Vector2 damage) {
             PlayerStatus.SpecialAmmoCount += 10;
             IsExpired = true;
         }

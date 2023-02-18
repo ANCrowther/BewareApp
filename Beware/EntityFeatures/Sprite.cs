@@ -9,16 +9,10 @@ namespace Beware.EntityFeatures {
         public float Radius { get { return (float)(Image.Width > Image.Height ? Image.Height * Scale : Image.Width * Scale); } }
 
         public Color color = Color.White;
-        private readonly Engine entity;
 
-        public Sprite(Texture2D image, float scale = 1.0f, Engine engine = null) {
+        public Sprite(Texture2D image, float scale = 1.0f) {
             this.Image = image;
-            this.entity = engine;
             this.Scale = scale;
-        }
-
-        public void Draw() {
-            BewareGame.Instance._spriteBatch.Draw(Image, entity.Position, null, Color.White, entity.Orientation, Size / 2f, Scale, 0, 0);
         }
 
         public void Draw(Engine engine) {

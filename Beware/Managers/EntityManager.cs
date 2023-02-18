@@ -1,6 +1,6 @@
 ﻿using Beware.Entities;
 using Beware.ExtensionSupport;
-using Beware.Utilities;
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -47,7 +47,7 @@ namespace Beware.Managers {
                 AddEntity(entity);
             }
 
-            BulletManager.Update();
+            AmmoManager.Update();
 
             addEntityList.Clear();
 
@@ -60,7 +60,7 @@ namespace Beware.Managers {
             foreach (var entity in entityList) {
                 entity.Draw();
             }
-            BulletManager.Draw();
+            AmmoManager.Draw();
         }
 
         static void HandleCollisions() {
@@ -76,12 +76,10 @@ namespace Beware.Managers {
 
             // Collisions between bullets and enemies
             for (int i = 0; i < enemyList.Count; i++) {
-                for (int j = 0; j < BulletManager.playerBullets.Count; j++) {
-                    if (enemyList[i].CollisionCircle.Intersects(BulletManager.playerBullets[j].CollisionCircle)) {
-                        enemyList[i].Hit(BulletManager.playerBullets[j].ImpactDamage);
-                        if (!(BulletManager.playerBullets[j] is SabotRound)) {
-                            BulletManager.playerBullets[j].IsExpired = true;
-                        }
+                for (int j = 0; j < AmmoManager.playerBullets.Count; j++) {
+                    if (enemyList[i].CollisionCircle.Intersects(AmmoManager.playerBullets[j].CollisionCircle)) {
+                        enemyList[i].Hit(AmmoManager.playerBullets[j].ImpactDamage);
+                        AmmoManager.playerBullets[j].Hit(enemyList[i].ImpactDamage);
                     }
                 }
             }
@@ -126,21 +124,21 @@ namespace Beware.Managers {
             // Collisions between player and droppedItems
             for (int i = 0; i < droppedItemList.Count; i++) {
                 if (droppedItemList[i].IsExpired == false && PlayerModel.Instance.CollisionCircle.Intersects(droppedItemList[i].CollisionCircle)) {
-                    droppedItemList[i].Hit();
+                    droppedItemList[i].Hit(Vector2.Zero);
                     break;
                 }
             }
 
-            for (int i = 0; i < BulletManager.enemyBullets.Count; i++) {
+            for (int i = 0; i < AmmoManager.enemyBullets.Count; i++) {
                 if (PlayerModel.Instance.Shield != null) {
-                    if (PlayerModel.Instance.Shield.CollisionCircle.Intersects(BulletManager.enemyBullets[i].CollisionCircle)) {
-                        PlayerModel.Instance.Shield.Hit(BulletManager.enemyBullets[i].ImpactDamage);
-                        BulletManager.enemyBullets[i].IsExpired = true;
+                    if (PlayerModel.Instance.Shield.CollisionCircle.Intersects(AmmoManager.enemyBullets[i].CollisionCircle)) {
+                        PlayerModel.Instance.Shield.Hit(AmmoManager.enemyBullets[i].ImpactDamage);
+                        AmmoManager.enemyBullets[i].Hit(PlayerModel.Instance.Shield.ImpactDamage);
                     }
                 } else {
-                    if (PlayerModel.Instance.CollisionCircle.Intersects(BulletManager.enemyBullets[i].CollisionCircle)) {
-                        PlayerModel.Instance.Hit(BulletManager.enemyBullets[i].ImpactDamage);
-                        BulletManager.enemyBullets[i].IsExpired = true;
+                    if (PlayerModel.Instance.CollisionCircle.Intersects(AmmoManager.enemyBullets[i].CollisionCircle)) {
+                        PlayerModel.Instance.Hit(AmmoManager.enemyBullets[i].ImpactDamage);
+                        AmmoManager.enemyBullets[i].Hit(PlayerModel.Instance.ImpactDamage);
                     }
                 }
             }
@@ -151,13 +149,13 @@ namespace Beware.Managers {
             addEntityList.Clear();
             enemyList.Clear();
             droppedItemList.Clear();
-            BulletManager.Clear();
+            AmmoManager.Clear();
         }
 
         public static void RoundChange() {
             addEntityList.Clear();
             enemyList.Clear();
-            BulletManager.Clear();
+            AmmoManager.Clear();
         }
     }
 }
