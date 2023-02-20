@@ -1,5 +1,7 @@
-﻿using Beware.Entities;
+﻿using Beware.Builders;
+using Beware.Entities;
 using Beware.EntityFeatures;
+using Beware.Enums;
 using Beware.Inputs;
 using Beware.Managers;
 using Beware.Utilities;
@@ -28,13 +30,10 @@ namespace Beware.Behaviours {
                 } else {
                     float aimAngle = player.MainGun.Orientation;
                     Quaternion aimQuat = Quaternion.CreateFromYawPitchRoll(0, 0, aimAngle);
-                    Vector2 vel = MathUtil.FromPolar(aimAngle, 11f);
+                    Vector2 vel = MathUtil.FromPolar(aimAngle, 20f);
                     Vector2 offset = Vector2.Transform(new Vector2(25, -8), aimQuat);
 
-                    //BulletModel bullet = new SabotRound(player.Engine.Position + offset, vel);
-                    AmmoModel bullet = new SabotRound(new Engine(player.Engine.Position + offset, vel * 2.5f), new Sprite(EntityArt.Sabot, 2.0f));
-                    bullet.SetBehaviour(BehaviourCategory.Move, new BulletBehaviour());
-                    AmmoManager.AddPlayerBullet(bullet);
+                    EntityManager.Add(AmmoBuilder.Factory(AmmoType.SabotRound, player.Engine.Position + offset, vel));
                     PlayerStatus.SpecialAmmoCount--;
                 }
             }

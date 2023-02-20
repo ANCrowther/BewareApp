@@ -1,6 +1,8 @@
 ﻿using Beware.Entities;
+using Beware.Enums;
 using Beware.Inputs;
 using Beware.Managers;
+using Beware.Spawners;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,7 +34,6 @@ namespace Beware.GameScenes {
             if (PlayerStatus.IsPaused == false) {
                 EntityManager.Update();
                 EnemySpawner.Update();
-                ItemDropSpawner.Update();
             }
 
             base.Update(gameTime);

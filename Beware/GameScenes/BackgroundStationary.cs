@@ -1,12 +1,12 @@
-﻿using Beware.Managers;
-using Beware.Utilities;
+﻿using Beware.Enums;
+using Beware.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Beware.GameScenes {
     public class BackgroundStationary : DrawableGameComponent {
         public Texture2D image;
-        private View view;
+        private readonly View view;
         private Vector2 scale;
 
         public BackgroundStationary(Texture2D backgroundImage, View backgroundView) : base(BewareGame.Instance) {

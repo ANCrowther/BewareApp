@@ -1,5 +1,5 @@
 ﻿using Beware.Behaviours;
-using Beware.Utilities;
+using Beware.Enums;
 
 namespace Beware.Entities {
     public static class PlayerBehaviourBuilder {

@@ -1,4 +1,5 @@
 ﻿using Beware.ControllerModels;
+using Beware.Enums;
 using Beware.ExtensionSupport;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
@@ -11,12 +12,18 @@ namespace Beware.Managers {
         private static List<IControllerModel> buttonList;
 
         public static void Initialize() {
-            buttonList = new List<IControllerModel>();
-            buttonList.Add(new ThumbStickModel(thumbOrigin));
-            buttonList.Add(new ButtonUpModel(buttonOrigin));
-            buttonList.Add(new ButtonDownModel(buttonOrigin));
-            buttonList.Add(new ButtonLeftModel(buttonOrigin));
-            buttonList.Add(new ButtonRightModel(buttonOrigin));
+            buttonList = new List<IControllerModel> {
+                new ThumbStickModel(thumbOrigin),
+                new ButtonUpModel(buttonOrigin),
+                new ButtonDownModel(buttonOrigin),
+                new ButtonLeftModel(buttonOrigin),
+                new ButtonRightModel(buttonOrigin)
+            };
+            //buttonList.Add(new ThumbStickModel(thumbOrigin));
+            //buttonList.Add(new ButtonUpModel(buttonOrigin));
+            //buttonList.Add(new ButtonDownModel(buttonOrigin));
+            //buttonList.Add(new ButtonLeftModel(buttonOrigin));
+            //buttonList.Add(new ButtonRightModel(buttonOrigin));
         }
 
         public static void Draw(Vector2 centerThumbStickPosition, Vector2 centerButtonPosition, Vector2 controlDirection, Mode mode) {

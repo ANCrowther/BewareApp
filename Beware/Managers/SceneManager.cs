@@ -1,4 +1,5 @@
-﻿using Beware.GameScenes;
+﻿using Beware.Enums;
+using Beware.GameScenes;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using System;

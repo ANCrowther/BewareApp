@@ -1,4 +1,5 @@
-﻿using Beware.ExtensionSupport;
+﻿using Beware.Enums;
+using Beware.ExtensionSupport;
 using Beware.Inputs;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;

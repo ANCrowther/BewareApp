@@ -16,7 +16,7 @@ namespace Beware.EntityFeatures {
 
         public virtual HitCircle CollisionCircle { get { return new HitCircle(Entity.Engine.Position, Sprite.Radius / 6); } }
 
-        public Shield(EntityModel entity, int startingHealth = 20, int startingImpactDamage = 15) 
+        public Shield(EntityModel entity, int startingHealth = 100, int startingImpactDamage = 15) 
             : base(entity, new Sprite(EntityArt.Shield)) {
             health = new ShieldHealth(startingHealth);
             maxShieldHealth = startingHealth;

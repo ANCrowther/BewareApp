@@ -7,12 +7,16 @@ namespace Beware.Managers {
         public static List<AmmoModel> playerBullets = new List<AmmoModel>();
         public static List<AmmoModel> enemyBullets = new List<AmmoModel>();
 
-        public static void AddPlayerBullet(AmmoModel bullet) {
-            playerBullets.Add(bullet);
-        }
-
-        public static void AddEnemyBullets(AmmoModel bullet) {
-            enemyBullets.Add(bullet);
+        public static void Add(AmmoModel ammo) {
+            if (ammo is PlayerBulletModel p) {
+                playerBullets.Add(p);
+            }
+            if (ammo is SabotRound s) {
+                playerBullets.Add(s);
+            }
+            if (ammo is BulletModel b) {
+                enemyBullets.Add(b);
+            }
         }
 
         public static void Update() {

@@ -13,6 +13,9 @@ namespace Beware.Utilities {
         public static Texture2D Sabot { get; private set; }
         public static Texture2D BlueBooster { get; private set; }
         public static Texture2D RedBooster { get; private set; }
+        public static Texture2D AmmoDrop { get; private set; }
+        public static Texture2D BoostDrop { get; private set; }
+        public static Texture2D ShieldDrop { get; private set; }
 
         public static void Initialize(ContentManager content) {
             Player1 = content.Load<Texture2D>(@"Sprites\Player2");
@@ -25,6 +28,9 @@ namespace Beware.Utilities {
             Sabot = content.Load<Texture2D>(@"Sprites\SabotRound");
             BlueBooster = content.Load<Texture2D>(@"Sprites\booster_blue");
             RedBooster = content.Load<Texture2D>(@"Sprites\booster_red");
+            AmmoDrop = content.Load<Texture2D>(@"Sprites\drop_ammo");
+            BoostDrop = content.Load<Texture2D>(@"Sprites\drop_boost");
+            ShieldDrop = content.Load<Texture2D>(@"Sprites\drop_shield");
         }
     }
 }

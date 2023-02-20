@@ -1,5 +1,6 @@
 ﻿using Beware.Entities;
 using Beware.EntityFeatures;
+using Beware.Enums;
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
@@ -62,9 +63,9 @@ namespace Beware.GameScenes {
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"Enemy Count: {ScoreKeeper.EnemyCount}", new Vector2(ViewportManager.GetWindowSize(View.InfoOne).X / 2, 25), Color.DeepPink);
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"Round: {ScoreKeeper.EnemyCount}", new Vector2(ViewportManager.GetWindowSize(View.InfoOne).X - 200, 25), Color.Maroon);
 
-            (float gun, float shield) scale = (PlayerStatus.IsSpecialDefensive == true) ? (2.5f, 0.25f) : (3.5f, 0.15f);
-            gunSprite?.Draw(new Vector2(200, ViewportManager.GetWindowSize(View.InfoOne).Y - 80), scale.gun, -135.0f);
-            shieldSprite?.Draw(new Vector2(100, ViewportManager.GetWindowSize(View.InfoOne).Y - 80),scale.shield, -135.0f);
+            (float gun, float shield) = (PlayerStatus.IsSpecialDefensive == true) ? (2.5f, 0.25f) : (3.5f, 0.15f);
+            gunSprite?.Draw(new Vector2(200, ViewportManager.GetWindowSize(View.InfoOne).Y - 80), gun, -135.0f);
+            shieldSprite?.Draw(new Vector2(100, ViewportManager.GetWindowSize(View.InfoOne).Y - 80),shield, -135.0f);
 
             DrawBooster(new Vector2(300, ViewportManager.GetWindowSize(View.InfoOne).Y - 80), 2.0f);
             DrawShieldCooldown();

@@ -1,5 +1,6 @@
 ﻿using Beware.Behaviours;
 using Beware.EntityFeatures;
+using Beware.Enums;
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
@@ -24,7 +25,7 @@ namespace Beware.Entities {
             }
         }
 
-        private PlayerModel(int startingHealth = 20, int startingImpactDamage = 5) 
+        private PlayerModel(int startingHealth = 100, int startingImpactDamage = 5) 
             : base(new Engine(ViewportManager.GetWindowSize(View.GamePlay) / 2, Vector2.Zero), new Sprite(EntityArt.Player1, 0.3f), startingHealth, startingImpactDamage) {
             Health.OnDeath += delegate { this.Die(); };
             Health.OnHit += delegate { this.Health.ResetHealthBarFramesUntilColorChange(); };
@@ -45,10 +46,6 @@ namespace Beware.Entities {
 
             base.Update();
         }
-
-        //public override void Hit(int damage = 1) {
-        //    base.Hit(damage);
-        //}
 
         private void UpdateShieldStatus() {
             if (Shield != null && Shield.IsExpired == true) {

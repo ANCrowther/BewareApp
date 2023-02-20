@@ -1,4 +1,4 @@
-﻿using Beware.Utilities;
+﻿using Beware.Enums;
 using Microsoft.Xna.Framework;
 
 namespace Beware.ControllerModels {

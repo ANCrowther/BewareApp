@@ -1,4 +1,5 @@
-﻿using Beware.Utilities;
+﻿using Beware.Enums;
+using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

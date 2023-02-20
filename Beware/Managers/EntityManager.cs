@@ -9,8 +9,6 @@ namespace Beware.Managers {
         private static bool isUpdating;
         private static List<EntityModel> entityList = new List<EntityModel>();
         private static readonly List<EntityModel> addEntityList = new List<EntityModel>();
-        private static List<EnemyModel> enemyList = new List<EnemyModel>();
-        private static List<DroppedItemModel> droppedItemList = new List<DroppedItemModel>();
 
         public static int Count { get { return entityList.Count; } }
 
@@ -26,10 +24,13 @@ namespace Beware.Managers {
             entityList.Add(entity);
 
             if (entity is EnemyModel e) {
-                enemyList.Add(e);
+                EnemyManager.Add(e);
             }
-            if(entity is DroppedItemModel d) {
-                droppedItemList.Add(d);
+            if (entity is AmmoModel b) {
+                AmmoManager.Add(b);
+            }
+            if (entity is DroppedItemModel d) {
+                DroppedItemManager.Add(d);
             }
         }
 
@@ -48,83 +49,80 @@ namespace Beware.Managers {
             }
 
             AmmoManager.Update();
+            EnemyManager.Update();
+            DroppedItemManager.Update();
 
             addEntityList.Clear();
-
             entityList = entityList.Where(x => x.IsExpired == false).ToList();
-            enemyList = enemyList.Where(x => x.IsExpired == false).ToList();
-            droppedItemList = droppedItemList.Where(x => x.IsExpired == false).ToList();
         }
 
         public static void Draw() {
-            foreach (var entity in entityList) {
-                entity.Draw();
-            }
+            PlayerModel.Instance.Draw();
             AmmoManager.Draw();
+            EnemyManager.Draw();
+            DroppedItemManager.Draw();
         }
 
         static void HandleCollisions() {
             // Collisions between enemies
-            for (int i = 0; i < enemyList.Count; i++) {
-                for (int j = 0; j < enemyList.Count; j++) {
-                    if (enemyList[i].CollisionCircle.Intersects(enemyList[j].CollisionCircle)) {
-                        enemyList[i].HandleCollision(enemyList[j]);
-                        enemyList[j].HandleCollision(enemyList[i]);
+            for (int i = 0; i < EnemyManager.enemies.Count; i++) {
+                for (int j = 0; j < EnemyManager.enemies.Count; j++) {
+                    if (EnemyManager.enemies[i].CollisionCircle.Intersects(EnemyManager.enemies[j].CollisionCircle)) {
+                        EnemyManager.enemies[i].HandleCollision(EnemyManager.enemies[j]);
+                        EnemyManager.enemies[j].HandleCollision(EnemyManager.enemies[i]);
                     }
                 }
             }
 
             // Collisions between bullets and enemies
-            for (int i = 0; i < enemyList.Count; i++) {
+            for (int i = 0; i < EnemyManager.enemies.Count; i++) {
                 for (int j = 0; j < AmmoManager.playerBullets.Count; j++) {
-                    if (enemyList[i].CollisionCircle.Intersects(AmmoManager.playerBullets[j].CollisionCircle)) {
-                        enemyList[i].Hit(AmmoManager.playerBullets[j].ImpactDamage);
-                        AmmoManager.playerBullets[j].Hit(enemyList[i].ImpactDamage);
+                    if (EnemyManager.enemies[i].CollisionCircle.Intersects(AmmoManager.playerBullets[j].CollisionCircle)) {
+                        EnemyManager.enemies[i].Hit(AmmoManager.playerBullets[j].ImpactDamage);
+                        AmmoManager.playerBullets[j].Hit(EnemyManager.enemies[i].ImpactDamage);
                     }
                 }
             }
 
             // Collisions between player and enemies
-            for (int i = 0; i < enemyList.Count; i++) {
+            for (int i = 0; i < EnemyManager.enemies.Count; i++) {
                 if (PlayerModel.Instance.Shield != null) {
-                    if (enemyList[i].Shield != null) {
-                        if (enemyList[i].IsActive && PlayerModel.Instance.Shield.CollisionCircle.Intersects(enemyList[i].Shield.CollisionCircle)) {
-                            PlayerModel.Instance.Shield.Hit(enemyList[i].ImpactDamage);
-                            enemyList[i].Shield.Hit(PlayerModel.Instance.Shield.ImpactDamage);
+                    if (EnemyManager.enemies[i].Shield != null) {
+                        if (EnemyManager.enemies[i].IsActive && PlayerModel.Instance.Shield.CollisionCircle.Intersects(EnemyManager.enemies[i].Shield.CollisionCircle)) {
+                            PlayerModel.Instance.Shield.Hit(EnemyManager.enemies[i].ImpactDamage);
+                            EnemyManager.enemies[i].Shield.Hit(PlayerModel.Instance.Shield.ImpactDamage);
                             break;
                         }
                     }else {
-                        if (enemyList[i].IsActive && PlayerModel.Instance.Shield.CollisionCircle.Intersects(enemyList[i].CollisionCircle)) {
-                            PlayerModel.Instance.Shield.Hit(enemyList[i].ImpactDamage);
-                            enemyList[i].Hit(PlayerModel.Instance.Shield.ImpactDamage);
+                        if (EnemyManager.enemies[i].IsActive && PlayerModel.Instance.Shield.CollisionCircle.Intersects(EnemyManager.enemies[i].CollisionCircle)) {
+                            PlayerModel.Instance.Shield.Hit(EnemyManager.enemies[i].ImpactDamage);
+                            EnemyManager.enemies[i].Hit(PlayerModel.Instance.Shield.ImpactDamage);
                             break;
                         }
                     }
 
 
                 } else {
-                    if (enemyList[i].Shield != null) {
-                        if (enemyList[i].IsActive && PlayerModel.Instance.CollisionCircle.Intersects(enemyList[i].Shield.CollisionCircle)) {
-                            PlayerModel.Instance.Hit(enemyList[i].ImpactDamage);
-                            enemyList[i].Shield.Hit(PlayerModel.Instance.ImpactDamage);
+                    if (EnemyManager.enemies[i].Shield != null) {
+                        if (EnemyManager.enemies[i].IsActive && PlayerModel.Instance.CollisionCircle.Intersects(EnemyManager.enemies[i].Shield.CollisionCircle)) {
+                            PlayerModel.Instance.Hit(EnemyManager.enemies[i].ImpactDamage);
+                            EnemyManager.enemies[i].Shield.Hit(PlayerModel.Instance.ImpactDamage);
                             break;
                         }
                     } else {
-                        if (enemyList[i].IsActive && PlayerModel.Instance.CollisionCircle.Intersects(enemyList[i].CollisionCircle)) {
-                            PlayerModel.Instance.Hit(enemyList[i].ImpactDamage);
-                            enemyList[i].Hit(PlayerModel.Instance.ImpactDamage);
+                        if (EnemyManager.enemies[i].IsActive && PlayerModel.Instance.CollisionCircle.Intersects(EnemyManager.enemies[i].CollisionCircle)) {
+                            PlayerModel.Instance.Hit(EnemyManager.enemies[i].ImpactDamage);
+                            EnemyManager.enemies[i].Hit(PlayerModel.Instance.ImpactDamage);
                             break;
                         }
                     }
-
                 }
-
             }
 
             // Collisions between player and droppedItems
-            for (int i = 0; i < droppedItemList.Count; i++) {
-                if (droppedItemList[i].IsExpired == false && PlayerModel.Instance.CollisionCircle.Intersects(droppedItemList[i].CollisionCircle)) {
-                    droppedItemList[i].Hit(Vector2.Zero);
+            for (int i = 0; i < DroppedItemManager.items.Count; i++) {
+                if (DroppedItemManager.items[i].IsExpired == false && PlayerModel.Instance.CollisionCircle.Intersects(DroppedItemManager.items[i].CollisionCircle)) {
+                    DroppedItemManager.items[i].Hit(Vector2.Zero);
                     break;
                 }
             }
@@ -147,14 +145,17 @@ namespace Beware.Managers {
         public static void Clear() {
             entityList.Clear();
             addEntityList.Clear();
-            enemyList.Clear();
-            droppedItemList.Clear();
-            AmmoManager.Clear();
+            ClearManagers();
         }
 
         public static void RoundChange() {
             addEntityList.Clear();
-            enemyList.Clear();
+            ClearManagers();
+        }
+
+        private static void ClearManagers() {
+            EnemyManager.Clear();
+            DroppedItemManager.Clear();
             AmmoManager.Clear();
         }
     }

@@ -25,8 +25,8 @@ namespace Beware.ExtensionSupport {
         }
 
         public static int GetDamage(this Vector2 vector, Vector2 damage, int baseDamage) {
-            int result = (int)((vector + damage).Length());
-            result = Math.Abs(result);
+            int result = (int)(vector + damage).Length();
+            result = Math.Abs(result) + baseDamage;
             return (result >= 1) ? result : baseDamage;
         }
     }

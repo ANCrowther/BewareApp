@@ -1,9 +1,9 @@
 ﻿using Beware.Behaviours;
 using Beware.EntityFeatures;
+using Beware.Enums;
 using Beware.ExtensionSupport;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
-using System;
 
 namespace Beware.Entities {
     public abstract class EntityModel {

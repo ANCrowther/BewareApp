@@ -1,5 +1,6 @@
-﻿using Beware.Entities;
-using Beware.EntityFeatures;
+﻿using Beware.Builders;
+using Beware.Entities;
+using Beware.Enums;
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
@@ -18,10 +19,7 @@ namespace Beware.Behaviours {
                 Vector2 vel = MathUtil.FromPolar(aimAngle, 11f);
                 Vector2 offset = Vector2.Transform(new Vector2(25, -8), aimQuat);
 
-                //BulletModel bullet = new BulletModel(entity.Engine.Position + offset, vel, new Sprite(EntityArt.Bullet));
-                BulletModel bullet = new BulletModel(new Engine(entity.Engine.Position + offset, vel), new Sprite(EntityArt.Bullet));
-                bullet.SetBehaviour(BehaviourCategory.Move, new BulletBehaviour());
-                AmmoManager.AddEnemyBullets(bullet);
+                EntityManager.Add(AmmoBuilder.Factory(AmmoType.EnemyBullet, entity.Engine.Position + offset, vel));
             }
 
             UpdateCooldown();

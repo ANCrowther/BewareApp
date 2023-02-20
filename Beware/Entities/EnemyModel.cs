@@ -1,5 +1,5 @@
 ﻿using Beware.EntityFeatures;
-using Beware.Managers;
+using Beware.Spawners;
 using Microsoft.Xna.Framework;
 using System;
 
@@ -38,6 +38,7 @@ namespace Beware.Entities {
             if (random.Next(50) == 0) {
                 ItemDropSpawner.SpawnItem(this.Engine.Position);
             }
+            ItemDropSpawner.SpawnItem(this.Engine.Position);
         }
     }
 }

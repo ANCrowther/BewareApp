@@ -1,4 +1,5 @@
-﻿using Beware.ExtensionSupport;
+﻿using Beware.Enums;
+using Beware.ExtensionSupport;
 using Beware.Managers;
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
@@ -46,14 +47,11 @@ namespace Beware.ControllerModels {
         }
 
         private Color GetColor(Mode mode, bool isActive) {
-            switch (mode) {
-                case Mode.Move:
-                    return (isActive) ? Color.Red : Color.DarkGray;
-                case Mode.Shoot:
-                    return (isActive) ? Color.HotPink : Color.Yellow;
-                default:
-                    return Color.White;
-            }
+            return mode switch {
+                Mode.Move => (isActive) ? Color.Red : Color.DarkGray,
+                Mode.Shoot => (isActive) ? Color.HotPink : Color.Yellow,
+                _ => Color.White,
+            };
         }
     }
 }

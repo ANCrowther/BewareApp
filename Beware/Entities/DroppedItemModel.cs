@@ -1,21 +1,26 @@
 ﻿using Beware.EntityFeatures;
-using Beware.Utilities;
-using Microsoft.Xna.Framework;
 
 namespace Beware.Entities {
-    class DroppedItemModel : EntityModel {
-        public DroppedItemModel(Vector2 position, Vector2 velocity, Sprite sprite, int startingHealth = 1, int startingImpactDamage = 0) 
-            : base(new Engine(position, velocity), sprite, startingHealth, startingImpactDamage) {
+    public abstract class DroppedItemModel : EntityModel {
+        private int frameCountDown = 150;
+        private bool drawMe = true;
 
-        }
+        public DroppedItemModel(Engine engine, Sprite sprite, int startingHealth, int startingImpactDamage) 
+            : base(engine, sprite, startingHealth, startingImpactDamage) { }
 
         public override void Update() {
-            base.Update();
+            if (frameCountDown-- <= 0) {
+                this.Die();
+            }
+            if (frameCountDown < 40 && frameCountDown % 5 == 0) {
+                drawMe = !drawMe;
+            }
         }
 
-        public override void Hit(Vector2 damage) {
-            PlayerStatus.SpecialAmmoCount += 10;
-            IsExpired = true;
+        public override void Draw() {
+            if (drawMe == true) {
+                base.Draw();
+            }
         }
     }
 }
