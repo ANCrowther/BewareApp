@@ -30,7 +30,7 @@ namespace Beware.Behaviours {
                 } else {
                     float aimAngle = player.MainGun.Orientation;
                     Quaternion aimQuat = Quaternion.CreateFromYawPitchRoll(0, 0, aimAngle);
-                    Vector2 vel = MathUtil.FromPolar(aimAngle, 20f);
+                    Vector2 vel = MathUtil.FromPolar(aimAngle, Values.SabotSpeed);
                     Vector2 offset = Vector2.Transform(new Vector2(25, -8), aimQuat);
 
                     EntityManager.Add(AmmoBuilder.Factory(AmmoType.SabotRound, player.Engine.Position + offset, vel));

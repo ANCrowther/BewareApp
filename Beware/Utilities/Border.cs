@@ -33,7 +33,6 @@ namespace Beware.Utilities {
                     bool colored = false;
                     for (int i = 0; i <= borderWidth; i++) {
                         if (x == i || y == i || x == texture.Width - 1 - i || y == texture.Height - 1 - i) {
-                            //colors[x + y * texture.Width] = borderColor;
                             if (i % 4 == 0)
                                 colors[x + y * texture.Width] = borderColor;
                             else

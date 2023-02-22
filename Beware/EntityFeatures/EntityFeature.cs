@@ -10,7 +10,9 @@ namespace Beware.EntityFeatures {
             this.Sprite = sprite;
         }
 
-        public abstract void Update();
-        public abstract void Draw();
+        public virtual void Update() { }
+        public virtual void Draw() {
+            Sprite.Draw(Entity.Engine);
+        }
     }
 }

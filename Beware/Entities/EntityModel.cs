@@ -1,14 +1,12 @@
 ﻿using Beware.Behaviours;
 using Beware.EntityFeatures;
 using Beware.Enums;
-using Beware.ExtensionSupport;
 using Beware.Utilities;
-using Microsoft.Xna.Framework;
 
 namespace Beware.Entities {
     public abstract class EntityModel {
         public bool IsExpired;
-        private readonly int baseImpactDamage;
+        public readonly int ImpactDamage;
 
         public Sprite Sprite;
         public Engine Engine;
@@ -17,7 +15,6 @@ namespace Beware.Entities {
 
         public Shield Shield { get; set; } = null;
         public virtual HitCircle CollisionCircle { get { return new HitCircle(Engine.Position, Sprite.Radius / 2); } }
-        public Vector2 ImpactDamage { get { return this.Engine.Velocity; } }
 
         protected IBehaviour[] behaviours = new IBehaviour[5];
 
@@ -25,7 +22,7 @@ namespace Beware.Entities {
             this.Engine = engine;
             this.Sprite = sprite;
             this.Health = new Health(startingHealth);
-            this.baseImpactDamage = startingImpactDamage;
+            this.ImpactDamage = startingImpactDamage;
         }
 
         public virtual void Update() {
@@ -36,8 +33,8 @@ namespace Beware.Entities {
             }
         }
 
-        public virtual void Hit(Vector2 damage) {
-            this.Health.TakeDamage(this.Engine.Velocity.GetDamage(damage, baseImpactDamage));
+        public virtual void Hit(int damage = 1) {
+            this.Health.TakeDamage(damage);
         }
 
         public virtual void SetBehaviour(BehaviourCategory category, IBehaviour behaviour) {

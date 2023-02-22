@@ -32,7 +32,7 @@ namespace Beware.Behaviours {
             }
         }
 
-        IEnumerable<int> FollowPlayer(EnemyFollowerModel entity, float acceleration = 1.0f) {
+        IEnumerable<int> FollowPlayer(EnemyFollowerModel entity, float acceleration = 0.5f) {
             while (true) {
                 if (!PlayerModel.Instance.IsExpired) {
                     entity.Engine.Velocity += (PlayerModel.Instance.Engine.Position - entity.Engine.Position).ScaleTo(acceleration);

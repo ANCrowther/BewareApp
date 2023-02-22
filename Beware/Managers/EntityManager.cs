@@ -122,7 +122,7 @@ namespace Beware.Managers {
             // Collisions between player and droppedItems
             for (int i = 0; i < DroppedItemManager.items.Count; i++) {
                 if (DroppedItemManager.items[i].IsExpired == false && PlayerModel.Instance.CollisionCircle.Intersects(DroppedItemManager.items[i].CollisionCircle)) {
-                    DroppedItemManager.items[i].Hit(Vector2.Zero);
+                    DroppedItemManager.items[i].Hit();
                     break;
                 }
             }

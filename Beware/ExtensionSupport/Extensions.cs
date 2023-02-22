@@ -23,11 +23,5 @@ namespace Beware.ExtensionSupport {
         public static bool Intersects(this HitCircle entity, HitCircle otherEntity) {
             return Vector2.Distance(entity.Position, otherEntity.Position) < (entity.Radius + otherEntity.Radius);
         }
-
-        public static int GetDamage(this Vector2 vector, Vector2 damage, int baseDamage) {
-            int result = (int)(vector + damage).Length();
-            result = Math.Abs(result) + baseDamage;
-            return (result >= 1) ? result : baseDamage;
-        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Beware.Entities;
-using Beware.ExtensionSupport;
+﻿using Beware.ExtensionSupport;
 using Microsoft.Xna.Framework;
 
 namespace Beware.EntityFeatures {
@@ -12,10 +11,6 @@ namespace Beware.EntityFeatures {
         public float MinSpeed { get; private set; }
         public float CurrentSpeed { get; private set; }
         public bool IsBoosting { get; set; } = false;
-
-        public Engine(float maxSpeed = 12.0f, float minSpeed = 6.0f) : base() {
-            SetSpeed(maxSpeed, minSpeed);
-        }
 
         public Engine(Vector2 position, Vector2 velocity, float maxSpeed = 8.0f, float minSpeed = 3.0f) : base() {
             Velocity = velocity;
@@ -32,14 +27,6 @@ namespace Beware.EntityFeatures {
 
         public void SwitchSpeed() {
             CurrentSpeed = (CurrentSpeed == MaxSpeed) ? MinSpeed : MaxSpeed;
-        }
-
-        public override void Update() {
-            //throw new System.NotImplementedException();
-        }
-
-        public override void Draw() {
-            //throw new System.NotImplementedException();
         }
     }
 }

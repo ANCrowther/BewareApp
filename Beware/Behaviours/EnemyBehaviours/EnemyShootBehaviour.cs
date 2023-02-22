@@ -12,27 +12,17 @@ namespace Beware.Behaviours {
 
         public void Update(EntityModel entity) {
             if (cooldownRemaining <= 0) {
-                ResetCooldown();
+                cooldownRemaining = cooldownFrames;
 
                 float aimAngle = entity.Engine.Orientation;
                 Quaternion aimQuat = Quaternion.CreateFromYawPitchRoll(0, 0, aimAngle);
-                Vector2 vel = MathUtil.FromPolar(aimAngle, 11f);
+                Vector2 vel = MathUtil.FromPolar(aimAngle, Values.BulletSpeed);
                 Vector2 offset = Vector2.Transform(new Vector2(25, -8), aimQuat);
 
                 EntityManager.Add(AmmoBuilder.Factory(AmmoType.EnemyBullet, entity.Engine.Position + offset, vel));
             }
 
-            UpdateCooldown();
-        }
-
-        private void ResetCooldown() {
-            cooldownRemaining = cooldownFrames;
-        }
-
-        private void UpdateCooldown() {
-            if (cooldownRemaining > 0) {
-                cooldownRemaining--;
-            }
+            cooldownRemaining--;
         }
     }
 }
