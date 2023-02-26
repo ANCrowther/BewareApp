@@ -26,7 +26,7 @@ namespace Beware.Entities {
         }
 
         private PlayerModel(int startingHealth = 100, int startingImpactDamage = 5) 
-            : base(new Engine(ViewportManager.GetWindowSize(View.GamePlay) / 2, Vector2.Zero), new Sprite(EntityArt.Player1, 0.3f), startingHealth, startingImpactDamage) {
+            : base(new Engine(ViewportManager.GetWindowSize(View.GamePlay) / 2, Vector2.Zero), new Sprite(EntityArtType.Player1, 0.3f), startingHealth, startingImpactDamage) {
             Health.OnDeath += delegate { this.Die(); };
             Health.OnHit += delegate { this.Health.ResetHealthBarFramesUntilColorChange(); };
             switchSpecial = new SwitchSpecialBehaviour();

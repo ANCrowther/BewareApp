@@ -1,4 +1,5 @@
 ﻿using Beware.Entities;
+using Beware.Enums;
 using Beware.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -42,12 +43,12 @@ namespace Beware.Utilities {
 
                 if (score > 0) {
                     digit = Helpers.GetDigit(print);
-                    score = score / 10;
+                    score /=  10;
                     print = score % 10;
                 }
 
                 BewareGame.Instance._spriteBatch.Draw(digit, position, null, Color.White, 0, new Vector2(digit.Width, digit.Height) / 2.0f, 0.3f, 0, 0.0f);
-                position.X = position.X - 50;
+                position.X -= 50;
             }
         }
 
@@ -57,7 +58,7 @@ namespace Beware.Utilities {
 
         public static void DrawScoreForNintendo() {
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Score}", new Vector2(25, ViewportManager.GameboardView.Height - 50), Color.Yellow);
-            BewareGame.Instance._spriteBatch.Draw(EntityArt.Player1, new Vector2(ViewportManager.GameboardView.Width - 50, ViewportManager.GameboardView.Height - 40), null, Color.Red, PlayerModel.Instance.Engine.Orientation, PlayerModel.Instance.Sprite.Size / 2f, 1.0f, 0, 0.3f);
+            BewareGame.Instance._spriteBatch.Draw(EntityArt.GetImage(EntityArtType.Player1), new Vector2(ViewportManager.GameboardView.Width - 50, ViewportManager.GameboardView.Height - 40), null, Color.Red, PlayerModel.Instance.Engine.Orientation, PlayerModel.Instance.Sprite.Size / 2f, 1.0f, 0, 0.3f);
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{GameRound}", new Vector2(ViewportManager.GameboardView.Width - 50, ViewportManager.GameboardView.Height - 50), Color.Yellow);
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{EnemyCount}", new Vector2(ViewportManager.GameboardView.Width / 2, ViewportManager.GameboardView.Height - 50), Color.Yellow);
         }

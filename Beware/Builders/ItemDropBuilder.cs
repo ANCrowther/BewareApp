@@ -10,13 +10,13 @@ namespace Beware.Builders {
         public static EntityModel Factory(DroppedItemType selection, Vector2 position, Vector2 velocity) {
             switch (selection) {
                 case DroppedItemType.SabotAmmoDrop:
-                    DroppedItemModel droppedAmmo = new DroppedSabotAmmo(new Engine(position, velocity), new Sprite(EntityArt.AmmoDrop, 0.25f));
+                    DroppedItemModel droppedAmmo = new DroppedSabotAmmo(new Engine(position, velocity), new Sprite(EntityArtType.AmmoDrop, 0.25f));
                     droppedAmmo.SetBehaviour(BehaviourCategory.Move, new DroppedItemMovementBehaviour());
                     return droppedAmmo;
                 case DroppedItemType.RegularShieldDrop:
 
                 default:
-                    DroppedItemModel defaultDrop = new DroppedSabotAmmo(new Engine(position, velocity), new Sprite(Art.BlueStarBurst));
+                    DroppedItemModel defaultDrop = new DroppedSabotAmmo(new Engine(position, velocity), new Sprite(EntityArtType.AmmoDrop, 0.25f));
                     defaultDrop.SetBehaviour(BehaviourCategory.Move, new DroppedItemMovementBehaviour());
                     return defaultDrop;
             }

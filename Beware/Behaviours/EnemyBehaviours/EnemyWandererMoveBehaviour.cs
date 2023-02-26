@@ -46,7 +46,7 @@ namespace Beware.Behaviours {
                     entity.Engine.Velocity += MathUtil.FromPolar(direction, 0.4f);
                     entity.Engine.Orientation -= 0.05f;
                     var bounds = ViewportManager.GameboardView.Bounds;
-                    bounds.Inflate(-entity.Sprite.Image.Width / 2 - 1, -entity.Sprite.Image.Height / 2 - 1);
+                    bounds.Inflate(-entity.Sprite.Size.X / 2 - 1, -entity.Sprite.Size.Y / 2 - 1);
 
                     if (!bounds.Contains(entity.Engine.Position.ToPoint())) {
                         direction = (ViewportManager.GetWindowSize(View.GamePlay) / 2 - entity.Engine.Position).ToAngle() + random.NextFloat(-MathHelper.PiOver2, MathHelper.PiOver2);

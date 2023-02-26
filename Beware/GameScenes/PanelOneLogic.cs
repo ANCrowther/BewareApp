@@ -22,10 +22,10 @@ namespace Beware.GameScenes {
             centerButtonPosition = new Vector2(centerThumbStickPosition.X, centerThumbStickPosition.Y + 250);
 
             if (ViewportManager.CurrentLayout == ViewportLayout.NoPanel) {
-                shieldSprite = new Sprite(EntityArt.Shield);
-                gunSprite = new Sprite(EntityArt.MainGun);
-                redBooster = new Sprite(EntityArt.RedBooster);
-                blueBooster = new Sprite(EntityArt.BlueBooster);
+                shieldSprite = new Sprite(EntityArtType.Shield);
+                gunSprite = new Sprite(EntityArtType.MainGun);
+                redBooster = new Sprite(EntityArtType.RedBooster);
+                blueBooster = new Sprite(EntityArtType.BlueBooster);
                 ResetFrameBorder();
             }
         }
