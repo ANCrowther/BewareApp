@@ -33,7 +33,7 @@ namespace Beware.Entities {
             }
         }
 
-        public virtual void Hit(int damage = 1) {
+        public virtual void Hit(int damage) {
             this.Health.TakeDamage(damage);
         }
 

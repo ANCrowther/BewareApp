@@ -6,7 +6,7 @@ namespace Beware.Entities {
         public DroppedSabotAmmo(Engine engine, Sprite sprite, int startingHealth = 1, int startingImpactDamage = 0)
             : base(engine, sprite, startingHealth, startingImpactDamage) { }
 
-        public override void Hit(int damage) {
+        public override void Hit(int damage = 1) {
             PlayerStatus.SpecialAmmoCount += 10;
             IsExpired = true;
         }

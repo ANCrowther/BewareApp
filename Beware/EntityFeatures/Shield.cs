@@ -10,7 +10,7 @@ namespace Beware.EntityFeatures {
         protected Health health;
         private readonly int colorCount = 0;
 
-        public virtual HitCircle CollisionCircle { get { return new HitCircle(Entity.Engine.Position, Sprite.Radius / 6); } }
+        public virtual HitCircle CollisionCircle { get { return new HitCircle(Entity.Engine.Position, Sprite.Radius / 3); } }
 
         public Shield(EntityModel entity, int startingHealth = 100, int startingImpactDamage = 15) 
             : base(entity, new Sprite(EntityArt.Shield)) {
