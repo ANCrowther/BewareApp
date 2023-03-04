@@ -19,7 +19,9 @@ namespace Beware.GameScenes {
 
         private readonly List<(string heading, VolumeType name)> volumeList;
         private (string heading, VolumeType name) activeVolume;
+        
         private bool isActive = false;
+        private string title = $"GAME SETTINGS";
 
         public GameSettingsLogic() : base(BewareGame.Instance) {
             settingList = new List<(string heading, GameSettings name)> {
@@ -104,10 +106,10 @@ namespace Beware.GameScenes {
 
         public override void Draw(GameTime gameTime) {
             BewareGame.Instance._spriteBatch.Begin();
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareLarge, "GAME SETTINGS", new Vector2(ViewportManager.MenuView.Width / 2 - Fonts.NovaSquareLarge.MeasureString("GAME SETTINGS").X / 2, 50), Color.BlueViolet);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareLarge, title, new Vector2(ViewportManager.MenuView.Width / 2 - Fonts.NovaSquareLarge.MeasureString(title).X / 2, 50), Color.BlueViolet);
 
             DrawSettingList(new Vector2(200, ViewportManager.MenuView.Height / 6));
-            DrawGameLayoutView(new Vector2(ViewportManager.MenuView.Width * 2 / 3, ViewportManager.MenuView.Height / 4));
+            DrawGameLayoutView(new Vector2(ViewportManager.MenuView.Width * 3 / 4, ViewportManager.MenuView.Height / 4));
 
             Vector2 volumePosition = new Vector2(200, ViewportManager.MenuView.Height * 3 / 4);
             AudioManager.DrawGameSettingsView(volumePosition, activeSetting.name, activeVolume.name, isActive);

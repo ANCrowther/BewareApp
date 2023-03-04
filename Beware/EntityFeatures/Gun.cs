@@ -10,7 +10,8 @@ namespace Beware.EntityFeatures {
         public Gun(EntityModel entity, Sprite sprite) : base(entity, sprite) { }
 
         public override void Draw() {
-           Sprite.DrawGun(Entity.Engine);
+           Sprite.DrawGun(Entity.Engine, Orientation);
+           //Sprite.Draw(Entity.Engine.Position, 1.0f, Orientation);
         }
     }
 }

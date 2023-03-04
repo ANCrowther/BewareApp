@@ -26,8 +26,8 @@ namespace Beware.EntityFeatures {
             BewareGame.Instance._spriteBatch.Draw(EntityArt.GetImage(ImageType), position, null, color, orientaion, Size / 2f, scale, 0, 0);
         }
 
-        public void DrawGun(Engine engine) {
-            BewareGame.Instance._spriteBatch.Draw(EntityArt.GetImage(ImageType), engine.Position, null, color, engine.Orientation, new Vector2(Size.X / 4, Size.Y / 2), Scale, 0, 0);
+        public void DrawGun(Engine engine, float orientation) {
+            BewareGame.Instance._spriteBatch.Draw(EntityArt.GetImage(ImageType), engine.Position, null, color, orientation, new Vector2(Size.X / 4, Size.Y / 2), Scale, 0, 0);
         }
     }
 }

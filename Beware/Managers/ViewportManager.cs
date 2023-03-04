@@ -2,17 +2,16 @@
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 /*                              |--- --- --- -|- ---|   |--- -|- --- --- ---|   |--- --- --- --- ---|
  *                              |             |     |   |     |             |   | |- --- --- --- -| |
  *                              |             |     |   |     |             |   | |               | |
- *      |---|--- --- ---|---|   |       M     |  1  |   |  1  |     M       |   | |               | |
+ *      |---|--- --- ---|---|   |       M     |  1  |   |  1  |     M       |   | |       M       | |
  *      |   |           |   |   |             |     |   |     |             |   | |               | |
  *      | 1 |     M     | 2 |   |             |     |   |     |             |   | |               | |
  *      |   |--- --- ---|   |   |--- --- --- --- ---|   |--- --- --- --- ---|   | |- --- --- --- -| |
  *      |---|--- --- ---|---|   |--- --- --- --- ---|   |--- --- --- --- ---|   |--- --- --- --- ---|
- *          Nintendo                SinglePanelRight        SinglePanelLeft         NoPanel
+ *          Nintendo                RightPanel              LeftPanel                NoPanel
  */
 
 //   16:10
@@ -53,17 +52,6 @@ namespace Beware.Managers {
             ViewportLayout.Nintendo => GetControllerScale(view, picture),
             _ => GetRegularScale(view, picture)
         };
-
-        public static void ChangeDimension(Dimension dimension) {
-            switch (dimension) {
-                //case Dimension.Nintendo:
-                //    ChangeDimension(nintendoDimension);
-                //    break;
-                case Dimension.Standard:
-                    ChangeDimension(standardDimension);
-                    break;
-            }
-        }
 
         private static void ChangeDimension((int width, int height) dimension) {
             //BewareGame.Instance._graphics.PreferredBackBufferWidth = BewareGame.Instance.GraphicsDevice.DisplayMode.Width;
@@ -114,17 +102,15 @@ namespace Beware.Managers {
             _ => new Vector2(MenuView.Width, MenuView.Height)
         };
 
-        private static Viewport LoadViewport(View selection) {
-            switch (selection) {
-                case View.GamePlay: return GameboardView;
-                case View.Menu:     return MenuView;
-                case View.Ticker:   return TickerView;
-                case View.HUD:      
-                case View.InfoOne:  return InfoOneView;
-                case View.InfoTwo:  return InfoTwoView;
-                default:            return Viewport;
-            }
-        }
+        private static Viewport LoadViewport(View selection) => selection switch {
+            View.GamePlay => GameboardView,
+            View.Menu => MenuView,
+            View.Ticker => TickerView,
+            View.HUD => InfoOneView,
+            View.InfoOne => InfoOneView,
+            View.InfoTwo => InfoTwoView,
+            _ => Viewport
+        };
 
         private static void CreateNintendoView() {
             MenuView = Viewport;
@@ -142,7 +128,7 @@ namespace Beware.Managers {
 
             GameboardView = new Viewport {
                 X = InfoOneView.X + InfoOneView.Width,
-                Y = InfoOneView.Y + InfoOneView.Height,
+                Y = InfoOneView.Y,
                 Width = 1440,
                 Height = InfoOneView.Height - 100
             };
@@ -160,64 +146,58 @@ namespace Beware.Managers {
                 Width = InfoOneView.Width,
                 Height = InfoOneView.Height
             };
-
-            //GameboardView = new Viewport {
-            //    X = 366,
-            //    Y = 100,
-            //    Width = 1440,
-            //    Height = 785
-            //};
-
-            //InfoOneView = new Viewport {
-            //    X = 50,
-            //    Y = GameboardView.Y,
-            //    Width = 315,
-            //    Height = 885
-            //};
-
-            //InfoTwoView = new Viewport {
-            //    X = 1805,
-            //    Y = GameboardView.Y,
-            //    Width = 315,
-            //    Height = 885
-            //};
-
-            //TickerView = new Viewport {
-            //    X = GameboardView.X,
-            //    Y = 885,
-            //    Width = GameboardView.Width,
-            //    Height = 100
-            //};
         }
 
         private static void CreateLeftPanelView() {
             MenuView = Viewport;
             CurrentLayout = ViewportLayout.LeftPanel;
 
-            GameboardView = new Viewport {
-                X = Viewport.Width / 5,
+            InfoOneView = new Viewport {
+                X = 0,
                 Y = 0,
-                Width = Viewport.Width - (Viewport.Width / 3),
+                Width = (Viewport.Width / 4),
+                Height = Viewport.Height - 100
+            };
+
+            GameboardView = new Viewport {
+                X = InfoOneView.Width,
+                Y = 0,
+                Width = Viewport.Width - (Viewport.Width / 4),
                 Height = Viewport.Height - 100
             };
 
             TickerView = new Viewport {
-                X = GameboardView.X,
-                Y = GameboardView.Height,
-                Width = GameboardView.Width,
-                Height = GameboardView.Height
-            };
-
-            InfoOneView = new Viewport {
                 X = 0,
-                Y = 0,
-                Width = GameboardView.X,
-                Height = Viewport.Height
+                Y = GameboardView.Height,
+                Width = Viewport.Width,
+                Height = 100
             };
         }
 
         private static void CreateRightPanelView() {
-            
+            MenuView = Viewport;
+            CurrentLayout = ViewportLayout.RightPanel;
+
+            GameboardView = new Viewport {
+                X = 0,
+                Y = 0,
+                Width = (Viewport.Width * 3 / 4),
+                Height = Viewport.Height - 100
+            };
+
+            InfoOneView = new Viewport {
+                X = GameboardView.Width,
+                Y = 0,
+                Width = Viewport.Width - GameboardView.Width,
+                Height = Viewport.Height - 100
+            };
+
+            TickerView = new Viewport {
+                X = 0,
+                Y = GameboardView.Height,
+                Width = Viewport.Width,
+                Height = 100
+            };
         }
 
         private static void CreateNoPanelView() {

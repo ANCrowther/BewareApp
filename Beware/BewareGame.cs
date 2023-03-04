@@ -42,7 +42,7 @@ namespace Beware {
             // Game scenes handles all the updates
             GameTime = gameTime;
             Input.Update();
-            AudioManager.Update();
+            //AudioManager.Update();
             TimeKeeper.Update();
             base.Update(gameTime);
         }
