@@ -3,18 +3,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Beware.Utilities {
     static class Art {
-        public static Texture2D FourPointStar { get; private set; }
         public static Texture2D BlueSquare { get; private set; }
         public static Texture2D RedSquare { get; private set; }
-        public static Texture2D BluePointer { get; private set; }
-        public static Texture2D RedPointer { get; private set; }
-        public static Texture2D RedStarBurst { get; private set; }
-        public static Texture2D BlueStarBurst { get; private set; }
 
         public static Texture2D Mute { get; private set; }
-        public static Texture2D Layout1 { get; private set; }
-        public static Texture2D Layout2 { get; private set; }
-        public static Texture2D Layout3 { get; private set; }
+        public static Texture2D NintendoLayout { get; private set; }
+        public static Texture2D LeftPanelLayout { get; private set; }
+        public static Texture2D RightPanelLayout { get; private set; }
+        public static Texture2D NoPanelLayout { get; private set; }
 
         // Used by TimeKeeper and ScoreKeeper
         public static Texture2D One { get; private set; }
@@ -28,21 +24,18 @@ namespace Beware.Utilities {
         public static Texture2D Nine { get; private set; }
         public static Texture2D Zero { get; private set; }
         public static Texture2D Colon { get; private set; }
-        public static Texture2D Comma { get; private set; }
+        //public static Texture2D Comma { get; private set; }
 
         public static void Initialize(ContentManager content) {
-            FourPointStar = content.Load<Texture2D>(@"Sprites\four_point_star");
             BlueSquare = content.Load<Texture2D>(@"Sprites\blue_square");
             RedSquare = content.Load<Texture2D>(@"Sprites\red_square");
-            BluePointer = content.Load<Texture2D>(@"Sprites\blue_pointer");
-            RedPointer = content.Load<Texture2D>(@"Sprites\red_pointer");
-            RedStarBurst = content.Load<Texture2D>(@"Sprites\red_starBurst");
-            BlueStarBurst = content.Load<Texture2D>(@"Sprites\blue_starBurst");
 
             Mute = content.Load<Texture2D>(@"Sprites\mute");
-            Layout1 = content.Load<Texture2D>(@"Sprites\layout1");
-            Layout2 = content.Load<Texture2D>(@"Sprites\layout2");
-            Layout3 = content.Load<Texture2D>(@"Sprites\layout3");
+
+            NintendoLayout = content.Load<Texture2D>(@"Sprites\layout_nintendo");
+            LeftPanelLayout = content.Load<Texture2D>(@"Sprites\layout_left_panel");
+            RightPanelLayout = content.Load<Texture2D>(@"Sprites\layout_right_panel");
+            NoPanelLayout = content.Load<Texture2D>(@"Sprites\layout_no_panel");
 
             One = content.Load<Texture2D>(@"Numbers\one");
             Two = content.Load<Texture2D>(@"Numbers\two");
@@ -55,7 +48,7 @@ namespace Beware.Utilities {
             Nine = content.Load<Texture2D>(@"Numbers\nine");
             Zero = content.Load<Texture2D>(@"Numbers\zero");
             Colon = content.Load<Texture2D>(@"Numbers\glow_colon");
-            Comma = content.Load<Texture2D>(@"Numbers\glow_comma");
+            //Comma = content.Load<Texture2D>(@"Numbers\glow_comma");
         }
     }
 }

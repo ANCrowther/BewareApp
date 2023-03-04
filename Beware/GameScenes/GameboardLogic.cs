@@ -52,9 +52,6 @@ namespace Beware.GameScenes {
             BewareGame.Instance._spriteBatch.End();
 
             BewareGame.Instance._spriteBatch.Begin(SpriteSortMode.Texture, BlendState.Additive);
-            if (ViewportManager.CurrentLayout == ViewportLayout.Parallel) {
-                ControllerManager.Draw(centerThumbStickPosition, centerButtonPosition, Helpers.GetDirection(Mode.Move), Mode.Move);
-            }
 
             if (ViewportManager.CurrentLayout == ViewportLayout.Nintendo) {
                 ControllerManager.Draw(centerThumbStickPosition, centerButtonPosition, Helpers.GetDirection(Mode.Move), Mode.Move);

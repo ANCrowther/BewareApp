@@ -2,16 +2,17 @@
 using Beware.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
-/*      |---|--- --- --- ---|   |---|--- --- ---|---|                           |--- --- --- -|- ---|   |--- -|- --- --- ---|   |--- --- --- --- ---|
- *      |   |               |   |   |           |   |                           |             |     |   |     |             |   | |- --- --- --- -| |
- *      |   |       M       |   |   |     M     |   |                           |             |     |   |     |             |   | |               | |
- *      |   |               |   |   |           |   |   |---|--- --- ---|---|   |       M     |  1  |   |  1  |     M       |   | |               | |
- *      | 1 |--- --- --- ---|   | 1 |           | 2 |   |   |           |   |   |             |     |   |     |             |   | |               | |
- *      |   |--- --- --- ---|   |   |           |   |   | 1 |     M     | 2 |   |             |     |   |     |             |   | |               | |
- *      |   |       2       |   |   |--- --- ---|   |   |   |--- --- ---|   |   |--- --- --- --- ---|   |--- --- --- --- ---|   | |- --- --- --- -| |
- *      |---|--- --- --- ---|   |---|--- --- ---|---|   |---|--- --- ---|---|   |--- --- --- --- ---|   |--- --- --- --- ---|   |--- --- --- --- ---|
- *          Unbalanced              Parallel                Nintendo                SinglePanelRight        SinglePanelLeft         NoPanel
+/*                              |--- --- --- -|- ---|   |--- -|- --- --- ---|   |--- --- --- --- ---|
+ *                              |             |     |   |     |             |   | |- --- --- --- -| |
+ *                              |             |     |   |     |             |   | |               | |
+ *      |---|--- --- ---|---|   |       M     |  1  |   |  1  |     M       |   | |               | |
+ *      |   |           |   |   |             |     |   |     |             |   | |               | |
+ *      | 1 |     M     | 2 |   |             |     |   |     |             |   | |               | |
+ *      |   |--- --- ---|   |   |--- --- --- --- ---|   |--- --- --- --- ---|   | |- --- --- --- -| |
+ *      |---|--- --- ---|---|   |--- --- --- --- ---|   |--- --- --- --- ---|   |--- --- --- --- ---|
+ *          Nintendo                SinglePanelRight        SinglePanelLeft         NoPanel
  */
 
 //   16:10
@@ -36,7 +37,7 @@ namespace Beware.Managers {
             set { BewareGame.Instance.GraphicsDevice.Viewport = value; }
         }
 
-        private static (int width, int height) nintendoDimension = (2200, 1200);
+        private static (int width, int height) nintendoDimension = (2070,885);
         private static (int width, int height) standardDimension = (2880, 1620);
 
         public static void Initialize() {
@@ -55,9 +56,9 @@ namespace Beware.Managers {
 
         public static void ChangeDimension(Dimension dimension) {
             switch (dimension) {
-                case Dimension.Nintendo:
-                    ChangeDimension(nintendoDimension);
-                    break;
+                //case Dimension.Nintendo:
+                //    ChangeDimension(nintendoDimension);
+                //    break;
                 case Dimension.Standard:
                     ChangeDimension(standardDimension);
                     break;
@@ -90,17 +91,14 @@ namespace Beware.Managers {
 
         public static void ChangeLayout(ViewportLayout layout) {
             switch (layout) {
-                case ViewportLayout.Unbalanced:
-                    CreateUnbalancedView();
-                    break;
-                case ViewportLayout.Parallel:
-                    CreateParallelView();
-                    break;
                 case ViewportLayout.Nintendo:
                     CreateNintendoView();
                     break;
-                case ViewportLayout.SinglePanelLeft:
-                    CreateSinglePanelLeftView();
+                case ViewportLayout.LeftPanel:
+                    CreateLeftPanelView();
+                    break;
+                case ViewportLayout.RightPanel:
+                    CreateRightPanelView();
                     break;
                 case ViewportLayout.NoPanel:
                     CreateNoPanelView();
@@ -128,108 +126,73 @@ namespace Beware.Managers {
             }
         }
 
-        private static void CreateUnbalancedView() {
-            MenuView = Viewport;
-            CurrentLayout = ViewportLayout.Unbalanced;
-
-            GameboardView = new Viewport {
-                X = Viewport.Width / 6,
-                Y = 0,
-                Width = Viewport.Width - (Viewport.Width / 6),
-                Height = Viewport.Height - 100 - (Viewport.Height / 6)
-            };
-
-            InfoOneView = new Viewport {
-                X = 0,
-                Y = 0,
-                Width = GameboardView.X,
-                Height = Viewport.Height
-            };
-
-            TickerView = new Viewport {
-                X = Viewport.Width / 6,
-                Y = GameboardView.Height,
-                Width = GameboardView.Width,
-                Height = Viewport.Height - (Viewport.Height - 100)
-            };
-
-            InfoTwoView = new Viewport {
-                X = Viewport.Width / 6,
-                Y = GameboardView.Height + TickerView.Height,
-                Width = GameboardView.Width,
-                Height = Viewport.Height - GameboardView.Height - TickerView.Height
-            };
-        }
-
-        private static void CreateParallelView() {
-            MenuView = Viewport;
-            CurrentLayout = ViewportLayout.Parallel;
-
-            GameboardView = new Viewport {
-                X = Viewport.Width / 6,
-                Y = 0,
-                Width = Viewport.Width - (Viewport.Width / 3),
-                Height = Viewport.Height - 100
-            };
-
-            TickerView = new Viewport {
-                X = GameboardView.X,
-                Y = GameboardView.Height,
-                Width = GameboardView.Width,
-                Height = GameboardView.Height
-            };
-
-            InfoOneView = new Viewport {
-                X = 0,
-                Y = 0,
-                Width = GameboardView.X,
-                Height = Viewport.Height
-            };
-
-            InfoTwoView = new Viewport {
-                X = Viewport.Width - GameboardView.X,
-                Y = 0,
-                Width = GameboardView.X,
-                Height = Viewport.Height
-            };
-        }
-
         private static void CreateNintendoView() {
             MenuView = Viewport;
             CurrentLayout = ViewportLayout.Nintendo;
 
-            GameboardView = new Viewport {
-                X = 366,
-                Y = 100,
-                Width = 1440,
-                Height = 785
-            };
+            int tempX = (standardDimension.width - nintendoDimension.width) / 2;
+            int tempY = (standardDimension.height - nintendoDimension.height) / 2;
 
             InfoOneView = new Viewport {
-                X = 50,
-                Y = GameboardView.Y,
+                X = tempX,
+                Y = tempY,
                 Width = 315,
                 Height = 885
             };
 
-            InfoTwoView = new Viewport {
-                X = 1805,
-                Y = GameboardView.Y,
-                Width = 315,
-                Height = 885
+            GameboardView = new Viewport {
+                X = InfoOneView.X + InfoOneView.Width,
+                Y = InfoOneView.Y + InfoOneView.Height,
+                Width = 1440,
+                Height = InfoOneView.Height - 100
             };
 
             TickerView = new Viewport {
                 X = GameboardView.X,
-                Y = 885,
+                Y = GameboardView.Y + GameboardView.Height,
                 Width = GameboardView.Width,
                 Height = 100
             };
+
+            InfoTwoView = new Viewport {
+                X = GameboardView.X + GameboardView.Width,
+                Y = GameboardView.Y,
+                Width = InfoOneView.Width,
+                Height = InfoOneView.Height
+            };
+
+            //GameboardView = new Viewport {
+            //    X = 366,
+            //    Y = 100,
+            //    Width = 1440,
+            //    Height = 785
+            //};
+
+            //InfoOneView = new Viewport {
+            //    X = 50,
+            //    Y = GameboardView.Y,
+            //    Width = 315,
+            //    Height = 885
+            //};
+
+            //InfoTwoView = new Viewport {
+            //    X = 1805,
+            //    Y = GameboardView.Y,
+            //    Width = 315,
+            //    Height = 885
+            //};
+
+            //TickerView = new Viewport {
+            //    X = GameboardView.X,
+            //    Y = 885,
+            //    Width = GameboardView.Width,
+            //    Height = 100
+            //};
         }
 
-        private static void CreateSinglePanelLeftView() {
+        private static void CreateLeftPanelView() {
             MenuView = Viewport;
-            CurrentLayout = ViewportLayout.SinglePanelLeft;
+            CurrentLayout = ViewportLayout.LeftPanel;
 
             GameboardView = new Viewport {
                 X = Viewport.Width / 5,
@@ -251,6 +214,10 @@ namespace Beware.Managers {
                 Width = GameboardView.X,
                 Height = Viewport.Height
             };
+        }
+
+        private static void CreateRightPanelView() {
+            
         }
 
         private static void CreateNoPanelView() {

@@ -38,9 +38,7 @@ namespace Beware.GameScenes {
         public override void Draw(GameTime gameTime) {
             BewareGame.Instance._spriteBatch.Begin();
             ViewportManager.GetView(View.InfoOne);
-            if (ViewportManager.CurrentLayout == ViewportLayout.Parallel) {
-                ControllerManager.Draw(centerThumbStickPosition, centerButtonPosition, Helpers.GetDirection(Mode.Move), Mode.Move);
-            }
+
             if (ViewportManager.CurrentLayout == ViewportLayout.Nintendo) {
                 ControllerManager.Draw(centerThumbStickPosition, centerButtonPosition, Helpers.GetDirection(Mode.Move), Mode.Move);
             }

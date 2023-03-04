@@ -5,15 +5,15 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Linq;
 
-/*      |---|--- --- --- ---|           |---|--- --- ---|---|
- *      |   |               |           |   |           |   |           |---|--- --- ---|---|
- *      |   |       M       |           |   |     M     |   |           |   |           |   |
- *      |   |               |           |   |           |   |           | 1 |     M     | 2 |
- *      | 1 |--- --- --- ---|           | 1 |           | 2 |           |   |--- --- ---|   |
- *      |   |--- --- --- ---|           |   |           |   |           |---|--- --- ---|---|
- *      |   |       2       |           |   |--- --- ---|   |               Layout 3
- *      |---|--- --- --- ---|           |---|--- --- ---|---|
- *          Layout 1                        Layout 2
+/*                              |--- --- --- -|- ---|   |--- -|- --- --- ---|   |--- --- --- --- ---|
+ *                              |             |     |   |     |             |   | |- --- --- --- -| |
+ *                              |             |     |   |     |             |   | |               | |
+ *      |---|--- --- ---|---|   |       M     |  1  |   |  1  |     M       |   | |               | |
+ *      |   |           |   |   |             |     |   |     |             |   | |               | |
+ *      | 1 |     M     | 2 |   |             |     |   |     |             |   | |               | |
+ *      |   |--- --- ---|   |   |--- --- --- --- ---|   |--- --- --- --- ---|   | |- --- --- --- -| |
+ *      |---|--- --- ---|---|   |--- --- --- --- ---|   |--- --- --- --- ---|   |--- --- --- --- ---|
+ *          Nintendo                SinglePanelRight        SinglePanelLeft         NoPanel
  */
 
 namespace Beware.Managers {
@@ -74,7 +74,7 @@ namespace Beware.Managers {
             BackgroundStationary panelTwoBackground = new BackgroundStationary(ScenesArt.ArtificialPlanet, View.InfoTwo);
             PanelTwoLogic panelTwoLogic = new PanelTwoLogic();
 
-            ViewportManager.ChangeDimension(Dimension.Standard);
+            //ViewportManager.ChangeDimension(Dimension.Standard);
             return new GameScene(tickerBackground, tickerLogic, panelOneBackground, panelOneLogic, panelTwoBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
         }
 
@@ -91,7 +91,7 @@ namespace Beware.Managers {
             BackgroundStationary tickerBackground = new BackgroundStationary(ScenesArt.GenericSpace, View.Ticker);
             TickerLogic tickerLogic = new TickerLogic();
 
-            ViewportManager.ChangeDimension(Dimension.Nintendo);
+            //ViewportManager.ChangeDimension(Dimension.Nintendo);
             return new GameScene(tickerBackground, tickerLogic, leftControllerBackground, panelOneLogic, rightControllerBackground, panelTwoLogic, gameboardBackground, gameboardLogic);
         }
 
@@ -99,21 +99,21 @@ namespace Beware.Managers {
             StartMenuComponents menuOptions = new StartMenuComponents(new Vector2(ViewportManager.MenuView.Width / 3, ViewportManager.MenuView.Height / 3));
             StartMenuLogic menuLogic = new StartMenuLogic(menuOptions);
             BackgroundStationary background = new BackgroundStationary(ScenesArt.NebulaPlanetRing, View.Menu);
-            ViewportManager.ChangeDimension(Dimension.Standard);
+            //ViewportManager.ChangeDimension(Dimension.Standard);
             return new GameScene(background, menuOptions, menuLogic);
         }
 
         private static GameScene CreatePlayerSettingWindow() {
             BackgroundStationary background = new BackgroundStationary(ScenesArt.StellarSpaceship, View.Menu);
             PlayerSettingsLogic logic = new PlayerSettingsLogic();
-            ViewportManager.ChangeDimension(Dimension.Standard);
+            //ViewportManager.ChangeDimension(Dimension.Standard);
             return new GameScene(background, logic);
         }
 
         private static GameScene CreateGameSettingWindow() {
             BackgroundStationary background = new BackgroundStationary(ScenesArt.SpacePlanetsStars, View.Menu);
             GameSettingsLogic logic = new GameSettingsLogic();
-            ViewportManager.ChangeDimension(Dimension.Standard);
+            //ViewportManager.ChangeDimension(Dimension.Standard);
             return new GameScene(background, logic);
         }
 
@@ -123,7 +123,7 @@ namespace Beware.Managers {
             }
             BackgroundStationary background = new BackgroundStationary(ScenesArt.SpaceBattleWide, View.Menu);
             GameOverLogic logic = new GameOverLogic();
-            ViewportManager.ChangeDimension(Dimension.Standard);
+            //ViewportManager.ChangeDimension(Dimension.Standard);
             return new GameScene(background, logic);
         }
 
@@ -140,7 +140,7 @@ namespace Beware.Managers {
             BackgroundStationary tickerBackground = new BackgroundStationary(ScenesArt.GenericSpace, View.Ticker);
             TickerLogic tickerLogic = new TickerLogic();
 
-            ViewportManager.ChangeDimension(Dimension.Nintendo);
+            //ViewportManager.ChangeDimension(Dimension.Nintendo);
             return new GameScene(tickerBackground, tickerLogic, background, logic, leftControllerBackground, panelOneLogic, rightControllerBackground, panelTwoLogic);
         }
     }

@@ -16,10 +16,8 @@
     public enum ViewportLayout {
         Nintendo,
         NoPanel,
-        Parallel,
-        SinglePanelLeft,
-        SinglePanelRIght,
-        Unbalanced
+        LeftPanel,
+        RightPanel
     }
 
     public enum EntityArtType {

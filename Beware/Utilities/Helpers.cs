@@ -22,7 +22,8 @@ namespace Beware.Utilities {
             7 => Art.Seven,
             8 => Art.Eight,
             9 => Art.Nine,
-            _ => Art.Comma
+            0 => Art.Zero,
+            _ => Art.Colon
         };
 
         public static Vector2 GetDirection(Mode type) {

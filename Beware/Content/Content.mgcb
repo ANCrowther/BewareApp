@@ -874,18 +874,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Black Hole.png
 
-#begin Sprites/blue_pointer.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/blue_pointer.png
-
 #begin Sprites/blue_square.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -897,18 +885,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/blue_square.png
-
-#begin Sprites/blue_starBurst.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/blue_starBurst.png
 
 #begin Sprites/booster_blue.png
 /importer:TextureImporter
@@ -982,18 +958,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/drop_shield.png
 
-#begin Sprites/four_point_star.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/four_point_star.png
-
 #begin Sprites/Glow.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1030,7 +994,7 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Laser.png
 
-#begin Sprites/layout1.png
+#begin Sprites/layout_left_panel.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1040,9 +1004,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/layout1.png
+/build:Sprites/layout_left_panel.png
 
-#begin Sprites/layout2.png
+#begin Sprites/layout_nintendo.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1052,9 +1016,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/layout2.png
+/build:Sprites/layout_nintendo.png
 
-#begin Sprites/layout3.png
+#begin Sprites/layout_no_panel.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1064,7 +1028,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/layout3.png
+/build:Sprites/layout_no_panel.png
+
+#begin Sprites/layout_right_panel.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/layout_right_panel.png
 
 #begin Sprites/maingun.png
 /importer:TextureImporter
@@ -1138,18 +1114,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprites/Pointer.png
 
-#begin Sprites/red_pointer.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/red_pointer.png
-
 #begin Sprites/red_square.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1161,18 +1125,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/red_square.png
-
-#begin Sprites/red_starBurst.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/red_starBurst.png
 
 #begin Sprites/SabotRound.png
 /importer:TextureImporter

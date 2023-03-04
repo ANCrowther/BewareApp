@@ -12,9 +12,11 @@ namespace Beware.GameScenes {
     class GameSettingsLogic: DrawableGameComponent {
         private readonly List<(string heading, GameSettings name)> settingList;
         private (string heading, GameSettings name) activeSetting;
+
         private readonly List<(Texture2D image, ViewportLayout name)> layoutList;
         private (Texture2D image, ViewportLayout name) activeLayout;
         private Texture2D activeLayoutFrame;
+
         private readonly List<(string heading, VolumeType name)> volumeList;
         private (string heading, VolumeType name) activeVolume;
         private bool isActive = false;
@@ -27,11 +29,12 @@ namespace Beware.GameScenes {
             activeSetting = ("Layout", GameSettings.Layout);
 
             layoutList = new List<(Texture2D image, ViewportLayout name)> {
-                (Art.Layout1, ViewportLayout.Unbalanced),
-                (Art.Layout2, ViewportLayout.Parallel),
-                (Art.Layout3, ViewportLayout.Nintendo)
+                (Art.NoPanelLayout, ViewportLayout.NoPanel),
+                (Art.LeftPanelLayout, ViewportLayout.LeftPanel),
+                (Art.RightPanelLayout, ViewportLayout.RightPanel),
+                (Art.NintendoLayout, ViewportLayout.Nintendo)
             };
-            activeLayout = (Art.Layout1, ViewportLayout.Unbalanced);
+            activeLayout = (Art.NoPanelLayout, ViewportLayout.NoPanel);
             ResetActiveLayoutFrameBorder();
 
             volumeList = new List<(string heading, VolumeType name)> {
@@ -66,14 +69,17 @@ namespace Beware.GameScenes {
 
         private void GetCurrentLayout() {
             switch (ViewportManager.CurrentLayout) {
-                case ViewportLayout.Unbalanced:
-                    activeLayout = (Art.Layout1, ViewportLayout.Unbalanced);
+                case ViewportLayout.NoPanel:
+                    activeLayout = (Art.NoPanelLayout, ViewportLayout.NoPanel);
                     break;
-                case ViewportLayout.Parallel:
-                    activeLayout = (Art.Layout2, ViewportLayout.Parallel);
+                case ViewportLayout.LeftPanel:
+                    activeLayout = (Art.LeftPanelLayout, ViewportLayout.LeftPanel);
+                    break;
+                case ViewportLayout.RightPanel:
+                    activeLayout = (Art.RightPanelLayout, ViewportLayout.RightPanel);
                     break;
                 case ViewportLayout.Nintendo:
-                    activeLayout = (Art.Layout3, ViewportLayout.Nintendo);
+                    activeLayout = (Art.NintendoLayout, ViewportLayout.Nintendo);
                     break;
             }
         }
