@@ -1,6 +1,4 @@
 ﻿using Beware.Entities;
-using Beware.Enums;
-using Beware.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -54,13 +52,6 @@ namespace Beware.Utilities {
 
         public static void DrawNintendo(Vector2 position) {
             BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"Round {GameRound}", position, Color.MintCream);
-        }
-
-        public static void DrawScoreForNintendo() {
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{Score}", new Vector2(25, ViewportManager.GameboardView.Height - 50), Color.Yellow);
-            BewareGame.Instance._spriteBatch.Draw(EntityArt.GetImage(EntityArtType.Player1), new Vector2(ViewportManager.GameboardView.Width - 50, ViewportManager.GameboardView.Height - 40), null, Color.Red, PlayerModel.Instance.Engine.Orientation, PlayerModel.Instance.Sprite.Size / 2f, 1.0f, 0, 0.3f);
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{GameRound}", new Vector2(ViewportManager.GameboardView.Width - 50, ViewportManager.GameboardView.Height - 50), Color.Yellow);
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareSmall, $"{EnemyCount}", new Vector2(ViewportManager.GameboardView.Width / 2, ViewportManager.GameboardView.Height - 50), Color.Yellow);
         }
 
         public static void DrawGameOverScore(Vector2 position) {

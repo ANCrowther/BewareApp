@@ -9,6 +9,12 @@
         Volume
     }
 
+    public enum GameSettingsMenu {
+        Main,
+        Layout,
+        Volume
+    }
+
     public enum PlayerSettings {
         Gamepad,
         Generic,

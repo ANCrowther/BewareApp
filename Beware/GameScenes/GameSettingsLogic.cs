@@ -19,11 +19,15 @@ namespace Beware.GameScenes {
 
         private readonly List<(string heading, VolumeType name)> volumeList;
         private (string heading, VolumeType name) activeVolume;
-        
+
+        private GameSettingsMenu activeMenu;
+
         private bool isActive = false;
-        private string title = $"GAME SETTINGS";
+        private string windowTitle = $"GAME SETTINGS";
 
         public GameSettingsLogic() : base(BewareGame.Instance) {
+            activeMenu = GameSettingsMenu.Main;
+
             settingList = new List<(string heading, GameSettings name)> {
                 ("Layout", GameSettings.Layout),
                 ("Volume Levels", GameSettings.Volume)
@@ -53,20 +57,27 @@ namespace Beware.GameScenes {
             if (Input.WasButtonPressed(ControlMap.Back)) {
                 SceneManager.SwitchScene(SceneManager.MenuWindow);
             }
-
-            if (Input.WasButtonPressed(ControlMap.Enter) || Input.WasButtonPressed(Buttons.A)) {
+            if (Input.WasButtonPressed(Buttons.LeftThumbstickLeft) || Input.WasButtonPressed(Buttons.LeftThumbstickRight)) {
+                UpdateActiveList();
                 isActive = !isActive;
             }
-
-            if (isActive == false) {
-                activeSetting = settingList.MoveThroughMenu(activeSetting);
-            }
-
-            if (isActive == true) {
-                UpdateActiveSetting(activeSetting.name);
-            }
+            UpdateActiveSetting(activeMenu);
 
             base.Update(gameTime);
+        }
+
+        private void UpdateActiveList() {
+            if (activeMenu != GameSettingsMenu.Main) {
+                activeMenu = GameSettingsMenu.Main;
+            }
+            else {
+                if (activeSetting.name == GameSettings.Layout) {
+                    activeMenu = GameSettingsMenu.Layout;
+                }
+                if (activeSetting.name == GameSettings.Volume) {
+                    activeMenu = GameSettingsMenu.Volume;
+                }
+            }
         }
 
         private void GetCurrentLayout() {
@@ -86,13 +97,16 @@ namespace Beware.GameScenes {
             }
         }
 
-        private void UpdateActiveSetting(GameSettings setting) {
+        private void UpdateActiveSetting(GameSettingsMenu setting) {
             switch (setting) {
-                case GameSettings.Layout:
+                case GameSettingsMenu.Main:
+                    activeSetting = settingList.MoveThroughMenu(activeSetting);
+                    break;
+                case GameSettingsMenu.Layout:
                     activeLayout = layoutList.MoveThroughMenu(activeLayout);
                     ViewportManager.ChangeLayout(activeLayout.name);
                     break;
-                case GameSettings.Volume:
+                case GameSettingsMenu.Volume:
                     activeVolume = volumeList.MoveThroughMenu(activeVolume);
                     AudioManager.Update(activeVolume.name);
                     break;
@@ -101,12 +115,12 @@ namespace Beware.GameScenes {
 
         private void ResetActiveLayoutFrameBorder() {
             activeLayoutFrame = new Texture2D(GraphicsDevice, activeLayout.image.Width, activeLayout.image.Height);
-            activeLayoutFrame.CreateBorder(15, Color.DarkRed);
+            activeLayoutFrame.CreateBorder(15, Color.Yellow);
         }
 
         public override void Draw(GameTime gameTime) {
             BewareGame.Instance._spriteBatch.Begin();
-            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareLarge, title, new Vector2(ViewportManager.MenuView.Width / 2 - Fonts.NovaSquareLarge.MeasureString(title).X / 2, 50), Color.BlueViolet);
+            BewareGame.Instance._spriteBatch.DrawString(Fonts.NovaSquareLarge, windowTitle, new Vector2(ViewportManager.MenuView.Width / 2 - Fonts.NovaSquareLarge.MeasureString(windowTitle).X / 2, 50), Color.BlueViolet);
 
             DrawSettingList(new Vector2(200, ViewportManager.MenuView.Height / 6));
             DrawGameLayoutView(new Vector2(ViewportManager.MenuView.Width * 3 / 4, ViewportManager.MenuView.Height / 4));
